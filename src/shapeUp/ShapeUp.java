@@ -27,6 +27,20 @@ public class ShapeUp {
 
 	        mode = scan.nextLine().charAt(0);*/
 	    	
+	        Scanner scan = new Scanner (System.in);
+	        System.out.println("Veuillez choisir le nombre de joueurs pour votre partie (2 ou 3) : ");
+	        int nb = scan.nextInt();
+
+	        if (nb != 2 && nb!= 3) {
+	        	System.out.println("Je suis désolée, vous ne pouvez choisir que 2 ou 3 joueurs.");
+	        } while (nb != 2 && nb !=3 );
+
+	        if (nb == 2 || nb == 3) {
+
+	        }
+
+	        return nb;
+	    	
 	    	
 	    	
 	    }
