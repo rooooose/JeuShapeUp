@@ -1,6 +1,7 @@
 package shapeUp;
 
 import java.util.Map;
+import java.util.Scanner;
 
 public class ShapeUp {
 
@@ -21,11 +22,6 @@ public class ShapeUp {
 
 	    public int choisirNbJoueurs() {
 	    	
-	    	/*System.out.println("Choisissez le mode de conversion :");
-	        System.out.println("1 - Convertisseur Celsius - Fahrenheit");
-	        System.out.println("2 - Convertisseur Fahrenheit - Celsius");
-
-	        mode = scan.nextLine().charAt(0);*/
 	    	
 	        Scanner scan = new Scanner (System.in);
 	        System.out.println("Veuillez choisir le nombre de joueurs pour votre partie (2 ou 3) : ");
