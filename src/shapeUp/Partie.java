@@ -4,9 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Partie implements Visitable {
+	
     private int nbreDeJoueurs;
 
-    private boolean estFinie;
+    public int getNbreDeJoueurs() {
+		return nbreDeJoueurs;
+	}
+
+	public void setNbreDeJoueurs(int nbreDeJoueurs) {
+		this.nbreDeJoueurs = nbreDeJoueurs;
+	}
+	
+	Partie(int nbJoueurs){
+		this.setNbreDeJoueurs(nbJoueurs);
+		System.out.print("Nombre de joueurs : " + nbJoueurs);
+	}
+
+	private boolean estFinie;
 
     public StrategieMode ;
 
