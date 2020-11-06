@@ -17,14 +17,27 @@ public class Partie implements Visitable {
 	
 	Partie(int nbJoueurs){
 		this.setNbreDeJoueurs(nbJoueurs);
-		System.out.print("Nombre de joueurs : " + nbJoueurs);
+		//System.out.print("Nombre de joueurs : " + nbJoueurs);
 	}
 
 	private boolean estFinie;
 
-    public StrategieMode ;
+    //public StrategieMode ;
+	
+	public String toString() {
+    	StringBuffer sb = new StringBuffer();
+    	sb.append("Nombre de joueurs choisi : ");
+    	sb.append(this.getNbreDeJoueurs());
+		return sb.toString();
+    }
 
-    public List<Joueur>  = new ArrayList<Joueur> ();
+	@Override
+	public int accepterScore(VisiteurScore visiteur, Joueur joueur) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+    /*public List<Joueur>  = new ArrayList<Joueur> ();
 
     public TapisDeJeu ;
 
@@ -50,6 +63,6 @@ public class Partie implements Visitable {
     }
 
     public int accepterScore(VisiteurScore visiteur, Joueur joueur) {
-    }
+    }*/
 
 }

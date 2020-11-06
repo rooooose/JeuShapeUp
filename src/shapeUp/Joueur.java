@@ -6,9 +6,17 @@ import java.util.List;
 public class Joueur {
     private String nom;
 
-    private String score;
+    public String getNom() {
+		return nom;
+	}
 
-    public StrategieJoueur ;
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	private String score;
+
+    //public StrategieJoueur ;
 
     public Pioche pioche;
 
