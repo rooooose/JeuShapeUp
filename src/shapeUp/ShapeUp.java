@@ -57,7 +57,7 @@ public class ShapeUp {
 
 	    public Queue<Joueur> definirTypeJoueur(int nbJoueurs) {
 	    	
-	    	String type="r";
+	    	char type='r';
 	    	Queue<Joueur> queueJoueurs = new LinkedList();
         		
         		for(int i=1; i<=nbJoueurs; i++) {
@@ -65,23 +65,27 @@ public class ShapeUp {
         			do {
 	        			System.out.print("Veuillez choisir le type du joueur " + i + ": virtuel (v) ou réel (r) ?");
 
-	        			type = scan.nextLine();
+	        			type = scan.next().charAt(0);
 	
-	    			    if (type != "v" && type!= "r") {
+	    			    if (type != 'v' && type!= 'r') {
 	    			        System.out.println("Je suis désolée, vous ne pouvez choisir qu'entre virtuel (v) ou réel (r).");
 	    			    } 
 	    			    
-        			}while (type != "v" && type!= "r");
+        			}while (type != 'v' && type!= 'r');
         			
         			switch(type) {
-	        			case "v" :
+	        			case 'v' :
 	        				JoueurVirtuel nouveauJoueurV = new JoueurVirtuel();
 	        				queueJoueurs.add(nouveauJoueurV);
 	        				break;
-	        			case "r" :
+	        			case 'r' :
 	        				JoueurReel nouveauJoueurR = new JoueurReel();
 	        				queueJoueurs.add(nouveauJoueurR);
 	        				break;
+	        			default :
+	        				System.out.println("Aucun joueur créé");
+	        				break;
+	        				
         			}
         		
     			}

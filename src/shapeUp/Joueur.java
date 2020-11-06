@@ -20,7 +20,7 @@ public class Joueur {
 
     public Pioche pioche;
 
-    public List<Carte>  = new ArrayList<Carte> ();
+    //public List<Carte>  = new ArrayList<Carte> ();
 
     public CarteJouable jouer;
 
