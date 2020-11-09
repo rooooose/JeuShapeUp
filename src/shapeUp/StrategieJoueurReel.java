@@ -3,6 +3,9 @@ package shapeUp;
 
 public class StrategieJoueurReel implements StrategieJoueur {
     public Carte piocherCarte(Pioche pioche) {
+    	
+    	
+    	pioche.compterNbCartes(pioche.nbreDeCartes - 1);
     }
 
     public void deplacerCarte(int ligneCase, int colonneCase, CarteJouable carte) {
