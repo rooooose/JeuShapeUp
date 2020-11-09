@@ -13,6 +13,10 @@ public class Joueur {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+	
+	Joueur(String nom) {
+		this.setNom(nom);
+	}
 
 	private String score;
 

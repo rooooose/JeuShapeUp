@@ -1,11 +1,13 @@
 package shapeUp;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class Partie implements Visitable {
 	
-    private int nbreDeJoueurs;
+    /*private int nbreDeJoueurs;
 
     public int getNbreDeJoueurs() {
 		return nbreDeJoueurs;
@@ -13,11 +15,22 @@ public class Partie implements Visitable {
 
 	public void setNbreDeJoueurs(int nbreDeJoueurs) {
 		this.nbreDeJoueurs = nbreDeJoueurs;
-	}
+	}*/
 	
-	Partie(int nbJoueurs){
-		this.setNbreDeJoueurs(nbJoueurs);
+	private Queue<Joueur> listeJoueurs  = new LinkedList<Joueur> ();
+	
+	public Queue<Joueur> getListeJoueurs() {
+		return listeJoueurs;
+	}
+
+	public void setListeJoueurs(Queue<Joueur> listeJoueurs) {
+		this.listeJoueurs = listeJoueurs;
+	}
+
+	Partie(Queue<Joueur> listeJoueurs){
+		//this.setNbreDeJoueurs(nbJoueurs);
 		//System.out.print("Nombre de joueurs : " + nbJoueurs);
+		this.setListeJoueurs(listeJoueurs);
 	}
 
 	private boolean estFinie;
@@ -26,10 +39,14 @@ public class Partie implements Visitable {
 	
 	public String toString() {
     	StringBuffer sb = new StringBuffer();
-    	sb.append("Nombre de joueurs choisi : ");
-    	sb.append(this.getNbreDeJoueurs());
+    	//sb.append("Nombre de joueurs choisi : ");
+    	//sb.append(this.getNbreDeJoueurs());
+    	sb.append("Liste des joueurs : ");
+    	sb.append(this.getListeJoueurs());
 		return sb.toString();
     }
+	
+	/*
 
 	@Override
 	public int accepterScore(VisiteurScore visiteur, Joueur joueur) {
@@ -37,7 +54,7 @@ public class Partie implements Visitable {
 		return 0;
 	}
 
-    /*public List<Joueur>  = new ArrayList<Joueur> ();
+    
 
     public TapisDeJeu ;
 

@@ -11,11 +11,9 @@ public class ShapeUp {
 	    private final Scanner scan = new Scanner (System.in);
 	    
 	    ShapeUp() {
-
-	    	//this.lancerLaPartie(this.choisirNbJoueurs(), mode, forme);
-	    	//this.lancerLaPartie(this.choisirNbJoueurs());
+	    	
 	    	int nbJoueurs = this.choisirNbJoueurs();
-	    	System.out.print(this.definirTypeJoueur(nbJoueurs));
+	    	this.lancerLaPartie(this.definirTypeJoueur(nbJoueurs));
 	    }
 	    
 	    public String toString() {
@@ -26,13 +24,13 @@ public class ShapeUp {
 	    }
 	    
 
-	    public void lancerLaPartie(int nbreJoueurs) {
+	    public void lancerLaPartie(Queue<Joueur> listeJoueurs) {
 	    	
-	    	this.maPartie = new Partie(nbreJoueurs);
+	    	this.maPartie = new Partie(listeJoueurs);
 	    	
 	    }
 	    
-	    /*public void lancerLaPartie(Queue<Joueurs> listeJoueurs, StrategieMode mode, FormeTapis forme) {
+	    /*public void lancerLaPartie(Queue<Joueur> listeJoueurs, StrategieMode mode, FormeTapis forme) {
 	    	
 	    	this.maPartie = new Partie(nbreJoueurs);
 	    	
@@ -58,14 +56,16 @@ public class ShapeUp {
 	    public Queue<Joueur> definirTypeJoueur(int nbJoueurs) {
 	    	
 	    	char type='r';
-	    	Queue<Joueur> queueJoueurs = new LinkedList();
+	    	Queue<Joueur> queueJoueurs = new LinkedList<Joueur>();
         		
         		for(int i=1; i<=nbJoueurs; i++) {
         			
+        			//définition des types des joueurs
         			do {
 	        			System.out.print("Veuillez choisir le type du joueur " + i + ": virtuel (v) ou réel (r) ?");
 
 	        			type = scan.next().charAt(0);
+	        			scan.nextLine();
 	
 	    			    if (type != 'v' && type!= 'r') {
 	    			        System.out.println("Je suis désolée, vous ne pouvez choisir qu'entre virtuel (v) ou réel (r).");
@@ -73,13 +73,20 @@ public class ShapeUp {
 	    			    
         			}while (type != 'v' && type!= 'r');
         			
+        			//définition des noms  des joueurs
+	        		System.out.print("Veuillez choisir le nom du joueur " + i + ": \n");
+	        		String nom = scan.nextLine();
+	    			   
+        			
         			switch(type) {
 	        			case 'v' :
-	        				JoueurVirtuel nouveauJoueurV = new JoueurVirtuel();
+	        				JoueurVirtuel nouveauJoueurV = new JoueurVirtuel(nom);
+	        				System.out.println("Nom du joueur " + i + ": " + nouveauJoueurV.getNom());
 	        				queueJoueurs.add(nouveauJoueurV);
 	        				break;
 	        			case 'r' :
-	        				JoueurReel nouveauJoueurR = new JoueurReel();
+	        				JoueurReel nouveauJoueurR = new JoueurReel(nom);
+	        				System.out.println("Nom du joueur " + i + ": " + nouveauJoueurR.getNom());
 	        				queueJoueurs.add(nouveauJoueurR);
 	        				break;
 	        			default :
