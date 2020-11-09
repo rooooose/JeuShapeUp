@@ -5,7 +5,7 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
     public Carte piocherCarte(Pioche pioche) {
     	
     	
-    	pioche.compterNbCartes(pioche.nbreDeCartes - 1);
+    	pioche.compterNbCartes(pioche.getNbreDeCartes() - 1);
     	
     }
 
