@@ -3,7 +3,7 @@ package shapeUp;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Joueur {
+public class Joueur {
     private String nom;
 
     public String getNom() {
@@ -20,13 +20,15 @@ public abstract class Joueur {
 
 	private String score;
 
-    //public StrategieJoueur ;
+    protected StrategieJoueur strategie;
 
-    public Pioche pioche;
+	public Pioche pioche;
 
     //public List<Carte>  = new ArrayList<Carte> ();
 
-    public CarteJouable jouer;
+    public CarteJouable main;
 
-    public abstract void jouer(StrategieJoueur strategie);
+    public void jouer() {
+    	
+    }
 }

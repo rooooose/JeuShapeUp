@@ -5,13 +5,7 @@ public class JoueurVirtuel extends Joueur{
 	
 	JoueurVirtuel(String nom) {
 		super(nom);
+		this.strategie = new StrategieJoueurVirtuel();
 	}
-
-	@Override
-	public void jouer(StrategieJoueur strategie) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	
 }

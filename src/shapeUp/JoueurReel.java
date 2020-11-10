@@ -5,13 +5,7 @@ public class JoueurReel extends Joueur{
 	
 	JoueurReel(String nom) {
 		super(nom);
+		this.strategie = new StrategieJoueurReel();
 	}
-
-	@Override
-	public void jouer(StrategieJoueur strategie) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 
 }
