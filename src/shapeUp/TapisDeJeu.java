@@ -23,10 +23,10 @@ public class TapisDeJeu {
 		this.setForme(forme);
 		
 		 switch (forme) {
-	    	case Rectangle : 
+	    	case RECTANGLE : 
 	    		Set<CarteJouable> tapisRect = new HashSet<CarteJouable> ();
 	    		break;
-	    	case TriangleRectangle :
+	    	case TRIANGLERECTANGLE :
 	    		Set<CarteJouable> tapisTrRect = new TreeSet<CarteJouable> ();
 	    		break;
 	    }

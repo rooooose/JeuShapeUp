@@ -175,9 +175,9 @@ public class ShapeUp {
 	    	
 	    	switch(lettreForme) {
 				case 'r' :
-					return forme = FormeTapis.Rectangle;
+					return forme = FormeTapis.RECTANGLE;
 				case 't' :
-					return forme = FormeTapis.TriangleRectangle;
+					return forme = FormeTapis.TRIANGLERECTANGLE;
 				default :
 					System.out.println("Aucune forme associée");
 					return null;
