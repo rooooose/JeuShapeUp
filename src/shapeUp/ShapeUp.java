@@ -1,6 +1,8 @@
 package shapeUp;
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Scanner;
 
@@ -9,16 +11,18 @@ public class ShapeUp {
 
 	    private Partie maPartie;
 	    private final Scanner scan = new Scanner (System.in);
+	    Map<String,Joueur> mapJoueurs;
 	    
 	    ShapeUp() {
 	    	
 	    	int nbJoueurs = this.choisirNbJoueurs();
 	    	this.lancerLaPartie(this.definirTypeJoueur(nbJoueurs));
+	    	System.out.print("Jeu ShapeUp créé\n");
 	    }
 	    
 	    public String toString() {
 	    	StringBuffer sb = new StringBuffer();
-	    	sb.append("Jeu ShapeUp créé\n");
+	    	sb.append(this.mapJoueurs.keySet());
 	    	sb.append(this.maPartie);
 			return sb.toString();
 	    }
@@ -56,13 +60,15 @@ public class ShapeUp {
 	    public Queue<Joueur> definirTypeJoueur(int nbJoueurs) {
 	    	
 	    	char type='r';
+	    	String nom;
+	    	mapJoueurs = new HashMap<String,Joueur>();
 	    	Queue<Joueur> queueJoueurs = new LinkedList<Joueur>();
         		
         		for(int i=1; i<=nbJoueurs; i++) {
         			
         			//définition des types des joueurs
         			do {
-	        			System.out.print("Veuillez choisir le type du joueur " + i + ": virtuel (v) ou réel (r) ?");
+	        			System.out.println("Veuillez choisir le type du joueur " + i + ": virtuel (v) ou réel (r) ?");
 
 	        			type = scan.next().charAt(0);
 	        			scan.nextLine();
@@ -74,8 +80,14 @@ public class ShapeUp {
         			}while (type != 'v' && type!= 'r');
         			
         			//définition des noms  des joueurs
-	        		System.out.print("Veuillez choisir le nom du joueur " + i + ": \n");
-	        		String nom = scan.nextLine();
+        			do {
+		        		System.out.println("Veuillez choisir le nom du joueur " + i + ": \n");
+		        		nom = scan.nextLine();
+		        		if (mapJoueurs.containsKey(nom)) {
+	    			        System.out.println("Je suis désolée, chaque joueur doit avoir un nom unique");
+	    			    } 
+    			    
+        			}while (mapJoueurs.containsKey(nom));
 	    			   
         			
         			switch(type) {
@@ -83,11 +95,13 @@ public class ShapeUp {
 	        				JoueurVirtuel nouveauJoueurV = new JoueurVirtuel(nom);
 	        				System.out.println("Nom du joueur " + i + ": " + nouveauJoueurV.getNom());
 	        				queueJoueurs.add(nouveauJoueurV);
+	        				mapJoueurs.put(nom, nouveauJoueurV);
 	        				break;
 	        			case 'r' :
 	        				JoueurReel nouveauJoueurR = new JoueurReel(nom);
 	        				System.out.println("Nom du joueur " + i + ": " + nouveauJoueurR.getNom());
 	        				queueJoueurs.add(nouveauJoueurR);
+	        				mapJoueurs.put(nom, nouveauJoueurR);
 	        				break;
 	        			default :
 	        				System.out.println("Aucun joueur créé");
@@ -96,7 +110,6 @@ public class ShapeUp {
         			}
         		
     			}
-	    	
 			return queueJoueurs;
 	    	
 	    }

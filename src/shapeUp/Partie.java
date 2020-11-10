@@ -30,6 +30,7 @@ public class Partie implements Visitable {
 	Partie(Queue<Joueur> listeJoueurs){
 		//this.setNbreDeJoueurs(nbJoueurs);
 		//System.out.print("Nombre de joueurs : " + nbJoueurs);
+		System.out.print("Partie créée\n");
 		this.setListeJoueurs(listeJoueurs);
 	}
 
