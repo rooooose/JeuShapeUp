@@ -27,27 +27,37 @@ public class Partie implements Visitable {
 		this.listeJoueurs = listeJoueurs;
 	}
 
-	Partie(Queue<Joueur> listeJoueurs){
+	Partie(Queue<Joueur> listeJoueurs, StrategieMode mode){
 		//this.setNbreDeJoueurs(nbJoueurs);
 		//System.out.print("Nombre de joueurs : " + nbJoueurs);
 		System.out.print("Partie créée\n");
 		this.setListeJoueurs(listeJoueurs);
+		this.setModeDeJeu(mode);
 	}
 
 	private boolean estFinie;
 
-    //public StrategieMode ;
+    private StrategieMode modeDeJeu;
+
+	public StrategieMode getModeDeJeu() {
+		return modeDeJeu;
+	}
+
+	public void setModeDeJeu(StrategieMode modeDeJeu) {
+		this.modeDeJeu = modeDeJeu;
+	}
 	
 	public String toString() {
     	StringBuffer sb = new StringBuffer();
     	//sb.append("Nombre de joueurs choisi : ");
     	//sb.append(this.getNbreDeJoueurs());
-    	sb.append("Liste des joueurs : ");
-    	sb.append(this.getListeJoueurs());
+    	sb.append("Liste des types de joueurs : ");
+    	sb.append(this.getListeJoueurs()+"\n");
+    	sb.append("Mode de jeu : ");
+    	sb.append(this.getModeDeJeu());
 		return sb.toString();
     }
 	
-	/*
 
 	@Override
 	public int accepterScore(VisiteurScore visiteur, Joueur joueur) {
@@ -55,7 +65,7 @@ public class Partie implements Visitable {
 		return 0;
 	}
 
-    
+	/*
 
     public TapisDeJeu ;
 

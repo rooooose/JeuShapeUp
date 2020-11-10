@@ -16,21 +16,22 @@ public class ShapeUp {
 	    ShapeUp() {
 	    	
 	    	int nbJoueurs = this.choisirNbJoueurs();
-	    	this.lancerLaPartie(this.definirTypeJoueur(nbJoueurs));
+	    	this.lancerLaPartie(this.creerJoueurs(nbJoueurs), this.choisirMode());
 	    	System.out.print("Jeu ShapeUp créé\n");
 	    }
 	    
 	    public String toString() {
 	    	StringBuffer sb = new StringBuffer();
-	    	sb.append(this.mapJoueurs.keySet());
+	    	sb.append("Liste des joueurs : ");
+	    	sb.append(this.mapJoueurs.keySet() + "\n");
 	    	sb.append(this.maPartie);
 			return sb.toString();
 	    }
 	    
 
-	    public void lancerLaPartie(Queue<Joueur> listeJoueurs) {
+	    public void lancerLaPartie(Queue<Joueur> listeJoueurs, StrategieMode mode) {
 	    	
-	    	this.maPartie = new Partie(listeJoueurs);
+	    	this.maPartie = new Partie(listeJoueurs, mode);
 	    	
 	    }
 	    
@@ -56,8 +57,29 @@ public class ShapeUp {
 			        
 			        return nb;
 	        	}
+	    
+	    
+	    public char definirTypeJoueur(int nb) {
+	    	
+	    	char type='r';
+	    	
+	    	do {
+    			System.out.println("Veuillez choisir le type du joueur " + nb + ": virtuel (v) ou réel (r) ?");
 
-	    public Queue<Joueur> definirTypeJoueur(int nbJoueurs) {
+    			type = scan.next().charAt(0);
+    			scan.nextLine();
+
+			    if (type != 'v' && type!= 'r') {
+			        System.out.println("Je suis désolée, vous ne pouvez choisir qu'entre virtuel (v) ou réel (r).");
+			    } 
+			    
+			}while (type != 'v' && type!= 'r');
+	    	
+	    	return type;
+	    	
+	    }
+
+	    public Queue<Joueur> creerJoueurs(int nbJoueurs) {
 	    	
 	    	char type='r';
 	    	String nom;
@@ -67,39 +89,21 @@ public class ShapeUp {
         		for(int i=1; i<=nbJoueurs; i++) {
         			
         			//définition des types des joueurs
-        			do {
-	        			System.out.println("Veuillez choisir le type du joueur " + i + ": virtuel (v) ou réel (r) ?");
-
-	        			type = scan.next().charAt(0);
-	        			scan.nextLine();
-	
-	    			    if (type != 'v' && type!= 'r') {
-	    			        System.out.println("Je suis désolée, vous ne pouvez choisir qu'entre virtuel (v) ou réel (r).");
-	    			    } 
-	    			    
-        			}while (type != 'v' && type!= 'r');
+        			type = definirTypeJoueur(i);
         			
         			//définition des noms  des joueurs
-        			do {
-		        		System.out.println("Veuillez choisir le nom du joueur " + i + ": \n");
-		        		nom = scan.nextLine();
-		        		if (mapJoueurs.containsKey(nom)) {
-	    			        System.out.println("Je suis désolée, chaque joueur doit avoir un nom unique");
-	    			    } 
-    			    
-        			}while (mapJoueurs.containsKey(nom));
-	    			   
+        			nom = definirNomJoueur(i);
         			
         			switch(type) {
 	        			case 'v' :
 	        				JoueurVirtuel nouveauJoueurV = new JoueurVirtuel(nom);
-	        				System.out.println("Nom du joueur " + i + ": " + nouveauJoueurV.getNom());
+	        				//System.out.println("Nom du joueur " + i + ": " + nouveauJoueurV.getNom());
 	        				queueJoueurs.add(nouveauJoueurV);
 	        				mapJoueurs.put(nom, nouveauJoueurV);
 	        				break;
 	        			case 'r' :
 	        				JoueurReel nouveauJoueurR = new JoueurReel(nom);
-	        				System.out.println("Nom du joueur " + i + ": " + nouveauJoueurR.getNom());
+	        				//System.out.println("Nom du joueur " + i + ": " + nouveauJoueurR.getNom());
 	        				queueJoueurs.add(nouveauJoueurR);
 	        				mapJoueurs.put(nom, nouveauJoueurR);
 	        				break;
@@ -114,11 +118,60 @@ public class ShapeUp {
 	    	
 	    }
 	    
+	    public String definirNomJoueur(int nb) {
+	    	
+	    	String nom;
+	    	do {
+        		System.out.println("Veuillez choisir le nom du joueur " + nb + ": \n");
+        		nom = scan.nextLine();
+        		if (mapJoueurs.containsKey(nom)) {
+			        System.out.println("Je suis désolée, chaque joueur doit avoir un nom unique");
+			    } 
+			}while (mapJoueurs.containsKey(nom));
+	    	
+	    	return nom;
+	    }
+	    
 
 	    public StrategieMode choisirMode() {
+	    	
+	    	StrategieMode mode;
+	    	//String lettreMode;
+	    	char lettreMode='b';
+	    	do {
+        		System.out.println("Veuillez choisir le mode de partie : \n \t-Mode de Base (b)\n \t-Mode Avancé (a)\n\t-Mode Victoire Ennemie (v)");
+        		lettreMode = scan.next().charAt(0);
+    			scan.nextLine();
+        		if (lettreMode!= 'b' && lettreMode!= 'a' && lettreMode!= 'v') {
+			        System.out.println("Je suis désolée, vous ne pouvez choisir qu'entre les 3 modes proposés.");
+			    }  
+			}while (lettreMode!= 'b' && lettreMode!= 'a' && lettreMode!= 'v');
+	    	
+	    	switch(lettreMode) {
+				case 'b' :
+					return mode = new StrategieDeBase();
+					//break;
+				case 'a' :
+					return mode = new StrategieAvance();
+					//break;
+				case 'v' :
+					return mode = new StrategieVictoireEnnemie();
+					//break;
+				default :
+					System.out.println("Aucun mode associé");
+					return null;
+					//break;
+	    	}
+	    	
+			//return mode;
+	    }
+	    
+	    
+	    public FormeTapis choisirFormeTapis() {
+	    	
 			return null;
 	    }
-
+	    
 
 	    public static void main(String[] args) {
 		// TODO Auto-generated method stub

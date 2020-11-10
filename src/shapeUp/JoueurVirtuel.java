@@ -1,34 +1,17 @@
 package shapeUp;
 
 
-public class JoueurVirtuel extends Joueur implements StrategieJoueur{
+public class JoueurVirtuel extends Joueur{
 	
 	JoueurVirtuel(String nom) {
 		super(nom);
 	}
+
+	@Override
+	public void jouer(StrategieJoueur strategie) {
+		// TODO Auto-generated method stub
+		
+	}
 	
-	public Carte piocherCarte(Pioche pioche) {
-    	
-    	
-    	pioche.compterNbCartes(pioche.getNbreDeCartes() - 1);
-    	
-    }
-
-    public void deplacerCarte(int ligneCase, int colonneCase, CarteJouable carte) {
-    	carte.setEstPlacee(false);    	
-    	 
-    	carte.setEstPlacee(true);
-    	
-    	
-    }
-
-    public void placerCarte(int ligneCase, int colonneCase, CarteJouable carte) {
-    	
-    	carte.setEstPlacee(true);
-    	
-
-    }
-
-    public CarteJouable definirCarteAJouer(Carte carte) {
-    }
+	
 }

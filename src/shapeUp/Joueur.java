@@ -3,7 +3,7 @@ package shapeUp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Joueur {
+public abstract class Joueur {
     private String nom;
 
     public String getNom() {
@@ -28,7 +28,5 @@ public class Joueur {
 
     public CarteJouable jouer;
 
-    public void jouer(StrategieJoueur strategie) {
-    }
-
+    public abstract void jouer(StrategieJoueur strategie);
 }
