@@ -16,7 +16,7 @@ public class ShapeUp {
 	    ShapeUp() {
 	    	
 	    	int nbJoueurs = this.choisirNbJoueurs();
-	    	this.lancerLaPartie(this.creerJoueurs(nbJoueurs), this.choisirMode());
+	    	this.lancerLaPartie(this.creerJoueurs(nbJoueurs), this.choisirMode(), this.choisirFormeTapis());
 	    	System.out.print("Jeu ShapeUp créé\n");
 	    }
 	    
@@ -29,17 +29,17 @@ public class ShapeUp {
 	    }
 	    
 
-	    public void lancerLaPartie(Queue<Joueur> listeJoueurs, StrategieMode mode) {
+	   /* public void lancerLaPartie(Queue<Joueur> listeJoueurs, StrategieMode mode) {
 	    	
 	    	this.maPartie = new Partie(listeJoueurs, mode);
 	    	
-	    }
-	    
-	    /*public void lancerLaPartie(Queue<Joueur> listeJoueurs, StrategieMode mode, FormeTapis forme) {
-	    	
-	    	this.maPartie = new Partie(nbreJoueurs);
-	    	
 	    }*/
+	    
+	    public void lancerLaPartie(Queue<Joueur> listeJoueurs, StrategieMode mode, FormeTapis forme) {
+	    	
+	    	this.maPartie = new Partie(listeJoueurs, mode, forme);
+	    	
+	    }
 
 	    public int choisirNbJoueurs() {
 
@@ -136,7 +136,6 @@ public class ShapeUp {
 	    public StrategieMode choisirMode() {
 	    	
 	    	StrategieMode mode;
-	    	//String lettreMode;
 	    	char lettreMode='b';
 	    	do {
         		System.out.println("Veuillez choisir le mode de partie : \n \t-Mode de Base (b)\n \t-Mode Avancé (a)\n\t-Mode Victoire Ennemie (v)");
@@ -150,26 +149,39 @@ public class ShapeUp {
 	    	switch(lettreMode) {
 				case 'b' :
 					return mode = new StrategieDeBase();
-					//break;
 				case 'a' :
 					return mode = new StrategieAvance();
-					//break;
 				case 'v' :
 					return mode = new StrategieVictoireEnnemie();
-					//break;
 				default :
 					System.out.println("Aucun mode associé");
 					return null;
-					//break;
 	    	}
-	    	
-			//return mode;
 	    }
 	    
 	    
 	    public FormeTapis choisirFormeTapis() {
+
+	    	FormeTapis forme;
+	    	char lettreForme='b';
+	    	do {
+        		System.out.println("Veuillez choisir la forme du tapis : \n \t-Rectangle 5x3 (r)\n \t-Triangle rectangle (t)\n");
+        		lettreForme = scan.next().charAt(0);
+    			scan.nextLine();
+        		if (lettreForme!= 'r' && lettreForme!= 't') {
+			        System.out.println("Je suis désolée, vous ne pouvez choisir qu'entre les 3 formes proposées.");
+			    }  
+			}while (lettreForme!= 'r' && lettreForme!= 't');
 	    	
-			return null;
+	    	switch(lettreForme) {
+				case 'r' :
+					return forme = FormeTapis.Rectangle;
+				case 't' :
+					return forme = FormeTapis.TriangleRectangle;
+				default :
+					System.out.println("Aucune forme associée");
+					return null;
+	    	}
 	    }
 	    
 

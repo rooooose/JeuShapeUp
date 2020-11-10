@@ -18,34 +18,43 @@ public class Partie implements Visitable {
 	}*/
 	
 	private Queue<Joueur> listeJoueurs  = new LinkedList<Joueur> ();
+	private TapisDeJeu tapisDeJeu;
+	private boolean estFinie;
+    private StrategieMode modeDeJeu;
 	
 	public Queue<Joueur> getListeJoueurs() {
 		return listeJoueurs;
 	}
-
 	public void setListeJoueurs(Queue<Joueur> listeJoueurs) {
 		this.listeJoueurs = listeJoueurs;
 	}
-
-	Partie(Queue<Joueur> listeJoueurs, StrategieMode mode){
-		//this.setNbreDeJoueurs(nbJoueurs);
-		//System.out.print("Nombre de joueurs : " + nbJoueurs);
-		System.out.print("Partie créée\n");
-		this.setListeJoueurs(listeJoueurs);
-		this.setModeDeJeu(mode);
-	}
-
-	private boolean estFinie;
-
-    private StrategieMode modeDeJeu;
-
+	
 	public StrategieMode getModeDeJeu() {
 		return modeDeJeu;
 	}
-
 	public void setModeDeJeu(StrategieMode modeDeJeu) {
 		this.modeDeJeu = modeDeJeu;
 	}
+	
+	/*public TapisDeJeu getTapisDeJeu() {
+		return tapisDeJeu;
+	}
+	public void setTapisDeJeu(TapisDeJeu tapisDeJeu) {
+		this.tapisDeJeu = tapisDeJeu;
+	}*/
+	
+	Partie(Queue<Joueur> joueurs, StrategieMode mode, FormeTapis forme){
+		//this.setNbreDeJoueurs(nbJoueurs);
+		//System.out.print("Nombre de joueurs : " + nbJoueurs);
+		System.out.print("Partie créée\n");
+		
+		listeJoueurs = new LinkedList<Joueur> ();
+		this.setListeJoueurs(joueurs);
+		this.setModeDeJeu(mode);
+		this.tapisDeJeu = new TapisDeJeu(forme);
+	}
+
+	
 	
 	public String toString() {
     	StringBuffer sb = new StringBuffer();
@@ -54,7 +63,9 @@ public class Partie implements Visitable {
     	sb.append("Liste des types de joueurs : ");
     	sb.append(this.getListeJoueurs()+"\n");
     	sb.append("Mode de jeu : ");
-    	sb.append(this.getModeDeJeu());
+    	sb.append(this.getModeDeJeu()+"\n");
+    	sb.append("Forme du tapis de jeu : ");
+    	sb.append(this.tapisDeJeu.getForme());
 		return sb.toString();
     }
 	
@@ -65,9 +76,7 @@ public class Partie implements Visitable {
 		return 0;
 	}
 
-	/*
-
-    public TapisDeJeu ;
+    /*
 
     public List<VisiteurScore>  = new ArrayList<VisiteurScore> ();
 
@@ -88,9 +97,6 @@ public class Partie implements Visitable {
     }
 
     public void controlerPlacementCarte(CarteJouable carte) {
-    }
-
-    public int accepterScore(VisiteurScore visiteur, Joueur joueur) {
     }*/
 
 }
