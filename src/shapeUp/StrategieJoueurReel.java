@@ -9,11 +9,11 @@ public class StrategieJoueurReel implements StrategieJoueur {
     	pioche.compterNbCartes(pioche.getNbreDeCartes() - 1);
     }
 
-    public void deplacerCarte(int ligneCase, int colonneCase, CarteJouable carte) {
+    public void deplacerCarte(int ligneCase, int colonneCase, CarteJouable carteDejaPlacee) {
     	
-    	carte.setEstPlacee(false);    	
+    	carteDejaPlacee.setEstPlacee(false);    	
  
-    	carte.setEstPlacee(true);
+    	carteDejaPlacee.setEstPlacee(true);
     }
    
 

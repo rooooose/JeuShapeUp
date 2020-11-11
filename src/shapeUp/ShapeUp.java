@@ -190,6 +190,7 @@ public class ShapeUp {
 		
 			ShapeUp jeuShapeUp = new ShapeUp();
 			System.out.println(jeuShapeUp);
+			
 	    }
 
 }

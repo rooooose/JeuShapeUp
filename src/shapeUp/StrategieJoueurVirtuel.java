@@ -9,10 +9,10 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
     	
     }
 
-    public void deplacerCarte(int ligneCase, int colonneCase, CarteJouable carte) {
-    	carte.setEstPlacee(false);    	
+    public void deplacerCarte(int ligneCase, int colonneCase, CarteJouable carteDejaPlacee) {
+    	carteDejaPlacee.setEstPlacee(false);    	
     	 
-    	carte.setEstPlacee(true);
+    	carteDejaPlacee.setEstPlacee(true);
     }
 
     public void placerCarte(int ligneCase, int colonneCase, CarteJouable carte) {

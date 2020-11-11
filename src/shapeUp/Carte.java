@@ -7,6 +7,15 @@ public class Carte {
     protected FormeCarte forme;
     protected boolean estRemplie;
     
+    
+    public Carte(CouleurType couleur, FormeCarte forme, boolean estRemplie) {
+    	
+    	this.couleur = couleur;
+    	this.forme = forme;
+    	this.estRemplie = estRemplie;
+    	
+    	
+    }
 
     public CouleurType getCouleur() {
 		return couleur;
@@ -44,8 +53,9 @@ public class Carte {
     public String toString() {
  StringBuffer sbCarte = new StringBuffer();
  sbCarte.append("Forme de la carte : " +this.forme);
- sbCarte.append("Couleur de la carte : " +this.couleur);
- sbCarte.append("La carte est remplie : " +this.estRemplie+ "(true -> la carte est remplie)");
+ sbCarte.append(" Couleur de la carte : " +this.couleur);
+ sbCarte.append(" La carte est remplie : " +this.estRemplie+ "(true -> la carte est remplie)");
+ sbCarte.append("\n");
  return sbCarte.toString();
 }
     
