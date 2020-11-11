@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class TapisDeJeu {
+public class TapisDeJeu extends ArrayList{
 	
     private boolean rempli;
     private FormeTapis forme; 
+    
+    private ArrayList<Carte> myThings;
     
     public FormeTapis getForme() {
 		return forme;
@@ -20,6 +22,13 @@ public class TapisDeJeu {
 	}
 	
 	TapisDeJeu(FormeTapis forme) {
+		
+		
+
+	    public ThingContainer(){
+	        myThings = new ArrayList<Thing>();
+	    }
+	    
 		this.setForme(forme);
 		
 		 switch (forme) {
