@@ -25,6 +25,10 @@ public class Partie implements Visitable {
 	private boolean estFinie;
     private StrategieMode modeDeJeu;
 	
+	public Set<Carte> getCarteDuJeu() {
+		return carteDuJeu;
+	}
+    
 	public Queue<Joueur> getListeJoueurs() {
 		return listeJoueurs;
 	}
