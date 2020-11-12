@@ -8,9 +8,15 @@ public class TapisCercle extends TapisDeJeu{
 		   	   							   {0,1,1,1,0},
 		   	   							   {0,0,1,1,0}};*/
 	
-	private static final int[][] MODELE = {{0,1,1,1,1,0},
+	/*private static final int[][] MODELE = {{0,1,1,1,1,0},
 				   						   {1,1,1,1,1,1},
-				   						   {0,1,1,1,1,0}};
+				   						   {0,1,1,1,1,0}};*/
+	
+	private static final int[][] MODELE = {{0,1,1,0},
+			   							   {1,1,1,1},
+			   							   {1,1,1,1},
+			   							   {1,1,1,1},
+			   							   {0,1,1,0}};
 
 	TapisCercle() {
 		super(MODELE);
