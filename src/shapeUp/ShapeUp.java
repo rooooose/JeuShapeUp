@@ -163,24 +163,34 @@ public class ShapeUp {
 	    
 	    
 	    public TapisDeJeu choisirFormeTapis() {
-
+	    	
+	    	TapisDeJeu forme;
 	    	char lettreForme='b';
 	    	do {
-        		System.out.println("Veuillez choisir la forme du tapis : \n \t-Rectangle 5x3 (r)\n \t-Triangle rectangle (t)\n");
+        		System.out.println("Veuillez choisir la forme du tapis : \n \t-Rectangle 5x3 (r)\n \t-Triangle rectangle (t)\n \t-Disque (d)");
         		lettreForme = scan.next().charAt(0);
     			scan.nextLine();
-        		if (lettreForme!= 'r' && lettreForme!= 't') {
-			        System.out.println("Je suis désolée, vous ne pouvez choisir qu'entre les 3 formes proposées.");
+        		if (lettreForme!= 'r' && lettreForme!= 't' && lettreForme!= 'd') {
+			        System.out.println("Je suis désolée, vous ne pouvez choisir qu'entre les formes proposées.");
 			    }  
-			}while (lettreForme!= 'r' && lettreForme!= 't');
+			}while (lettreForme!= 'r' && lettreForme!= 't' && lettreForme!= 'd');
 	    	
 	    	switch(lettreForme) {
 				case 'r' :
-					TapisRectangle rectangle = new TapisRectangle();
-					return rectangle;
+					//TapisRectangle rectangle = new TapisRectangle();
+					forme = new TapisRectangle();
+					//return rectangle;
+					return forme;
 				case 't' :
-					TapisTriangleRectangle triangle = new TapisTriangleRectangle();
-					return triangle;
+					//TapisTriangleRectangle triangle = new TapisTriangleRectangle();
+					forme = new TapisRectangle();
+					//return triangle;
+					return forme;
+				case 'd' :
+					//TapisTriangleRectangle triangle = new TapisTriangleRectangle();
+					forme = new TapisCercle();
+					//return triangle;
+					return forme;
 				default :
 					System.out.println("Aucune forme associée");
 					return null;

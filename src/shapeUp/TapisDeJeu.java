@@ -1,11 +1,6 @@
 package shapeUp;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class TapisDeJeu {
 	
@@ -64,6 +59,8 @@ public class TapisDeJeu {
 			for(int j=0; j<this.modele[i].length; j++) {
 				if(this.placementPossible(i,j)) {
 					sb.append("[ ]");
+				} else {
+					sb.append("   ");
 				}
 			}
 			sb.append("\n");
