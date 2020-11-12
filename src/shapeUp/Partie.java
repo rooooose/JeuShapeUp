@@ -50,7 +50,7 @@ public class Partie implements Visitable {
 		this.tapisDeJeu = tapisDeJeu;
 	}*/
 	
-	Partie(Queue<Joueur> joueurs, StrategieMode mode, FormeTapis forme){
+	Partie(Queue<Joueur> joueurs, StrategieMode mode, TapisDeJeu formeTapisDeJeu){
 		//this.setNbreDeJoueurs(nbJoueurs);
 		//System.out.print("Nombre de joueurs : " + nbJoueurs);
 		System.out.print("Partie créée\n");
@@ -58,7 +58,7 @@ public class Partie implements Visitable {
 		listeJoueurs = new LinkedList<Joueur> ();
 		this.setListeJoueurs(joueurs);
 		this.setModeDeJeu(mode);
-		this.tapisDeJeu = new TapisDeJeu(forme);
+		this.tapisDeJeu = formeTapisDeJeu;
 		this.créerLesCartes();
 	}
 
@@ -129,8 +129,8 @@ public class Partie implements Visitable {
     	sb.append(this.getListeJoueurs()+"\n");
     	sb.append("Mode de jeu : ");
     	sb.append(this.getModeDeJeu()+"\n");
-    	sb.append("Forme du tapis de jeu : ");
-    	sb.append(this.tapisDeJeu.getForme());
+    	sb.append("Forme du tapis de jeu : \n");
+    	sb.append(this.tapisDeJeu);
 		return sb.toString();
     }
 	

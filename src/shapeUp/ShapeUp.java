@@ -35,7 +35,7 @@ public class ShapeUp {
 	    	
 	    }*/
 	    
-	    public void lancerLaPartie(Queue<Joueur> listeJoueurs, StrategieMode mode, FormeTapis forme) {
+	    public void lancerLaPartie(Queue<Joueur> listeJoueurs, StrategieMode mode, TapisDeJeu forme) {
 	    	
 	    	this.maPartie = new Partie(listeJoueurs, mode, forme);
 	    	
@@ -43,18 +43,20 @@ public class ShapeUp {
 
 	    public int choisirNbJoueurs() {
 
-	        	int nb;
+	    		char nbChar='r';
 	        	
 	        		do {
 			        	System.out.println("Veuillez choisir le nombre de joueurs pour votre partie (2 ou 3) : ");
-				        nb = scan.nextInt();
+				        //nb = scan.nextInt();
+				        nbChar = scan.next().charAt(0);
+		    			scan.nextLine();
 
-				        if (nb != 2 && nb!= 3) {
+				        if (nbChar != '2' && nbChar!= '3') {
 				        	System.out.println("Je suis désolée, vous ne pouvez choisir que 2 ou 3 joueurs.");
 				        } 
 
-			        }while (nb != 2 && nb !=3 );
-			        
+			        }while (nbChar != '2' && nbChar !='3' );
+			        int nb= Integer.parseInt(String.valueOf(nbChar));
 			        return nb;
 	        	}
 	    
@@ -160,9 +162,8 @@ public class ShapeUp {
 	    }
 	    
 	    
-	    public FormeTapis choisirFormeTapis() {
+	    public TapisDeJeu choisirFormeTapis() {
 
-	    	FormeTapis forme;
 	    	char lettreForme='b';
 	    	do {
         		System.out.println("Veuillez choisir la forme du tapis : \n \t-Rectangle 5x3 (r)\n \t-Triangle rectangle (t)\n");
@@ -175,9 +176,11 @@ public class ShapeUp {
 	    	
 	    	switch(lettreForme) {
 				case 'r' :
-					return forme = FormeTapis.RECTANGLE;
+					TapisRectangle rectangle = new TapisRectangle();
+					return rectangle;
 				case 't' :
-					return forme = FormeTapis.TRIANGLERECTANGLE;
+					TapisTriangleRectangle triangle = new TapisTriangleRectangle();
+					return triangle;
 				default :
 					System.out.println("Aucune forme associée");
 					return null;
