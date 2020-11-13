@@ -43,11 +43,11 @@ public class TapisDeJeu {
 	    //ListIterator<Carte> itLigne = ligne.listIterator();
 	    ListIterator<ArrayList<Carte>> itContainer = this.getContainer().listIterator();
 	    while(itContainer.hasNext()) {
-	    	System.out.print(itContainer.next());
+	    	System.out.print(itContainer.nextIndex());
 	    	//for(int i=0; i<this.modele.length; i++) {
 				
-			    for(int j=0; j<this.modele[itContainer.nextIndex()-1].length; j++) {
-			    	if(this.modele[itContainer.nextIndex()-1][j]==1) {
+			    for(int j=0; j<this.modele[itContainer.nextIndex()].length; j++) {
+			    	if(this.modele[itContainer.nextIndex()][j]==1) {
 		    		   itContainer.next().add(carteVide);
 		    		   //System.out.print(getContainer().get(i));
 			    	}
