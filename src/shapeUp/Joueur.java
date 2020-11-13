@@ -28,7 +28,7 @@ public class Joueur {
 
     public CarteJouable main;
 
-    public void jouer() {
-    	
+    public void jouer(StrategieJoueur strategie) {
+    	//strategie.placerCarte(ligneCase, colonneCase, carte, tapis);
     }
 }

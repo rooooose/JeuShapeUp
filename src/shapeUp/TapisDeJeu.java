@@ -8,10 +8,19 @@ import java.util.Map;
 public class TapisDeJeu {
 	
     private boolean rempli;
+    //private Carte carteVide;
     //private FormeTapis forme; 
     
     
-    //private ArrayList<ArrayList<Carte>> container;
+    public boolean isCaseRemplie() {
+		return caseRemplie;
+	}
+
+	public void setCaseRemplie(boolean caseRemplie) {
+		this.caseRemplie = caseRemplie;
+	}
+
+	//private ArrayList<ArrayList<Carte>> container;
     private Map<Integer,Map<Integer,Carte>> container;
 
 	public Map<Integer, Map<Integer, Carte>> getContainer() {
@@ -37,19 +46,20 @@ public class TapisDeJeu {
 		
 		this.modele= modeleForme;
 		//ArrayList<Carte> ligne = new ArrayList<Carte>();
-		//Map<Integer,Carte> ligne = new HashMap<Integer,Carte>();
-		
 		
 	    this.setContainer(new HashMap<Integer,Map<Integer,Carte>>());
 	    for(int i=0; i<this.modele.length; i++) {
+	    	
 	    	Map<Integer,Carte> ligne = new HashMap<Integer,Carte>();
-			this.getContainer().put(i,ligne);	
-			for(int j=0; j<this.modele[i].length; j++) {
-				Carte carteVide = new Carte();
-		    	if(this.modele[i][j]==1) {
-		    		this.getContainer().get(i).put(j,carteVide);
-		    	}
-			}
+			this.getContainer().put(i,ligne);
+			
+//			for(int j=0; j<this.modele[i].length; j++) {
+//				carteVide = new Carte();
+//				
+//		    	if(this.modele[i][j]==1) {
+//		    		this.getContainer().get(i).put(j,carteVide);
+//		    	}
+//			}
 		}
 	    
 
@@ -88,6 +98,20 @@ public class TapisDeJeu {
 
     }
 	
+	public boolean adjacenceRespectee(int lig, int col) {
+		//regle d'adjacence + déplacement possible des autres cartes + 1ere carte au milieu
+		if(this.getContainer().get(lig).get(col)!=null) {
+			return true;
+		}else {
+			return false;
+		}
+		
+    }
+	
+	public boolean caseRemplie(int lig, int col) {
+		return this.getContainer().get(lig).get(col)!=null;
+	}
+	
 	public String toString(){
 		StringBuffer sb = new StringBuffer();
 		
@@ -99,7 +123,9 @@ public class TapisDeJeu {
 			sb.append(i);
 			for(int j=0; j<this.modele[i].length; j++) {
 				if(this.placementPossible(i,j)) {
-					sb.append("[ ]");
+					if(this.caseRemplie(i,j)) {
+						sb.append("[x]");
+					}else sb.append("[ ]");
 				} else {
 					sb.append("   ");
 				}

@@ -14,5 +14,9 @@ public class CarteJouable extends Carte {
     	return estPlacee;
     	
     }
+	
+	CarteJouable(CouleurType couleur, FormeCarte forme, boolean estRemplie){
+		super(couleur,forme,estRemplie);
+	}
 
 }

@@ -60,6 +60,13 @@ public class Partie implements Visitable {
 		this.setModeDeJeu(mode);
 		this.tapisDeJeu = formeTapisDeJeu;
 		this.créerLesCartes();
+		
+		Carte carteTest = new CarteJouable(CouleurType.BLEU, FormeCarte.CERCLE, false);
+		CarteJouable c = (CarteJouable) carteTest;
+		listeJoueurs.peek().strategie.placerCarte(0, 2, c, tapisDeJeu);
+		listeJoueurs.peek().strategie.placerCarte(3, 3, c, tapisDeJeu);
+		listeJoueurs.peek().strategie.placerCarte(3, 3, c, tapisDeJeu);
+		listeJoueurs.peek().strategie.placerCarte(0, 0, c, tapisDeJeu);
 	}
 
 	
@@ -146,8 +153,6 @@ public class Partie implements Visitable {
 
     public List<VisiteurScore>  = new ArrayList<VisiteurScore> ();
 
-    public Set<Carte>  = new ArrayList<Carte> ();
-
     public Pioche ;
 
     public void utiliserMode(StrategieMode mode) {
@@ -157,9 +162,6 @@ public class Partie implements Visitable {
     }
 
     public Joueur definirGagnant() {
-    }
-
-    public void creerCartes() {
     }
 
     public void controlerPlacementCarte(CarteJouable carte) {
