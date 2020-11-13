@@ -1,6 +1,7 @@
 package shapeUp;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -20,7 +21,7 @@ public class Pioche {
     }
     
     
-	private Set<Carte> pioche = new TreeSet<Carte> ();  
+	private Set<Carte> pioche = new HashSet<Carte> ();  
 	
 	public Set<Carte> getPioche() {
 		return pioche;
@@ -33,23 +34,64 @@ public class Pioche {
 	
     public Pioche(int nbreDeCartes, Partie maPartie) {
     	this.nbreDeCartes = nbreDeCartes;
+    	List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
+    	recupCarteJeu.addAll(maPartie.getCarteDuJeu()); 
     	
-    	int size = maPartie.getCarteDuJeu().size();
     	
-    	for(int i = 0; i < nbreDeCartes;i = i){
-    		int item = new Random().nextInt(size);
+    	for (int i=0; i < nbreDeCartes; i++) {
+    		
+    	
+    	int arrayLength = recupCarteJeu.size(); 
+    	int randomIndex = new Random().nextInt(arrayLength);
+    	
+    	while (pioche.contains(recupCarteJeu.get(randomIndex)))
+    		
+    	{
+        	arrayLength = 0; 
+        	randomIndex = 0; 
+        	arrayLength = recupCarteJeu.size(); 
+        	randomIndex = new Random().nextInt(arrayLength);
+    	}
+    	
+    	pioche.add(recupCarteJeu.get(randomIndex)); 
+    	arrayLength = 0; 
+    	randomIndex = 0; 
+    	
+    	}
+    	
+    	
+    	Iterator<Carte> piocheIt = pioche.iterator();
+    	
+    	while (piocheIt.hasNext()) {
+    	System.out.println(piocheIt.next());
+    	}
+    	
+    	
+    	
+    	//}
+    	/*int size = maPartie.getCarteDuJeu().size();
+    	
+    	for(int i = 0; i < nbreDeCartes;){
+    		int random = new Random().nextInt(size);
     		Iterator<Carte> recupIterator = maPartie.getCarteDuJeu().iterator();
-    		if (i == item) {
-    			pioche.add(recupIterator.next());
+    		Carte test = null;
+    		
+    		while(recupIterator.hasNext()) {
+    		if (i == random) {
+    			test = recupIterator.next();
+    			pioche.add(test);
     			i++;
     		}
     	        
-    	    
+    		}*/
+
     	}
-    	System.out.println(pioche);
-    }
-    
+    	
+    	
+
+    //}
+    }    
     
 
 
-}
+

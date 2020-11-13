@@ -14,9 +14,14 @@ public class StrategieDeBase implements StrategieMode {
     		
     		
     		
+    		Pioche pioche = new Pioche (15, maPartie);
+    		
+    		
     	case 3 : 
     	
     	
+    		
+    		Pioche pioche = new Pioche (14, maPartie);
     	}
     	
     }
