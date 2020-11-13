@@ -26,9 +26,22 @@ public class Joueur {
 
     //public List<Carte>  = new ArrayList<Carte> ();
 
-    public CarteJouable main;
+    private CarteJouable main;
 
+<<<<<<< Updated upstream
     public void jouer(StrategieJoueur strategie) {
     	//strategie.placerCarte(ligneCase, colonneCase, carte, tapis);
+=======
+    public CarteJouable getMain() {
+		return main;
+	}
+
+	public void setMain(CarteJouable main) {
+		this.main = main;
+	}
+
+	public void jouer() {
+    	
+>>>>>>> Stashed changes
     }
 }

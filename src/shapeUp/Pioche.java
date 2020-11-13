@@ -21,20 +21,41 @@ public class Pioche {
     }
     
     
-	private Set<Carte> pioche = new HashSet<Carte> ();  
+	private List<Carte> pioche = new ArrayList<Carte> ();  
 	
-	public Set<Carte> getPioche() {
+	public List<Carte> getPioche() {
 		return pioche;
 	}
 
-	public void setPioche(Set<Carte> pioche) {
+	public void setPioche(List<Carte> pioche) {
 		this.pioche = pioche;
 	}
 
 	
     public Pioche(int nbreDeCartes, Partie maPartie) {
     	this.nbreDeCartes = nbreDeCartes;
-    	List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
+    	
+    	for (int i = 0; i < nbreDeCartes; i++) {
+    		int longueurListeCarte = maPartie.getCarteDuJeu().size();
+    		int randomIndex = new Random().nextInt(longueurListeCarte);
+    		
+    		pioche.add(maPartie.getCarteDuJeu().get(randomIndex));
+    		
+    		longueurListeCarte = 0;
+    		randomIndex = 0;
+    		
+    		
+    	}
+    	
+    	Iterator<Carte> piocheIt = pioche.iterator(); 
+    	while (piocheIt.hasNext()) {
+    	System.out.println(piocheIt.next());
+    	}
+    	
+    	
+    	
+    	// Si on garde un Set au final 
+    	/*List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
     	recupCarteJeu.addAll(maPartie.getCarteDuJeu()); 
     	
     	
@@ -66,24 +87,11 @@ public class Pioche {
     	System.out.println(piocheIt.next());
     	}
     	
+    	*/
     	
     	
     	//}
-    	/*int size = maPartie.getCarteDuJeu().size();
-    	
-    	for(int i = 0; i < nbreDeCartes;){
-    		int random = new Random().nextInt(size);
-    		Iterator<Carte> recupIterator = maPartie.getCarteDuJeu().iterator();
-    		Carte test = null;
-    		
-    		while(recupIterator.hasNext()) {
-    		if (i == random) {
-    			test = recupIterator.next();
-    			pioche.add(test);
-    			i++;
-    		}
-    	        
-    		}*/
+ 
 
     	}
     	

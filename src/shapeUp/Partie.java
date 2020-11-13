@@ -19,14 +19,25 @@ public class Partie implements Visitable {
 	public void setNbreDeJoueurs(int nbreDeJoueurs) {
 		this.nbreDeJoueurs = nbreDeJoueurs;
 	}*/
-	private Set<Carte> carteDuJeu = new HashSet<Carte> ();
+	
+	
+	//private Set<Carte> carteDuJeu = new HashSet<Carte> (); suspens
+	
+	private List<Carte> carteDuJeu = new ArrayList<Carte> ();
+	
+
+
 	private Queue<Joueur> listeJoueurs  = new LinkedList<Joueur> ();
 	private TapisDeJeu tapisDeJeu;
 	private boolean estFinie;
     private StrategieMode modeDeJeu;
 	
-	public Set<Carte> getCarteDuJeu() {
+	public List<Carte> getCarteDuJeu() {
 		return carteDuJeu;
+	}
+	
+	public void setCarteDuJeu(List<Carte> carteDuJeu) {
+		this.carteDuJeu = carteDuJeu;
 	}
     
 	public Queue<Joueur> getListeJoueurs() {
