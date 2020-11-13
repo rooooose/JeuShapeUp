@@ -3,6 +3,7 @@ package shapeUp;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -17,8 +18,9 @@ public class Pioche {
     	this.nbreDeCartes = nbreDeCartes;
     	
     }
-
-	public Set<Carte> pioche = new TreeSet<Carte> ();  
+    
+    
+	private Set<Carte> pioche = new TreeSet<Carte> ();  
 	
 	public Set<Carte> getPioche() {
 		return pioche;
@@ -28,21 +30,26 @@ public class Pioche {
 		this.pioche = pioche;
 	}
 
+	
+    public Pioche(int nbreDeCartes, Partie maPartie) {
+    	this.nbreDeCartes = nbreDeCartes;
+    	
+    	int size = maPartie.getCarteDuJeu().size();
+    	
+    	for(int i = 0; i < nbreDeCartes;i = i){
+    		int item = new Random().nextInt(size);
+    		Iterator<Carte> recupIterator = maPartie.getCarteDuJeu().iterator();
+    		if (i == item) {
+    			pioche.add(recupIterator.next());
+    			i++;
+    		}
+    	        
+    	    
+    	}
+    	System.out.println(pioche);
+    }
+    
+    
 
-	{  
 
-	
-	/*for (int i = 0; i < 14; i++) {
-		pioche.add(new Carte());
-		
-	} */
-	
-	/*Iterator<Carte> testIterator = pioche.iterator();
-	
-	while (testIterator.hasNext()) {
-		System.out.println(testIterator.next());
-	}*/
-	
-
-}
 }
