@@ -1,10 +1,12 @@
 package shapeUp;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
@@ -27,7 +29,8 @@ public class Partie implements Visitable {
 	
 
 
-	private Queue<Joueur> listeJoueurs  = new LinkedList<Joueur> ();
+	//private Queue<Joueur> listeJoueurs  = new LinkedList<Joueur> ();
+	private Map<String,Joueur> listeJoueurs  = new HashMap<String,Joueur> ();
 	private TapisDeJeu tapisDeJeu;
 	private boolean estFinie;
     private StrategieMode modeDeJeu;
@@ -40,10 +43,10 @@ public class Partie implements Visitable {
 		this.carteDuJeu = carteDuJeu;
 	}
     
-	public Queue<Joueur> getListeJoueurs() {
+	public Map<String,Joueur> getListeJoueurs() {
 		return listeJoueurs;
 	}
-	public void setListeJoueurs(Queue<Joueur> listeJoueurs) {
+	public void setListeJoueurs(Map<String,Joueur> listeJoueurs) {
 		this.listeJoueurs = listeJoueurs;
 	}
 	
@@ -61,12 +64,11 @@ public class Partie implements Visitable {
 		this.tapisDeJeu = tapisDeJeu;
 	}*/
 	
-	Partie(Queue<Joueur> joueurs, StrategieMode mode, TapisDeJeu formeTapisDeJeu){
+	Partie(Map<String,Joueur> joueurs, StrategieMode mode, TapisDeJeu formeTapisDeJeu){
 		//this.setNbreDeJoueurs(nbJoueurs);
 		//System.out.print("Nombre de joueurs : " + nbJoueurs);
 		System.out.print("Partie créée\n");
-		
-		listeJoueurs = new LinkedList<Joueur> ();
+
 		this.setListeJoueurs(joueurs);
 		this.setModeDeJeu(mode);
 		this.tapisDeJeu = formeTapisDeJeu;
@@ -74,10 +76,10 @@ public class Partie implements Visitable {
 		
 		Carte carteTest = new CarteJouable(CouleurType.BLEU, FormeCarte.CERCLE, false);
 		CarteJouable c = (CarteJouable) carteTest;
-		listeJoueurs.peek().strategie.placerCarte(0, 2, c, tapisDeJeu);
-		listeJoueurs.peek().strategie.placerCarte(3, 3, c, tapisDeJeu);
-		listeJoueurs.peek().strategie.placerCarte(3, 3, c, tapisDeJeu);
-		listeJoueurs.peek().strategie.placerCarte(0, 0, c, tapisDeJeu);
+		listeJoueurs.get("o").strategie.placerCarte(0, 2, c, tapisDeJeu);
+		listeJoueurs.get("o").strategie.placerCarte(3, 3, c, tapisDeJeu);
+		listeJoueurs.get("o").strategie.placerCarte(3, 3, c, tapisDeJeu);
+		listeJoueurs.get("o").strategie.placerCarte(0, 0, c, tapisDeJeu);
 	}
 
 	

@@ -28,10 +28,10 @@ public class Joueur {
 
     private CarteJouable main;
 
-<<<<<<< Updated upstream
+
     public void jouer(StrategieJoueur strategie) {
     	//strategie.placerCarte(ligneCase, colonneCase, carte, tapis);
-=======
+    }
     public CarteJouable getMain() {
 		return main;
 	}
@@ -42,6 +42,5 @@ public class Joueur {
 
 	public void jouer() {
     	
->>>>>>> Stashed changes
     }
 }

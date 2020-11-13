@@ -35,7 +35,7 @@ public class ShapeUp {
 	    	
 	    }*/
 	    
-	    public void lancerLaPartie(Queue<Joueur> listeJoueurs, StrategieMode mode, TapisDeJeu forme) {
+	    public void lancerLaPartie(Map<String,Joueur> listeJoueurs, StrategieMode mode, TapisDeJeu forme) {
 	    	
 	    	this.maPartie = new Partie(listeJoueurs, mode, forme);
 	    	
@@ -81,12 +81,12 @@ public class ShapeUp {
 	    	
 	    }
 
-	    public Queue<Joueur> creerJoueurs(int nbJoueurs) {
+	    public Map<String,Joueur> creerJoueurs(int nbJoueurs) {
 	    	
 	    	char type='r';
 	    	String nom;
 	    	mapJoueurs = new HashMap<String,Joueur>();
-	    	Queue<Joueur> queueJoueurs = new LinkedList<Joueur>();
+	    	//Queue<Joueur> queueJoueurs = new LinkedList<Joueur>();
         		
         		for(int i=1; i<=nbJoueurs; i++) {
         			
@@ -100,13 +100,13 @@ public class ShapeUp {
 	        			case 'v' :
 	        				JoueurVirtuel nouveauJoueurV = new JoueurVirtuel(nom);
 	        				//System.out.println("Nom du joueur " + i + ": " + nouveauJoueurV.getNom());
-	        				queueJoueurs.add(nouveauJoueurV);
+	        				//queueJoueurs.add(nouveauJoueurV);
 	        				mapJoueurs.put(nom, nouveauJoueurV);
 	        				break;
 	        			case 'r' :
 	        				JoueurReel nouveauJoueurR = new JoueurReel(nom);
 	        				//System.out.println("Nom du joueur " + i + ": " + nouveauJoueurR.getNom());
-	        				queueJoueurs.add(nouveauJoueurR);
+	        				//queueJoueurs.add(nouveauJoueurR);
 	        				mapJoueurs.put(nom, nouveauJoueurR);
 	        				break;
 	        			default :
@@ -116,7 +116,7 @@ public class ShapeUp {
         			}
         		
     			}
-			return queueJoueurs;
+			return mapJoueurs;
 	    	
 	    }
 	    
