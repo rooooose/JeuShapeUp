@@ -1,7 +1,9 @@
 package shapeUp;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ListIterator;
+import java.util.Map;
 
 public class TapisDeJeu {
 	
@@ -9,12 +11,14 @@ public class TapisDeJeu {
     //private FormeTapis forme; 
     
     
-    private ArrayList<ArrayList<Carte>> container;
-    
-    public ArrayList<ArrayList<Carte>> getContainer() {
+    //private ArrayList<ArrayList<Carte>> container;
+    private Map<Integer,Map<Integer,Carte>> container;
+
+	public Map<Integer, Map<Integer, Carte>> getContainer() {
 		return container;
 	}
-	public void setContainer(ArrayList<ArrayList<Carte>> container) {
+
+	public void setContainer(Map<Integer, Map<Integer, Carte>> container) {
 		this.container = container;
 	}
 
@@ -32,29 +36,38 @@ public class TapisDeJeu {
 	TapisDeJeu(int[][] modeleForme) {
 		
 		this.modele= modeleForme;
-		ArrayList<Carte> ligne = new ArrayList<Carte>();
-		Carte carteVide = new Carte();
+		//ArrayList<Carte> ligne = new ArrayList<Carte>();
+		//Map<Integer,Carte> ligne = new HashMap<Integer,Carte>();
 		
-	    this.setContainer(new ArrayList<ArrayList<Carte>>());
+		
+	    this.setContainer(new HashMap<Integer,Map<Integer,Carte>>());
 	    for(int i=0; i<this.modele.length; i++) {
-			this.getContainer().add(ligne);
+	    	Map<Integer,Carte> ligne = new HashMap<Integer,Carte>();
+			this.getContainer().put(i,ligne);	
+			for(int j=0; j<this.modele[i].length; j++) {
+				Carte carteVide = new Carte();
+		    	if(this.modele[i][j]==1) {
+		    		this.getContainer().get(i).put(j,carteVide);
+		    	}
+			}
 		}
 	    
+
 	    //ListIterator<Carte> itLigne = ligne.listIterator();
-	    ListIterator<ArrayList<Carte>> itContainer = this.getContainer().listIterator();
-	    while(itContainer.hasNext()) {
-	    	System.out.print(itContainer.nextIndex());
-	    	//for(int i=0; i<this.modele.length; i++) {
-				
-			    //for(int j=0; j<this.modele[0].length; j++) {
-			    	if(this.modele[0][0]==1) {
-		    		   itContainer.next().add(carteVide);
-		    		   //System.out.print(getContainer().get(i));
-			    	}
-			    	//itContainer.nextIndex()	
-				//}
-			// }
-	    }  
+//	    ListIterator<ArrayList<Carte>> itContainer = this.getContainer().listIterator();
+//	    while(itContainer.hasNext()) {
+//	    	System.out.print(itContainer.nextIndex());
+//	    	//for(int i=0; i<this.modele.length; i++) {
+//				
+//			    //for(int j=0; j<this.modele[0].length; j++) {
+//			    	if(this.modele[0][0]==1) {
+//		    		   itContainer.next().add(carteVide);
+//		    		   //System.out.print(getContainer().get(i));
+//			    	}
+//			    	//itContainer.nextIndex()	
+//				//}
+//			// }
+//	    }  
 	    
 	    
 		//this.setForme(forme);
