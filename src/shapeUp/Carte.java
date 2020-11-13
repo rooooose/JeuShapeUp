@@ -3,6 +3,8 @@ package shapeUp;
 
 
 public class Carte {
+	
+	//private static int nbCartes;
     protected CouleurType couleur;
     protected FormeCarte forme;
     protected boolean estRemplie;
@@ -10,17 +12,21 @@ public class Carte {
     
     public Carte(CouleurType couleur, FormeCarte forme, boolean estRemplie) {
     	
-    	this.couleur = couleur;
-    	this.forme = forme;
-    	this.estRemplie = estRemplie;
-    	
+    	this.setCouleur(couleur);
+    	this.setForme(forme);
+    	this.setEstRemplie(estRemplie);
+    	//Carte.setNbCartes(Carte.getNbCartes() + 1);
     	
     }
 
-    public CouleurType getCouleur() {
-		return couleur;
+    //Ne pas supprimer
+    public Carte() {
+		// TODO Auto-generated constructor stub
 	}
 
+	public CouleurType getCouleur() {
+		return couleur;
+	}
 	public void setCouleur(CouleurType couleur) {
 		this.couleur = couleur;
 	}
@@ -28,7 +34,6 @@ public class Carte {
 	public FormeCarte getForme() {
 		return forme;
 	}
-
 	public void setForme(FormeCarte forme) {
 		this.forme = forme;
 	}
@@ -36,12 +41,16 @@ public class Carte {
 	public boolean EstRemplie() {
 		return estRemplie;
 	}
-
 	public void setEstRemplie(boolean estRemplie) {
 		this.estRemplie = estRemplie;
 	}
 
-	
+	/*public static int getNbCartes() {
+		return nbCartes;
+	}
+	public static void setNbCartes(int nbCartes) {
+		Carte.nbCartes = nbCartes;
+	}*/
 
     
 
@@ -58,5 +67,7 @@ public class Carte {
  sbCarte.append("\n");
  return sbCarte.toString();
 }
+
+	
     
 }

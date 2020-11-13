@@ -183,7 +183,7 @@ public class ShapeUp {
 					return forme;
 				case 't' :
 					//TapisTriangleRectangle triangle = new TapisTriangleRectangle();
-					forme = new TapisRectangle();
+					forme = new TapisTriangleRectangle();
 					//return triangle;
 					return forme;
 				case 'd' :

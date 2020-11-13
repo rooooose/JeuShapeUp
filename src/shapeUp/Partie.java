@@ -119,6 +119,7 @@ public class Partie implements Visitable {
 		while (testIterator.hasNext()) {
 			System.out.println(testIterator.next());
 		} */
+
 	}
 	
 	public String toString() {

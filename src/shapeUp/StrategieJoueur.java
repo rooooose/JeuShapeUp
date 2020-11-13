@@ -6,7 +6,7 @@ public interface StrategieJoueur {
 
     void deplacerCarte(int ligneCase, int colonneCase, CarteJouable carte);
 
-    void placerCarte(int ligneCase, int colonneCase, CarteJouable carte);
+    void placerCarte(int ligneCase, int colonneCase, CarteJouable carte, TapisDeJeu tapis);
 
     CarteJouable definirCarteAJouer(Carte carte);
 
