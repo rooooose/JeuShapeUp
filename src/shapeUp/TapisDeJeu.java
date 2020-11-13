@@ -46,15 +46,17 @@ public class TapisDeJeu {
 	    	System.out.print(itContainer.nextIndex());
 	    	//for(int i=0; i<this.modele.length; i++) {
 				
-			    for(int j=0; j<this.modele[itContainer.nextIndex()].length; j++) {
-			    	if(this.modele[itContainer.nextIndex()][j]==1) {
+			    //for(int j=0; j<this.modele[0].length; j++) {
+			    	if(this.modele[0][0]==1) {
 		    		   itContainer.next().add(carteVide);
 		    		   //System.out.print(getContainer().get(i));
 			    	}
-						
-				}
+			    	//itContainer.nextIndex()	
+				//}
 			// }
 	    }  
+	    
+	    
 		//this.setForme(forme);
 		
 		 /*switch (forme) {
