@@ -8,17 +8,16 @@ import java.util.Map;
 public class TapisDeJeu {
 	
     private boolean rempli;
+    private int nbCartes;
+    
+	public int getNbCartes() {
+		return nbCartes;
+	}
+	public void setNbCartes(int nbCartes) {
+		this.nbCartes = nbCartes;
+	}
     //private Carte carteVide;
     //private FormeTapis forme; 
-    
-    
-    public boolean isCaseRemplie() {
-		return caseRemplie;
-	}
-
-	public void setCaseRemplie(boolean caseRemplie) {
-		this.caseRemplie = caseRemplie;
-	}
 
 	//private ArrayList<ArrayList<Carte>> container;
     private Map<Integer,Map<Integer,Carte>> container;
@@ -44,6 +43,7 @@ public class TapisDeJeu {
 	
 	TapisDeJeu(int[][] modeleForme) {
 		
+		setNbCartes(0);
 		this.modele= modeleForme;
 		//ArrayList<Carte> ligne = new ArrayList<Carte>();
 		
@@ -94,13 +94,44 @@ public class TapisDeJeu {
 	
 	public boolean placementPossible(int lig, int col) {
 		//regle d'adjacence + déplacement possible des autres cartes + 1ere carte au milieu
-		return this.modele[lig][col]==1;
+		System.out.println("placement possible appelé");
+		return (this.modele[lig][col]==1 && adjacenceRespectee(lig,col));
+		//return this.modele[lig][col]==1 && adjacenceRespectee(lig,col);
+		
 
     }
 	
 	public boolean adjacenceRespectee(int lig, int col) {
 		//regle d'adjacence + déplacement possible des autres cartes + 1ere carte au milieu
-		if(this.getContainer().get(lig).get(col)!=null) {
+		
+		//déclaration + initialisation des variables de condition
+		boolean caseDessusRemplie = false;
+		boolean caseDessousRemplie = false;
+		boolean caseGaucheRemplie = false;
+		boolean caseDroiteRemplie = false;
+		;
+		System.out.println("adjacence appelée");
+		if(this.getContainer().containsKey(lig-1)) {
+			caseDessusRemplie = this.getContainer().get(lig-1).containsKey(col);
+			System.out.println("caseDessusRemplie : "+ caseDessusRemplie);
+		}
+		if(this.getContainer().containsKey(lig+1)) {
+			caseDessousRemplie = this.getContainer().get(lig+1).containsKey(col);
+			System.out.println("caseDessousRemplie : "+ caseDessousRemplie);
+		}
+		if(this.getContainer().containsKey(lig)) {
+			caseGaucheRemplie = this.getContainer().get(lig).containsKey(col-1);
+			System.out.println("caseGaucheRemplie : "+ caseGaucheRemplie);
+		}
+		if(this.getContainer().containsKey(lig)) {
+			caseDroiteRemplie = this.getContainer().get(lig).containsKey(col+1);
+			System.out.println("caseDroiteRemplie : "+ caseDroiteRemplie);
+		}
+//		boolean caseDessousRemplie = this.getContainer().get(lig+1).get(col)!=null;
+//		boolean caseGaucheRemplie = this.getContainer().get(lig).get(col-1)!=null;
+//		boolean caseDroiteRemplie = this.getContainer().get(lig).get(col+1)!=null;
+		
+		if( caseDessusRemplie || caseDessousRemplie || caseGaucheRemplie || caseDroiteRemplie) {
 			return true;
 		}else {
 			return false;
@@ -122,7 +153,7 @@ public class TapisDeJeu {
 		for(int i=0; i<this.modele.length; i++) {
 			sb.append(i);
 			for(int j=0; j<this.modele[i].length; j++) {
-				if(this.placementPossible(i,j)) {
+				if(this.modele[i][j]==1) {
 					if(this.caseRemplie(i,j)) {
 						sb.append("[x]");
 					}else sb.append("[ ]");
@@ -136,6 +167,8 @@ public class TapisDeJeu {
 		return sb.toString();
 		
 	}
+
+
 
 
 	

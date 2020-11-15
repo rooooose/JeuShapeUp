@@ -76,10 +76,10 @@ public class Partie implements Visitable {
 		
 		Carte carteTest = new CarteJouable(CouleurType.BLEU, FormeCarte.CERCLE, false);
 		CarteJouable c = (CarteJouable) carteTest;
-		listeJoueurs.get("o").strategie.placerCarte(0, 2, c, tapisDeJeu);
-		listeJoueurs.get("o").strategie.placerCarte(3, 3, c, tapisDeJeu);
-		listeJoueurs.get("o").strategie.placerCarte(3, 3, c, tapisDeJeu);
-		listeJoueurs.get("o").strategie.placerCarte(0, 0, c, tapisDeJeu);
+		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
+		listeJoueurs.get("1").strategie.placerCarte(3, 3, c, tapisDeJeu);
+		//listeJoueurs.get("1").strategie.placerCarte(3, 3, c, tapisDeJeu);
+		listeJoueurs.get("1").strategie.placerCarte(0, 0, c, tapisDeJeu);
 	}
 
 	

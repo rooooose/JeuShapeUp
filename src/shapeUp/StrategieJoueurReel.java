@@ -19,15 +19,24 @@ public class StrategieJoueurReel implements StrategieJoueur {
    
 
     public void placerCarte(int ligneCase, int colonneCase, CarteJouable carte, TapisDeJeu tapis) {
+    	//Cas 1ere carte
     	//SCANNER
-		if(tapis.placementPossible(ligneCase,colonneCase)) {
-			
-			tapis.getContainer().get(ligneCase).put(colonneCase, carte);
-			carte.setEstPlacee(true); 
-			System.out.println(tapis);
-		} else {
-			//DEMANDER DE REPLACER CARTE
-		}
+    	
+    	//controle de si aucune carte n'est sur le tapis
+    	if(tapis.getNbCartes()==0) {
+    		tapis.getContainer().get(ligneCase).put(colonneCase, carte);
+    	}else {
+    		if(tapis.placementPossible(ligneCase,colonneCase)) {
+    			
+    			tapis.getContainer().get(ligneCase).put(colonneCase, carte);
+    			carte.setEstPlacee(true); 
+    			System.out.println(tapis);
+    		} else {
+    			//DEMANDER DE REPLACER CARTE
+    		}
+    	}
+    	
+		
 		
     	   	
     }
