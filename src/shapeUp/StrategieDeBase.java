@@ -34,7 +34,7 @@ public class StrategieDeBase implements StrategieMode {
   		  
       	if (nbreDeJoueurs == 2) {
     		Pioche pioche = new Pioche (16, maPartie); 
-    		
+    		//this.piocheDeLaPartie = pioche;
  
         	//On récupère les cartes du jeu (toutes les cartes)
         	List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
@@ -64,7 +64,7 @@ public class StrategieDeBase implements StrategieMode {
       	}
     	      	else if (nbreDeJoueurs == 3 ) {
     	    		Pioche pioche= new Pioche (15, maPartie);
-    	    		
+    	    		//this.piocheDeLaPartie = pioche;
     	    	
     	        	
     	        	//On récupère les cartes du jeu (toutes les cartes)

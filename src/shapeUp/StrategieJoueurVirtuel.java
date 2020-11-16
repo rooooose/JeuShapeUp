@@ -38,7 +38,11 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
     	carteDejaPlacee.setEstPlacee(true);
     }
 
-    public CarteJouable definirCarteAJouer(Carte carte) {
+    public CarteJouable definirCarteAJouer(Carte carte, StrategieMode modeDeJeu) {
+    	
+    	
+    	
+    	
     }
 
 	@Override

@@ -62,10 +62,13 @@ public class StrategieJoueurReel implements StrategieJoueur {
     		}
     	}
     	System.out.println(tapis);
-    	tapis.setNbCartes(tapis.getNbCartes()+1);		   	
+
+    	tapis.setNbCartes(tapis.getNbCartes()+1);
+	
+    	carte.setEstPlacee(true);
     }
 
-    public CarteJouable definirCarteAJouer(Carte carte) {
+    public CarteJouable definirCarteAJouer(Carte carte, StrategieMode modeDeJeu) {
 		return null;
     }
 }
