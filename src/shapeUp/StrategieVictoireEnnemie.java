@@ -2,7 +2,16 @@ package shapeUp;
 
 
 public class StrategieVictoireEnnemie implements StrategieMode {
+    //private Pioche piocheDeLaPartie; 
+	
+	
+	//public Pioche getPiocheDeLaPartie() {
+	//	return piocheDeLaPartie;
+	//}
 
+	//public void setPiocheDeLaPartie(Pioche piocheDeLaPartie) {
+	//	this.piocheDeLaPartie = piocheDeLaPartie;
+	//}
 	
     public void voirCarteVictoire(Joueur joueur) {
     }

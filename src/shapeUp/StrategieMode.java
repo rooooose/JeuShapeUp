@@ -10,4 +10,5 @@ public interface StrategieMode {
 
     void voirCarteVictoire(Joueur joueur);
 
+    // void Pioche getPiocheDeLaPartie();
 }

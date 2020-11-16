@@ -10,6 +10,16 @@ public class StrategieJoueurReel implements StrategieJoueur {
 		return null;
     }
 
+	/* 	public Carte piocherCarte(StrategieMode strategie) {
+    	
+    	
+    	strategie.getPiocheDeLaPartie().compterNbCartes(pioche.getNbreDeCartes() - 1);
+		return null;
+    }
+	 
+	 
+	 
+	 */
     public void deplacerCarte(int ligneCase, int colonneCase, CarteJouable carteDejaPlacee) {
     	
     	carteDejaPlacee.setEstPlacee(false);    	
