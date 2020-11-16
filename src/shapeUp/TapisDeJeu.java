@@ -19,16 +19,22 @@ public class TapisDeJeu {
     //private Carte carteVide;
     //private FormeTapis forme; 
 
-	//private ArrayList<ArrayList<Carte>> container;
-    private Map<Integer,Map<Integer,Carte>> container;
+	private ArrayList<ArrayList<Carte>> container;
+    //private Map<Integer,Map<Integer,Carte>> container;
 
-	public Map<Integer, Map<Integer, Carte>> getContainer() {
-		return container;
-	}
-
-	public void setContainer(Map<Integer, Map<Integer, Carte>> container) {
+	public void setContainer(ArrayList<ArrayList<Carte>> container) {
 		this.container = container;
 	}
+	public ArrayList<ArrayList<Carte>> getContainer() {
+		return container;
+	}
+	
+//	public Map<Integer, Map<Integer, Carte>> getContainer() {
+//		return container;
+//	}
+//	public void setContainer(Map<Integer, Map<Integer, Carte>> container) {
+//		this.container = container;
+//	}
 
 	private int[][] modele;
 
@@ -45,21 +51,23 @@ public class TapisDeJeu {
 		
 		setNbCartes(0);
 		this.modele= modeleForme;
-		//ArrayList<Carte> ligne = new ArrayList<Carte>();
+		//boolean debutForme = false;
 		
-	    this.setContainer(new HashMap<Integer,Map<Integer,Carte>>());
+	    this.setContainer(new ArrayList<ArrayList<Carte>>());
 	    for(int i=0; i<this.modele.length; i++) {
 	    	
-	    	Map<Integer,Carte> ligne = new HashMap<Integer,Carte>();
-			this.getContainer().put(i,ligne);
+	    	ArrayList<Carte> ligne = new ArrayList<Carte>();
+	    	//Map<Integer,Carte> ligne = new HashMap<Integer,Carte>();
+			this.getContainer().add(ligne);
 			
-//			for(int j=0; j<this.modele[i].length; j++) {
-//				carteVide = new Carte();
-//				
-//		    	if(this.modele[i][j]==1) {
-//		    		this.getContainer().get(i).put(j,carteVide);
-//		    	}
-//			}
+			for(int j=0; j<this.modele[i].length; j++) {
+				//carteVide = new Carte();
+				// VOIR POUR LONGUEUR DE LA LISTE
+		    	//if(this.modele[i][j]==1 || !debutForme) {
+		    		this.getContainer().get(i).add(null);
+
+//				}
+			}
 		}
 	    
 
@@ -109,27 +117,44 @@ public class TapisDeJeu {
 		boolean caseDessousRemplie = false;
 		boolean caseGaucheRemplie = false;
 		boolean caseDroiteRemplie = false;
-		;
 		System.out.println("adjacence appelée");
-		if(this.getContainer().containsKey(lig-1)) {
-			caseDessusRemplie = this.getContainer().get(lig-1).containsKey(col);
+
+		if(lig>0) {
+			caseDessusRemplie = caseRemplie(lig-1,col);
 			System.out.println("caseDessusRemplie : "+ caseDessusRemplie);
 		}
-		if(this.getContainer().containsKey(lig+1)) {
-			caseDessousRemplie = this.getContainer().get(lig+1).containsKey(col);
-			System.out.println("caseDessousRemplie : "+ caseDessousRemplie);
+		
+		if(lig<this.getContainer().size()) {
+			caseDessousRemplie = caseRemplie(lig+1,col);
+			System.out.println("caseDessousRemplie : "+ caseDessusRemplie);
 		}
-		if(this.getContainer().containsKey(lig)) {
-			caseGaucheRemplie = this.getContainer().get(lig).containsKey(col-1);
+		
+		if(col>0) {
+			caseGaucheRemplie = caseRemplie(lig,col-1);
 			System.out.println("caseGaucheRemplie : "+ caseGaucheRemplie);
 		}
-		if(this.getContainer().containsKey(lig)) {
-			caseDroiteRemplie = this.getContainer().get(lig).containsKey(col+1);
+		
+		if(col<this.getContainer().get(lig).size()) {
+			caseDroiteRemplie = caseRemplie(lig,col+1);
 			System.out.println("caseDroiteRemplie : "+ caseDroiteRemplie);
 		}
-//		boolean caseDessousRemplie = this.getContainer().get(lig+1).get(col)!=null;
-//		boolean caseGaucheRemplie = this.getContainer().get(lig).get(col-1)!=null;
-//		boolean caseDroiteRemplie = this.getContainer().get(lig).get(col+1)!=null;
+		
+//		if(this.getContainer().containsKey(lig-1)) {
+//			caseDessusRemplie = this.getContainer().get(lig-1).containsKey(col);
+//			System.out.println("caseDessusRemplie : "+ caseDessusRemplie);
+//		}
+//		if(this.getContainer().containsKey(lig+1)) {
+//			caseDessousRemplie = this.getContainer().get(lig+1).containsKey(col);
+//			System.out.println("caseDessousRemplie : "+ caseDessousRemplie);
+//		}
+//		if(this.getContainer().containsKey(lig)) {
+//			caseGaucheRemplie = this.getContainer().get(lig).containsKey(col-1);
+//			System.out.println("caseGaucheRemplie : "+ caseGaucheRemplie);
+//		}
+//		if(this.getContainer().containsKey(lig)) {
+//			caseDroiteRemplie = this.getContainer().get(lig).containsKey(col+1);
+//			System.out.println("caseDroiteRemplie : "+ caseDroiteRemplie);
+//		}
 		
 		if( caseDessusRemplie || caseDessousRemplie || caseGaucheRemplie || caseDroiteRemplie) {
 			return true;
@@ -143,6 +168,20 @@ public class TapisDeJeu {
 		return this.getContainer().get(lig).get(col)!=null;
 	}
 	
+	public void decalerCartes(int lig, int col) {
+		
+		//si en haut ou en bas, on décale la ligne des cartes
+		if(caseRemplie(lig,col)){
+			
+			//parcours de toutes les lignes
+			for(int i=0; i<this.getContainer().size(); i++) {
+				
+				//this.getContainer().get(i).get(col)++;
+			}
+			
+		}
+	}
+	
 	public String toString(){
 		StringBuffer sb = new StringBuffer();
 		
@@ -150,13 +189,19 @@ public class TapisDeJeu {
 			sb.append("  "+col);
 		}
 		sb.append("\n");
+		
 		for(int i=0; i<this.modele.length; i++) {
 			sb.append(i);
+			
 			for(int j=0; j<this.modele[i].length; j++) {
+				
 				if(this.modele[i][j]==1) {
+					
 					if(this.caseRemplie(i,j)) {
 						sb.append("[x]");
+						
 					}else sb.append("[ ]");
+					
 				} else {
 					sb.append("   ");
 				}
@@ -165,7 +210,6 @@ public class TapisDeJeu {
 		}
 		sb.append(this.getContainer());
 		return sb.toString();
-		
 	}
 
 
