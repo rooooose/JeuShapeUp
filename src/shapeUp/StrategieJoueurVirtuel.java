@@ -15,11 +15,14 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
     	carteDejaPlacee.setEstPlacee(true);
     }
 
-    public void placerCarte(int ligneCase, int colonneCase, CarteJouable carte) {
-    	
-    	carte.setEstPlacee(true);
-    }
-
     public CarteJouable definirCarteAJouer(Carte carte) {
     }
+
+	@Override
+	public void placerCarte(int ligneCase, int colonneCase, CarteJouable carte, TapisDeJeu tapis) {
+		// TODO Auto-generated method stub
+		
+		
+		carte.setEstPlacee(true);
+	}
 }

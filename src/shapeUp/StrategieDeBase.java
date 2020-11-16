@@ -7,8 +7,6 @@ import java.util.Random;
 
 public class StrategieDeBase implements StrategieMode {
      
-	
-	
 	public void distribuerCartes(Joueur joueur, Partie maPartie) {
     	
 		int nbreDeJoueurs = maPartie.getListeJoueurs().size();
@@ -25,10 +23,8 @@ public class StrategieDeBase implements StrategieMode {
   		  
       	if (nbreDeJoueurs == 2) {
     		Pioche pioche = new Pioche (16, maPartie); 
-
-    		
-    		
-        	
+    		//Pioche.setPioche(pioche.getPioche());
+ 
         	//On récupère les cartes du jeu (toutes les cartes)
         	List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
         	recupCarteJeu.addAll(maPartie.getCarteDuJeu()); 
@@ -87,8 +83,10 @@ public class StrategieDeBase implements StrategieMode {
     	    		  randomIndex = 0;
     	    		
     	  		}
+      	
   		}
       		
+		
     	}
       	
 		
