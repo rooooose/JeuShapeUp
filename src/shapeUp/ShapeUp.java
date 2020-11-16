@@ -203,7 +203,7 @@ public class ShapeUp {
 		
 			ShapeUp jeuShapeUp = new ShapeUp();
 			System.out.println(jeuShapeUp);
-
+			//Pioche piocheDeTest = new Pioche (3,jeuShapeUp.maPartie);
 
 			
 	    }

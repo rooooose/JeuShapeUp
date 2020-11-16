@@ -22,10 +22,10 @@ public class Partie implements Visitable {
 		this.nbreDeJoueurs = nbreDeJoueurs;
 	}*/
 	
+	//Unicité des cartes du jeu
+	private Set<Carte> carteDuJeu = new HashSet<Carte> (); 
 	
-	//private Set<Carte> carteDuJeu = new HashSet<Carte> (); suspens
-	
-	private List<Carte> carteDuJeu = new ArrayList<Carte> ();
+	//private List<Carte> carteDuJeu = new ArrayList<Carte> ();
 	
 
 
@@ -35,11 +35,11 @@ public class Partie implements Visitable {
 	private boolean estFinie;
     private StrategieMode modeDeJeu;
 	
-	public List<Carte> getCarteDuJeu() {
+	public Set<Carte> getCarteDuJeu() {
 		return carteDuJeu;
 	}
 	
-	public void setCarteDuJeu(List<Carte> carteDuJeu) {
+	public void setCarteDuJeu(Set<Carte> carteDuJeu) {
 		this.carteDuJeu = carteDuJeu;
 	}
     
