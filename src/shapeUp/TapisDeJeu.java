@@ -10,14 +10,14 @@ public class TapisDeJeu {
     private boolean rempli;
     private int nbCartes;
     private int nbLignesVides;
-    private int nbCartesSurLigne;
-    
-	public int getNbCartesSurLigne() {
-		return nbCartesSurLigne;
-	}
-	public void setNbCartesSurLigne(int nbCartesSurLigne) {
-		this.nbCartesSurLigne = nbCartesSurLigne;
-	}
+//    private int nbCartesSurLigne;
+//    
+//	public int getNbCartesSurLigne() {
+//		return nbCartesSurLigne;
+//	}
+//	public void setNbCartesSurLigne(int nbCartesSurLigne) {
+//		this.nbCartesSurLigne = nbCartesSurLigne;
+//	}
 	public int getNbCartes() {
 		return nbCartes;
 	}
@@ -86,7 +86,7 @@ public class TapisDeJeu {
 			}
 		}
 	    setNbLignesVides(this.getContainer().size());
-	    setNbCartesSurLigne(0);
+	    //setNbCartesSurLigne(0);
 	    
 		//this.setForme(forme);
 		
@@ -167,14 +167,37 @@ public class TapisDeJeu {
 	public boolean caseRemplie(int lig, int col) {
 		return this.getContainer().get(lig).get(col)!=null;
 	}
+	
 	public boolean decalagePossible(int lig, int col) {
 		
 		boolean carteEnHaut = lig == 0;
 		boolean carteEnBas = lig == this.getContainer().lastIndexOf(ligne);
 		//il doit y avoir au moins 1 ligne en haut ou en bas des cartes présentes et des 1 en dessous ou dessus d'elles.
-		boolean nbLignesVidesOk = ;				
-		return (carteEnHaut || carteEnBas) && nbLignesVidesOk;
+		boolean nbLignesVidesOk = this.getNbLignesVides()>0;
+		// si case l+1 == 0 et case == null
+		//==> parcourir matrice pour trouver toutes les cases dont l+1 == 0
+		//==> verifier que ces cases (lig col) ne sont pas remplies
+		boolean carteVideSur0 = true;
+		boolean carteVideSous0 = true;
+		boolean carteVideGauche0 = true;
+		boolean carteVideDroite0 = true;
 		
+		for(int i=0; i<this.modele.length; i++) {
+			
+			for(int j=0; j<this.modele[i].length; j++) {
+				
+				if(this.modele[i][j]==0) {
+					carteVideSur0 = !caseRemplie(i-1,j);
+					carteVideSous0 = !caseRemplie(i+1,j);
+					carteVideGauche0 = !caseRemplie(i,j-1);
+					carteVideDroite0 = !caseRemplie(i,j+1);
+				}
+				
+			}
+
+		}
+		
+		return (carteEnHaut || carteEnBas) && nbLignesVidesOk;
 	}
 	
 	public void decalerCartes(int lig, int col) {

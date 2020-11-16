@@ -31,7 +31,12 @@ public class StrategieJoueurReel implements StrategieJoueur {
     		if(tapis.placementPossible(ligneCase,colonneCase)) {
     			
     			tapis.getContainer().get(ligneCase).add(colonneCase, carte);
-    			tapis.setNbLignesVides(tapis.getNbLignesVides()+1);
+    			
+    			//on diminue le nombre de lignes vides
+    			if(tapis.getContainer().get(ligneCase).isEmpty()) {
+    				tapis.setNbLignesVides(tapis.getNbLignesVides()-1);
+    			}
+    			
     			carte.setEstPlacee(true); 
     			
     		} else if(tapis.caseRemplie(ligneCase,colonneCase)){
