@@ -25,8 +25,18 @@ public class Joueur {
 	public Pioche pioche;
 
     //public List<Carte>  = new ArrayList<Carte> ();
+	
+	
+	private CarteDeVictoire carteDeVictoire;
+    public CarteDeVictoire getCarteDeVictoire() {
+		return carteDeVictoire;
+	}
 
-    private CarteJouable main;
+	public void setCarteDeVictoire(CarteDeVictoire carteDeVictoire) {
+		this.carteDeVictoire = carteDeVictoire;
+	}
+
+	private CarteJouable main;
 
 
     public void jouer(StrategieJoueur strategie) {

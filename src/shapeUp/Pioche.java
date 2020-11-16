@@ -21,13 +21,13 @@ public class Pioche {
     }
     
     
-	private List<Carte> pioche = new ArrayList<Carte> ();  
+	private Set<Carte> pioche = new TreeSet<Carte> ();  
 	
-	public List<Carte> getPioche() {
+	public Set<Carte> getPioche() {
 		return pioche;
 	}
 
-	public void setPioche(List<Carte> pioche) {
+	public void setPioche(Set<Carte> pioche) {
 		this.pioche = pioche;
 	}
 
@@ -35,27 +35,7 @@ public class Pioche {
     public Pioche(int nbreDeCartes, Partie maPartie) {
     	this.nbreDeCartes = nbreDeCartes;
     	
-    	for (int i = 0; i < nbreDeCartes; i++) {
-    		int longueurListeCarte = maPartie.getCarteDuJeu().size();
-    		int randomIndex = new Random().nextInt(longueurListeCarte);
-    		
-    		pioche.add(maPartie.getCarteDuJeu().get(randomIndex));
-    		
-    		longueurListeCarte = 0;
-    		randomIndex = 0;
-    		
-    		
-    	}
-    	
-    	Iterator<Carte> piocheIt = pioche.iterator(); 
-    	while (piocheIt.hasNext()) {
-    	System.out.println(piocheIt.next());
-    	}
-    	
-    	
-    	
-    	// Si on garde un Set au final 
-    	/*List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
+    	List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
     	recupCarteJeu.addAll(maPartie.getCarteDuJeu()); 
     	
     	
@@ -81,13 +61,33 @@ public class Pioche {
     	}
     	
     	
-    	Iterator<Carte> piocheIt = pioche.iterator();
+    	//Iterator<Carte> piocheIt = pioche.iterator();
     	
+    	//while (piocheIt.hasNext()) {
+    	//System.out.println(piocheIt.next());
+    	//}
+    	
+    	/*for (int i = 0; i < nbreDeCartes; i++) {
+    		int longueurListeCarte = maPartie.getCarteDuJeu().size();
+    		int randomIndex = new Random().nextInt(longueurListeCarte);
+    		
+    		pioche.add(maPartie.getCarteDuJeu().get(randomIndex));
+    		
+    		longueurListeCarte = 0;
+    		randomIndex = 0;
+    		
+    		
+    	}
+    	
+    	Iterator<Carte> piocheIt = pioche.iterator(); 
     	while (piocheIt.hasNext()) {
     	System.out.println(piocheIt.next());
     	}
-    	
     	*/
+    	
+    	
+
+
     	
     	
     	//}
