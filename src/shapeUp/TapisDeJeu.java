@@ -34,14 +34,14 @@ public class TapisDeJeu {
     //private Carte carteVide;
     //private FormeTapis forme; 
 
-	private ArrayList<ArrayList<Carte>> container;
-	ArrayList<Carte> ligne;
+	private ArrayList<ArrayList<CarteJouable>> container;
+	ArrayList<CarteJouable> ligne;
     //private Map<Integer,Map<Integer,Carte>> container;
 
-	public void setContainer(ArrayList<ArrayList<Carte>> container) {
+	public void setContainer(ArrayList<ArrayList<CarteJouable>> container) {
 		this.container = container;
 	}
-	public ArrayList<ArrayList<Carte>> getContainer() {
+	public ArrayList<ArrayList<CarteJouable>> getContainer() {
 		return container;
 	}
 	
@@ -69,10 +69,10 @@ public class TapisDeJeu {
 		this.modele= modeleForme;
 		//boolean debutForme = false;
 		
-	    this.setContainer(new ArrayList<ArrayList<Carte>>());
+	    this.setContainer(new ArrayList<ArrayList<CarteJouable>>());
 	    for(int i=0; i<this.modele.length; i++) {
 	    	
-	    	ligne = new ArrayList<Carte>();
+	    	ligne = new ArrayList<CarteJouable>();
 	    	//Map<Integer,Carte> ligne = new HashMap<Integer,Carte>();
 			this.getContainer().add(ligne);
 			
@@ -124,7 +124,7 @@ public class TapisDeJeu {
 			System.out.println("caseDessusRemplie : "+ caseDessusRemplie);
 		}
 		
-		if(lig<this.getContainer().size()) {
+		if(lig<this.getContainer().size()-1) {
 			caseDessousRemplie = caseRemplie(lig+1,col);
 			System.out.println("caseDessousRemplie : "+ caseDessusRemplie);
 		}
@@ -134,7 +134,7 @@ public class TapisDeJeu {
 			System.out.println("caseGaucheRemplie : "+ caseGaucheRemplie);
 		}
 		
-		if(col<this.getContainer().get(lig).size()) {
+		if(col<this.getContainer().get(lig).size()-1) {
 			caseDroiteRemplie = caseRemplie(lig,col+1);
 			System.out.println("caseDroiteRemplie : "+ caseDroiteRemplie);
 		}
@@ -187,17 +187,30 @@ public class TapisDeJeu {
 			for(int j=0; j<this.modele[i].length; j++) {
 				
 				if(this.modele[i][j]==0) {
-					carteVideSur0 = !caseRemplie(i-1,j);
-					carteVideSous0 = !caseRemplie(i+1,j);
-					carteVideGauche0 = !caseRemplie(i,j-1);
-					carteVideDroite0 = !caseRemplie(i,j+1);
+					
+					if(i>0) {
+						carteVideSur0 = !caseRemplie(i-1,j);
+					}
+					
+					if(i<this.getContainer().size()-1) {
+						carteVideSous0 = !caseRemplie(i+1,j);
+					}
+					
+					if(j>0) {
+						carteVideGauche0 = !caseRemplie(i,j-1);
+					}
+					
+					if(j<this.getContainer().get(i).size()-1) {
+						carteVideDroite0 = !caseRemplie(i,j+1);
+					}
+					
 				}
 				
 			}
 
 		}
 		
-		return (carteEnHaut || carteEnBas) && nbLignesVidesOk;
+		return ((carteEnHaut && carteVideSur0) || (carteEnBas && carteVideSous0)) && nbLignesVidesOk;
 	}
 	
 	public void decalerCartes(int lig, int col) {
@@ -211,7 +224,7 @@ public class TapisDeJeu {
 //			}
 //			
 //		}
-		ligne = new ArrayList<Carte>();
+		ligne = new ArrayList<CarteJouable>();
 		this.getContainer().add(lig,ligne);
 		
 		for(int j=0; j<this.modele[lig].length; j++) {
@@ -219,7 +232,6 @@ public class TapisDeJeu {
 		}
 		//suppression de la ligne excédante
 		this.getContainer().remove(this.getContainer().lastIndexOf(ligne));
-		//this.getContainer().remove(this.getContainer().size()-1);
 		
 //		ListIterator<Carte> itLigne = ligne.listIterator();
 //	    ListIterator<ArrayList<Carte>> itContainer = this.getContainer().listIterator();

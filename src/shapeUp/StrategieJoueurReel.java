@@ -30,6 +30,7 @@ public class StrategieJoueurReel implements StrategieJoueur {
 
     public void placerCarte(int ligneCase, int colonneCase, CarteJouable carte, TapisDeJeu tapis) {
     	//SCANNER
+    	//variables
     	
     	//controle de si aucune carte n'est sur le tapis
     	if(tapis.getNbCartes()==0) {
@@ -38,7 +39,7 @@ public class StrategieJoueurReel implements StrategieJoueur {
     		
     	}else {
     		
-    		if(tapis.placementPossible(ligneCase,colonneCase)) {
+    		if(tapis.placementPossible(ligneCase,colonneCase) && !tapis.caseRemplie(ligneCase,colonneCase)) {
     			
     			tapis.getContainer().get(ligneCase).add(colonneCase, carte);
     			
@@ -49,19 +50,19 @@ public class StrategieJoueurReel implements StrategieJoueur {
     			
     			carte.setEstPlacee(true); 
     			
-    		} else if(tapis.caseRemplie(ligneCase,colonneCase)){
+    		} else if(tapis.caseRemplie(ligneCase,colonneCase) && tapis.decalagePossible(ligneCase, colonneCase)){
+    			
     		    tapis.decalerCartes(ligneCase, colonneCase);
+    		    tapis.getContainer().get(ligneCase).remove(colonneCase);
     		    tapis.getContainer().get(ligneCase).add(colonneCase, carte);
+    		    
     		}
     		else {
     			//DEMANDER DE REPLACER CARTE
     		}
     	}
     	System.out.println(tapis);
-    	tapis.setNbCartes(tapis.getNbCartes()+1);
-		
-		
-    	   	
+    	tapis.setNbCartes(tapis.getNbCartes()+1);		   	
     }
 
     public CarteJouable definirCarteAJouer(Carte carte) {
