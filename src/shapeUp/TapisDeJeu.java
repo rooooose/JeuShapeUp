@@ -20,6 +20,7 @@ public class TapisDeJeu {
     //private FormeTapis forme; 
 
 	private ArrayList<ArrayList<Carte>> container;
+	ArrayList<Carte> ligne;
     //private Map<Integer,Map<Integer,Carte>> container;
 
 	public void setContainer(ArrayList<ArrayList<Carte>> container) {
@@ -56,7 +57,7 @@ public class TapisDeJeu {
 	    this.setContainer(new ArrayList<ArrayList<Carte>>());
 	    for(int i=0; i<this.modele.length; i++) {
 	    	
-	    	ArrayList<Carte> ligne = new ArrayList<Carte>();
+	    	ligne = new ArrayList<Carte>();
 	    	//Map<Integer,Carte> ligne = new HashMap<Integer,Carte>();
 			this.getContainer().add(ligne);
 			
@@ -69,23 +70,6 @@ public class TapisDeJeu {
 //				}
 			}
 		}
-	    
-
-	    //ListIterator<Carte> itLigne = ligne.listIterator();
-//	    ListIterator<ArrayList<Carte>> itContainer = this.getContainer().listIterator();
-//	    while(itContainer.hasNext()) {
-//	    	System.out.print(itContainer.nextIndex());
-//	    	//for(int i=0; i<this.modele.length; i++) {
-//				
-//			    //for(int j=0; j<this.modele[0].length; j++) {
-//			    	if(this.modele[0][0]==1) {
-//		    		   itContainer.next().add(carteVide);
-//		    		   //System.out.print(getContainer().get(i));
-//			    	}
-//			    	//itContainer.nextIndex()	
-//				//}
-//			// }
-//	    }  
 	    
 	    
 		//this.setForme(forme);
@@ -171,14 +155,28 @@ public class TapisDeJeu {
 	public void decalerCartes(int lig, int col) {
 		
 		//si en haut ou en bas, on décale la ligne des cartes
-		if(caseRemplie(lig,col)){
-			
-			//parcours de toutes les lignes
-			for(int i=0; i<this.getContainer().size(); i++) {
-				
-				//this.getContainer().get(i).get(col)++;
-			}
-			
+//		if(caseRemplie(lig,col)){
+//			
+//			//parcours de toutes les lignes
+//			for(int i=0; i<this.getContainer().size(); i++) {
+//				this.getContainer().get(i).get(col).remove();
+//			}
+//			
+//		}
+		
+		//ListIterator<Carte> itLigne = ligne.listIterator();
+	    ListIterator<ArrayList<Carte>> itContainer = this.getContainer().listIterator();
+	    
+	    while(itContainer.hasNext()) {
+	    	
+	    	ArrayList<Carte> elementCourant = itContainer.next();
+	    	int ligneCourante = this.getContainer().indexOf(elementCourant);
+	    	
+	    	if(caseRemplie(ligneCourante,col)) {
+	    		elementCourant.remove(elementCourant.get(col));
+	    		elementCourant.add(col,itContainer.previous().get(col));
+	    	}
+	    	
 		}
 	}
 	

@@ -34,7 +34,11 @@ public class StrategieJoueurReel implements StrategieJoueur {
     			carte.setEstPlacee(true); 
     			System.out.println(tapis);
     			
-    		} else {
+    		} else if(tapis.caseRemplie(ligneCase,colonneCase)){
+    		    tapis.decalerCartes(ligneCase, colonneCase);
+    		    tapis.getContainer().get(ligneCase).add(colonneCase, carte);
+    		}
+    		else {
     			//DEMANDER DE REPLACER CARTE
     		}
     	}
