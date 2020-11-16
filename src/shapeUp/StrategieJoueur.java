@@ -11,6 +11,6 @@ public interface StrategieJoueur {
 
     void placerCarte(int ligneCase, int colonneCase, CarteJouable carte, TapisDeJeu tapis);
 
-    CarteJouable definirCarteAJouer(Carte carte);
+    CarteJouable definirCarteAJouer(Carte carte, StrategieMode modeDeJeu);
 
 }
