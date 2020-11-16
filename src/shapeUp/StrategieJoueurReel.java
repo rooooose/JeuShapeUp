@@ -31,8 +31,8 @@ public class StrategieJoueurReel implements StrategieJoueur {
     		if(tapis.placementPossible(ligneCase,colonneCase)) {
     			
     			tapis.getContainer().get(ligneCase).add(colonneCase, carte);
+    			tapis.setNbLignesVides(tapis.getNbLignesVides()+1);
     			carte.setEstPlacee(true); 
-    			System.out.println(tapis);
     			
     		} else if(tapis.caseRemplie(ligneCase,colonneCase)){
     		    tapis.decalerCartes(ligneCase, colonneCase);
@@ -42,6 +42,7 @@ public class StrategieJoueurReel implements StrategieJoueur {
     			//DEMANDER DE REPLACER CARTE
     		}
     	}
+    	System.out.println(tapis);
     	tapis.setNbCartes(tapis.getNbCartes()+1);
 		
 		
