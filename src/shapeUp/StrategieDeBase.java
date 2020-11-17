@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class StrategieDeBase implements StrategieMode {
     //private Pioche piocheDeLaPartie; 
@@ -33,7 +35,7 @@ public class StrategieDeBase implements StrategieMode {
   		  
   		  
       	if (nbreDeJoueurs == 2) {
-    		Pioche pioche = new Pioche (16, maPartie); 
+    		//Pioche pioche = new Pioche (16, maPartie); 
     		//this.piocheDeLaPartie = pioche;
  
         	//On récupère les cartes du jeu (toutes les cartes)
@@ -42,7 +44,7 @@ public class StrategieDeBase implements StrategieMode {
         	
         	
         	//On fait en sorte que la carte ne soit pas dans la pioche
-    		  while(pioche.getPioche().contains(recupCarteJeu.get(randomIndex))) {
+    		  while(creerLaPiocheDeLaPartie(maPartie).getPioche().contains(recupCarteJeu.get(randomIndex))) {
     			  
     			  longueurListeCarte = 0;
         		  randomIndex = 0;
@@ -63,7 +65,7 @@ public class StrategieDeBase implements StrategieMode {
     		  randomIndex = 0;
       	}
     	      	else if (nbreDeJoueurs == 3 ) {
-    	    		Pioche pioche= new Pioche (15, maPartie);
+    	    		//Pioche pioche= new Pioche (15, maPartie);
     	    		//this.piocheDeLaPartie = pioche;
     	    	
     	        	
@@ -73,7 +75,7 @@ public class StrategieDeBase implements StrategieMode {
     	        	
     	        	
     	        	//On fait en sorte que la carte ne soit pas dans la pioche
-    	    		  while(pioche.getPioche().contains(recupCarteJeu.get(randomIndex))) {
+    	    		  while(creerLaPiocheDeLaPartie(maPartie).getPioche().contains(recupCarteJeu.get(randomIndex))) {
     	    			  
     	    			  longueurListeCarte = 0;
     	        		  randomIndex = 0;
@@ -102,8 +104,78 @@ public class StrategieDeBase implements StrategieMode {
       	
 		
 		
-
+	public Pioche creerLaPiocheDeLaPartie (Partie maPartie) {
+		
+		Set<Carte> pioche = new TreeSet<Carte> ();
+		int nombreDeCartes = 0;
+		
+		int nbreDeJoueurs = maPartie.getListeJoueurs().size();
+		
+		
+		List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
+    	recupCarteJeu.addAll(maPartie.getCarteDuJeu()); 
+		
+		if (nbreDeJoueurs == 2) {
+	    
+	    	for (int nbreDeCartes = 0; nbreDeCartes < 15; nbreDeCartes++) {
+	    		
+	    	
+	    	int arrayLength = recupCarteJeu.size(); 
+	    	int randomIndex = new Random().nextInt(arrayLength);
+	    	
+	    	while (pioche.contains(recupCarteJeu.get(randomIndex)))
+	    		
+	    	{
+	        	arrayLength = 0; 
+	        	randomIndex = 0; 
+	        	arrayLength = recupCarteJeu.size(); 
+	        	randomIndex = new Random().nextInt(arrayLength);
+	    	}
+	    	
+	    	pioche.add(recupCarteJeu.get(randomIndex)); 
+	    	arrayLength = 0; 
+	    	randomIndex = 0; 
+	    	
+	    	
+	    	nombreDeCartes = nbreDeCartes;
+	    	
+	    	}
+				
+		}else if (nbreDeJoueurs == 3) {
+			
+			
+	    	for (int nbreDeCartes = 0; nbreDeCartes < 14; nbreDeCartes++) {
+	    		
+		    	
+	    	int arrayLength = recupCarteJeu.size(); 
+	    	int randomIndex = new Random().nextInt(arrayLength);
+	    	
+	    	while (pioche.contains(recupCarteJeu.get(randomIndex)))
+	    		
+	    	{
+	        	arrayLength = 0; 
+	        	randomIndex = 0; 
+	        	arrayLength = recupCarteJeu.size(); 
+	        	randomIndex = new Random().nextInt(arrayLength);
+	    	}
+	    	
+	    	pioche.add(recupCarteJeu.get(randomIndex)); 
+	    	arrayLength = 0; 
+	    	randomIndex = 0; 
+	    	
+	    	
+	    	nombreDeCartes = nbreDeCartes;
+	    	}
+			
+		}
+		
+		Pioche piocheDeLaPartie = new Pioche (pioche);	
+		piocheDeLaPartie.compterNbCartes(nombreDeCartes);
+		return piocheDeLaPartie;
+	}
     	
+	
+	
 	@Override
 	public void definirCarteVictoire(CarteDeVictoire carteVictoire, Joueur joueur) {
 		// TODO Auto-generated method stub

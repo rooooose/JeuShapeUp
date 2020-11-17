@@ -10,7 +10,8 @@ import java.util.TreeSet;
 
 public class Pioche {
    private int nbreDeCartes;
-
+   private Set<Carte> pioche;
+   
     public int getNbreDeCartes() {
 		return nbreDeCartes;
 	}
@@ -20,8 +21,7 @@ public class Pioche {
     	
     }
     
-    
-	private Set<Carte> pioche = new TreeSet<Carte> ();  
+  
 	
 	public Set<Carte> getPioche() {
 		return pioche;
@@ -30,37 +30,14 @@ public class Pioche {
 	public void setPioche(Set<Carte> pioche) {
 		this.pioche = pioche;
 	}
-
 	
-    public Pioche(int nbreDeCartes, Partie maPartie) {
-    	this.nbreDeCartes = nbreDeCartes;
-    	
-    	List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
-    	recupCarteJeu.addAll(maPartie.getCarteDuJeu()); 
-    	
-    	
-    	for (int i=0; i < nbreDeCartes; i++) {
-    		
-    	
-    	int arrayLength = recupCarteJeu.size(); 
-    	int randomIndex = new Random().nextInt(arrayLength);
-    	
-    	while (pioche.contains(recupCarteJeu.get(randomIndex)))
-    		
-    	{
-        	arrayLength = 0; 
-        	randomIndex = 0; 
-        	arrayLength = recupCarteJeu.size(); 
-        	randomIndex = new Random().nextInt(arrayLength);
-    	}
-    	
-    	pioche.add(recupCarteJeu.get(randomIndex)); 
-    	arrayLength = 0; 
-    	randomIndex = 0; 
-    	
-    	}
-    	
-    	
+	
+	Pioche (Set<Carte> pioche) {
+		this.pioche = pioche;
+		
+	}
+}
+
     	//Iterator<Carte> piocheIt = pioche.iterator();
     	
     	//while (piocheIt.hasNext()) {
@@ -93,12 +70,12 @@ public class Pioche {
     	//}
  
 
-    	}
+    	
     	
     	
 
     //}
-    }    
+    
     
 
 
