@@ -15,28 +15,14 @@ public class TapisDeJeu {
     private int nbLignesVides;
     private boolean carteEnHaut;
 	private boolean carteEnBas;
-//    private int nbCartesSurLigne;
-//    
-//	public int getNbCartesSurLigne() {
-//		return nbCartesSurLigne;
-//	}
-//	public void setNbCartesSurLigne(int nbCartesSurLigne) {
-//		this.nbCartesSurLigne = nbCartesSurLigne;
-//	}
+
 	public int getNbCartes() {
 		return nbCartes;
 	}
 	public void setNbCartes(int nbCartes) {
 		this.nbCartes = nbCartes;
 	}
-	
-	public int getNbLignesVides() {
-		return nbLignesVides;
-	}
-	public void setNbLignesVides(int nbLignesVides) {
-		this.nbLignesVides = nbLignesVides;
-	}
-    //private Carte carteVide;
+
     //private FormeTapis forme; 
 
 	private ArrayList<ArrayList<CarteJouable>> container;
@@ -90,19 +76,9 @@ public class TapisDeJeu {
 //				}
 			}
 		}
-	    setNbLignesVides(this.getContainer().size());
-	    //setNbCartesSurLigne(0);
+	    //setNbLignesVides(this.getContainer().size());
 	    
 		//this.setForme(forme);
-		
-		 /*switch (forme) {
-	    	case RECTANGLE : 
-	    		Set<CarteJouable> tapisRect = new HashSet<CarteJouable> ();
-	    		break;
-	    	case TRIANGLERECTANGLE :
-	    		Set<CarteJouable> tapisTrRect = new TreeSet<CarteJouable> ();
-	    		break;
-	    }*/
 	}
 	
 	public boolean placementPossible(int lig, int col) {
@@ -175,8 +151,10 @@ public class TapisDeJeu {
 		
 		this.carteEnHaut = lig == 0;
 		this.carteEnBas = lig == this.getContainer().size()-1;
+		
 		//il doit y avoir au moins 1 ligne en haut ou en bas des cartes présentes et des 1 en dessous ou dessus d'elles.
-		boolean nbLignesVidesOk = this.getNbLignesVides()>0;
+		//boolean nbLignesVidesOk = this.getNbLignesVides()>0;
+		
 		// si case l+1 == 0 et case == null
 		//==> parcourir matrice pour trouver toutes les cases dont l+1 == 0
 		//==> verifier que ces cases (lig col) ne sont pas remplies
@@ -213,7 +191,7 @@ public class TapisDeJeu {
 
 		}
 		
-		return ((carteEnHaut && carteVideSur0) || (carteEnBas && carteVideSous0)) && nbLignesVidesOk;
+		return carteEnHaut || carteEnBas;
 	}
 	
 	public void decalerCartes(int lig, int col) {
