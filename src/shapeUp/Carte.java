@@ -61,9 +61,12 @@ public class Carte {
     
     public String toString() {
  StringBuffer sbCarte = new StringBuffer();
- sbCarte.append("Forme de la carte : " +this.forme);
- sbCarte.append(" Couleur de la carte : " +this.couleur);
- sbCarte.append(" La carte est remplie : " +this.estRemplie+ "(true -> la carte est remplie)");
+// sbCarte.append("Forme de la carte : " +this.forme);
+// sbCarte.append(" Couleur de la carte : " +this.couleur);
+// sbCarte.append(" La carte est remplie : " +this.estRemplie+ "(true -> la carte est remplie)");
+ sbCarte.append(this.forme + " ; ");
+ sbCarte.append(this.couleur+ " ; ");
+ sbCarte.append("remplie " +this.estRemplie);
  sbCarte.append("\n");
  return sbCarte.toString();
 }

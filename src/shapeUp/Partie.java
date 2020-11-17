@@ -83,12 +83,15 @@ public class Partie implements Visitable {
 		listeJoueurs.get("1").strategie.placerCarte(4, 2, c, tapisDeJeu);
 		listeJoueurs.get("1").strategie.placerCarte(4, 2, c, tapisDeJeu);
 		listeJoueurs.get("1").strategie.placerCarte(4, 2, c, tapisDeJeu);
-		listeJoueurs.get("1").strategie.placerCarte(4, 2, c, tapisDeJeu);
-		listeJoueurs.get("1").strategie.placerCarte(4, 2, c, tapisDeJeu);
-		listeJoueurs.get("1").strategie.placerCarte(4, 2, c, tapisDeJeu);
+		
+//		listeJoueurs.get("1").strategie.placerCarte(0, 2, c1, tapisDeJeu);
+//		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
+//		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
+//		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
+//		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
+//		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
+		
 
-		//listeJoueurs.get("1").strategie.placerCarte(1, 2, c, tapisDeJeu);
-		//listeJoueurs.get("1").strategie.placerCarte(1, 2, c, tapisDeJeu);
 
 	}
 

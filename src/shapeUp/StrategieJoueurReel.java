@@ -53,8 +53,20 @@ public class StrategieJoueurReel implements StrategieJoueur {
     		} else if(tapis.caseRemplie(ligneCase,colonneCase) && tapis.decalagePossible(ligneCase, colonneCase)){
     			
     		    tapis.decalerCartes(ligneCase, colonneCase);
-    		    tapis.getContainer().get(ligneCase).remove(colonneCase);
-    		    tapis.getContainer().get(ligneCase).add(colonneCase, carte);
+    		    
+    		    //pas obligé ?
+    		   //tapis.getContainer().get(ligneCase).remove(colonneCase);
+    		    
+    		    System.out.print("/n container = " +tapis.getContainer());
+    		    
+    			tapis.getContainer().get(ligneCase).add(colonneCase, carte);
+    			
+    			//on diminue le nombre de lignes vides
+    			if(tapis.getContainer().get(ligneCase).isEmpty()) {
+    				tapis.setNbLignesVides(tapis.getNbLignesVides()-1);
+    			}
+    			
+    			carte.setEstPlacee(true); 
     		    
     		}
     		else {
@@ -62,6 +74,9 @@ public class StrategieJoueurReel implements StrategieJoueur {
     		}
     	}
     	System.out.println(tapis);
+    	
+    	//nbLignesVides FAUX
+    	System.out.println(tapis.getNbLignesVides());
 
     	tapis.setNbCartes(tapis.getNbCartes()+1);
 	

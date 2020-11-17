@@ -1,6 +1,9 @@
 package shapeUp;
 
 import java.util.ArrayList;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.ListIterator;
 import java.util.Map;
@@ -103,11 +106,9 @@ public class TapisDeJeu {
 	}
 	
 	public boolean placementPossible(int lig, int col) {
-		//regle d'adjacence + déplacement possible des autres cartes + 1ere carte au milieu
+		
 		System.out.println("placement possible appelé");
 		return (this.modele[lig][col]==1 && adjacenceRespectee(lig,col));
-		//return this.modele[lig][col]==1 && adjacenceRespectee(lig,col);
-		
 
     }
 	
@@ -173,7 +174,7 @@ public class TapisDeJeu {
 	public boolean decalagePossible(int lig, int col) {
 		
 		this.carteEnHaut = lig == 0;
-		this.carteEnBas = lig == this.getContainer().lastIndexOf(ligne);
+		this.carteEnBas = lig == this.getContainer().size()-1;
 		//il doit y avoir au moins 1 ligne en haut ou en bas des cartes présentes et des 1 en dessous ou dessus d'elles.
 		boolean nbLignesVidesOk = this.getNbLignesVides()>0;
 		// si case l+1 == 0 et case == null
@@ -226,37 +227,47 @@ public class TapisDeJeu {
 //			}
 //			
 //		}
-		int derniereLigne = this.getContainer().lastIndexOf(ligne);
-		if(this.carteEnHaut) {
+		int derniereLigne = this.getContainer().size();
+		System.out.print("CARTE EN BAS " + carteEnBas);
+		System.out.print("CARTE EN HAUT " + carteEnHaut);
+		if(this.carteEnBas) {
+			//add à l'envers
+			// convertir container en array
+//			ArrayList<CarteJouable>[] arrayContainer = new ArrayList[this.getContainer().size()];
+//			arrayContainer = this.getContainer().toArray(arrayContainer);
+//	        System.arraycopy(arrayContainer, lig, arrayContainer, lig-1, 1);
+//	        ArrayList<ArrayList<CarteJouable>> newContainer = new ArrayList<ArrayList<CarteJouable>>();
+//	        Collections.addAll(newContainer,arrayContainer);
+//	        this.setContainer(newContainer);
+	        
+	        ligne = new ArrayList<CarteJouable>();
+			this.getContainer().add(ligne);
+			
+			//suppression de la ligne excédante
+			this.getContainer().remove(0);
+			
+			//remplissage de la ligne avec null
+			for(int j=0; j<this.modele[lig].length; j++) {
+			    this.getContainer().get(lig).add(null);
+			}
+	        
+			//System.out.print("CONTAINER TABLEAU : " + Arrays.toString(arrayContainer));
+			System.out.print("CONTAINER RECONVERTI : " + this.getContainer());
+	        
+		} else if(this.carteEnHaut){
+			
+			//ajout d'une nouvelle ligne là où on veut ajouter une carte
 			ligne = new ArrayList<CarteJouable>();
 			this.getContainer().add(lig,ligne);
+			System.out.print("AJOUT DE LIGNE FAIT \n");
 			
+			//remplissage de la ligne avec null
 			for(int j=0; j<this.modele[lig].length; j++) {
-		    	this.getContainer().get(lig).add(null);
+			    this.getContainer().get(lig).add(null);
 			}
-			//suppression de la ligne excédante
+			//suppression de la ligne excédente
 			this.getContainer().remove(derniereLigne);
-		} else 
-			if(this.carteEnBas) {
-			//ListIterator<Carte> itLigne = ligne.listIterator();
-		    ListIterator<ArrayList<CarteJouable>> itContainer = this.getContainer().listIterator(derniereLigne);
-		    ListIterator<ArrayList<CarteJouable>> itContainerPrev = this.getContainer().listIterator(derniereLigne-1);
-		    
-		    while(itContainer.hasPrevious() && itContainerPrev.hasPrevious()) {
-		    	
-		    	ArrayList<CarteJouable> elementCourant = itContainer.previous();
-		    	ArrayList<CarteJouable> elementSuivant = itContainerPrev.previous();
-		    	int ligneCourante = this.getContainer().indexOf(elementCourant);
-		    	
-		    	//if(caseRemplie(ligneCourante,col)) {
-		    		elementSuivant=new ArrayList<CarteJouable>(elementCourant);
-		    		System.out.print("ligne du dessous copiée");
-		    		System.out.print(ligneCourante);
-		    		//elementCourant.remove(elementCourant.get(col));
-		    		//itContainerNext.add(col,elementCourant.get(col));
-		    	//}
-		    	
-			}
+			System.out.print("DERNIERE LIGNE SUPPRIMEE : " + derniereLigne);
 		}
 		
 	}
