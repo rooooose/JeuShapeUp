@@ -10,6 +10,8 @@ public class TapisDeJeu {
     private boolean rempli;
     private int nbCartes;
     private int nbLignesVides;
+    private boolean carteEnHaut;
+	private boolean carteEnBas;
 //    private int nbCartesSurLigne;
 //    
 //	public int getNbCartesSurLigne() {
@@ -170,8 +172,8 @@ public class TapisDeJeu {
 	
 	public boolean decalagePossible(int lig, int col) {
 		
-		boolean carteEnHaut = lig == 0;
-		boolean carteEnBas = lig == this.getContainer().lastIndexOf(ligne);
+		this.carteEnHaut = lig == 0;
+		this.carteEnBas = lig == this.getContainer().lastIndexOf(ligne);
 		//il doit y avoir au moins 1 ligne en haut ou en bas des cartes présentes et des 1 en dessous ou dessus d'elles.
 		boolean nbLignesVidesOk = this.getNbLignesVides()>0;
 		// si case l+1 == 0 et case == null
@@ -224,31 +226,39 @@ public class TapisDeJeu {
 //			}
 //			
 //		}
-		ligne = new ArrayList<CarteJouable>();
-		this.getContainer().add(lig,ligne);
-		
-		for(int j=0; j<this.modele[lig].length; j++) {
-	    	this.getContainer().get(lig).add(null);
+		int derniereLigne = this.getContainer().lastIndexOf(ligne);
+		if(this.carteEnHaut) {
+			ligne = new ArrayList<CarteJouable>();
+			this.getContainer().add(lig,ligne);
+			
+			for(int j=0; j<this.modele[lig].length; j++) {
+		    	this.getContainer().get(lig).add(null);
+			}
+			//suppression de la ligne excédante
+			this.getContainer().remove(derniereLigne);
+		} else 
+			if(this.carteEnBas) {
+			//ListIterator<Carte> itLigne = ligne.listIterator();
+		    ListIterator<ArrayList<CarteJouable>> itContainer = this.getContainer().listIterator(derniereLigne);
+		    ListIterator<ArrayList<CarteJouable>> itContainerPrev = this.getContainer().listIterator(derniereLigne-1);
+		    
+		    while(itContainer.hasPrevious() && itContainerPrev.hasPrevious()) {
+		    	
+		    	ArrayList<CarteJouable> elementCourant = itContainer.previous();
+		    	ArrayList<CarteJouable> elementSuivant = itContainerPrev.previous();
+		    	int ligneCourante = this.getContainer().indexOf(elementCourant);
+		    	
+		    	//if(caseRemplie(ligneCourante,col)) {
+		    		elementSuivant=new ArrayList<CarteJouable>(elementCourant);
+		    		System.out.print("ligne du dessous copiée");
+		    		System.out.print(ligneCourante);
+		    		//elementCourant.remove(elementCourant.get(col));
+		    		//itContainerNext.add(col,elementCourant.get(col));
+		    	//}
+		    	
+			}
 		}
-		//suppression de la ligne excédante
-		this.getContainer().remove(this.getContainer().lastIndexOf(ligne));
 		
-//		ListIterator<Carte> itLigne = ligne.listIterator();
-//	    ListIterator<ArrayList<Carte>> itContainer = this.getContainer().listIterator();
-//	    ListIterator<ArrayList<Carte>> itContainerNext = this.getContainer().listIterator(lig+1);
-//	    
-//	    while(itContainer.hasNext() && itContainerNext.hasNext()) {
-//	    	
-//	    	ArrayList<Carte> elementCourant = itContainer.next();
-//	    	ArrayList<Carte> elementSuivant = itContainerNext.next();
-//	    	int ligneCourante = this.getContainer().indexOf(elementCourant);
-//	    	
-//	    	if(caseRemplie(ligneCourante,col)) {
-//	    		elementCourant.remove(elementCourant.get(col));
-//	    		itContainerNext.add(col,elementCourant.get(col));
-//	    	}
-//	    	
-//		}
 	}
 	
 	public String toString(){
