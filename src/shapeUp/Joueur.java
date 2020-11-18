@@ -39,9 +39,15 @@ public class Joueur {
 	private CarteJouable main;
 
 
-    public void jouer(StrategieJoueur strategie) {
-    	//strategie.placerCarte(ligneCase, colonneCase, carte, tapis);
+	public void jouer(TapisDeJeu tapis, CarteJouable carte) {
+
+    	this.strategie.placerCarte(ligneCase, colonneCase, carte, tapis);
     }
+	
+//    public void jouer(StrategieJoueur strategie) {
+//    	//strategie.placerCarte(ligneCase, colonneCase, carte, tapis);
+//    }
+	
     public CarteJouable getMain() {
 		return main;
 	}
@@ -49,8 +55,6 @@ public class Joueur {
 	public void setMain(CarteJouable main) {
 		this.main = main;
 	}
-
-	public void jouer() {
-    	
-    }
+	
+//	
 }

@@ -1,5 +1,6 @@
 package shapeUp;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -16,6 +17,7 @@ public class ShapeUp {
 	    ShapeUp() {
 	    	
 	    	int nbJoueurs = this.choisirNbJoueurs();
+	    	
 	    	this.lancerLaPartie(this.creerJoueurs(nbJoueurs), this.choisirMode(), this.choisirFormeTapis());
 	    	System.out.print("Jeu ShapeUp créé\n");
 	    }
@@ -86,7 +88,6 @@ public class ShapeUp {
 	    	char type='r';
 	    	String nom;
 	    	mapJoueurs = new HashMap<String,Joueur>();
-	    	//Queue<Joueur> queueJoueurs = new LinkedList<Joueur>();
         		
         		for(int i=1; i<=nbJoueurs; i++) {
         			
@@ -204,8 +205,10 @@ public class ShapeUp {
 			ShapeUp jeuShapeUp = new ShapeUp();
 			System.out.println(jeuShapeUp);
 			
-
-			
+			jeuShapeUp.maPartie.tourDeJeu();
+			jeuShapeUp.maPartie.tourDeJeu();
+			jeuShapeUp.maPartie.tourDeJeu();
+			jeuShapeUp.maPartie.tourDeJeu();
 	    }
 
 }

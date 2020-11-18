@@ -28,9 +28,8 @@ public class StrategieJoueurReel implements StrategieJoueur {
     	carteDejaPlacee.setEstPlacee(true);
     }
    
-
+    // A METTRE DANS JOUEUR
     public void placerCarte(int ligneCase, int colonneCase, CarteJouable carte, TapisDeJeu tapis) {
-    	//SCANNER
 
     	//controle de si aucune carte n'est sur le tapis
     	if(tapis.getNbCartes()==0) {

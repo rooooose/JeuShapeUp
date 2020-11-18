@@ -1,6 +1,7 @@
 package shapeUp;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -31,6 +32,8 @@ public class Partie implements Visitable {
 
 	//private Queue<Joueur> listeJoueurs  = new LinkedList<Joueur> ();
 	private Map<String,Joueur> listeJoueurs  = new HashMap<String,Joueur> ();
+	Queue<Joueur> queueJoueurs = new LinkedList<Joueur>();
+	
 	private TapisDeJeu tapisDeJeu;
 	private boolean estFinie;
     private StrategieMode modeDeJeu;
@@ -74,6 +77,13 @@ public class Partie implements Visitable {
 		this.tapisDeJeu = formeTapisDeJeu;
 		this.créerLesCartes();
 		
+		//conversion map joueurs en Queue
+		Collection<Joueur> valeursMapJoueurs = new LinkedList<Joueur>();
+		valeursMapJoueurs = this.getListeJoueurs().values();
+		queueJoueurs.addAll(valeursMapJoueurs);
+		
+		System.out.print(queueJoueurs);
+		
 		Carte carteTest = new CarteJouable(CouleurType.BLEU, FormeCarte.CERCLE, false);
 		CarteJouable c = (CarteJouable) carteTest;
 		Carte carteTest1 = new CarteJouable(CouleurType.ROUGE, FormeCarte.CERCLE, false);
@@ -84,12 +94,12 @@ public class Partie implements Visitable {
 //		listeJoueurs.get("1").strategie.placerCarte(4, 2, c, tapisDeJeu);
 //		listeJoueurs.get("1").strategie.placerCarte(4, 2, c, tapisDeJeu);
 		
-		listeJoueurs.get("1").strategie.placerCarte(0, 2, c1, tapisDeJeu);
-		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
-		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
-		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
-		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
-		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
+//		listeJoueurs.get("1").strategie.placerCarte(0, 2, c1, tapisDeJeu);
+//		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
+//		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
+//		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
+//		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
+//		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
 		
 
 
@@ -173,6 +183,16 @@ public class Partie implements Visitable {
 	public int accepterScore(VisiteurScore visiteur, Joueur joueur) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	public void tourDeJeu() {
+		
+		Joueur joueurActif = queueJoueurs.peek();
+		CarteJouable carteJoueur = joueurActif.getMain();
+		
+		System.out.println("C'est au tour de " + joueurActif.getNom());
+		queueJoueurs.peek().jouer(this.tapisDeJeu, carteJoueur);
+		queueJoueurs.add(queueJoueurs.poll());
 	}
 
     /*
