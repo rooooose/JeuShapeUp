@@ -1,6 +1,7 @@
 package shapeUp;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -26,7 +27,7 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
     	
     	//On enlève la carte de la pioche
     	
-    	Set<Carte> transition = new TreeSet();
+    	Set<Carte> transition = new HashSet();
     	transition.addAll(pioche.getPioche());
     	transition.remove(cartePiochee);
     	pioche.setPioche(transition);

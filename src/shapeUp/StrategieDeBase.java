@@ -2,6 +2,7 @@ package shapeUp;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -74,7 +75,7 @@ public class StrategieDeBase implements StrategieMode {
 		
 	public Pioche creerLaPiocheDeLaPartie (Partie maPartie) {
 		
-		Set<Carte> pioche = new TreeSet<Carte> ();
+		Set<Carte> pioche = new HashSet<Carte> ();
 		int nombreDeCartes = 0;
 		
 		int nbreDeJoueurs = maPartie.getListeJoueurs().size();
@@ -127,7 +128,9 @@ public class StrategieDeBase implements StrategieMode {
 	        	randomIndex = new Random().nextInt(arrayLength);
 	    	}
 	    	
+	    	
 	    	pioche.add(recupCarteJeu.get(randomIndex)); 
+	    	
 	    	arrayLength = 0; 
 	    	randomIndex = 0; 
 	    	

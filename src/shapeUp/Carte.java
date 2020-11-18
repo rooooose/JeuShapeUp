@@ -59,18 +59,30 @@ public class Carte {
  	// Quand on appelle cette fonction ça va nous dire : je ne suis pas implémentée (en gros)
     }
     
+    
+    
+    
+    
+    public boolean equals(Object o) {
+    	if (o instanceof Carte) {
+    		Carte c = (Carte) o;
+    		return (this.couleur == c.couleur && this.forme == c.forme && this.estRemplie == c.estRemplie );
+    	} else {
+    	return false;
+    	}
+    }
+    
+
+       
     public String toString() {
  StringBuffer sbCarte = new StringBuffer();
-// sbCarte.append("Forme de la carte : " +this.forme);
-// sbCarte.append(" Couleur de la carte : " +this.couleur);
-// sbCarte.append(" La carte est remplie : " +this.estRemplie+ "(true -> la carte est remplie)");
+ // sbCarte.append("Forme de la carte : " +this.forme);
+ // sbCarte.append(" Couleur de la carte : " +this.couleur);
+ // sbCarte.append(" La carte est remplie : " +this.estRemplie+ "(true -> la carte est remplie)");
  sbCarte.append(this.forme + " ; ");
  sbCarte.append(this.couleur+ " ; ");
  sbCarte.append("remplie " +this.estRemplie);
  sbCarte.append("\n");
  return sbCarte.toString();
-}
-
-	
-    
+}  
 }

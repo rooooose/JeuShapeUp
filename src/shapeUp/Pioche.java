@@ -30,7 +30,7 @@ public class Pioche {
 		this.pioche = pioche;
 		
 	}
-}
+
 
     	//Iterator<Carte> piocheIt = pioche.iterator();
     	
@@ -65,8 +65,17 @@ public class Pioche {
  
 
     	
-    	
-    	
+    	    public String toString() {
+    	    	 StringBuffer sbPioche = new StringBuffer();
+    	    	// sbCarte.append("Forme de la carte : " +this.forme);
+    	    	// sbCarte.append(" Couleur de la carte : " +this.couleur);
+    	    	// sbCarte.append(" La carte est remplie : " +this.estRemplie+ "(true -> la carte est remplie)");
+    	    	 sbPioche.append("\n");
+    	    	 sbPioche.append(this.pioche);
+    	    	 sbPioche.append("\n");
+    	    	 return sbPioche.toString();
+    	    	}
+    	}
 
     //}
     

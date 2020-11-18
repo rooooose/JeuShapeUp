@@ -209,6 +209,9 @@ public class ShapeUp {
 			jeuShapeUp.maPartie.tourDeJeu();
 			jeuShapeUp.maPartie.tourDeJeu();
 			jeuShapeUp.maPartie.tourDeJeu();
+			Pioche pioche = jeuShapeUp.maPartie.getModeDeJeu().creerLaPiocheDeLaPartie(jeuShapeUp.maPartie);
+			System.out.println(pioche);
+			
 	    }
 
 }
