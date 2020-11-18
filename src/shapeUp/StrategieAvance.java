@@ -18,7 +18,7 @@ public class StrategieAvance implements StrategieMode {
 
 
 	@Override
-	public void distribuerCartes(Joueur joueur, Partie maPartie) {
+	public void distribuerCartes(Partie maPartie) {
 		// TODO Auto-generated method stub
 		
 	}

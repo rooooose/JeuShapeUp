@@ -1,26 +1,42 @@
+
 package shapeUp;
 
+import java.util.Iterator;
 
 public class CarteDeVictoire extends Carte {
 	
 	
 	public boolean estVisible(Partie maPartie, Joueur joueur) {
 		
-	
-	//if (maPartie.getStrategieMode() instanceof StrategieDeBase) {
-	
-	//System.out.println("Le joueur peut voir sa carte de victoire");
-	
-	//return true;
+		Iterator<CarteDeVictoire> CartesDeVictoires = maPartie.getCarteVictAssociationJoueur().keySet().iterator();
+		boolean visibiliteDeLaCarte = false;
 		
-	//}else if (maPartie.getStrategieMode() instanceof StrategieVictoireEnnemie) {
+		
+		
+		while (CartesDeVictoires.hasNext()) {
+		if (maPartie.getModeDeJeu() instanceof StrategieDeBase || maPartie.getModeDeJeu() instanceof StrategieAvance) {
+			
+			if (maPartie.getCarteVictAssociationJoueur().get(CartesDeVictoires.next()) == joueur) {
+				visibiliteDeLaCarte = true;
+				
+			} else if (maPartie.getCarteVictAssociationJoueur().get(CartesDeVictoires.next()) != joueur) {
+				visibiliteDeLaCarte = false;
+			}
 	
-	//System.out.println("Le joueur ne peut pas voir sa carte de victoire");
-	
-	//return false;
-	//}
-	
-	return true;
-	
+
+		}else {
+			if (maPartie.getCarteVictAssociationJoueur().get(CartesDeVictoires.next()) == joueur) {
+				visibiliteDeLaCarte = false;
+				
+			}else if (maPartie.getCarteVictAssociationJoueur().get(CartesDeVictoires.next()) != joueur) {
+				visibiliteDeLaCarte = true;
+			}
+			
+		
+	}
+	}
+		return visibiliteDeLaCarte;
+		
+}
 	
 }

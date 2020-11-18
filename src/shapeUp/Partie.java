@@ -32,8 +32,25 @@ public class Partie implements Visitable {
 
 	//private Queue<Joueur> listeJoueurs  = new LinkedList<Joueur> ();
 	private Map<String,Joueur> listeJoueurs  = new HashMap<String,Joueur> ();
-	Queue<Joueur> queueJoueurs = new LinkedList<Joueur>();
+	private Queue<Joueur> queueJoueurs = new LinkedList<Joueur>();
+	private Map<CarteDeVictoire,Joueur> CarteVictAssociationJoueur = new HashMap <CarteDeVictoire, Joueur>();
 	
+	public Map<CarteDeVictoire, Joueur> getCarteVictAssociationJoueur() {
+		return CarteVictAssociationJoueur;
+	}
+
+	public void setCarteVictAssociationJoueur(Map<CarteDeVictoire, Joueur> carteVictAssociationJoueur) {
+		CarteVictAssociationJoueur = carteVictAssociationJoueur;
+	}
+
+	public Queue<Joueur> getQueueJoueurs() {
+		return queueJoueurs;
+	}
+
+	public void setQueueJoueurs(Queue<Joueur> queueJoueurs) {
+		this.queueJoueurs = queueJoueurs;
+	}
+
 	private TapisDeJeu tapisDeJeu;
 	private boolean estFinie;
     private StrategieMode modeDeJeu;

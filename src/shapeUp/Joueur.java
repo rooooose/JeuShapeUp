@@ -36,7 +36,7 @@ public class Joueur {
 		this.carteDeVictoire = carteDeVictoire;
 	}
 
-	private CarteJouable main;
+	private Carte mainDuJoueur;
 
 
 	public void jouer(TapisDeJeu tapis, CarteJouable carte) {
@@ -48,12 +48,12 @@ public class Joueur {
 //    	//strategie.placerCarte(ligneCase, colonneCase, carte, tapis);
 //    }
 	
-    public CarteJouable getMain() {
-		return main;
+    public Carte getMainDuJoueur() {
+		return mainDuJoueur;
 	}
 
-	public void setMain(CarteJouable main) {
-		this.main = main;
+	public void setMain(Carte main) {
+		this.mainDuJoueur = main;
 	}
 	
 //	

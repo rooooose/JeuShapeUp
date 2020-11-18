@@ -1,14 +1,44 @@
 package shapeUp;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class StrategieJoueurReel implements StrategieJoueur {
     
 	public Carte piocherCarte(Pioche pioche) {
+		
+		
+		if (pioche.getNbreDeCartes() <0) {
+		System.out.println("Aucune carte disponible dans la pioche");
+		return null;
+		}else {
+		
+		//On récupère les cartes de la pioche
+		List<Carte> recupCartePioche = new ArrayList<Carte>(); 
+    	recupCartePioche.addAll(pioche.getPioche()); 
+    	
+    	//On pioche une carte
+    	Carte cartePiochee = recupCartePioche.get(1);
+		
+    	
+    	//On enlève la carte de la pioche
+    	
+    	Set<Carte> transition = new TreeSet();
+    	transition.addAll(pioche.getPioche());
+    	transition.remove(cartePiochee);
+    	pioche.setPioche(transition);
+    	
     	
     	
     	pioche.compterNbCartes(pioche.getNbreDeCartes() - 1);
-		return null;
+    	
+    	
+    	System.out.println("Vous avez pioché une carte");
+    	return cartePiochee;
+    
+		}	
     }
 
 	/* 	public Carte piocherCarte(StrategieMode strategie) {
@@ -78,7 +108,22 @@ public class StrategieJoueurReel implements StrategieJoueur {
     	//System.out.println(tapis.getNbLignesVides());
     }
 
-    public CarteJouable definirCarteAJouer(Carte carte, StrategieMode modeDeJeu) {
-		return null;
+    public CarteJouable definirCarteAJouer(Carte carte, Joueur joueur, StrategieMode modeDeJeu) {
+    	   
+    	
+    	
+    	if (modeDeJeu instanceof StrategieDeBase) {
+    		
+    		CarteJouable carteAJouer = (CarteJouable) joueur.getMainDuJoueur();
+    		return carteAJouer;
+    		
+    	} else {
+    		
+    		System.out.println("Ces modes de jeu ne sont pas encore disponibles");
+    		return null;
+    	
+    	}
+    	
+    
     }
 }

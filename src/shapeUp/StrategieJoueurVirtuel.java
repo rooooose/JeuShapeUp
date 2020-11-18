@@ -9,6 +9,13 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
     
 	public Carte piocherCarte(Pioche pioche) {
     	
+		if (pioche.getNbreDeCartes() < 0) {
+			
+			System.out.println("Aucune carte disponible dans la pioche");
+			return null;
+			}
+		else {
+		
 		//On récupère les cartes de la pioche
 		List<Carte> recupCartePioche = new ArrayList<Carte>(); 
     	recupCartePioche.addAll(pioche.getPioche()); 
@@ -28,9 +35,13 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
     	
     	pioche.compterNbCartes(pioche.getNbreDeCartes() - 1);
     	
+    	
+    	//System.out.println("Le joueur virtuel a pioché sa carte");
     	return cartePiochee;
     	
     }
+	}
+	
 
     public void deplacerCarte(int ligneCase, int colonneCase, CarteJouable carteDejaPlacee) {
     	carteDejaPlacee.setEstPlacee(false);    	
@@ -38,10 +49,24 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
     	carteDejaPlacee.setEstPlacee(true);
     }
 
-    public CarteJouable definirCarteAJouer(Carte carte, StrategieMode modeDeJeu) {
+    public CarteJouable definirCarteAJouer(Carte carte, Joueur joueur, StrategieMode modeDeJeu) {
+		
+   
     	
     	
+    	if (modeDeJeu instanceof StrategieDeBase) {
+    		
+    		CarteJouable carteAJouer = (CarteJouable) joueur.getMainDuJoueur();
+    		return carteAJouer;
+    		
+    	} else {
+    		System.out.println("Ces modes de jeu ne sont pas encore disponibles");
+    		return null;
+    		
+    	}
     	
+
+	
     	
     }
 
