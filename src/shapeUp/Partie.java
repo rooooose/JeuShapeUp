@@ -205,10 +205,10 @@ public class Partie implements Visitable {
 	public void tourDeJeu() {
 		
 		Joueur joueurActif = queueJoueurs.peek();
-		CarteJouable carteJoueur = (CarteJouable) joueurActif.getMainDuJoueur();
+		//CarteJouable carteJoueur = (CarteJouable) joueurActif.getMainDuJoueur();
 		
 		System.out.println("C'est au tour de " + joueurActif.getNom());
-		queueJoueurs.peek().jouer(this.tapisDeJeu, carteJoueur);
+		queueJoueurs.peek().jouer(this.tapisDeJeu, this.pioche);
 		queueJoueurs.add(queueJoueurs.poll());
 	}
 

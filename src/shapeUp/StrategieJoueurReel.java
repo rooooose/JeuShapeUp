@@ -20,7 +20,7 @@ public class StrategieJoueurReel implements StrategieJoueur {
     	recupCartePioche.addAll(pioche.getPioche()); 
     	
     	//On pioche une carte
-    	Carte cartePiochee = recupCartePioche.get(1);
+    	Carte cartePiochee = recupCartePioche.get(0);
 		
     	
     	//On enlève la carte de la pioche
@@ -59,7 +59,7 @@ public class StrategieJoueurReel implements StrategieJoueur {
     }
    
     // A METTRE DANS JOUEUR
-    public void placerCarte(int ligneCase, int colonneCase, CarteJouable carte, TapisDeJeu tapis) {
+    public void placerCarte(int ligneCase, int colonneCase, Carte carte, TapisDeJeu tapis) {
 
     	//controle de si aucune carte n'est sur le tapis
     	if(tapis.getNbCartes()==0) {
@@ -108,12 +108,13 @@ public class StrategieJoueurReel implements StrategieJoueur {
     	//System.out.println(tapis.getNbLignesVides());
     }
 
-    public CarteJouable definirCarteAJouer(Carte carte, Joueur joueur, StrategieMode modeDeJeu) {
+    public Carte definirCarteAJouer(Joueur joueur, StrategieMode modeDeJeu) {
     	   
-    	
+    	//Inclure le choix de la carte dans la main du joueur pour mode AVANCE
     	
     	if (modeDeJeu instanceof StrategieDeBase) {
     		
+    		//joueur.setMain(new CarteJouable());
     		CarteJouable carteAJouer = (CarteJouable) joueur.getMainDuJoueur();
     		return carteAJouer;
     		
@@ -126,4 +127,16 @@ public class StrategieJoueurReel implements StrategieJoueur {
     	
     
     }
+
+	@Override
+	public int choisirLigneCartePlacement() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int choisirColonneCartePlacement() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

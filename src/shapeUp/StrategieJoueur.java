@@ -9,9 +9,9 @@ public interface StrategieJoueur {
     
     void deplacerCarte(int ligneCase, int colonneCase, CarteJouable carte);
 
-    void placerCarte(int ligneCase, int colonneCase, CarteJouable carte, TapisDeJeu tapis);
+    void placerCarte(int ligneCase, int colonneCase, Carte carte, TapisDeJeu tapis);
 
-    CarteJouable definirCarteAJouer(Carte carte, Joueur joueur, StrategieMode modeDeJeu);
+    //CarteJouable definirCarteAJouer(Carte carte, Joueur joueur, StrategieMode modeDeJeu);
     
     public int choisirLigneCartePlacement();
 	

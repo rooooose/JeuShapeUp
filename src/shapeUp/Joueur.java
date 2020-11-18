@@ -22,7 +22,7 @@ public class Joueur {
 
     protected StrategieJoueur strategie;
 
-	public Pioche pioche;
+	//public Pioche pioche;
 
     //public List<Carte>  = new ArrayList<Carte> ();
 	
@@ -39,9 +39,13 @@ public class Joueur {
 	private Carte mainDuJoueur;
 
 
-	public void jouer(TapisDeJeu tapis, CarteJouable carte) {
-
-    	this.strategie.placerCarte(ligneCase, colonneCase, carte, tapis);
+	public void jouer(TapisDeJeu tapis, Pioche pioche) {
+		
+		this.setMain(this.strategie.piocherCarte(pioche));
+		
+		int ligne = this.strategie.choisirLigneCartePlacement();
+		int colonne = this.strategie.choisirColonneCartePlacement();
+    	this.strategie.placerCarte(ligne, colonne, this.getMainDuJoueur(), tapis);
     }
 	
 //    public void jouer(StrategieJoueur strategie) {

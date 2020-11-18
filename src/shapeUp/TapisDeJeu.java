@@ -25,14 +25,14 @@ public class TapisDeJeu {
 
     //private FormeTapis forme; 
 
-	private ArrayList<ArrayList<CarteJouable>> container;
-	ArrayList<CarteJouable> ligne;
+	private ArrayList<ArrayList<Carte>> container;
+	ArrayList<Carte> ligne;
     //private Map<Integer,Map<Integer,Carte>> container;
 
-	public void setContainer(ArrayList<ArrayList<CarteJouable>> container) {
+	public void setContainer(ArrayList<ArrayList<Carte>> container) {
 		this.container = container;
 	}
-	public ArrayList<ArrayList<CarteJouable>> getContainer() {
+	public ArrayList<ArrayList<Carte>> getContainer() {
 		return container;
 	}
 	
@@ -60,10 +60,10 @@ public class TapisDeJeu {
 		this.modele= modeleForme;
 		//boolean debutForme = false;
 		
-	    this.setContainer(new ArrayList<ArrayList<CarteJouable>>());
+	    this.setContainer(new ArrayList<ArrayList<Carte>>());
 	    for(int i=0; i<this.modele.length; i++) {
 	    	
-	    	ligne = new ArrayList<CarteJouable>();
+	    	ligne = new ArrayList<Carte>();
 	    	//Map<Integer,Carte> ligne = new HashMap<Integer,Carte>();
 			this.getContainer().add(ligne);
 			
@@ -218,7 +218,7 @@ public class TapisDeJeu {
 //	        Collections.addAll(newContainer,arrayContainer);
 //	        this.setContainer(newContainer);
 	        
-	        ligne = new ArrayList<CarteJouable>();
+	        ligne = new ArrayList<Carte>();
 			this.getContainer().add(ligne);
 			
 			//suppression de la ligne excédante
@@ -235,7 +235,7 @@ public class TapisDeJeu {
 		} else if(this.carteEnHaut){
 			
 			//ajout d'une nouvelle ligne là où on veut ajouter une carte
-			ligne = new ArrayList<CarteJouable>();
+			ligne = new ArrayList<Carte>();
 			this.getContainer().add(lig,ligne);
 			System.out.print("AJOUT DE LIGNE FAIT \n");
 			

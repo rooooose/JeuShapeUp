@@ -19,10 +19,17 @@ public class Carte {
     	
     }
 
-    //Ne pas supprimer
-    public Carte() {
-		// TODO Auto-generated constructor stub
+    private boolean estPlacee;
+	
+
+	public void setEstPlacee(boolean estPlacee) {
+		this.estPlacee = estPlacee;
 	}
+	public boolean estPlacee() { // J'ai enlevé l'argument TapisDeJeu tapis car il n'y qu'1 tapis
+
+    	return estPlacee;
+    	
+    }
 
 	public CouleurType getCouleur() {
 		return couleur;
