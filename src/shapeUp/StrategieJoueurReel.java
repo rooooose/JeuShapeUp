@@ -31,25 +31,24 @@ public class StrategieJoueurReel implements StrategieJoueur {
 
     public void placerCarte(int ligneCase, int colonneCase, CarteJouable carte, TapisDeJeu tapis) {
     	//SCANNER
-    	//variables
-    	ArrayList<CarteJouable> ligne = tapis.getContainer().get(ligneCase);
-    	
+
     	//controle de si aucune carte n'est sur le tapis
     	if(tapis.getNbCartes()==0) {
     		
-    		ligne.add(colonneCase, carte);
+    		tapis.getContainer().get(ligneCase).add(colonneCase, carte);
     		
     	}else {
     		
     		if(tapis.placementPossible(ligneCase,colonneCase) && !tapis.caseRemplie(ligneCase,colonneCase)) {
     			
-    			ligne.add(colonneCase, carte);
+    			tapis.getContainer().get(ligneCase).add(colonneCase, carte);
     			
     			//on diminue le nombre de lignes vides
 //    			if(tapis.getContainer().get(ligneCase).isEmpty()) {
 //    				tapis.setNbLignesVides(tapis.getNbLignesVides()-1);
 //    			}
-    			tapis.setNbCartes(tapis.getNbCartes()+1);
+    			System.out.println("Case remplie "+ tapis.caseRemplie(ligneCase,colonneCase));
+    			
     			carte.setEstPlacee(true); 
     			
     		} else if(tapis.caseRemplie(ligneCase,colonneCase) && tapis.decalagePossible(ligneCase, colonneCase)){
@@ -57,8 +56,9 @@ public class StrategieJoueurReel implements StrategieJoueur {
     		    tapis.decalerCartes(ligneCase, colonneCase);
     		    
     		    //pas obligé ?
-    		   //tapis.getContainer().get(ligneCase).remove(colonneCase);
-    		    ligne.add(colonneCase, carte);
+    		    //ligne.remove(colonneCase);
+    		    System.out.print("/n container = " +tapis.getContainer());
+    		    tapis.getContainer().get(ligneCase).add(colonneCase, carte);
     			
     			//on diminue le nombre de lignes vides
 //    			if(tapis.getContainer().get(ligneCase).isEmpty()) {
@@ -73,6 +73,7 @@ public class StrategieJoueurReel implements StrategieJoueur {
     		}
     	}
     	System.out.println(tapis);
+    	tapis.setNbCartes(tapis.getNbCartes()+1);
     	System.out.println("NB CARTES : " + tapis.getNbCartes());
     	//nbLignesVides FAUX
     	//System.out.println(tapis.getNbLignesVides());
