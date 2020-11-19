@@ -86,10 +86,14 @@ public class Carte {
  // sbCarte.append("Forme de la carte : " +this.forme);
  // sbCarte.append(" Couleur de la carte : " +this.couleur);
  // sbCarte.append(" La carte est remplie : " +this.estRemplie+ "(true -> la carte est remplie)");
- sbCarte.append(this.forme + " ; ");
- sbCarte.append(this.couleur+ " ; ");
- sbCarte.append("remplie " +this.estRemplie);
- sbCarte.append("\n");
+ sbCarte.append(this.forme + " ");
+ sbCarte.append(this.couleur+ " ");
+ if(this.estRemplie) {
+	 sbCarte.append("rempli");
+ } else {
+	 sbCarte.append("vide");
+ }
+ 
  return sbCarte.toString();
 }  
 }

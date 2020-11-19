@@ -1,5 +1,6 @@
 package shapeUp;
 
+import java.util.Scanner;
 
 public interface StrategieJoueur {
     
@@ -9,12 +10,14 @@ public interface StrategieJoueur {
     
     void deplacerCarte(int ligneCase, int colonneCase, CarteJouable carte);
 
-    void placerCarte(int ligneCase, int colonneCase, Carte carte, TapisDeJeu tapis);
+    void placerCarte(Carte carte, TapisDeJeu tapis);
 
     //CarteJouable definirCarteAJouer(Carte carte, Joueur joueur, StrategieMode modeDeJeu);
     
     public int choisirLigneCartePlacement();
 	
 	public int choisirColonneCartePlacement();
+	
+	public char choisirPlacementDeplacement();
 
 }

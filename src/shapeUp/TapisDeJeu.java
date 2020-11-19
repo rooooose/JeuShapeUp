@@ -81,10 +81,14 @@ public class TapisDeJeu {
 		//this.setForme(forme);
 	}
 	
-	public boolean placementPossible(int lig, int col) {
+	public boolean placementNormalPossible(int lig, int col) {
 		
-		System.out.println("placement possible appelé");
-		return (this.modele[lig][col]==1 && adjacenceRespectee(lig,col));
+		if(getNbCartes()==0) {
+			return this.modele[lig][col]==1;
+		} else {
+			return (this.modele[lig][col]==1 && adjacenceRespectee(lig,col) && !this.caseRemplie(lig, col));
+		}
+		
 
     }
 	
@@ -96,26 +100,21 @@ public class TapisDeJeu {
 		boolean caseDessousRemplie = false;
 		boolean caseGaucheRemplie = false;
 		boolean caseDroiteRemplie = false;
-		System.out.println("adjacence appelée");
 
 		if(lig>0) {
 			caseDessusRemplie = caseRemplie(lig-1,col);
-			System.out.println("caseDessusRemplie : "+ caseDessusRemplie);
 		}
 		
 		if(lig<this.getContainer().size()-1) {
 			caseDessousRemplie = caseRemplie(lig+1,col);
-			System.out.println("caseDessousRemplie : "+ caseDessusRemplie);
 		}
 		
 		if(col>0) {
 			caseGaucheRemplie = caseRemplie(lig,col-1);
-			System.out.println("caseGaucheRemplie : "+ caseGaucheRemplie);
 		}
 		
 		if(col<this.getContainer().get(lig).size()-1) {
 			caseDroiteRemplie = caseRemplie(lig,col+1);
-			System.out.println("caseDroiteRemplie : "+ caseDroiteRemplie);
 		}
 		
 //		if(this.getContainer().containsKey(lig-1)) {
@@ -151,7 +150,7 @@ public class TapisDeJeu {
 		
 		this.carteEnHaut = lig == 0;
 		this.carteEnBas = lig == this.getContainer().size()-1;
-		
+		// A FAIRE / POSSIBILITE DE CONSIDERER UNE CARTE EN BAS OU HAUT SI AU DESSUS OU EN DESSOUS DE 0
 		//il doit y avoir au moins 1 ligne en haut ou en bas des cartes présentes et des 1 en dessous ou dessus d'elles.
 		//boolean nbLignesVidesOk = this.getNbLignesVides()>0;
 		
@@ -230,7 +229,7 @@ public class TapisDeJeu {
 			}
 	        
 			//System.out.print("CONTAINER TABLEAU : " + Arrays.toString(arrayContainer));
-			System.out.print("CONTAINER RECONVERTI : " + this.getContainer());
+			System.out.print("CONTAINER RECONVERTI : " + this.getContainer() + "\n");
 	        
 		} else if(this.carteEnHaut){
 			
@@ -245,7 +244,7 @@ public class TapisDeJeu {
 			}
 			//suppression de la ligne excédente
 			this.getContainer().remove(derniereLigne);
-			System.out.print("DERNIERE LIGNE SUPPRIMEE : " + derniereLigne);
+			System.out.println("DERNIERE LIGNE SUPPRIMEE : " + derniereLigne);
 		}
 		
 	}
@@ -273,10 +272,12 @@ public class TapisDeJeu {
 				} else {
 					sb.append("   ");
 				}
+				
 			}
+			sb.append("\t");
+			sb.append(this.getContainer().get(i));
 			sb.append("\n");
 		}
-		sb.append(this.getContainer());
 		return sb.toString();
 	}
 	

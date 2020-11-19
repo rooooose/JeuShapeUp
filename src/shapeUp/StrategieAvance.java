@@ -30,4 +30,11 @@ public class StrategieAvance implements StrategieMode {
 		
 	}
 
+
+	@Override
+	public Pioche creerLaPiocheDeLaPartie(Partie maPartie) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

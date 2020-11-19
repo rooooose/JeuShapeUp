@@ -1,10 +1,6 @@
 package shapeUp;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class StrategieJoueurReel implements StrategieJoueur {
     
@@ -36,7 +32,7 @@ public class StrategieJoueurReel implements StrategieJoueur {
     	pioche.compterNbCartes(pioche.getNbreDeCartes() - 1);
     	
     	
-    	System.out.println("Vous avez pioché une carte");
+    	System.out.println("Vous avez pioché une carte : ");
     	return cartePiochee;
     
 		}	
@@ -58,20 +54,31 @@ public class StrategieJoueurReel implements StrategieJoueur {
  
     	carteDejaPlacee.setEstPlacee(true);
     }
-   
-    // A METTRE DANS JOUEUR
-    public void placerCarte(int ligneCase, int colonneCase, Carte carte, TapisDeJeu tapis) {
 
-    	//controle de si aucune carte n'est sur le tapis
-    	if(tapis.getNbCartes()==0) {
-    		
-    		tapis.getContainer().get(ligneCase).add(colonneCase, carte);
-    		
-    	}else {
-    		
-    		if(tapis.placementPossible(ligneCase,colonneCase) && !tapis.caseRemplie(ligneCase,colonneCase)) {
+    
+    public void placerCarte(Carte carte, TapisDeJeu tapis) {
+    	
+    	int ligneCase;
+    	int colonneCase;
+    	System.out.println(tapis);
+    	
+    	if(tapis.getNbCartes()>0) {
+    		System.out.println("Attention, les cartes doivent être adjacentes.");
+    	}
+    	
+    	do {
+    		ligneCase = choisirLigneCartePlacement();
+        	colonneCase = choisirColonneCartePlacement();
+        	
+        	if(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase)) {
+        		System.out.print("Désolée, cette case n'est pas disponible" + "\n");
+        	}
+        	
+    	}while(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase));
+    	
+    	if(!tapis.caseRemplie(ligneCase,colonneCase)) {
     			
-    			tapis.getContainer().get(ligneCase).add(colonneCase, carte);
+    			tapis.getContainer().get(ligneCase).set(colonneCase, carte);
     			
     			//on diminue le nombre de lignes vides
 //    			if(tapis.getContainer().get(ligneCase).isEmpty()) {
@@ -81,27 +88,24 @@ public class StrategieJoueurReel implements StrategieJoueur {
     			
     			carte.setEstPlacee(true); 
     			
-    		} else if(tapis.caseRemplie(ligneCase,colonneCase) && tapis.decalagePossible(ligneCase, colonneCase)){
+    	} else if(tapis.caseRemplie(ligneCase,colonneCase)){
+    		
     			System.out.println("DECALAGE POSSIBLE ");
     		    tapis.decalerCartes(ligneCase, colonneCase);
     		    
     		    //pas obligé ?
     		    //ligne.remove(colonneCase);
-    		    System.out.print("/n container = " +tapis.getContainer());
-    		    tapis.getContainer().get(ligneCase).add(colonneCase, carte);
+
+    		    tapis.getContainer().get(ligneCase).set(colonneCase, carte);
     			
     			//on diminue le nombre de lignes vides
 //    			if(tapis.getContainer().get(ligneCase).isEmpty()) {
 //    				tapis.setNbLignesVides(tapis.getNbLignesVides()-1);
 //    			}
-    			
     			carte.setEstPlacee(true); 
     		    
     		}
-    		else {
-    			//DEMANDER DE REPLACER CARTE
-    		}
-    	}
+
     	System.out.println(tapis);
     	tapis.setNbCartes(tapis.getNbCartes()+1);
     	System.out.println("NB CARTES : " + tapis.getNbCartes());
@@ -131,12 +135,28 @@ public class StrategieJoueurReel implements StrategieJoueur {
 
 	@Override
 	public int choisirLigneCartePlacement() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		Scanner scan = new Scanner (System.in);
+		int nb;
+        System.out.println("Veuillez choisir une ligne parmi celles disponibles :");
+	    nb = scan.nextInt();
+
+        return nb;
 	}
 
 	@Override
 	public int choisirColonneCartePlacement() {
+		
+		Scanner scan = new Scanner (System.in);
+		int nb;
+        System.out.println("Veuillez choisir une colonne parmi celles disponibles :");
+	    nb = scan.nextInt();
+
+        return nb;
+	}
+
+	@Override
+	public char choisirPlacementDeplacement() {
 		// TODO Auto-generated method stub
 		return 0;
 	}

@@ -1,7 +1,6 @@
 package shapeUp;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Joueur {
     private String nom;
@@ -35,17 +34,21 @@ public class Joueur {
 	public void setCarteDeVictoire(CarteDeVictoire carteDeVictoire) {
 		this.carteDeVictoire = carteDeVictoire;
 	}
-
+	
+	//Composée de plusieurs cartes en mode avancé ==> List
 	private Carte mainDuJoueur;
 
 
 	public void jouer(TapisDeJeu tapis, Pioche pioche) {
 		
-		this.setMain(this.strategie.piocherCarte(pioche));
+		Carte cartePiochee = this.strategie.piocherCarte(pioche);
+		this.setMain(cartePiochee);
+		System.out.println(cartePiochee);
+		// méthode choisir placer carte ou déplacer carte
 		
-		int ligne = this.strategie.choisirLigneCartePlacement();
-		int colonne = this.strategie.choisirColonneCartePlacement();
-    	this.strategie.placerCarte(ligne, colonne, this.getMainDuJoueur(), tapis);
+//		int ligne = this.strategie.choisirLigneCartePlacement();
+//		int colonne = this.strategie.choisirColonneCartePlacement(scan);
+    	this.strategie.placerCarte(this.getMainDuJoueur(), tapis);
     }
 	
 //    public void jouer(StrategieJoueur strategie) {

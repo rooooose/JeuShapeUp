@@ -1,12 +1,6 @@
 package shapeUp;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 public class ShapeUp {
 
@@ -14,6 +8,7 @@ public class ShapeUp {
 	    private Partie maPartie;
 	    private final Scanner scan = new Scanner (System.in);
 	    Map<String,Joueur> mapJoueurs;
+
 	    
 	    ShapeUp() {
 	    	
@@ -63,8 +58,8 @@ public class ShapeUp {
 			        return nb;
 	        	}
 	    
-	    
-	    public char definirTypeJoueur(int nb) {
+
+		public char definirTypeJoueur(int nb) {
 	    	
 	    	char type='r';
 	    	
@@ -210,7 +205,7 @@ public class ShapeUp {
 			jeuShapeUp.maPartie.tourDeJeu();
 			jeuShapeUp.maPartie.tourDeJeu();
 			jeuShapeUp.maPartie.tourDeJeu();
-			
+			jeuShapeUp.maPartie.tourDeJeu();
 			
 			//Pour tester 
 			//Pioche pioche = jeuShapeUp.maPartie.getModeDeJeu().creerLaPiocheDeLaPartie(jeuShapeUp.maPartie);
