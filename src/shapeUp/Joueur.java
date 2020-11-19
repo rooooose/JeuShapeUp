@@ -43,9 +43,9 @@ public class Joueur {
 		
 		this.setMain(this.strategie.piocherCarte(pioche));
 		
-		//int ligne = this.strategie.choisirLigneCartePlacement();
-		//int colonne = this.strategie.choisirColonneCartePlacement();
-    	//this.strategie.placerCarte(ligne, colonne, this.getMainDuJoueur(), tapis);
+		int ligne = this.strategie.choisirLigneCartePlacement();
+		int colonne = this.strategie.choisirColonneCartePlacement();
+    	this.strategie.placerCarte(ligne, colonne, this.getMainDuJoueur(), tapis);
     }
 	
 //    public void jouer(StrategieJoueur strategie) {
