@@ -25,7 +25,7 @@ public class Partie implements Visitable {
 	
 	//Unicité des cartes du jeu
 	private Set<Carte> carteDuJeu = new HashSet<Carte> (); 
-	
+	private Pioche pioche;
 	//private List<Carte> carteDuJeu = new ArrayList<Carte> ();
 	
 
@@ -219,6 +219,8 @@ public class Partie implements Visitable {
     public Pioche ;
 
     public void utiliserMode(StrategieMode mode) {
+    mode.creerLaPiocheDeLaPartie(maPartie) = this.pioche;
+    
     }
 
     public int calculerScoreTotal(Joueur joueur) {

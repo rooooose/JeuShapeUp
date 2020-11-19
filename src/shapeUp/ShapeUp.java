@@ -2,6 +2,7 @@ package shapeUp;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
@@ -209,8 +210,11 @@ public class ShapeUp {
 			jeuShapeUp.maPartie.tourDeJeu();
 			jeuShapeUp.maPartie.tourDeJeu();
 			jeuShapeUp.maPartie.tourDeJeu();
-			Pioche pioche = jeuShapeUp.maPartie.getModeDeJeu().creerLaPiocheDeLaPartie(jeuShapeUp.maPartie);
-			System.out.println(pioche);
+			//Pioche pioche = jeuShapeUp.maPartie.getModeDeJeu().creerLaPiocheDeLaPartie(jeuShapeUp.maPartie);
+			//jeuShapeUp.maPartie.getModeDeJeu().distribuerCartes(jeuShapeUp.maPartie);
+			//System.out.println(jeuShapeUp.maPartie.getCarteVictAssociationJoueur());
+			
+			
 			
 	    }
 
