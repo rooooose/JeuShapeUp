@@ -28,8 +28,11 @@ public class StrategieDeBase implements StrategieMode {
 		
 		
 		Iterator<Joueur> iteratorRecupJoueurs = maPartie.getQueueJoueurs().iterator();
+		Map<CarteDeVictoire,Joueur> CarteVictAssociationJoueur = new HashMap <CarteDeVictoire, Joueur>();
+		int i = 0;
 		
-		while(iteratorRecupJoueurs.hasNext())  {
+		
+		while(i<maPartie.getQueueJoueurs().size())  {
 			
 		  //Paramètres pour récupérer une carte au hasard
 			
@@ -56,19 +59,32 @@ public class StrategieDeBase implements StrategieMode {
           		  
     		  }
     		  
-    		  CarteDeVictoire carteVictJoueur = (CarteDeVictoire) recupCarteJeu.get(randomIndex);
+    		  CouleurType recupCouleur = recupCarteJeu.get(randomIndex).getCouleur();
+    		  FormeCarte recupForme = recupCarteJeu.get(randomIndex).getForme();
+    		  boolean recupRemplissage = recupCarteJeu.get(randomIndex).estRemplie;
+    		  
+    		  Carte carteRecup = new CarteDeVictoire(recupCouleur, recupForme, recupRemplissage);
+    		  CarteDeVictoire carteVictJoueur = (CarteDeVictoire) carteRecup;
     		  
     		  //Récupérer les différents joueurs pour leur attribuer une carte 
     		   
-    		  definirCarteVictoire( carteVictJoueur, iteratorRecupJoueurs.next());;
-    		  maPartie.getCarteVictAssociationJoueur().put(carteVictJoueur, iteratorRecupJoueurs.next());
+    		  
+    		  Joueur joueurAssocie = iteratorRecupJoueurs.next();
+    		  definirCarteVictoire( carteVictJoueur, joueurAssocie);
+    		 
+    		  CarteVictAssociationJoueur.put(carteVictJoueur,joueurAssocie);
+    		  recupCarteJeu.remove(carteRecup);
+    		  
+    		 //non// maPartie.getCarteVictAssociationJoueur().put(carteVictJoueur, iteratorRecupJoueurs.next());
     		  
     		  //Réinitialisation des paramètres pour récuperer une carte au hasard
     		  
     		  longueurListeCarte = 0;
     		  randomIndex = 0;
+    		  i++;
       	}
 
+		maPartie.setCarteVictAssociationJoueur(CarteVictAssociationJoueur);
     	    		
     	  		}
 

@@ -210,11 +210,22 @@ public class ShapeUp {
 			jeuShapeUp.maPartie.tourDeJeu();
 			jeuShapeUp.maPartie.tourDeJeu();
 			jeuShapeUp.maPartie.tourDeJeu();
+			
+			
+			//Pour tester 
 			//Pioche pioche = jeuShapeUp.maPartie.getModeDeJeu().creerLaPiocheDeLaPartie(jeuShapeUp.maPartie);
 			//jeuShapeUp.maPartie.getModeDeJeu().distribuerCartes(jeuShapeUp.maPartie);
-			//System.out.println(jeuShapeUp.maPartie.getCarteVictAssociationJoueur());
+
+			/*Iterator<CarteDeVictoire> espoir= jeuShapeUp.maPartie.getCarteVictAssociationJoueur().keySet().iterator();
 			
+			while(espoir.hasNext()) {
+				
+				CarteDeVictoire truc =espoir.next();
+				String joueurSuivant = jeuShapeUp.maPartie.getCarteVictAssociationJoueur().get(truc).getNom();
+				System.out.println(truc+ " pour " +joueurSuivant);
+			}*/
 			
+		
 			
 	    }
 

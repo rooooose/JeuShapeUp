@@ -33,14 +33,14 @@ public class Partie implements Visitable {
 	//private Queue<Joueur> listeJoueurs  = new LinkedList<Joueur> ();
 	private Map<String,Joueur> listeJoueurs  = new HashMap<String,Joueur> ();
 	private Queue<Joueur> queueJoueurs = new LinkedList<Joueur>();
-	private Map<CarteDeVictoire,Joueur> CarteVictAssociationJoueur = new HashMap <CarteDeVictoire, Joueur>();
+	private Map<CarteDeVictoire,Joueur> CarteVictAssociationJoueur;
 	
 	public Map<CarteDeVictoire, Joueur> getCarteVictAssociationJoueur() {
 		return CarteVictAssociationJoueur;
 	}
 
 	public void setCarteVictAssociationJoueur(Map<CarteDeVictoire, Joueur> carteVictAssociationJoueur) {
-		CarteVictAssociationJoueur = carteVictAssociationJoueur;
+		this.CarteVictAssociationJoueur = carteVictAssociationJoueur;
 	}
 
 	public Queue<Joueur> getQueueJoueurs() {
@@ -117,7 +117,7 @@ public class Partie implements Visitable {
 //		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
 //		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
 //		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
-		
+		utiliserMode(this.modeDeJeu);
 
 
 	}
@@ -204,14 +204,22 @@ public class Partie implements Visitable {
 	
 	public void tourDeJeu() {
 		
+		
 		Joueur joueurActif = queueJoueurs.peek();
 		//CarteJouable carteJoueur = (CarteJouable) joueurActif.getMainDuJoueur();
 		
-		System.out.println("C'est au tour de " + joueurActif.getNom());
+		System.out.println("C'est au tour de " + joueurActif.getNom());	
 		queueJoueurs.peek().jouer(this.tapisDeJeu, this.pioche);
+		System.out.println(joueurActif.getMainDuJoueur());
 		queueJoueurs.add(queueJoueurs.poll());
 	}
 
+	
+    public void utiliserMode(StrategieMode mode) {
+    	 
+    	this.pioche = mode.creerLaPiocheDeLaPartie(this);
+    
+    }  
     /*
 
     public List<VisiteurScore>  = new ArrayList<VisiteurScore> ();

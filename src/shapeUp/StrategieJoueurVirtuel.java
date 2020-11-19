@@ -22,14 +22,14 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
     	recupCartePioche.addAll(pioche.getPioche()); 
     	
     	//On pioche une carte
-    	Carte cartePiochee = recupCartePioche.get(1);
+    	Carte cartePiochee = recupCartePioche.get(0);
 		
     	
     	//On enlève la carte de la pioche
     	
     	Set<Carte> transition = new HashSet();
-    	transition.addAll(pioche.getPioche());
-    	transition.remove(cartePiochee);
+    	transition = pioche.getPioche();
+    	transition.remove(cartePiochee);	
     	pioche.setPioche(transition);
     	
     	
