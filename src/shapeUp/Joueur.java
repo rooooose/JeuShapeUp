@@ -49,7 +49,7 @@ public class Joueur {
 //		int ligne = this.strategie.choisirLigneCartePlacement();
 //		int colonne = this.strategie.choisirColonneCartePlacement(scan);
     	this.strategie.placerCarte(this.getMainDuJoueur().remove(0), tapis);
-    	this.strategie.deplacerCarte(tapis);
+    	//this.strategie.deplacerCarte(tapis);
     }
 	
 //    public void jouer(StrategieJoueur strategie) {
