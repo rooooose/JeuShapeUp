@@ -48,7 +48,7 @@ public class Joueur {
 		System.out.println("Carte(s) en main : " + this.getMainDuJoueur());
 		Carte carteAJouer = this.strategie.definirCarteAJouer(this,modeDeJeu);
 		
-    	if(tapis.getNbCartes()>1) {
+    	if(tapis.getNbCartes()>1 && tapis.getNbCartes()<15) {
     		
     		this.strategie.proposerDeplacement(tapis);
     		this.strategie.placerCarte(carteAJouer, tapis);

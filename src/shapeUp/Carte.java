@@ -15,7 +15,6 @@ public class Carte {
     	this.setCouleur(couleur);
     	this.setForme(forme);
     	this.setEstRemplie(estRemplie);
-    	//Carte.setNbCartes(Carte.getNbCartes() + 1);
     	
     }
 
@@ -51,13 +50,6 @@ public class Carte {
 	public void setEstRemplie(boolean estRemplie) {
 		this.estRemplie = estRemplie;
 	}
-
-	/*public static int getNbCartes() {
-		return nbCartes;
-	}
-	public static void setNbCartes(int nbCartes) {
-		Carte.nbCartes = nbCartes;
-	}*/
 
     
 

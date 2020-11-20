@@ -25,6 +25,9 @@ public class Partie implements Visitable {
 	private Map<String,Joueur> listeJoueurs  = new HashMap<String,Joueur> ();
 	private Queue<Joueur> queueJoueurs = new LinkedList<Joueur>();
 	private Map<CarteDeVictoire,Joueur> CarteVictAssociationJoueur;
+	private TapisDeJeu tapisDeJeu;
+	private boolean estFinie;
+	private int nbCartesJouables;
 	
 	public Map<CarteDeVictoire, Joueur> getCarteVictAssociationJoueur() {
 		return CarteVictAssociationJoueur;
@@ -37,13 +40,18 @@ public class Partie implements Visitable {
 	public Queue<Joueur> getQueueJoueurs() {
 		return queueJoueurs;
 	}
-
 	public void setQueueJoueurs(Queue<Joueur> queueJoueurs) {
 		this.queueJoueurs = queueJoueurs;
 	}
 
-	private TapisDeJeu tapisDeJeu;
-	private boolean estFinie;
+	
+	public boolean isEstFinie() {
+		return estFinie;
+	}
+	public void setEstFinie(boolean estFinie) {
+		this.estFinie = estFinie;
+	}
+	
     private StrategieMode modeDeJeu;
 	
 	public Set<Carte> getCarteDuJeu() {
@@ -54,12 +62,12 @@ public class Partie implements Visitable {
 		this.carteDuJeu = carteDuJeu;
 	}
     
-	public Map<String,Joueur> getListeJoueurs() {
-		return listeJoueurs;
-	}
-	public void setListeJoueurs(Map<String,Joueur> listeJoueurs) {
-		this.listeJoueurs = listeJoueurs;
-	}
+//	public Map<String,Joueur> getListeJoueurs() {
+//		return listeJoueurs;
+//	}
+//	public void setListeJoueurs(Map<String,Joueur> listeJoueurs) {
+//		this.listeJoueurs = listeJoueurs;
+//	}
 	
 	public StrategieMode getModeDeJeu() {
 		return modeDeJeu;
@@ -75,27 +83,40 @@ public class Partie implements Visitable {
 		this.tapisDeJeu = tapisDeJeu;
 	}
 	
-	Partie(Map<String,Joueur> joueurs, StrategieMode mode, TapisDeJeu formeTapisDeJeu){
+	public int getNbCartesJouables() {
+		return nbCartesJouables;
+	}
+	public void setNbCartesJouables(int nbCartesJouables) {
+		this.nbCartesJouables = nbCartesJouables;
+	}
+	
+	Partie(Queue<Joueur> joueurs, StrategieMode mode, TapisDeJeu formeTapisDeJeu){
 		//this.setNbreDeJoueurs(nbJoueurs);
 		//System.out.print("Nombre de joueurs : " + nbJoueurs);
 		System.out.print("Partie créée\n");
-
-		this.setListeJoueurs(joueurs);
+		
+		//A SUPPR LISTE 
+		//this.setListeJoueurs(joueurs);
+		
+		this.setQueueJoueurs(joueurs);
 		this.setModeDeJeu(mode);
 		this.tapisDeJeu = formeTapisDeJeu;
 		this.créerLesCartes();
+		this.setEstFinie(false);
+		this.setNbCartesJouables(this.getCarteDuJeu().size() - (this.getQueueJoueurs().size()+1));
+		System.out.println(this.getNbCartesJouables());
 		
 		//conversion map joueurs en Queue
-		Collection<Joueur> valeursMapJoueurs = new LinkedList<Joueur>();
-		valeursMapJoueurs = this.getListeJoueurs().values();
-		queueJoueurs.addAll(valeursMapJoueurs);
+//		Collection<Joueur> valeursMapJoueurs = new LinkedList<Joueur>();
+//		valeursMapJoueurs = this.getListeJoueurs().values();
+//		queueJoueurs.addAll(valeursMapJoueurs);
 		
 		System.out.print(queueJoueurs);
 		
-		Carte carteTest = new CarteJouable(CouleurType.BLEU, FormeCarte.CERCLE, false);
-		CarteJouable c = (CarteJouable) carteTest;
-		Carte carteTest1 = new CarteJouable(CouleurType.ROUGE, FormeCarte.CERCLE, false);
-		CarteJouable c1 = (CarteJouable) carteTest1;
+//		Carte carteTest = new CarteJouable(CouleurType.BLEU, FormeCarte.CERCLE, false);
+//		CarteJouable c = (CarteJouable) carteTest;
+//		Carte carteTest1 = new CarteJouable(CouleurType.ROUGE, FormeCarte.CERCLE, false);
+//		CarteJouable c1 = (CarteJouable) carteTest1;
 //		listeJoueurs.get("1").strategie.placerCarte(4, 2, c1, tapisDeJeu);
 //		listeJoueurs.get("1").strategie.placerCarte(4, 2, c, tapisDeJeu);
 //		listeJoueurs.get("1").strategie.placerCarte(4, 2, c, tapisDeJeu);
@@ -176,8 +197,13 @@ public class Partie implements Visitable {
     	StringBuffer sb = new StringBuffer();
     	//sb.append("Nombre de joueurs choisi : ");
     	//sb.append(this.getNbreDeJoueurs());
-    	sb.append("Liste des types de joueurs : ");
-    	sb.append(this.getListeJoueurs()+"\n");
+    	sb.append("Liste des joueurs : " + "\n");
+    	Iterator<Joueur> it = this.queueJoueurs.iterator();
+    	while(it.hasNext()) {
+    		Joueur joueur = it.next();
+    		sb.append("- " + joueur.getNom() + " -> "+ joueur.strategie + "\n");
+    	}
+    	
     	sb.append("Mode de jeu : ");
     	sb.append(this.getModeDeJeu()+"\n");
     	sb.append("Forme du tapis de jeu : \n");
@@ -202,6 +228,10 @@ public class Partie implements Visitable {
 		queueJoueurs.peek().jouer(this.tapisDeJeu, this.pioche, this.modeDeJeu);
 		//System.out.println(joueurActif.getMainDuJoueur());
 		queueJoueurs.add(queueJoueurs.poll());
+		
+		if(this.getTapisDeJeu().getNbCartes() == this.getNbCartesJouables()) {
+			this.setEstFinie(true);
+		}
 	}
 
 	
@@ -209,7 +239,8 @@ public class Partie implements Visitable {
     	 
     	this.pioche = mode.creerLaPiocheDeLaPartie(this);
     
-    }  
+    }
+    
     /*
 
     public List<VisiteurScore>  = new ArrayList<VisiteurScore> ();
@@ -229,5 +260,9 @@ public class Partie implements Visitable {
 
     public void controlerPlacementCarte(CarteJouable carte) {
     }*/
+
+	
+
+	
 
 }

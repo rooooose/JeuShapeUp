@@ -7,7 +7,7 @@ public class ShapeUp {
 
 	    private Partie maPartie;
 	    private final Scanner scan = new Scanner (System.in);
-	    Map<String,Joueur> mapJoueurs;
+	    Set<String> nomsJoueurs;
 
 	    
 	    ShapeUp() {
@@ -20,8 +20,8 @@ public class ShapeUp {
 	    
 	    public String toString() {
 	    	StringBuffer sb = new StringBuffer();
-	    	sb.append("Liste des joueurs : ");
-	    	sb.append(this.mapJoueurs.keySet() + "\n");
+//	    	sb.append("Liste des joueurs : ");
+//	    	sb.append(this.nomsJoueurs.keySet() + "\n");
 	    	sb.append(this.maPartie);
 			return sb.toString();
 	    }
@@ -33,9 +33,9 @@ public class ShapeUp {
 	    	
 	    }*/
 	    
-	    public void lancerLaPartie(Map<String,Joueur> listeJoueurs, StrategieMode mode, TapisDeJeu forme) {
+	    public void lancerLaPartie(Queue<Joueur> queueJoueurs, StrategieMode mode, TapisDeJeu forme) {
 	    	
-	    	this.maPartie = new Partie(listeJoueurs, mode, forme);
+	    	this.maPartie = new Partie(queueJoueurs, mode, forme);
 	    	
 	    }
 
@@ -79,11 +79,12 @@ public class ShapeUp {
 	    	
 	    }
 
-	    public Map<String,Joueur> creerJoueurs(int nbJoueurs) {
+	    public Queue<Joueur> creerJoueurs(int nbJoueurs) {
 	    	
 	    	char type='r';
 	    	String nom;
-	    	mapJoueurs = new HashMap<String,Joueur>();
+	    	nomsJoueurs = new HashSet<String>();
+	    	Queue<Joueur> queueJoueurs = new LinkedList<Joueur>();
         		
         		for(int i=1; i<=nbJoueurs; i++) {
         			
@@ -97,14 +98,14 @@ public class ShapeUp {
 	        			case 'v' :
 	        				JoueurVirtuel nouveauJoueurV = new JoueurVirtuel(nom);
 	        				//System.out.println("Nom du joueur " + i + ": " + nouveauJoueurV.getNom());
-	        				//queueJoueurs.add(nouveauJoueurV);
-	        				mapJoueurs.put(nom, nouveauJoueurV);
+	        				queueJoueurs.add(nouveauJoueurV);
+	        				nomsJoueurs.add(nom);
 	        				break;
 	        			case 'r' :
 	        				JoueurReel nouveauJoueurR = new JoueurReel(nom);
 	        				//System.out.println("Nom du joueur " + i + ": " + nouveauJoueurR.getNom());
-	        				//queueJoueurs.add(nouveauJoueurR);
-	        				mapJoueurs.put(nom, nouveauJoueurR);
+	        				queueJoueurs.add(nouveauJoueurR);
+	        				nomsJoueurs.add(nom);
 	        				break;
 	        			default :
 	        				System.out.println("Aucun joueur créé");
@@ -113,7 +114,7 @@ public class ShapeUp {
         			}
         		
     			}
-			return mapJoueurs;
+			return queueJoueurs;
 	    	
 	    }
 	    
@@ -123,10 +124,10 @@ public class ShapeUp {
 	    	do {
         		System.out.println("Veuillez choisir le nom du joueur " + nb + ": \n");
         		nom = scan.nextLine();
-        		if (mapJoueurs.containsKey(nom)) {
+        		if (nomsJoueurs.contains(nom)) {
 			        System.out.println("Je suis désolée, chaque joueur doit avoir un nom unique");
 			    } 
-			}while (mapJoueurs.containsKey(nom));
+			}while (nomsJoueurs.contains(nom));
 	    	
 	    	return nom;
 	    }
@@ -201,11 +202,11 @@ public class ShapeUp {
 			ShapeUp jeuShapeUp = new ShapeUp();
 			System.out.println(jeuShapeUp);
 			
-			jeuShapeUp.maPartie.tourDeJeu();
-			jeuShapeUp.maPartie.tourDeJeu();
-			jeuShapeUp.maPartie.tourDeJeu();
-			jeuShapeUp.maPartie.tourDeJeu();
-			jeuShapeUp.maPartie.tourDeJeu();
+			while(!jeuShapeUp.maPartie.isEstFinie()) {
+				jeuShapeUp.maPartie.tourDeJeu();
+			}
+			
+			System.out.println("Partie finie !"+"\n");
 			
 			//Pour tester 
 			//Pioche pioche = jeuShapeUp.maPartie.getModeDeJeu().creerLaPiocheDeLaPartie(jeuShapeUp.maPartie);

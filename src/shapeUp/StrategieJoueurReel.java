@@ -203,7 +203,14 @@ public class StrategieJoueurReel implements StrategieJoueur {
         	}
     		
     	}
-    	
+	}
 	
+
+	public String toString() {
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("joueur réel");
+		
+		return sb.toString();
 	}
 }

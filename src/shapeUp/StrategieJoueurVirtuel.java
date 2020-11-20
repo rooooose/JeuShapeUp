@@ -50,32 +50,75 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
     	carteDejaPlacee.setEstPlacee(true);
     }
 
-    public CarteJouable definirCarteAJouer(Carte carte, Joueur joueur, StrategieMode modeDeJeu) {
-		
-   
+    public Carte definirCarteAJouer(Carte carte, Joueur joueur, StrategieMode modeDeJeu) {
+
     	
+    	//Inclure le choix de la carte dans la main du joueur pour mode AVANCE
     	
     	if (modeDeJeu instanceof StrategieDeBase) {
     		
-    		CarteJouable carteAJouer = (CarteJouable) joueur.getMainDuJoueur();
+    		Carte carteAJouer = joueur.getMainDuJoueur().remove(0);
     		return carteAJouer;
     		
     	} else {
+    		
     		System.out.println("Ces modes de jeu ne sont pas encore disponibles");
     		return null;
-    		
+    	
     	}
     	
 
 	
     	
     }
+	
+	public String toString() {
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("joueur réel");
+		
+		return sb.toString();
+	}
+
 
 	@Override
-	public void placerCarte(int ligneCase, int colonneCase, CarteJouable carte, TapisDeJeu tapis) {
+	public void deplacerCarte(TapisDeJeu tapis) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public void placerCarte(Carte carte, TapisDeJeu tapis) {
+		// TODO Auto-generated method stub
 		
-		carte.setEstPlacee(true);
+	}
+
+
+	@Override
+	public Carte definirCarteAJouer(Joueur joueur, StrategieMode modeDeJeu) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public int choisirLigneCarte() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public int choisirColonneCarte() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public void proposerDeplacement(TapisDeJeu tapis) {
+		// TODO Auto-generated method stub
+		
 	}
 }
