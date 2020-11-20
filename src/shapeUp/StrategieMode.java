@@ -12,5 +12,4 @@ public interface StrategieMode {
     
     Pioche creerLaPiocheDeLaPartie (Partie maPartie);
 
-    // void Pioche getPiocheDeLaPartie();
 }
