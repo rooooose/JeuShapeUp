@@ -1,6 +1,7 @@
 package shapeUp;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -99,6 +100,7 @@ public class StrategieDeBase implements StrategieMode {
 		
 		List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
     	recupCarteJeu.addAll(maPartie.getCarteDuJeu()); 
+    	Collections.shuffle(recupCarteJeu);
 		
 		if (nbreDeJoueurs == 2) {
 	    
