@@ -86,7 +86,7 @@ public class StrategieJoueurReel implements StrategieJoueur {
     	System.out.println(tapis);
     	
     	if(tapis.getNbCartes()>0) {
-    		System.out.println("Attention, les cartes doivent être adjacentes.");
+    		System.out.println("Désormais, les cartes doivent être adjacentes.");
     	}
     	
     	do {
@@ -138,17 +138,18 @@ public class StrategieJoueurReel implements StrategieJoueur {
     	   
     	//Inclure le choix de la carte dans la main du joueur pour mode AVANCE
     	
-//    	if (modeDeJeu instanceof StrategieDeBase) {
-//    		
-//    		//CarteJouable carteAJouer = (CarteJouable) joueur.getMainDuJoueur();
-//    		return carteAJouer;
-//    		
-//    	} else {
+    	if (modeDeJeu instanceof StrategieDeBase) {
+    		
+    		Carte carteAJouer = joueur.getMainDuJoueur().remove(0);
+    		//CarteJouable carteAJouer = (CarteJouable) joueur.getMainDuJoueur();
+    		return carteAJouer;
+    		
+    	} else {
     		
     		System.out.println("Ces modes de jeu ne sont pas encore disponibles");
     		return null;
     	
-    	//}
+    	}
     	
     
     }
@@ -176,8 +177,33 @@ public class StrategieJoueurReel implements StrategieJoueur {
 	}
 
 	@Override
-	public char choisirPlacementDeplacement() {
-		// TODO Auto-generated method stub
-		return 0;
+	public void proposerDeplacement(TapisDeJeu tapis) {
+		
+		boolean deplacementFait = false;
+		
+		Scanner scan = new Scanner (System.in);
+    	char choix='p';
+    	
+    	if(!deplacementFait) {
+    		
+    		do {
+        		System.out.println("Souhaitez-vous déplacer une carte ? \n \t-Oui (o)\n \t-Non (n)");
+        		choix = scan.next().charAt(0);
+    			scan.nextLine();
+    			
+        		if (choix!= 'o' && choix!= 'n') {
+    		        System.out.println("Je n'ai pas compris votre choix...");
+    		    }
+        		
+    		}while (choix!= 'o' && choix!= 'n');
+        	
+        	if(choix == 'o') {
+        		this.deplacerCarte(tapis);
+        		deplacementFait = true;
+        	}
+    		
+    	}
+    	
+	
 	}
 }

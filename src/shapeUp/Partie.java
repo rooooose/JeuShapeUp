@@ -68,12 +68,12 @@ public class Partie implements Visitable {
 		this.modeDeJeu = modeDeJeu;
 	}
 	
-	/*public TapisDeJeu getTapisDeJeu() {
+	public TapisDeJeu getTapisDeJeu() {
 		return tapisDeJeu;
 	}
 	public void setTapisDeJeu(TapisDeJeu tapisDeJeu) {
 		this.tapisDeJeu = tapisDeJeu;
-	}*/
+	}
 	
 	Partie(Map<String,Joueur> joueurs, StrategieMode mode, TapisDeJeu formeTapisDeJeu){
 		//this.setNbreDeJoueurs(nbJoueurs);
@@ -199,8 +199,8 @@ public class Partie implements Visitable {
 		//CarteJouable carteJoueur = (CarteJouable) joueurActif.getMainDuJoueur();
 		
 		System.out.println("C'est au tour de " + joueurActif.getNom());	
-		queueJoueurs.peek().jouer(this.tapisDeJeu, this.pioche);
-		System.out.println(joueurActif.getMainDuJoueur());
+		queueJoueurs.peek().jouer(this.tapisDeJeu, this.pioche, this.modeDeJeu);
+		//System.out.println(joueurActif.getMainDuJoueur());
 		queueJoueurs.add(queueJoueurs.poll());
 	}
 

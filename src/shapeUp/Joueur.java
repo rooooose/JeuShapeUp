@@ -39,17 +39,24 @@ public class Joueur {
 	private ArrayList<Carte> mainDuJoueur = new ArrayList<Carte>();
 
 
-	public void jouer(TapisDeJeu tapis, Pioche pioche) {
+	public void jouer(TapisDeJeu tapis, Pioche pioche, StrategieMode modeDeJeu) {
 		
 		Carte cartePiochee = this.strategie.piocherCarte(pioche);
 		this.getMainDuJoueur().add(cartePiochee);
 		System.out.println(cartePiochee);
-		// méthode choisir déplacer carte (ssi nbCartes>1)
+
+		System.out.println("Carte(s) en main : " + this.getMainDuJoueur());
+		Carte carteAJouer = this.strategie.definirCarteAJouer(this,modeDeJeu);
 		
-//		int ligne = this.strategie.choisirLigneCartePlacement();
-//		int colonne = this.strategie.choisirColonneCartePlacement(scan);
-    	this.strategie.placerCarte(this.getMainDuJoueur().remove(0), tapis);
-    	//this.strategie.deplacerCarte(tapis);
+    	if(tapis.getNbCartes()>1) {
+    		
+    		this.strategie.proposerDeplacement(tapis);
+    		this.strategie.placerCarte(carteAJouer, tapis);
+    		this.strategie.proposerDeplacement(tapis);
+
+    	} else {
+    		this.strategie.placerCarte(carteAJouer, tapis);
+    	}
     }
 	
 //    public void jouer(StrategieJoueur strategie) {

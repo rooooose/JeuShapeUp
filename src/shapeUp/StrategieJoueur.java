@@ -10,12 +10,12 @@ public interface StrategieJoueur {
 
     void placerCarte(Carte carte, TapisDeJeu tapis);
 
-    //CarteJouable definirCarteAJouer(Carte carte, Joueur joueur, StrategieMode modeDeJeu);
+    Carte definirCarteAJouer(Joueur joueur, StrategieMode modeDeJeu);
     
     public int choisirLigneCarte();
 	
 	public int choisirColonneCarte();
 	
-	public char choisirPlacementDeplacement();
+	public void proposerDeplacement(TapisDeJeu tapis);
 
 }
