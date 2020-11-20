@@ -48,12 +48,35 @@ public class StrategieJoueurReel implements StrategieJoueur {
 	 
 	 
 	 */
-    public void deplacerCarte(int ligneCase, int colonneCase, CarteJouable carteDejaPlacee) {
+    
+	public void deplacerCarte(TapisDeJeu tapis) {
     	
-    	carteDejaPlacee.setEstPlacee(false);    	
- 
-    	carteDejaPlacee.setEstPlacee(true);
-    }
+    	int ligneCase;
+    	int colonneCase;
+    	System.out.println(tapis);
+    	System.out.println("Veuillez choisir une carte à déplacer :");
+    	
+    	do {
+    		ligneCase = choisirLigneCarte();
+        	colonneCase = choisirColonneCarte();
+        	
+        	if(!tapis.caseRemplie(ligneCase,colonneCase)) {
+        		System.out.println("Désolée, cette case est vide");
+        	}
+    	}while(!tapis.caseRemplie(ligneCase,colonneCase));
+    	
+    	Carte carteADeplacer = tapis.getContainer().get(ligneCase).get(colonneCase);
+    	tapis.setNbCartes(tapis.getNbCartes()-1);
+    	tapis.getContainer().get(ligneCase).set(colonneCase, null);
+    	
+    	System.out.println(tapis);
+    	System.out.println("Vous avez choisi de déplacer la carte " + carteADeplacer);
+//    	carteADeplacer.setEstPlacee(false);
+    	
+    	this.placerCarte(carteADeplacer, tapis);
+   	 
+//    	carteADeplacer.setEstPlacee(true);
+	}
 
     
     public void placerCarte(Carte carte, TapisDeJeu tapis) {
@@ -67,8 +90,8 @@ public class StrategieJoueurReel implements StrategieJoueur {
     	}
     	
     	do {
-    		ligneCase = choisirLigneCartePlacement();
-        	colonneCase = choisirColonneCartePlacement();
+    		ligneCase = choisirLigneCarte();
+        	colonneCase = choisirColonneCarte();
         	
         	if(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase)) {
         		System.out.print("Désolée, cette case n'est pas disponible" + "\n");
@@ -84,9 +107,6 @@ public class StrategieJoueurReel implements StrategieJoueur {
 //    			if(tapis.getContainer().get(ligneCase).isEmpty()) {
 //    				tapis.setNbLignesVides(tapis.getNbLignesVides()-1);
 //    			}
-    			System.out.println("Case remplie "+ tapis.caseRemplie(ligneCase,colonneCase));
-    			
-    			carte.setEstPlacee(true); 
     			
     	} else if(tapis.caseRemplie(ligneCase,colonneCase)){
     		
@@ -102,13 +122,14 @@ public class StrategieJoueurReel implements StrategieJoueur {
 //    			if(tapis.getContainer().get(ligneCase).isEmpty()) {
 //    				tapis.setNbLignesVides(tapis.getNbLignesVides()-1);
 //    			}
-    			carte.setEstPlacee(true); 
     		    
     		}
 
     	System.out.println(tapis);
     	tapis.setNbCartes(tapis.getNbCartes()+1);
     	System.out.println("NB CARTES : " + tapis.getNbCartes());
+    	//carte.setEstPlacee(true); 
+    	
     	//nbLignesVides FAUX
     	//System.out.println(tapis.getNbLignesVides());
     }
@@ -117,24 +138,23 @@ public class StrategieJoueurReel implements StrategieJoueur {
     	   
     	//Inclure le choix de la carte dans la main du joueur pour mode AVANCE
     	
-    	if (modeDeJeu instanceof StrategieDeBase) {
-    		
-    		//joueur.setMain(new CarteJouable());
-    		CarteJouable carteAJouer = (CarteJouable) joueur.getMainDuJoueur();
-    		return carteAJouer;
-    		
-    	} else {
+//    	if (modeDeJeu instanceof StrategieDeBase) {
+//    		
+//    		//CarteJouable carteAJouer = (CarteJouable) joueur.getMainDuJoueur();
+//    		return carteAJouer;
+//    		
+//    	} else {
     		
     		System.out.println("Ces modes de jeu ne sont pas encore disponibles");
     		return null;
     	
-    	}
+    	//}
     	
     
     }
 
 	@Override
-	public int choisirLigneCartePlacement() {
+	public int choisirLigneCarte() {
 		
 		Scanner scan = new Scanner (System.in);
 		int nb;
@@ -145,7 +165,7 @@ public class StrategieJoueurReel implements StrategieJoueur {
 	}
 
 	@Override
-	public int choisirColonneCartePlacement() {
+	public int choisirColonneCarte() {
 		
 		Scanner scan = new Scanner (System.in);
 		int nb;

@@ -190,7 +190,7 @@ public class TapisDeJeu {
 
 		}
 		
-		return carteEnHaut || carteEnBas;
+		return (carteEnHaut || carteEnBas) && this.caseRemplie(lig, col);
 	}
 	
 	public void decalerCartes(int lig, int col) {
