@@ -9,20 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
-import java.util.TreeSet;
 
 public class StrategieDeBase implements StrategieMode {
-    //private Pioche piocheDeLaPartie; 
-	
-	
-	//public Pioche getPiocheDeLaPartie() {
-	//	return piocheDeLaPartie;
-	//}
-
-	//public void setPiocheDeLaPartie(Pioche piocheDeLaPartie) {
-	//	this.piocheDeLaPartie = piocheDeLaPartie;
-	//}
-
 
 	public void distribuerCartes(Partie maPartie) {
 		

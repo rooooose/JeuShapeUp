@@ -1,32 +1,102 @@
 package shapeUp;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 public class StrategieAvance implements StrategieMode {
-    //private Pioche piocheDeLaPartie; 
-	
-	
-	//public Pioche getPiocheDeLaPartie() {
-	//	return piocheDeLaPartie;
-	//}
 
-	//public void setPiocheDeLaPartie(Pioche piocheDeLaPartie) {
-	//	this.piocheDeLaPartie = piocheDeLaPartie;
-	//}
-	
     public void voirCarteVictoire(Joueur joueur) {
     }
-
 
 	@Override
 	public void distribuerCartes(Partie maPartie) {
 		// TODO Auto-generated method stub
 		
-	}
+		Iterator<Joueur> iteratorRecupJoueurs = maPartie.getQueueJoueurs().iterator();
+		int i = 0;
+		
+		
+		while(i<maPartie.getQueueJoueurs().size())  {
+			
+			
+			
+			for (int nbreMain = 0; nbreMain < 3; nbreMain++) {
+		  //Paramètres pour récupérer une carte au hasard
+			
+		  int longueurListeCarte = maPartie.getCarteDuJeu().size();
+  		  int randomIndex = new Random().nextInt(longueurListeCarte);
+  		  
+  
+        	//On récupère les cartes du jeu (toutes les cartes)
+        	List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
+        	recupCarteJeu.addAll(maPartie.getCarteDuJeu()); 
+        	
+        	
+        	//On fait en sorte que la carte ne soit pas dans la pioche
+    		  while(creerLaPiocheDeLaPartie(maPartie).getPioche().contains(recupCarteJeu.get(randomIndex))) {
+    			  
+    			  longueurListeCarte = 0;
+        		  randomIndex = 0;
+        		  longueurListeCarte = maPartie.getCarteDuJeu().size();
+          		  randomIndex = new Random().nextInt(longueurListeCarte);
+          		  
+    		  }
+
+    		  
+    		  Carte carteRecup = recupCarteJeu.get(randomIndex);
+    		  
+    		  
+    		  //Récupérer les différents joueurs ajouter les cartes récupérées dans leur main
+    		   
+    		  Joueur joueurAssocie = iteratorRecupJoueurs.next();
+    		  joueurAssocie.getMainDuJoueur().add(carteRecup);
+    		 
+    		  
+    		  //On enlève la carte mise dans la main de la liste de récupération des cartes pour garantir l'unicité
+    		  recupCarteJeu.remove(carteRecup);
+    		  
+    		
+    		  
+    		  //Réinitialisation des paramètres pour récuperer une autre carte au hasard
+    		  
+    		  longueurListeCarte = 0;
+    		  randomIndex = 0;
+    		  i++;
+    		  
+			}
+      	}
+    	    		
+    	  		}
+
+		
+		
+		
+		
+	
 
 
 	@Override
 	public void definirCarteVictoire(CarteDeVictoire carteVictoire, Joueur joueur) {
 		// TODO Auto-generated method stub
+		
+		joueur.setCarteDeVictoire(carteVictoire);
+		
+		
+		
+		//A utiliser en fin de partie
+		 /* CouleurType recupCouleur = joueur.getMainDuJoueur().get(0).getCouleur();
+		  FormeCarte recupForme = joueur.getMainDuJoueur().get(0).getForme();
+		  boolean recupRemplissage = joueur.getMainDuJoueur().get(0).estRemplie;
+		  CarteDeVictoire carteDeVictJoueur = new CarteDeVictoire (recupCouleur, recupForme, recupRemplissage);
+		 
+		  
+		  joueur.setCarteDeVictoire(carteDeVictJoueur);
+		  */
 		
 	}
 
@@ -34,7 +104,78 @@ public class StrategieAvance implements StrategieMode {
 	@Override
 	public Pioche creerLaPiocheDeLaPartie(Partie maPartie) {
 		// TODO Auto-generated method stub
-		return null;
+		Set<Carte> pioche = new HashSet<Carte> ();
+		int nombreDeCartes = 0;
+		
+		int nbreDeJoueurs = maPartie.getListeJoueurs().size();
+		
+		
+		List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
+    	recupCarteJeu.addAll(maPartie.getCarteDuJeu()); 
+    	Collections.shuffle(recupCarteJeu);
+		
+		if (nbreDeJoueurs == 2) {
+	    
+	    	for (int nbreDeCartes = 0; nbreDeCartes < 12; nbreDeCartes++) {
+	    		
+	    	
+	    	int arrayLength = recupCarteJeu.size(); 
+	    	int randomIndex = new Random().nextInt(arrayLength);
+	    	
+	    	while (pioche.contains(recupCarteJeu.get(randomIndex)))
+	    		
+	    	{
+	        	arrayLength = 0; 
+	        	randomIndex = 0; 
+	        	arrayLength = recupCarteJeu.size(); 
+	        	randomIndex = new Random().nextInt(arrayLength);
+	    	}
+	    	
+	    	pioche.add(recupCarteJeu.get(randomIndex)); 
+	    	arrayLength = 0; 
+	    	randomIndex = 0; 
+	    	
+	    	
+	    	nombreDeCartes = nbreDeCartes;
+	    	
+	    	}
+				
+		}else if (nbreDeJoueurs == 3) {
+			
+			
+	    	for (int nbreDeCartes = 0; nbreDeCartes < 9; nbreDeCartes++) {
+	    		
+		    	
+	    	int arrayLength = recupCarteJeu.size(); 
+	    	int randomIndex = new Random().nextInt(arrayLength);
+	    	
+	    	while (pioche.contains(recupCarteJeu.get(randomIndex)))
+	    		
+	    	{
+	        	arrayLength = 0; 
+	        	randomIndex = 0; 
+	        	arrayLength = recupCarteJeu.size(); 
+	        	randomIndex = new Random().nextInt(arrayLength);
+	    	}
+	    	
+	    	
+	    	pioche.add(recupCarteJeu.get(randomIndex)); 
+	    	
+	    	arrayLength = 0; 
+	    	randomIndex = 0; 
+	    	
+	    	
+	    	nombreDeCartes = nbreDeCartes;
+	    	}
+			
+		}
+		
+		Pioche piocheDeLaPartie = new Pioche (pioche);	
+		piocheDeLaPartie.compterNbCartes(nombreDeCartes);
+		return piocheDeLaPartie;
 	}
+
+
+
 
 }
