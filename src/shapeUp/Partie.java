@@ -19,6 +19,14 @@ public class Partie implements Visitable {
 	private Pioche pioche;
 	//private List<Carte> carteDuJeu = new ArrayList<Carte> ();
 	
+	public Pioche getPioche() {
+		return pioche;
+	}
+
+	public void setPioche(Pioche pioche) {
+		this.pioche = pioche;
+	}
+
 	//LISTE
 	private VisiteurScore scoreForme = new ScoreForme();
 	//public List<VisiteurScore> visiteurs = new ArrayList<VisiteurScore> ();
@@ -223,13 +231,32 @@ public class Partie implements Visitable {
 		return score;
 	}
 	
-	public void tourDeJeu() {
+	public void tourDeJeu()  {
 		
 		
 		Joueur joueurActif = queueJoueurs.peek();
 		//CarteJouable carteJoueur = (CarteJouable) joueurActif.getMainDuJoueur();
 		
-		System.out.println("C'est au tour de " + joueurActif.getNom());	
+		System.out.println("C'est au tour de " + joueurActif.getNom());
+		
+		if (joueurActif.getCarteDeVictoire().estVisible(this, joueurActif) && this.modeDeJeu instanceof StrategieDeBase) {
+			System.out.println("Ta carte de victoire est "+ joueurActif.getCarteDeVictoire());
+			
+		} else if (joueurActif.getCarteDeVictoire().estVisible(this,joueurActif) == false){
+			Iterator <Joueur> voirCartesEnnemies = this.getQueueJoueurs().iterator();
+			
+			int i = 0;
+			while (i < this.getQueueJoueurs().size()) {
+				Joueur joueur = voirCartesEnnemies.next();
+			if (joueur != joueurActif) {
+			System.out.println("Tu ne peux voir que la carte de victoire des tes ennemis "+joueur.getNom()+ " : " +joueur.getCarteDeVictoire());
+		}else {
+			System.out.println("Tu ne peux pas voir ta carte de victoire");
+			}
+			i++;
+		}
+		}
+		
 		queueJoueurs.peek().jouer(this.tapisDeJeu, this.pioche, this.modeDeJeu);
 		//System.out.println(joueurActif.getMainDuJoueur());
 		queueJoueurs.add(queueJoueurs.poll());

@@ -19,7 +19,6 @@ public class StrategieVictoireEnnemie implements StrategieMode {
 
 	@Override
 	public void distribuerCartes(Partie maPartie) {
-		// TODO Auto-generated method stub
 		Iterator<Joueur> iteratorRecupJoueurs = maPartie.getQueueJoueurs().iterator();
 		Map<CarteDeVictoire,Joueur> CarteVictAssociationJoueur = new HashMap <CarteDeVictoire, Joueur>();
 		int i = 0;
@@ -43,7 +42,7 @@ public class StrategieVictoireEnnemie implements StrategieMode {
         	
         	
         	//On fait en sorte que la carte ne soit pas dans la pioche
-    		  while(creerLaPiocheDeLaPartie(maPartie).getPioche().contains(recupCarteJeu.get(randomIndex))) {
+    		  while(maPartie.getPioche().getPioche().contains(recupCarteJeu.get(randomIndex))) {
     			  
     			  longueurListeCarte = 0;
         		  randomIndex = 0;
@@ -78,10 +77,8 @@ public class StrategieVictoireEnnemie implements StrategieMode {
       	}
 
 		maPartie.setCarteVictAssociationJoueur(CarteVictAssociationJoueur);
-		
-		
-		
-	}
+    	    		
+    	  		}
 
 
 	@Override

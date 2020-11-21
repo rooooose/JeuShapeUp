@@ -39,7 +39,7 @@ public class StrategieDeBase implements StrategieMode {
         	
         	
         	//On fait en sorte que la carte ne soit pas dans la pioche
-    		  while(creerLaPiocheDeLaPartie(maPartie).getPioche().contains(recupCarteJeu.get(randomIndex))) {
+    		  while(maPartie.getPioche().getPioche().contains(recupCarteJeu.get(randomIndex))) {
     			  
     			  longueurListeCarte = 0;
         		  randomIndex = 0;
