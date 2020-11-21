@@ -135,12 +135,12 @@ public class StrategieJoueurReel implements StrategieJoueur {
     }
 
     public Carte definirCarteAJouer(Joueur joueur, StrategieMode modeDeJeu) {
-    	   
-    	//Inclure le choix de la carte dans la main du joueur pour mode AVANCE
+    	
+    	Carte carteAJouer;
     	
     	if (modeDeJeu instanceof StrategieDeBase || modeDeJeu instanceof StrategieVictoireEnnemie ) {
     		
-    		Carte carteAJouer = joueur.getMainDuJoueur().remove(0);
+    		carteAJouer = joueur.getMainDuJoueur().remove(0);
     		return carteAJouer;
     		
     	} else {
@@ -160,7 +160,7 @@ public class StrategieJoueurReel implements StrategieJoueur {
     		
     		int indexChoisi = index;
     		
-    		Carte carteAJouer = joueur.getMainDuJoueur().remove(indexChoisi);
+    		carteAJouer = joueur.getMainDuJoueur().remove(indexChoisi);
     		return carteAJouer;
     	
     	}

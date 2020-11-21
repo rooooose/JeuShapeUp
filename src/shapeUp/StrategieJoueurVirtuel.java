@@ -69,20 +69,19 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
     }
     
 
-    public Carte definirCarteAJouer(Carte carte, Joueur joueur, StrategieMode modeDeJeu) {
+    public Carte definirCarteAJouer(Joueur joueur, StrategieMode modeDeJeu) {
 
-    	
-    	//Inclure le choix de la carte dans la main du joueur pour mode AVANCE
+    	Carte carteAJouer;
     	
     	if (modeDeJeu instanceof StrategieDeBase || modeDeJeu instanceof StrategieVictoireEnnemie ) {
     		
-    		Carte carteAJouer = joueur.getMainDuJoueur().remove(0);
+    		carteAJouer = joueur.getMainDuJoueur().remove(0);
     		return carteAJouer;
     		
     	} else {
     		
     		int randomIndex = new Random().nextInt(joueur.getMainDuJoueur().size());
-    		Carte carteAJouer = joueur.getMainDuJoueur().remove(randomIndex);
+    		carteAJouer = joueur.getMainDuJoueur().remove(randomIndex);
     		System.out.println("Le joueur a choisi la carte à jouer");
     		return carteAJouer;
     	
@@ -147,13 +146,6 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
     	tapis.setNbCartes(tapis.getNbCartes()+1);
     	System.out.println("NB CARTES : " + tapis.getNbCartes());
 		
-	}
-
-
-	@Override
-	public Carte definirCarteAJouer(Joueur joueur, StrategieMode modeDeJeu) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 
