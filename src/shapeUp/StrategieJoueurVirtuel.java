@@ -83,6 +83,7 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
     		
     		int randomIndex = new Random().nextInt(joueur.getMainDuJoueur().size());
     		Carte carteAJouer = joueur.getMainDuJoueur().remove(randomIndex);
+    		System.out.println("Le joueur a choisi la carte à jouer");
     		return carteAJouer;
     	
     	}
