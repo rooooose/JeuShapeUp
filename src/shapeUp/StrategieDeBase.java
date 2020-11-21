@@ -92,9 +92,8 @@ public class StrategieDeBase implements StrategieMode {
 		
 		//if (nbreDeJoueurs == 2) {
 	    
-	    for (int nbreDeCartes = 0; nbreDeCartes < (maPartie.getNbCartesJouables()-1); nbreDeCartes++) {
+	    for (int nbreDeCartes = 0; nbreDeCartes < (maPartie.getNbCartesJouables()); nbreDeCartes++) {
 	    		
-	    	
 	    	int arrayLength = recupCarteJeu.size(); 
 	    	int randomIndex = new Random().nextInt(arrayLength);
 	    	
@@ -113,6 +112,7 @@ public class StrategieDeBase implements StrategieMode {
 	    	
 	    	
 	    	nombreDeCartes = nbreDeCartes;
+	    	//System.out.print("NB CARTES DANS LA PIOCHE :" + nombreDeCartes);
 	    	
 	    }
 				

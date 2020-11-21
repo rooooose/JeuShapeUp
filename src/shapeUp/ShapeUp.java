@@ -208,6 +208,16 @@ public class ShapeUp {
 			
 			System.out.println("Partie finie !"+"\n");
 			
+			Iterator<Joueur> it = jeuShapeUp.maPartie.getQueueJoueurs().iterator();
+	    	while(it.hasNext()) {
+	    		Joueur joueur = it.next();
+	    		int score = jeuShapeUp.maPartie.calculerScoreTotal(joueur);
+	    		System.out.println("Score total de " + joueur.getNom() + " : " + score);
+	    	}
+			
+			
+			
+			
 			//Pour tester 
 			//Pioche pioche = jeuShapeUp.maPartie.getModeDeJeu().creerLaPiocheDeLaPartie(jeuShapeUp.maPartie);
 			//jeuShapeUp.maPartie.getModeDeJeu().distribuerCartes(jeuShapeUp.maPartie);

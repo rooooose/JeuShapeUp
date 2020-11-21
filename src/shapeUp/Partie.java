@@ -19,6 +19,10 @@ public class Partie implements Visitable {
 	private Pioche pioche;
 	//private List<Carte> carteDuJeu = new ArrayList<Carte> ();
 	
+	//LISTE
+	private VisiteurScore scoreForme = new ScoreForme();
+	//public List<VisiteurScore> visiteurs = new ArrayList<VisiteurScore> ();
+	//visiteurs.add()
 
 
 	//private Queue<Joueur> listeJoueurs  = new LinkedList<Joueur> ();
@@ -215,7 +219,8 @@ public class Partie implements Visitable {
 	@Override
 	public int accepterScore(VisiteurScore visiteur, Joueur joueur) {
 		// TODO Auto-generated method stub
-		return 0;
+		int score = visiteur.visiter(this, joueur.getCarteDeVictoire());
+		return score;
 	}
 	
 	public void tourDeJeu() {
@@ -241,25 +246,27 @@ public class Partie implements Visitable {
     
     }
     
-    /*
-
-    public List<VisiteurScore>  = new ArrayList<VisiteurScore> ();
-
-    public Pioche ;
-
-    public void utiliserMode(StrategieMode mode) {
-    mode.creerLaPiocheDeLaPartie(maPartie) = this.pioche;
     
-    }
+
+//    public Pioche ;
+//
+//    public void utiliserMode(StrategieMode mode) {
+//    mode.creerLaPiocheDeLaPartie(maPartie) = this.pioche;
+//    
+//    }
 
     public int calculerScoreTotal(Joueur joueur) {
+    	
+    	//A FAIRE : boucle visiteurs
+    	int scoreTotal = this.accepterScore(this.scoreForme, joueur);
+    	return scoreTotal;
     }
 
-    public Joueur definirGagnant() {
-    }
-
-    public void controlerPlacementCarte(CarteJouable carte) {
-    }*/
+//    public Joueur definirGagnant() {
+//    }
+//
+//    public void controlerPlacementCarte(CarteJouable carte) {
+//    }
 
 	
 

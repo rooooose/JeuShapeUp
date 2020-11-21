@@ -57,8 +57,8 @@ public class StrategieJoueurReel implements StrategieJoueur {
     	System.out.println("Veuillez choisir une carte à déplacer :");
     	
     	do {
-    		ligneCase = choisirLigneCarte();
-        	colonneCase = choisirColonneCarte();
+    		ligneCase = choisirLigneCarte(tapis);
+        	colonneCase = choisirColonneCarte(tapis);
         	
         	if(!tapis.caseRemplie(ligneCase,colonneCase)) {
         		System.out.println("Désolée, cette case est vide");
@@ -90,8 +90,8 @@ public class StrategieJoueurReel implements StrategieJoueur {
     	}
     	
     	do {
-    		ligneCase = choisirLigneCarte();
-        	colonneCase = choisirColonneCarte();
+    		ligneCase = choisirLigneCarte(tapis);
+        	colonneCase = choisirColonneCarte(tapis);
         	
         	if(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase)) {
         		System.out.print("Désolée, cette case n'est pas disponible" + "\n");
@@ -149,7 +149,7 @@ public class StrategieJoueurReel implements StrategieJoueur {
     		int index = 0;
     		
     		do {
-    			System.out.println("Il faut choisir la carte à jouer dans ta main entre la carte 0, 1 ou 2. ");
+    			System.out.println("Il faut choisir la carte à jouer dans votre main entre la carte 0, 1 ou 2. ");
     		
     		index = scan.nextInt();
     		 
@@ -167,7 +167,7 @@ public class StrategieJoueurReel implements StrategieJoueur {
     }
 
 	@Override
-	public int choisirLigneCarte() {
+	public int choisirLigneCarte(TapisDeJeu tapis) {
 		
 		Scanner scan = new Scanner (System.in);
 		int nb;
@@ -178,7 +178,7 @@ public class StrategieJoueurReel implements StrategieJoueur {
 	}
 
 	@Override
-	public int choisirColonneCarte() {
+	public int choisirColonneCarte(TapisDeJeu tapis) {
 		
 		Scanner scan = new Scanner (System.in);
 		int nb;
