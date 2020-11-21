@@ -208,9 +208,13 @@ public class ShapeUp {
 			
 			System.out.println("Partie finie !"+"\n");
 			
+			
 			Iterator<Joueur> it = jeuShapeUp.maPartie.getQueueJoueurs().iterator();
+			
 	    	while(it.hasNext()) {
+	    		
 	    		Joueur joueur = it.next();
+	    		System.out.println("La carte de victoire de " +joueur.getNom()+ " est " +joueur.getCarteDeVictoire());
 	    		int score = jeuShapeUp.maPartie.calculerScoreTotal(joueur);
 	    		System.out.println("Score total de " + joueur.getNom() + " : " + score);
 	    	}
