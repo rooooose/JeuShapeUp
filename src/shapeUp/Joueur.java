@@ -50,10 +50,13 @@ public class Joueur {
 		
     	if(tapis.getNbCartes()>1 && tapis.getNbCartes()<15) {
     		
-    		this.strategie.proposerDeplacement(tapis);
+    		boolean deplacementFait = this.strategie.proposerDeplacement(tapis);
     		this.strategie.placerCarte(carteAJouer, tapis);
-    		this.strategie.proposerDeplacement(tapis);
-
+    		
+    		if(deplacementFait) {
+    			this.strategie.proposerDeplacement(tapis);
+    		}
+    		
     	} else {
     		this.strategie.placerCarte(carteAJouer, tapis);
     	}

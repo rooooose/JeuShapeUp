@@ -189,32 +189,27 @@ public class StrategieJoueurReel implements StrategieJoueur {
 	}
 
 	@Override
-	public void proposerDeplacement(TapisDeJeu tapis) {
-		
-		boolean deplacementFait = false;
+	public boolean proposerDeplacement(TapisDeJeu tapis) {
 		
 		Scanner scan = new Scanner (System.in);
     	char choix='p';
-    	
-    	if(!deplacementFait) {
     		
-    		do {
-        		System.out.println("Souhaitez-vous déplacer une carte ? \n \t-Oui (o)\n \t-Non (n)");
-        		choix = scan.next().charAt(0);
-    			scan.nextLine();
+    	do {
+        	System.out.println("Souhaitez-vous déplacer une carte ? \n \t-Oui (o)\n \t-Non (n)");
+        	choix = scan.next().charAt(0);
+    		scan.nextLine();
     			
-        		if (choix!= 'o' && choix!= 'n') {
-    		        System.out.println("Je n'ai pas compris votre choix...");
-    		    }
+        	if (choix!= 'o' && choix!= 'n') {
+    		    System.out.println("Je n'ai pas compris votre choix...");
+    		}
         		
-    		}while (choix!= 'o' && choix!= 'n');
+    	}while (choix!= 'o' && choix!= 'n');
         	
-        	if(choix == 'o') {
-        		this.deplacerCarte(tapis);
-        		deplacementFait = true;
-        	}
+        if(choix == 'o') {
+        	this.deplacerCarte(tapis);
+        	return true;
+        } else return false;
     		
-    	}
 	}
 	
 
