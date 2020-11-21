@@ -54,6 +54,11 @@ public class TapisDeJeu {
 		this.forme = forme;
 	}*/
 	
+	public int[][] getModele() {
+		return modele;
+	}
+
+	
 	TapisDeJeu(int[][] modeleForme) {
 		
 		setNbCartes(0);

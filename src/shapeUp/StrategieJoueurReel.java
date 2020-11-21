@@ -138,20 +138,32 @@ public class StrategieJoueurReel implements StrategieJoueur {
     	   
     	//Inclure le choix de la carte dans la main du joueur pour mode AVANCE
     	
-    	if (modeDeJeu instanceof StrategieDeBase) {
+    	if (modeDeJeu instanceof StrategieDeBase || modeDeJeu instanceof StrategieVictoireEnnemie ) {
     		
     		Carte carteAJouer = joueur.getMainDuJoueur().remove(0);
-    		//CarteJouable carteAJouer = (CarteJouable) joueur.getMainDuJoueur();
     		return carteAJouer;
     		
     	} else {
     		
-    		System.out.println("Ces modes de jeu ne sont pas encore disponibles");
-    		return null;
+    		Scanner scan = new Scanner (System.in);
+    		int index = 0;
+    		
+    		do {
+    			System.out.println("Il faut choisir la carte à jouer dans ta main entre la carte 0, 1 ou 2. ");
+    		
+    		index = scan.nextInt();
+    		 
+    		if (index != 0 && index != 1 && index != 2 ) {
+    			System.out.println("Vous n'avez que 3 cartes, veuillez recommencer votre choix");
+    		}
+    	}while (index != 0 && index != 1 && index != 2 );
+    		
+    		int indexChoisi = index;
+    		
+    		Carte carteAJouer = joueur.getMainDuJoueur().remove(indexChoisi);
+    		return carteAJouer;
     	
     	}
-    	
-    
     }
 
 	@Override

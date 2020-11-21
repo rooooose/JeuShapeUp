@@ -4,10 +4,10 @@ package shapeUp;
 public class ScoreRemplissage implements VisiteurScore {
 
 	/*
-	 * Pour le score de remplissage on prend en considération à partir de 2 cartes côte à côte
-	 * 2 cartes = + 1 point
+	 * Pour le score de REMPLISSAGE on prend en considération à partir de 3 cartes côte à côte
+	 * 3 cartes = + 3 points
 		...
-	 * 5 cartes = + 4 points
+	 * 5 cartes = + 5 points
 	 * 
 	 */
 	

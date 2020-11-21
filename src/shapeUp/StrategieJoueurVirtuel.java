@@ -74,15 +74,16 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
     	
     	//Inclure le choix de la carte dans la main du joueur pour mode AVANCE
     	
-    	if (modeDeJeu instanceof StrategieDeBase) {
+    	if (modeDeJeu instanceof StrategieDeBase || modeDeJeu instanceof StrategieVictoireEnnemie ) {
     		
     		Carte carteAJouer = joueur.getMainDuJoueur().remove(0);
     		return carteAJouer;
     		
     	} else {
     		
-    		System.out.println("Ces modes de jeu ne sont pas encore disponibles");
-    		return null;
+    		int randomIndex = new Random().nextInt(joueur.getMainDuJoueur().size());
+    		Carte carteAJouer = joueur.getMainDuJoueur().remove(randomIndex);
+    		return carteAJouer;
     	
     	}
     	
@@ -94,7 +95,7 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
 	public String toString() {
 		
 		StringBuffer sb = new StringBuffer();
-		sb.append("joueur réel");
+		sb.append("joueur virtuel");
 		
 		return sb.toString();
 	}

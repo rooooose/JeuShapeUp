@@ -92,7 +92,7 @@ public class StrategieDeBase implements StrategieMode {
 		
 		//if (nbreDeJoueurs == 2) {
 	    
-	    for (int nbreDeCartes = 0; nbreDeCartes < maPartie.getNbCartesJouables(); nbreDeCartes++) {
+	    for (int nbreDeCartes = 0; nbreDeCartes < (maPartie.getNbCartesJouables()-1); nbreDeCartes++) {
 	    		
 	    	
 	    	int arrayLength = recupCarteJeu.size(); 
