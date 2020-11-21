@@ -16,6 +16,6 @@ public interface StrategieJoueur {
 	
 	public int choisirColonneCarte(TapisDeJeu tapis);
 	
-	public void proposerDeplacement(TapisDeJeu tapis);
+	public boolean proposerDeplacement(TapisDeJeu tapis);
 
 }

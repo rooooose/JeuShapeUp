@@ -181,7 +181,7 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
 
 
 	@Override
-	public void proposerDeplacement(TapisDeJeu tapis) {
+	public boolean proposerDeplacement(TapisDeJeu tapis) {
 		// TODO Auto-generated method stub
 		
 	}
