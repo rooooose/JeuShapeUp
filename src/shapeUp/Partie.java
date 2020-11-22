@@ -30,6 +30,7 @@ public class Partie implements Visitable {
 	//LISTE
 	private VisiteurScore scoreForme = new ScoreForme();
 	private VisiteurScore scoreCouleur = new ScoreCouleur();
+	private VisiteurScore scoreRemplissage = new ScoreRemplissage();
 	//public List<VisiteurScore> visiteurs = new ArrayList<VisiteurScore> ();
 	//visiteurs.add()
 
@@ -287,7 +288,7 @@ public class Partie implements Visitable {
     public int calculerScoreTotal(Joueur joueur) {
     	
     	//A FAIRE : boucle visiteurs
-    	int scoreTotal = this.accepterScore(this.scoreForme, joueur)+ this.accepterScore(this.scoreCouleur, joueur);
+    	int scoreTotal = this.accepterScore(this.scoreForme, joueur)+ this.accepterScore(this.scoreCouleur, joueur)+ this.accepterScore(scoreRemplissage, joueur);
     	return scoreTotal;
     }
 
