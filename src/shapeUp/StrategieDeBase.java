@@ -26,7 +26,7 @@ public class StrategieDeBase implements StrategieMode {
 			
 		  //Paramètres pour récupérer une carte au hasard
 			
-		  int longueurListeCarte = (maPartie.getCarteDuJeu().size())-2;
+		  int longueurListeCarte = (maPartie.getCarteDuJeu().size())-(maPartie.getQueueJoueurs().size())-1;
   		  int randomIndex = new Random().nextInt(longueurListeCarte);
   		  Joueur joueurAssocie = iteratorRecupJoueurs.next();
 
@@ -40,7 +40,7 @@ public class StrategieDeBase implements StrategieMode {
     			  
     			  longueurListeCarte = 0;
         		  randomIndex = 0;
-        		  longueurListeCarte = (maPartie.getCarteDuJeu().size())-2;
+        		  longueurListeCarte = (maPartie.getCarteDuJeu().size())-(maPartie.getQueueJoueurs().size())-1;
           		  randomIndex = new Random().nextInt(longueurListeCarte);
           		  
     		  }

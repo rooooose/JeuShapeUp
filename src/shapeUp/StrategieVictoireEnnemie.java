@@ -29,7 +29,7 @@ public class StrategieVictoireEnnemie implements StrategieMode {
 			
 		  //Paramètres pour récupérer une carte au hasard
 		  Joueur joueurAssocie = iteratorRecupJoueurs.next();
-		  int longueurListeCarte = (maPartie.getCarteDuJeu().size())-2;
+		  int longueurListeCarte = (maPartie.getCarteDuJeu().size())-(maPartie.getQueueJoueurs().size())-1;
   		  int randomIndex = new Random().nextInt(longueurListeCarte);
   		  
   		  
@@ -46,7 +46,7 @@ public class StrategieVictoireEnnemie implements StrategieMode {
     			  
     			  longueurListeCarte = 0;
         		  randomIndex = 0;
-        		  longueurListeCarte = maPartie.getCarteDuJeu().size()-2;
+        		  longueurListeCarte = (maPartie.getCarteDuJeu().size())-(maPartie.getQueueJoueurs().size())-1;
           		  randomIndex = new Random().nextInt(longueurListeCarte);
           		  
     		  }

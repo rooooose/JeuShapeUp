@@ -29,7 +29,7 @@ public class StrategieAvance implements StrategieMode {
 			for (int nbreMain = 0; nbreMain < 3; nbreMain++) {
 		  //Paramètres pour récupérer une carte au hasard
 			
-		  int longueurListeCarte = (maPartie.getCarteDuJeu().size())-2;
+		  int longueurListeCarte = (maPartie.getCarteDuJeu().size())-(maPartie.getQueueJoueurs().size())-1;
   		  int randomIndex = new Random().nextInt(longueurListeCarte);
   		  
   
@@ -42,7 +42,7 @@ public class StrategieAvance implements StrategieMode {
     			  
     			  longueurListeCarte = 0;
         		  randomIndex = 0;
-        		  longueurListeCarte = (maPartie.getCarteDuJeu().size())-2;
+        		  longueurListeCarte = ((maPartie.getCarteDuJeu().size())-(maPartie.getQueueJoueurs().size()))-1;
           		  randomIndex = new Random().nextInt(longueurListeCarte);
           		  
     		  }
