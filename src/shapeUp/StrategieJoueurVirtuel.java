@@ -19,30 +19,30 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
 			}
 		else {
 		
-		//On récupère les cartes de la pioche
-		List<Carte> recupCartePioche = new ArrayList<Carte>(); 
-    	recupCartePioche.addAll(pioche.getPioche()); 
+			//On récupère les cartes de la pioche
+			List<Carte> recupCartePioche = new ArrayList<Carte>(); 
+	    	recupCartePioche.addAll(pioche.getPioche()); 
+	    	
+	    	//On pioche une carte
+	    	Carte cartePiochee = recupCartePioche.get(0);
+			
+	    	
+	    	//On enlève la carte de la pioche
+	    	
+	    	Set<Carte> transition = new HashSet();
+	    	transition = pioche.getPioche();
+	    	transition.remove(cartePiochee);	
+	    	pioche.setPioche(transition);
+	    	
+	    	
+	    	
+	    	pioche.compterNbCartes(pioche.getNbreDeCartes() - 1);
+	    	
+	    	
+	    	System.out.println("Le joueur virtuel a pioché sa carte");
+	    	return cartePiochee;
     	
-    	//On pioche une carte
-    	Carte cartePiochee = recupCartePioche.get(0);
-		
-    	
-    	//On enlève la carte de la pioche
-    	
-    	Set<Carte> transition = new HashSet();
-    	transition = pioche.getPioche();
-    	transition.remove(cartePiochee);	
-    	pioche.setPioche(transition);
-    	
-    	
-    	
-    	pioche.compterNbCartes(pioche.getNbreDeCartes() - 1);
-    	
-    	
-    	//System.out.println("Le joueur virtuel a pioché sa carte");
-    	return cartePiochee;
-    	
-    }
+		}
 	}
 	
 
@@ -54,8 +54,9 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
     	System.out.println("Le joueur choisit une carte à déplacer :");
 
     	ligneCase = choisirLigneCarte(tapis);
+    	 System.out.println("Ligne choisie : " + ligneCase);
         colonneCase = choisirColonneCarte(tapis);
-
+        System.out.println("Colonne choisie : " + colonneCase);
     	
     	Carte carteADeplacer = tapis.getContainer().get(ligneCase).get(colonneCase);
     	tapis.setNbCartes(tapis.getNbCartes()-1);
@@ -112,9 +113,11 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
     		System.out.println("Désormais, les cartes doivent être adjacentes.");
     	}
 
-    	ligneCase = choisirLigneCarte(tapis);
-        colonneCase = choisirColonneCarte(tapis);
-
+    	do {
+    		ligneCase = this.choisirLigneCarte(tapis);
+        	colonneCase = this.choisirColonneCarte(tapis);
+        	
+    	}while(!tapis.placementNormalPossible(ligneCase,colonneCase));
     	
     	if(!tapis.caseRemplie(ligneCase,colonneCase)) {
     			
@@ -124,23 +127,23 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
 //    			if(tapis.getContainer().get(ligneCase).isEmpty()) {
 //    				tapis.setNbLignesVides(tapis.getNbLignesVides()-1);
 //    			}
-    			
-    	} else if(tapis.caseRemplie(ligneCase,colonneCase)){
-    		
-    		System.out.println("DECALAGE POSSIBLE ");
-    		tapis.decalerCartes(ligneCase, colonneCase);
-    		    
-    		    //pas obligé ?
-    		    //ligne.remove(colonneCase);
-
-    		    tapis.getContainer().get(ligneCase).set(colonneCase, carte);
-    			
-    			//on diminue le nombre de lignes vides
-//    			if(tapis.getContainer().get(ligneCase).isEmpty()) {
-//    				tapis.setNbLignesVides(tapis.getNbLignesVides()-1);
-//    			}
-    		    
-    		}
+    	}	
+//    	} else if(tapis.caseRemplie(ligneCase,colonneCase)){
+//    		
+//    		System.out.println("DECALAGE POSSIBLE ");
+//    		tapis.decalerCartes(ligneCase, colonneCase);
+//    		    
+//    		    //pas obligé ?
+//    		    //ligne.remove(colonneCase);
+//
+//    		    tapis.getContainer().get(ligneCase).set(colonneCase, carte);
+//    			
+//    			//on diminue le nombre de lignes vides
+////    			if(tapis.getContainer().get(ligneCase).isEmpty()) {
+////    				tapis.setNbLignesVides(tapis.getNbLignesVides()-1);
+////    			}
+//    		    
+//    	}
 
     	System.out.println(tapis);
     	tapis.setNbCartes(tapis.getNbCartes()+1);
@@ -154,9 +157,7 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
 
 		Random rand = new Random();
 		int nb;
-        System.out.println("Choix aléatoire d'une ligne...");
 	    nb = rand.nextInt(tapis.getContainer().size());
-	    System.out.println("Ligne choisie : " + nb);
         return nb;
 	}
 
@@ -166,17 +167,25 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
 		// revoir methode avec contraintes 0
 		Random rand = new Random();
 		int nb;
-        System.out.println("Choix aléatoire d'une ligne...");
 	    nb = rand.nextInt(tapis.getContainer().get(0).size());
-	    System.out.println("Ligne choisie : " + nb);
         return nb;
 	}
 
 
 	@Override
 	public boolean proposerDeplacement(TapisDeJeu tapis) {
-		return false;
-		// TODO Auto-generated method stub
+
+       Random rand = new Random();
+       int choix;
+	   choix = rand.nextInt(2);
+        	
+       if(choix == 1) {
+    	   
+          System.out.println("Le joueur souhaite déplacer une carte");
+          this.deplacerCarte(tapis);
+          return true;
+          
+        } else return false;
 		
 	}
 }

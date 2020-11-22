@@ -80,7 +80,7 @@ public class StrategieJoueurReel implements StrategieJoueur {
 
     
     public void placerCarte(Carte carte, TapisDeJeu tapis) {
-    	
+		
     	int ligneCase;
     	int colonneCase;
     	System.out.println(tapis);
@@ -123,7 +123,7 @@ public class StrategieJoueurReel implements StrategieJoueur {
 //    				tapis.setNbLignesVides(tapis.getNbLignesVides()-1);
 //    			}
     		    
-    		}
+    	}
 
     	System.out.println(tapis);
     	tapis.setNbCartes(tapis.getNbCartes()+1);
@@ -133,6 +133,7 @@ public class StrategieJoueurReel implements StrategieJoueur {
     	//nbLignesVides FAUX
     	//System.out.println(tapis.getNbLignesVides());
     }
+    
 
     public Carte definirCarteAJouer(Joueur joueur, StrategieMode modeDeJeu) {
     	

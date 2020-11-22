@@ -41,16 +41,22 @@ public class Joueur {
 
 	public void jouer(TapisDeJeu tapis, Pioche pioche, StrategieMode modeDeJeu) {
 		
-		Carte cartePiochee = this.strategie.piocherCarte(pioche);
-		this.getMainDuJoueur().add(cartePiochee);
-		System.out.println(cartePiochee);
-
-		System.out.println("Carte(s) en main : " + this.getMainDuJoueur());
-		Carte carteAJouer = this.strategie.definirCarteAJouer(this,modeDeJeu);
+		Carte cartePiochee;
+		Carte carteAJouer;
+		
+		if(modeDeJeu instanceof StrategieDeBase || modeDeJeu instanceof StrategieVictoireEnnemie) {
+			
+			cartePiochee = this.strategie.piocherCarte(pioche);
+			this.getMainDuJoueur().add(cartePiochee);
+			System.out.println(cartePiochee);
+		}
 		
     	if(tapis.getNbCartes()>1 && tapis.getNbCartes()<15) {
     		
     		boolean deplacementFait = this.strategie.proposerDeplacement(tapis);
+    		
+    		System.out.println("Carte(s) en main : " + this.getMainDuJoueur());
+    		carteAJouer = this.strategie.definirCarteAJouer(this,modeDeJeu);
     		this.strategie.placerCarte(carteAJouer, tapis);
     		
     		if(!deplacementFait) {
@@ -58,8 +64,17 @@ public class Joueur {
     		}
     		
     	} else {
+    		System.out.println("Carte(s) en main : " + this.getMainDuJoueur());
+    		carteAJouer = this.strategie.definirCarteAJouer(this,modeDeJeu);
     		this.strategie.placerCarte(carteAJouer, tapis);
     	}
+    	
+    	if(modeDeJeu instanceof StrategieAvance) {
+    		
+			cartePiochee = this.strategie.piocherCarte(pioche);
+			this.getMainDuJoueur().add(cartePiochee);
+			System.out.println(cartePiochee);
+		}
     }
 	
 //    public void jouer(StrategieJoueur strategie) {

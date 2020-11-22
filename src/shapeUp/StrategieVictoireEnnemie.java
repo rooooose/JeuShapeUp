@@ -101,7 +101,7 @@ public class StrategieVictoireEnnemie implements StrategieMode {
 		
 
 	    
-	    for (int nbreDeCartes = 0; nbreDeCartes < (maPartie.getNbCartesJouables()-1); nbreDeCartes++) {
+	    for (int nbreDeCartes = 0; nbreDeCartes < (maPartie.getNbCartesJouables()); nbreDeCartes++) {
 	    		
 	    	
 	    	int arrayLength = recupCarteJeu.size(); 
