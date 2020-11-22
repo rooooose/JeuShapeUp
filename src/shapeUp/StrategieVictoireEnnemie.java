@@ -22,13 +22,14 @@ public class StrategieVictoireEnnemie implements StrategieMode {
 		Iterator<Joueur> iteratorRecupJoueurs = maPartie.getQueueJoueurs().iterator();
 		Map<CarteDeVictoire,Joueur> CarteVictAssociationJoueur = new HashMap <CarteDeVictoire, Joueur>();
 		int i = 0;
+		List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
+    	recupCarteJeu.addAll(maPartie.getCarteDuJeu()); 
 		
-		
-		while(i<maPartie.getQueueJoueurs().size())  {
+		while(iteratorRecupJoueurs.hasNext())  {
 			
 		  //Paramètres pour récupérer une carte au hasard
-			
-		  int longueurListeCarte = maPartie.getCarteDuJeu().size();
+		  Joueur joueurAssocie = iteratorRecupJoueurs.next();
+		  int longueurListeCarte = (maPartie.getCarteDuJeu().size())-2;
   		  int randomIndex = new Random().nextInt(longueurListeCarte);
   		  
   		  
@@ -37,8 +38,7 @@ public class StrategieVictoireEnnemie implements StrategieMode {
     		//this.piocheDeLaPartie = pioche;}
  
         	//On récupère les cartes du jeu (toutes les cartes)
-        	List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
-        	recupCarteJeu.addAll(maPartie.getCarteDuJeu()); 
+        	
         	
         	
         	//On fait en sorte que la carte ne soit pas dans la pioche
@@ -46,7 +46,7 @@ public class StrategieVictoireEnnemie implements StrategieMode {
     			  
     			  longueurListeCarte = 0;
         		  randomIndex = 0;
-        		  longueurListeCarte = maPartie.getCarteDuJeu().size();
+        		  longueurListeCarte = maPartie.getCarteDuJeu().size()-2;
           		  randomIndex = new Random().nextInt(longueurListeCarte);
           		  
     		  }
@@ -61,11 +61,12 @@ public class StrategieVictoireEnnemie implements StrategieMode {
     		  //Récupérer les différents joueurs pour leur attribuer une carte 
     		   
     		  
-    		  Joueur joueurAssocie = iteratorRecupJoueurs.next();
+    		  
     		  definirCarteVictoire( carteVictJoueur, joueurAssocie);
     		 
     		  CarteVictAssociationJoueur.put(carteVictJoueur,joueurAssocie);
     		  recupCarteJeu.remove(carteRecup);
+    		  recupCarteJeu.remove(recupCarteJeu.get(randomIndex));
     		  
     		 //non// maPartie.getCarteVictAssociationJoueur().put(carteVictJoueur, iteratorRecupJoueurs.next());
     		  
@@ -130,4 +131,10 @@ public class StrategieVictoireEnnemie implements StrategieMode {
 		return piocheDeLaPartie;
 	}
 
+	
+    public String toString() {
+    	StringBuffer sb = new StringBuffer();
+    	sb.append("Stratégie victoire ennemie, vous pouvez voir les cartes de victoire de vos ennemis!");
+		return sb.toString();
+    }
 }

@@ -205,11 +205,29 @@ public class ShapeUp {
 			while(!jeuShapeUp.maPartie.isEstFinie()) {
 				jeuShapeUp.maPartie.tourDeJeu();
 			}
+
+			Iterator<Joueur> it = jeuShapeUp.maPartie.getQueueJoueurs().iterator();
 			
+			if (jeuShapeUp.maPartie.getModeDeJeu() instanceof StrategieAvance) {
+				
+				System.out.println("La dernière carte dans votre main est votre carte de victoire.");
+		    	
+				while(it.hasNext()) {
+		    		
+		    		Joueur joueur = it.next();
+		    		Carte recupValeur = joueur.getMainDuJoueur().get(0);
+		    		CarteDeVictoire carteVictJoueur = new CarteDeVictoire (recupValeur.getCouleur(),recupValeur.getForme(),recupValeur.EstRemplie());
+		    		jeuShapeUp.maPartie.getModeDeJeu().definirCarteVictoire(carteVictJoueur, joueur);
+		    	}
+		    	
+		    	System.out.println("Partie finie !"+"\n");
+				
+				
+			}else {
 			System.out.println("Partie finie !"+"\n");
 			
-			
-			Iterator<Joueur> it = jeuShapeUp.maPartie.getQueueJoueurs().iterator();
+			}
+
 			
 	    	while(it.hasNext()) {
 	    		
@@ -219,21 +237,6 @@ public class ShapeUp {
 	    		System.out.println("Score total de " + joueur.getNom() + " : " + score);
 	    	}
 			
-			
-			
-			
-			//Pour tester 
-			//Pioche pioche = jeuShapeUp.maPartie.getModeDeJeu().creerLaPiocheDeLaPartie(jeuShapeUp.maPartie);
-			//jeuShapeUp.maPartie.getModeDeJeu().distribuerCartes(jeuShapeUp.maPartie);
-
-			/*Iterator<CarteDeVictoire> espoir= jeuShapeUp.maPartie.getCarteVictAssociationJoueur().keySet().iterator();
-			
-			while(espoir.hasNext()) {
-				
-				CarteDeVictoire truc =espoir.next();
-				String joueurSuivant = jeuShapeUp.maPartie.getCarteVictAssociationJoueur().get(truc).getNom();
-				System.out.println(truc+ " pour " +joueurSuivant);
-			}*/
 			
 		
 			

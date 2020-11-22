@@ -155,7 +155,7 @@ public class StrategieJoueurReel implements StrategieJoueur {
     		index = scan.nextInt();
     		 
     		if (index != 0 && index != 1 && index != 2 ) {
-    			System.out.println("Vous n'avez que 3 cartes, veuillez recommencer votre choix");
+    			System.out.println("Vous n'avez qu'un nombre limité de cartes, veuillez recommencer votre choix");
     		}
     	}while (index != 0 && index != 1 && index != 2 );
     		

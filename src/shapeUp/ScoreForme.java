@@ -20,41 +20,44 @@ public class ScoreForme implements VisiteurScore {
     	int scoreCompteFormeLigne = 0;
     	int compteNbCartesFormeColonne = 0;
     	int scoreCompteFormeColonne = 0 ;
-    	//Si plusieurs cartes de même forme que la carte de Victoire sont côte à côte alors
-    	// on leur attribue le score du nombre de cartes qui sont à côté (à partir de 3 sinon le score vaut 0)
+    	
     
     	
     
-    	for (int ligne = 0 ; ligne < partie.getTapisDeJeu().getModele().length-1; ligne++) {
+    	for (int ligne = 0 ; ligne < partie.getTapisDeJeu().getModele().length; ligne++) {
     		
     		for (int colonne = 0; colonne < (partie.getTapisDeJeu().getModele()[0].length)-1; colonne++) {
     		if (partie.getTapisDeJeu().caseRemplie(ligne, colonne) && partie.getTapisDeJeu().getContainer().get(ligne).get(colonne).getForme().ordinal() == carteVictoire.getForme().ordinal()) {
     		
-    			if (partie.getTapisDeJeu().caseRemplie(ligne+1, colonne) && partie.getTapisDeJeu().getContainer().get(ligne+1).get(colonne).getForme().ordinal() == carteVictoire.getForme().ordinal()) {
+    			if (partie.getTapisDeJeu().caseRemplie(ligne, colonne+1) && partie.getTapisDeJeu().getContainer().get(ligne).get(colonne+1).getForme().ordinal() == carteVictoire.getForme().ordinal()) {
     				compteNbCartesFormeLigne = compteNbCartesFormeLigne+1;
     			} 	
     			else {
-    				scoreCompteFormeLigne += compteNbCartesFormeLigne;
+    				scoreCompteFormeLigne = scoreCompteFormeLigne+compteNbCartesFormeLigne;
     				compteNbCartesFormeLigne = 0;
     			}
     		}
     		}
+    		scoreCompteFormeLigne = scoreCompteFormeLigne+compteNbCartesFormeLigne;
+			compteNbCartesFormeLigne = 0;
     	}
     	
-    	for (int colonne = 0; colonne < (partie.getTapisDeJeu().getModele()[0].length)-1; colonne++) {
+    	for (int colonne = 0; colonne < (partie.getTapisDeJeu().getModele()[0].length); colonne++) {
     		
     		for (int ligne = 0 ; ligne < (partie.getTapisDeJeu().getModele().length)-1; ligne++) {
     		if (partie.getTapisDeJeu().caseRemplie(ligne, colonne) && partie.getTapisDeJeu().getContainer().get(ligne).get(colonne).getForme().ordinal() == carteVictoire.getForme().ordinal()) {
     		
-    			if (partie.getTapisDeJeu().caseRemplie(ligne, colonne+1) && partie.getTapisDeJeu().getContainer().get(ligne).get(colonne+1).getForme().ordinal() == carteVictoire.getForme().ordinal()) {
+    			if (partie.getTapisDeJeu().caseRemplie(ligne+1, colonne) && partie.getTapisDeJeu().getContainer().get(ligne+1).get(colonne).getForme().ordinal() == carteVictoire.getForme().ordinal()) {
     				compteNbCartesFormeColonne = compteNbCartesFormeColonne+1;
     			} 	
     			else {
-    				scoreCompteFormeColonne += compteNbCartesFormeColonne;
+    				scoreCompteFormeColonne = scoreCompteFormeColonne + compteNbCartesFormeColonne;
     				compteNbCartesFormeColonne = 0;
     			}
     		}
     		}
+    		scoreCompteFormeColonne = scoreCompteFormeColonne + compteNbCartesFormeColonne;
+			compteNbCartesFormeColonne = 0;
     	}
     
     	scoreForme = scoreCompteFormeColonne + scoreCompteFormeLigne;

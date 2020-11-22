@@ -29,6 +29,7 @@ public class Partie implements Visitable {
 
 	//LISTE
 	private VisiteurScore scoreForme = new ScoreForme();
+	private VisiteurScore scoreCouleur = new ScoreCouleur();
 	//public List<VisiteurScore> visiteurs = new ArrayList<VisiteurScore> ();
 	//visiteurs.add()
 
@@ -228,6 +229,7 @@ public class Partie implements Visitable {
 	public int accepterScore(VisiteurScore visiteur, Joueur joueur) {
 		// TODO Auto-generated method stub
 		int score = visiteur.visiter(this, joueur.getCarteDeVictoire());
+		
 		return score;
 	}
 	
@@ -239,10 +241,10 @@ public class Partie implements Visitable {
 		
 		System.out.println("C'est au tour de " + joueurActif.getNom());
 		
-		if (joueurActif.getCarteDeVictoire().estVisible(this, joueurActif) && this.modeDeJeu instanceof StrategieDeBase) {
+		if (this.modeDeJeu instanceof StrategieDeBase) {
 			System.out.println("Ta carte de victoire est "+ joueurActif.getCarteDeVictoire());
 			
-		} else if (joueurActif.getCarteDeVictoire().estVisible(this,joueurActif) == false){
+		} else if (this.modeDeJeu instanceof StrategieVictoireEnnemie){
 			Iterator <Joueur> voirCartesEnnemies = this.getQueueJoueurs().iterator();
 			
 			int i = 0;
@@ -250,7 +252,7 @@ public class Partie implements Visitable {
 				Joueur joueur = voirCartesEnnemies.next();
 			if (joueur != joueurActif) {
 			System.out.println("Tu ne peux voir que la carte de victoire des tes ennemis "+joueur.getNom()+ " : " +joueur.getCarteDeVictoire());
-		}else {
+		   }else {
 			System.out.println("Tu ne peux pas voir ta carte de victoire");
 			}
 			i++;
@@ -285,7 +287,7 @@ public class Partie implements Visitable {
     public int calculerScoreTotal(Joueur joueur) {
     	
     	//A FAIRE : boucle visiteurs
-    	int scoreTotal = this.accepterScore(this.scoreForme, joueur);
+    	int scoreTotal = this.accepterScore(this.scoreForme, joueur)+ this.accepterScore(this.scoreCouleur, joueur);
     	return scoreTotal;
     }
 

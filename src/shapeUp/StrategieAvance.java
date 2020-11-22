@@ -19,22 +19,22 @@ public class StrategieAvance implements StrategieMode {
 		
 		Iterator<Joueur> iteratorRecupJoueurs = maPartie.getQueueJoueurs().iterator();
 		int i = 0;
+		List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
+    	recupCarteJeu.addAll(maPartie.getCarteDuJeu()); 
 		
-		
-		while(i<maPartie.getQueueJoueurs().size())  {
+		while(iteratorRecupJoueurs.hasNext())  {
 			
 			
-			
+			Joueur joueurAssocie = iteratorRecupJoueurs.next();
 			for (int nbreMain = 0; nbreMain < 3; nbreMain++) {
 		  //Paramètres pour récupérer une carte au hasard
 			
-		  int longueurListeCarte = maPartie.getCarteDuJeu().size();
+		  int longueurListeCarte = (maPartie.getCarteDuJeu().size())-2;
   		  int randomIndex = new Random().nextInt(longueurListeCarte);
   		  
   
         	//On récupère les cartes du jeu (toutes les cartes)
-        	List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
-        	recupCarteJeu.addAll(maPartie.getCarteDuJeu()); 
+        	
         	
         	
         	//On fait en sorte que la carte ne soit pas dans la pioche
@@ -42,7 +42,7 @@ public class StrategieAvance implements StrategieMode {
     			  
     			  longueurListeCarte = 0;
         		  randomIndex = 0;
-        		  longueurListeCarte = maPartie.getCarteDuJeu().size();
+        		  longueurListeCarte = (maPartie.getCarteDuJeu().size())-2;
           		  randomIndex = new Random().nextInt(longueurListeCarte);
           		  
     		  }
@@ -53,13 +53,13 @@ public class StrategieAvance implements StrategieMode {
     		  
     		  //Récupérer les différents joueurs ajouter les cartes récupérées dans leur main
     		   
-    		  Joueur joueurAssocie = iteratorRecupJoueurs.next();
+    		  
     		  joueurAssocie.getMainDuJoueur().add(carteRecup);
     		 
     		  
     		  //On enlève la carte mise dans la main de la liste de récupération des cartes pour garantir l'unicité
     		  recupCarteJeu.remove(carteRecup);
-    		  
+    		  recupCarteJeu.remove(recupCarteJeu.get(randomIndex));
     		
     		  
     		  //Réinitialisation des paramètres pour récuperer une autre carte au hasard
@@ -145,6 +145,10 @@ public class StrategieAvance implements StrategieMode {
 		return piocheDeLaPartie;
 	}
 
-
+    public String toString() {
+    	StringBuffer sb = new StringBuffer();
+    	sb.append("Stratégie avancée");
+		return sb.toString();
+    }
 
 }

@@ -19,23 +19,20 @@ public class StrategieDeBase implements StrategieMode {
 		Iterator<Joueur> iteratorRecupJoueurs = maPartie.getQueueJoueurs().iterator();
 		Map<CarteDeVictoire,Joueur> CarteVictAssociationJoueur = new HashMap <CarteDeVictoire, Joueur>();
 		int i = 0;
+		List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
+    	recupCarteJeu.addAll(maPartie.getCarteDuJeu()); 
 		
-		
-		while(i<maPartie.getQueueJoueurs().size())  {
+		while(iteratorRecupJoueurs.hasNext())  {
 			
 		  //Paramètres pour récupérer une carte au hasard
 			
-		  int longueurListeCarte = maPartie.getCarteDuJeu().size();
+		  int longueurListeCarte = (maPartie.getCarteDuJeu().size())-2;
   		  int randomIndex = new Random().nextInt(longueurListeCarte);
-  		  
-  		  
-      	//if (nbreDeJoueurs == 2) {
-    		//Pioche pioche = new Pioche (16, maPartie); 
-    		//this.piocheDeLaPartie = pioche;}
+  		  Joueur joueurAssocie = iteratorRecupJoueurs.next();
+
  
         	//On récupère les cartes du jeu (toutes les cartes)
-        	List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
-        	recupCarteJeu.addAll(maPartie.getCarteDuJeu()); 
+        	
         	
         	
         	//On fait en sorte que la carte ne soit pas dans la pioche
@@ -43,7 +40,7 @@ public class StrategieDeBase implements StrategieMode {
     			  
     			  longueurListeCarte = 0;
         		  randomIndex = 0;
-        		  longueurListeCarte = maPartie.getCarteDuJeu().size();
+        		  longueurListeCarte = (maPartie.getCarteDuJeu().size())-2;
           		  randomIndex = new Random().nextInt(longueurListeCarte);
           		  
     		  }
@@ -58,11 +55,12 @@ public class StrategieDeBase implements StrategieMode {
     		  //Récupérer les différents joueurs pour leur attribuer une carte 
     		   
     		  
-    		  Joueur joueurAssocie = iteratorRecupJoueurs.next();
+    		 
     		  definirCarteVictoire( carteVictJoueur, joueurAssocie);
     		 
     		  CarteVictAssociationJoueur.put(carteVictJoueur,joueurAssocie);
     		  recupCarteJeu.remove(carteRecup);
+    		  recupCarteJeu.remove(recupCarteJeu.get(randomIndex));
     		  
     		 //non// maPartie.getCarteVictAssociationJoueur().put(carteVictJoueur, iteratorRecupJoueurs.next());
     		  
@@ -165,7 +163,12 @@ public class StrategieDeBase implements StrategieMode {
     public void voirCarteVictoire(Joueur joueur) {
     	
     }
-
+    
+    public String toString() {
+    	StringBuffer sb = new StringBuffer();
+    	sb.append("Stratégie de base");
+		return sb.toString();
+    }
 
 
 
