@@ -10,7 +10,6 @@ import java.util.Map;
 
 public class TapisDeJeu {
 	
-    private boolean rempli;
     private int nbCartes;
     private int nbLignesVides;
     private boolean carteEnHaut;
