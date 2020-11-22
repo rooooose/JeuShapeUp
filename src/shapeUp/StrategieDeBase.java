@@ -160,7 +160,9 @@ public class StrategieDeBase implements StrategieMode {
 
 
 
-    public void voirCarteVictoire(Joueur joueur) {
+    public void voirCarteVictoire(Partie maPartie, Joueur joueur) {
+    	
+    	System.out.println("Ta carte de victoire est "+ joueur.getCarteDeVictoire());
     	
     }
     

@@ -10,7 +10,8 @@ import java.util.Set;
 
 public class StrategieAvance implements StrategieMode {
 
-    public void voirCarteVictoire(Joueur joueur) {
+    public void voirCarteVictoire(Partie maPartie, Joueur joueur) {
+    	System.out.println("La dernière carte dans votre main est votre carte de victoire.");
     }
 
 	@Override

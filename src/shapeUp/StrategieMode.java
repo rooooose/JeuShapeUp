@@ -8,7 +8,7 @@ public interface StrategieMode {
 
     void definirCarteVictoire(CarteDeVictoire carteVictoire, Joueur joueur);
 
-    void voirCarteVictoire(Joueur joueur);
+    void voirCarteVictoire(Partie maPartie, Joueur joueur);
     
     Pioche creerLaPiocheDeLaPartie (Partie maPartie);
 

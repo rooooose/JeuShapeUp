@@ -210,7 +210,7 @@ public class ShapeUp {
 			
 			if (jeuShapeUp.maPartie.getModeDeJeu() instanceof StrategieAvance) {
 				
-				System.out.println("La dernière carte dans votre main est votre carte de victoire.");
+				
 		    	
 				while(it.hasNext()) {
 		    		

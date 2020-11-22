@@ -241,24 +241,7 @@ public class Partie implements Visitable {
 		//CarteJouable carteJoueur = (CarteJouable) joueurActif.getMainDuJoueur();
 		
 		System.out.println("C'est au tour de " + joueurActif.getNom());
-		
-		if (this.modeDeJeu instanceof StrategieDeBase) {
-			System.out.println("Ta carte de victoire est "+ joueurActif.getCarteDeVictoire());
-			
-		} else if (this.modeDeJeu instanceof StrategieVictoireEnnemie){
-			Iterator <Joueur> voirCartesEnnemies = this.getQueueJoueurs().iterator();
-			
-			int i = 0;
-			while (i < this.getQueueJoueurs().size()) {
-				Joueur joueur = voirCartesEnnemies.next();
-			if (joueur != joueurActif) {
-			System.out.println("Tu ne peux voir que la carte de victoire des tes ennemis "+joueur.getNom()+ " : " +joueur.getCarteDeVictoire());
-		   }else {
-			System.out.println("Tu ne peux pas voir ta carte de victoire");
-			}
-			i++;
-		}
-		}
+
 		
 		queueJoueurs.peek().jouer(this.tapisDeJeu, this.pioche, this.modeDeJeu);
 		//System.out.println(joueurActif.getMainDuJoueur());

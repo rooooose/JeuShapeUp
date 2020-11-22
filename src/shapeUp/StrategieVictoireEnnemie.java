@@ -13,7 +13,22 @@ import java.util.Set;
 public class StrategieVictoireEnnemie implements StrategieMode {
 
 	
-    public void voirCarteVictoire(Joueur joueur) {
+    public void voirCarteVictoire(Partie maPartie, Joueur joueur) {
+    	
+    	
+		Iterator <Joueur> voirCartesEnnemies = maPartie.getQueueJoueurs().iterator();
+		
+		int i = 0;
+		while (i < maPartie.getQueueJoueurs().size()) {
+			Joueur joueurNext = voirCartesEnnemies.next();
+		if (joueur != joueurNext ) {
+		System.out.println("Tu ne peux voir que la carte de victoire des tes ennemis "+joueurNext.getNom()+ " : " +joueurNext.getCarteDeVictoire());
+	   }else {
+		System.out.println("Tu ne peux pas voir ta carte de victoire");
+		}
+		i++;
+	}
+    	
     }
 
 
