@@ -53,7 +53,7 @@ public class Joueur {
     		boolean deplacementFait = this.strategie.proposerDeplacement(tapis);
     		this.strategie.placerCarte(carteAJouer, tapis);
     		
-    		if(deplacementFait) {
+    		if(!deplacementFait) {
     			this.strategie.proposerDeplacement(tapis);
     		}
     		
