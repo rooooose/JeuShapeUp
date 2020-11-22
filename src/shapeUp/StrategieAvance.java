@@ -19,7 +19,7 @@ public class StrategieAvance implements StrategieMode {
 		// TODO Auto-generated method stub
 		
 		Iterator<Joueur> iteratorRecupJoueurs = maPartie.getQueueJoueurs().iterator();
-		int i = 0;
+		int i = 1;
 		List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
     	recupCarteJeu.addAll(maPartie.getCarteDuJeu()); 
 		
@@ -30,7 +30,7 @@ public class StrategieAvance implements StrategieMode {
 			for (int nbreMain = 0; nbreMain < 3; nbreMain++) {
 		  //Paramètres pour récupérer une carte au hasard
 			
-		  int longueurListeCarte = (maPartie.getCarteDuJeu().size())-(maPartie.getQueueJoueurs().size())-1;
+		  int longueurListeCarte = (recupCarteJeu.size())-(3*(maPartie.getQueueJoueurs().size()))-1;
   		  int randomIndex = new Random().nextInt(longueurListeCarte);
   		  
   
@@ -43,7 +43,7 @@ public class StrategieAvance implements StrategieMode {
     			  
     			  longueurListeCarte = 0;
         		  randomIndex = 0;
-        		  longueurListeCarte = ((maPartie.getCarteDuJeu().size())-(maPartie.getQueueJoueurs().size()))-1;
+        		  longueurListeCarte = (recupCarteJeu.size())-(3*(maPartie.getQueueJoueurs().size()))-1;
           		  randomIndex = new Random().nextInt(longueurListeCarte);
           		  
     		  }
@@ -59,7 +59,7 @@ public class StrategieAvance implements StrategieMode {
     		 
     		  
     		  //On enlève la carte mise dans la main de la liste de récupération des cartes pour garantir l'unicité
-    		  recupCarteJeu.remove(carteRecup);
+    		  
     		  recupCarteJeu.remove(recupCarteJeu.get(randomIndex));
     		
     		  

@@ -18,7 +18,7 @@ public class StrategieDeBase implements StrategieMode {
 		
 		Iterator<Joueur> iteratorRecupJoueurs = maPartie.getQueueJoueurs().iterator();
 		Map<CarteDeVictoire,Joueur> CarteVictAssociationJoueur = new HashMap <CarteDeVictoire, Joueur>();
-		int i = 0;
+		int i = 1;
 		List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
     	recupCarteJeu.addAll(maPartie.getCarteDuJeu()); 
 		
@@ -26,7 +26,7 @@ public class StrategieDeBase implements StrategieMode {
 			
 		  //Paramètres pour récupérer une carte au hasard
 			
-		  int longueurListeCarte = (maPartie.getCarteDuJeu().size())-(maPartie.getQueueJoueurs().size())-1;
+		  int longueurListeCarte = (recupCarteJeu.size())-(maPartie.getQueueJoueurs().size())-1;
   		  int randomIndex = new Random().nextInt(longueurListeCarte);
   		  Joueur joueurAssocie = iteratorRecupJoueurs.next();
 
@@ -40,7 +40,7 @@ public class StrategieDeBase implements StrategieMode {
     			  
     			  longueurListeCarte = 0;
         		  randomIndex = 0;
-        		  longueurListeCarte = (maPartie.getCarteDuJeu().size())-(maPartie.getQueueJoueurs().size())-1;
+        		  longueurListeCarte = (recupCarteJeu.size())-(maPartie.getQueueJoueurs().size())-1;
           		  randomIndex = new Random().nextInt(longueurListeCarte);
           		  
     		  }
@@ -59,7 +59,7 @@ public class StrategieDeBase implements StrategieMode {
     		  definirCarteVictoire( carteVictJoueur, joueurAssocie);
     		 
     		  CarteVictAssociationJoueur.put(carteVictJoueur,joueurAssocie);
-    		  recupCarteJeu.remove(carteRecup);
+    		  
     		  recupCarteJeu.remove(recupCarteJeu.get(randomIndex));
     		  
     		 //non// maPartie.getCarteVictAssociationJoueur().put(carteVictJoueur, iteratorRecupJoueurs.next());
