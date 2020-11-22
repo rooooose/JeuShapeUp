@@ -53,10 +53,14 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
     	System.out.println(tapis);
     	System.out.println("Le joueur choisit une carte à déplacer :");
 
-    	ligneCase = choisirLigneCarte(tapis);
-    	 System.out.println("Ligne choisie : " + ligneCase);
-        colonneCase = choisirColonneCarte(tapis);
-        System.out.println("Colonne choisie : " + colonneCase);
+    	
+        do {
+          ligneCase = choisirLigneCarte(tapis);
+       	  System.out.println("Ligne choisie : " + ligneCase);
+          colonneCase = choisirColonneCarte(tapis);
+          System.out.println("Colonne choisie : " + colonneCase);
+        	
+    	}while(!tapis.caseRemplie(ligneCase,colonneCase));
     	
     	Carte carteADeplacer = tapis.getContainer().get(ligneCase).get(colonneCase);
     	tapis.setNbCartes(tapis.getNbCartes()-1);
@@ -108,10 +112,6 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
 		int ligneCase;
     	int colonneCase;
     	System.out.println(tapis);
-    	
-    	if(tapis.getNbCartes()>0) {
-    		System.out.println("Désormais, les cartes doivent être adjacentes.");
-    	}
 
     	do {
     		ligneCase = this.choisirLigneCarte(tapis);

@@ -86,7 +86,7 @@ public class StrategieJoueurReel implements StrategieJoueur {
     	System.out.println(tapis);
     	
     	if(tapis.getNbCartes()>0) {
-    		System.out.println("Désormais, les cartes doivent être adjacentes.");
+    		System.out.println("Les cartes doivent être adjacentes.");
     	}
     	
     	do {
