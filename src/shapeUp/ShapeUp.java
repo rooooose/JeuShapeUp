@@ -210,17 +210,20 @@ public class ShapeUp {
 			
 			if (jeuShapeUp.maPartie.getModeDeJeu() instanceof StrategieAvance) {
 				
-				
-		    	
 				while(it.hasNext()) {
 		    		
 		    		Joueur joueur = it.next();
 		    		Carte recupValeur = joueur.getMainDuJoueur().get(0);
+		    		
 		    		CarteDeVictoire carteVictJoueur = new CarteDeVictoire (recupValeur.getCouleur(),recupValeur.getForme(),recupValeur.EstRemplie());
+		    		System.out.println(carteVictJoueur);
 		    		jeuShapeUp.maPartie.getModeDeJeu().definirCarteVictoire(carteVictJoueur, joueur);
+		    		System.out.println(joueur.getCarteDeVictoire());
+		    		
 		    	}
 		    	
 		    	System.out.println("Partie finie !"+"\n");
+		    
 				
 				
 			}else {
