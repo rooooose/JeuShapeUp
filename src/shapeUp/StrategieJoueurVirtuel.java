@@ -12,7 +12,7 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
     
 	public Carte piocherCarte(Pioche pioche) {
     	
-		if (pioche.getNbreDeCartes() < 0) {
+		if (pioche.getNbreDeCartes() <= 0) {
 			
 			System.out.println("Aucune carte disponible dans la pioche");
 			return null;

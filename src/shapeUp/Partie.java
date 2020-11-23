@@ -96,12 +96,12 @@ public class Partie implements Visitable {
 		this.tapisDeJeu = tapisDeJeu;
 	}
 	
-	public int getNbCartesJouables() {
-		return nbCartesJouables;
-	}
-	public void setNbCartesJouables(int nbCartesJouables) {
-		this.nbCartesJouables = nbCartesJouables;
-	}
+//	public int getNbCartesJouables() {
+//		return nbCartesJouables;
+//	}
+//	public void setNbCartesJouables(int nbCartesJouables) {
+//		this.nbCartesJouables = nbCartesJouables;
+//	}
 	
 	Partie(Queue<Joueur> joueurs, StrategieMode mode, TapisDeJeu formeTapisDeJeu){
 		//this.setNbreDeJoueurs(nbJoueurs);
@@ -116,8 +116,9 @@ public class Partie implements Visitable {
 		this.tapisDeJeu = formeTapisDeJeu;
 		this.créerLesCartes();
 		this.setEstFinie(false);
-		this.setNbCartesJouables(this.getCarteDuJeu().size() - (this.getQueueJoueurs().size()+1));
-		System.out.println(this.getNbCartesJouables());
+		//this.setNbCartesJouables(this.getCarteDuJeu().size() - (this.getQueueJoueurs().size()+1));
+		this.nbCartesJouables = mode.definirNbCartesJouables(this);
+		System.out.println(this.nbCartesJouables);
 		
 		//conversion map joueurs en Queue
 //		Collection<Joueur> valeursMapJoueurs = new LinkedList<Joueur>();
@@ -246,7 +247,7 @@ public class Partie implements Visitable {
 		//System.out.println(joueurActif.getMainDuJoueur());
 		queueJoueurs.add(queueJoueurs.poll());
 		
-		if(this.getTapisDeJeu().getNbCartes() == this.getNbCartesJouables()) {
+		if(this.getTapisDeJeu().getNbCartes() == this.nbCartesJouables) {
 			this.setEstFinie(true);
 		}
 	}

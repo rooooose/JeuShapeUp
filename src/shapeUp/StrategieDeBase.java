@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -87,14 +88,19 @@ public class StrategieDeBase implements StrategieMode {
 		
 		
 		List<Carte> recupCarteJeu = this.distribuerCartes(maPartie);
-    	Collections.shuffle(recupCarteJeu);
+    	//Collections.shuffle(recupCarteJeu);
 		
 		//if (nbreDeJoueurs == 2) {
-	    
-	    for (int nbreDeCartes = 0; nbreDeCartes < (maPartie.getNbCartesJouables()); nbreDeCartes++) {
+    	
+//    	ListIterator<Carte> it = recupCarteJeu.listIterator();
+//    	while(it.hasNext()) {
+//    		pioche.add(it.next());
+//    	}
+//	    System.out.println(pioche);
+	    for (int nbreDeCartes = 0; nbreDeCartes < this.definirNbCartesJouables(maPartie); nbreDeCartes++) {
 	    		
-	    	int arrayLength = recupCarteJeu.size(); 
-	    	int randomIndex = new Random().nextInt(arrayLength);
+	    	//int arrayLength = recupCarteJeu.size(); 
+	    	//int randomIndex = new Random().nextInt(arrayLength);
 	    	
 	    	/*while (pioche.contains(recupCarteJeu.get(randomIndex)))
 	    		
@@ -105,10 +111,11 @@ public class StrategieDeBase implements StrategieMode {
 	        	randomIndex = new Random().nextInt(arrayLength);
 	    	}*/
 	    	
-	    	pioche.add(recupCarteJeu.remove(randomIndex));
+	    	//pioche.add(recupCarteJeu.remove(randomIndex));
+	    	pioche.add(recupCarteJeu.get(nbreDeCartes));
 	    	//recupCarteJeu.remove((randomIndex));
-	    	arrayLength = 0; 
-	    	randomIndex = 0; 
+	    	//arrayLength = 0; 
+	    	//randomIndex = 0; 
 	    	
 	    	
 	    	nombreDeCartes = nbreDeCartes;
@@ -145,7 +152,7 @@ public class StrategieDeBase implements StrategieMode {
 //	    	}
 //			
 //		}
-		
+	    System.out.println(pioche);
 		Pioche piocheDeLaPartie = new Pioche (pioche);	
 		piocheDeLaPartie.compterNbCartes(nombreDeCartes);
 		return piocheDeLaPartie;
@@ -173,6 +180,13 @@ public class StrategieDeBase implements StrategieMode {
     	sb.append("Stratégie de base");
 		return sb.toString();
     }
+
+
+	@Override
+	public int definirNbCartesJouables(Partie partie) {
+
+		return partie.getCarteDuJeu().size() - (partie.getQueueJoueurs().size()+1);
+	}
 
 
 

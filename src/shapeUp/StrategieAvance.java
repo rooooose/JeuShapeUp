@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Random;
 import java.util.Set;
 
@@ -74,11 +75,17 @@ public class StrategieAvance implements StrategieMode {
 		
 		
 		List<Carte> recupCarteJeu = this.distribuerCartes(maPartie);
-    	Collections.shuffle(recupCarteJeu);
+    	//Collections.shuffle(recupCarteJeu);
     	System.out.println("Cartes pour pioche : " + recupCarteJeu);
-
+    	
+//    	ListIterator<Carte> it = recupCarteJeu.listIterator();
+//    	while(it.hasNext()) {
+//    		pioche.add(it.next());
+//    		nombreDeCartes++;
+//    	}
+//	    System.out.println(pioche);
 	    
-	    for (int nbreDeCartes = 0; nbreDeCartes < ((maPartie.getNbCartesJouables()) - (nbreDeJoueurs*2)); nbreDeCartes++) {
+	    for (int nbreDeCartes = 0; nbreDeCartes < (15 - (nbreDeJoueurs*2)); nbreDeCartes++) {
 	    		
 	    	
 	    	int arrayLength = recupCarteJeu.size(); 
@@ -134,5 +141,11 @@ public class StrategieAvance implements StrategieMode {
     	sb.append("Stratégie avancée");
 		return sb.toString();
     }
+
+
+	public int definirNbCartesJouables(Partie partie) {
+		
+		return partie.getCarteDuJeu().size() - (partie.getQueueJoueurs().size()*2);
+	}
 
 }

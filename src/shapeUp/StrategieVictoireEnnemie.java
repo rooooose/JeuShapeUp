@@ -110,15 +110,15 @@ public class StrategieVictoireEnnemie implements StrategieMode {
 		
 		
 		List<Carte> recupCarteJeu = this.distribuerCartes(maPartie);
-    	Collections.shuffle(recupCarteJeu);
+    	//Collections.shuffle(recupCarteJeu);
 		
 
 	    
-	    for (int nbreDeCartes = 0; nbreDeCartes < (maPartie.getNbCartesJouables()); nbreDeCartes++) {
+	    for (int nbreDeCartes = 0; nbreDeCartes < this.definirNbCartesJouables(maPartie); nbreDeCartes++) {
 	    		
 	    	
-	    	int arrayLength = recupCarteJeu.size(); 
-	    	int randomIndex = new Random().nextInt(arrayLength);
+//	    	int arrayLength = recupCarteJeu.size(); 
+//	    	int randomIndex = new Random().nextInt(arrayLength);
 	    	
 	    	/*while (pioche.contains(recupCarteJeu.get(randomIndex)))
 	    		
@@ -130,10 +130,11 @@ public class StrategieVictoireEnnemie implements StrategieMode {
 	    	}*/
 	    	
 	    	// On remove pour garantir l'unicité
-	    	pioche.add(recupCarteJeu.remove(randomIndex)); 
+//	    	pioche.add(recupCarteJeu.remove(randomIndex)); 
+	    	pioche.add(recupCarteJeu.get(nbreDeCartes));
 	    	//recupCarteJeu.remove((randomIndex));
-	    	arrayLength = 0; 
-	    	randomIndex = 0; 
+//	    	arrayLength = 0; 
+//	    	randomIndex = 0; 
 	    	
 	    	
 	    	nombreDeCartes = nbreDeCartes;
@@ -151,4 +152,11 @@ public class StrategieVictoireEnnemie implements StrategieMode {
     	sb.append("Stratégie victoire ennemie, vous pouvez voir les cartes de victoire de vos ennemis!");
 		return sb.toString();
     }
+
+
+	@Override
+	public int definirNbCartesJouables(Partie partie) {
+		
+		return partie.getCarteDuJeu().size() - (partie.getQueueJoueurs().size()+1);
+	}
 }
