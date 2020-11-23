@@ -42,13 +42,13 @@ public class StrategieAvance implements StrategieMode {
     		 
     		  //Récupérer les différents joueurs ajouter les cartes récupérées dans leur main
     		   
-    		  joueurAssocie.getMainDuJoueur().add(recupCarteJeu.get(randomIndex));
+    		  joueurAssocie.getMainDuJoueur().add(recupCarteJeu.remove(randomIndex));
     		  
     		  //System.out.println(joueurAssocie.getNom() + joueurAssocie.getMainDuJoueur());
     		  
     		  //On enlève la carte mise dans la main de la liste de récupération des cartes pour garantir l'unicité
     		  
-    		  recupCarteJeu.remove((randomIndex));
+    		 // recupCarteJeu.remove((randomIndex));
     		
     		  
     		  //Réinitialisation des paramètres pour récuperer une autre carte au hasard
@@ -83,17 +83,17 @@ public class StrategieAvance implements StrategieMode {
 	    	int arrayLength = recupCarteJeu.size(); 
 	    	int randomIndex = new Random().nextInt(arrayLength);
 	    	
-	    	while (pioche.contains(recupCarteJeu.get(randomIndex)))
+	    	/*while (pioche.contains(recupCarteJeu.get(randomIndex)))
 	    		
 	    	{
 	        	arrayLength = 0; 
 	        	randomIndex = 0; 
 	        	arrayLength = recupCarteJeu.size(); 
 	        	randomIndex = new Random().nextInt(arrayLength);
-	    	}
+	    	}*/
 	    	
-	    	pioche.add(recupCarteJeu.get(randomIndex));
-	    	recupCarteJeu.remove((randomIndex));
+	    	pioche.add(recupCarteJeu.remove(randomIndex));
+	    	//recupCarteJeu.remove((randomIndex));
 	    	arrayLength = 0; 
 	    	randomIndex = 0; 
 	    	
