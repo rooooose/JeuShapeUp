@@ -35,7 +35,8 @@ public class StrategieAvance implements StrategieMode {
 			while (joueurAssocie.getMainDuJoueur().size()<3) {
 		  //Paramètres pour récupérer une carte au hasard
 		
-			  int longueurListeCarte = (recupCarteJeu.size())-(3*(maPartie.getQueueJoueurs().size()))-1;
+			  int longueurListeCarte = (recupCarteJeu.size())-(3*(maPartie.getQueueJoueurs().size()));
+			  System.out.println("LongueurListeCarte : " + longueurListeCarte);
 	  		  int randomIndex = new Random().nextInt(longueurListeCarte);
     		  //Carte carteRecup = recupCarteJeu.get(randomIndex);
     		  //System.out.println(carteRecup);
