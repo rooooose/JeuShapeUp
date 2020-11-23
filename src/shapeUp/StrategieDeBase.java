@@ -96,17 +96,17 @@ public class StrategieDeBase implements StrategieMode {
 	    	int arrayLength = recupCarteJeu.size(); 
 	    	int randomIndex = new Random().nextInt(arrayLength);
 	    	
-	    	while (pioche.contains(recupCarteJeu.get(randomIndex)))
+	    	/*while (pioche.contains(recupCarteJeu.get(randomIndex)))
 	    		
 	    	{
 	        	arrayLength = 0; 
 	        	randomIndex = 0; 
 	        	arrayLength = recupCarteJeu.size(); 
 	        	randomIndex = new Random().nextInt(arrayLength);
-	    	}
+	    	}*/
 	    	
-	    	pioche.add(recupCarteJeu.get(randomIndex));
-	    	recupCarteJeu.remove((randomIndex));
+	    	pioche.add(recupCarteJeu.remove(randomIndex));
+	    	//recupCarteJeu.remove((randomIndex));
 	    	arrayLength = 0; 
 	    	randomIndex = 0; 
 	    	
