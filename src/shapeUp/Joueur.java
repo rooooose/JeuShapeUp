@@ -39,7 +39,7 @@ public class Joueur {
 	private ArrayList<Carte> mainDuJoueur = new ArrayList<Carte>();
 
 
-	public void jouer(TapisDeJeu tapis, Pioche pioche, StrategieMode modeDeJeu) {
+	public void jouer(Partie partie, TapisDeJeu tapis, Pioche pioche, StrategieMode modeDeJeu) {
 		
 		Carte cartePiochee;
 		Carte carteAJouer;
@@ -57,6 +57,7 @@ public class Joueur {
     		
     		System.out.println("Carte(s) en main : " + this.getMainDuJoueur());
     		carteAJouer = this.strategie.definirCarteAJouer(this,modeDeJeu);
+    	    modeDeJeu.voirCarteVictoire(partie, this);
     		this.strategie.placerCarte(carteAJouer, tapis);
     		
     		if(!deplacementFait) {
@@ -64,8 +65,9 @@ public class Joueur {
     		}
     		
     	} else {
-    		System.out.println("Carte(s) en main : " + this.getMainDuJoueur());
-    		carteAJouer = this.strategie.definirCarteAJouer(this,modeDeJeu);
+        	System.out.println("Carte(s) en main : " + this.getMainDuJoueur());
+    		carteAJouer = this.strategie.definirCarteAJouer(this,partie.getModeDeJeu());
+    		modeDeJeu.voirCarteVictoire(partie, this);
     		this.strategie.placerCarte(carteAJouer, tapis);
     	}
     	

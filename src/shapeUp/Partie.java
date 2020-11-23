@@ -143,7 +143,7 @@ public class Partie implements Visitable {
 //		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
 //		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
 //		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
-		utiliserMode(this.modeDeJeu);
+		this.utiliserMode(this.modeDeJeu);
 
 	}
 
@@ -243,7 +243,7 @@ public class Partie implements Visitable {
 		System.out.println("C'est au tour de " + joueurActif.getNom());
 
 		
-		queueJoueurs.peek().jouer(this.tapisDeJeu, this.pioche, this.modeDeJeu);
+		queueJoueurs.peek().jouer(this, this.getTapisDeJeu(), this.getPioche(), this.getModeDeJeu());
 		//System.out.println(joueurActif.getMainDuJoueur());
 		queueJoueurs.add(queueJoueurs.poll());
 		

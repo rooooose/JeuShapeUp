@@ -63,14 +63,15 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
     	}while(!tapis.caseRemplie(ligneCase,colonneCase));
     	
     	Carte carteADeplacer = tapis.getContainer().get(ligneCase).get(colonneCase);
-    	tapis.setNbCartes(tapis.getNbCartes()-1);
-    	tapis.getContainer().get(ligneCase).set(colonneCase, null);
+    	
     	
     	System.out.println(tapis);
     	System.out.println("Le joueur a choisi de déplacer la carte " + carteADeplacer);
 //    	carteADeplacer.setEstPlacee(false);
     	
     	this.placerCarte(carteADeplacer, tapis);
+    	tapis.getContainer().get(ligneCase).set(colonneCase, null);
+    	tapis.setNbCartes(tapis.getNbCartes()-1);
     }
     
 
@@ -85,9 +86,13 @@ public class StrategieJoueurVirtuel implements StrategieJoueur {
     		
     	} else {
     		
-    		int randomIndex = new Random().nextInt(joueur.getMainDuJoueur().size());
+    		int randomIndex = 0;
+    		do {
+    		  randomIndex = new Random().nextInt(joueur.getMainDuJoueur().size());
+    		}while(joueur.getMainDuJoueur().get(randomIndex) == null);
+
     		carteAJouer = joueur.getMainDuJoueur().remove(randomIndex);
-    		System.out.println("Le joueur a choisi la carte à jouer");
+    		System.out.println(joueur.getNom()+" a choisi la carte à jouer : " + carteAJouer);
     		return carteAJouer;
     	
     	}

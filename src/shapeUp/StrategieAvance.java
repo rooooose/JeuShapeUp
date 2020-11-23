@@ -11,7 +11,7 @@ import java.util.Set;
 public class StrategieAvance implements StrategieMode {
 
     public void voirCarteVictoire(Partie maPartie, Joueur joueur) {
-    	System.out.println("La dernière carte dans votre main est votre carte de victoire.");
+    	System.out.println("La dernière carte dans votre main sera votre carte de victoire.");
     }
 
 	@Override
@@ -19,7 +19,7 @@ public class StrategieAvance implements StrategieMode {
 		// TODO Auto-generated method stub
 		
 		Iterator<Joueur> iteratorRecupJoueurs = maPartie.getQueueJoueurs().iterator();
-		int i = 1;
+		//int i = 1;
 		List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
     	recupCarteJeu.addAll(maPartie.getCarteDuJeu()); 
 		
@@ -30,8 +30,8 @@ public class StrategieAvance implements StrategieMode {
 			for (int nbreMain = 0; nbreMain < 3; nbreMain++) {
 		  //Paramètres pour récupérer une carte au hasard
 			
-		  int longueurListeCarte = (recupCarteJeu.size())-(3*(maPartie.getQueueJoueurs().size()))-1;
-  		  int randomIndex = new Random().nextInt(longueurListeCarte);
+			  int longueurListeCarte = (recupCarteJeu.size())-(3*(maPartie.getQueueJoueurs().size()))-1;
+	  		  int randomIndex = new Random().nextInt(longueurListeCarte);
   		  
   
         	//On récupère les cartes du jeu (toutes les cartes)
@@ -50,13 +50,13 @@ public class StrategieAvance implements StrategieMode {
 
     		  
     		  Carte carteRecup = recupCarteJeu.get(randomIndex);
-    		  
+    		  System.out.println(carteRecup);
     		  
     		  //Récupérer les différents joueurs ajouter les cartes récupérées dans leur main
     		   
     		  
     		  joueurAssocie.getMainDuJoueur().add(carteRecup);
-    		 
+    		  System.out.println(joueurAssocie.getNom() + joueurAssocie.getMainDuJoueur());
     		  
     		  //On enlève la carte mise dans la main de la liste de récupération des cartes pour garantir l'unicité
     		  
@@ -67,12 +67,12 @@ public class StrategieAvance implements StrategieMode {
     		  
     		  longueurListeCarte = 0;
     		  randomIndex = 0;
-    		  i++;
+    		  //i++;
     		  
 			}
       	}
     	    		
-    	  		}
+    }
 
 		
 		
@@ -117,7 +117,7 @@ public class StrategieAvance implements StrategieMode {
 		
 
 	    
-	    for (int nbreDeCartes = 0; nbreDeCartes < (((maPartie.getNbCartesJouables()) - (nbreDeJoueurs*2))); nbreDeCartes++) {
+	    for (int nbreDeCartes = 0; nbreDeCartes < ((maPartie.getNbCartesJouables()) - (nbreDeJoueurs*2)); nbreDeCartes++) {
 	    		
 	    	
 	    	int arrayLength = recupCarteJeu.size(); 
