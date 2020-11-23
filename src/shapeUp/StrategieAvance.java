@@ -117,7 +117,7 @@ public class StrategieAvance implements StrategieMode {
 		
 
 	    
-	    for (int nbreDeCartes = 0; nbreDeCartes < (((maPartie.getNbCartesJouables()) - (nbreDeJoueurs*2)) -1 ); nbreDeCartes++) {
+	    for (int nbreDeCartes = 0; nbreDeCartes < (((maPartie.getNbCartesJouables()) - (nbreDeJoueurs*2))); nbreDeCartes++) {
 	    		
 	    	
 	    	int arrayLength = recupCarteJeu.size(); 
