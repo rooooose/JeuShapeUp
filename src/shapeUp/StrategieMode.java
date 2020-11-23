@@ -1,10 +1,11 @@
 package shapeUp;
 
+import java.util.List;
 
 public interface StrategieMode {
 
 	
-    void distribuerCartes(Partie maPartie);
+    List<Carte> distribuerCartes(Partie maPartie);
 
     void definirCarteVictoire(CarteDeVictoire carteVictoire, Joueur joueur);
 

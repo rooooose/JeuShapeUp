@@ -33,67 +33,65 @@ public class StrategieVictoireEnnemie implements StrategieMode {
 
 
 	@Override
-	public void distribuerCartes(Partie maPartie) {
+	public List<Carte> distribuerCartes(Partie maPartie) {
+		
 		Iterator<Joueur> iteratorRecupJoueurs = maPartie.getQueueJoueurs().iterator();
 		Map<CarteDeVictoire,Joueur> CarteVictAssociationJoueur = new HashMap <CarteDeVictoire, Joueur>();
-		int i = 1;
+		
+		
+		//On récupère les cartes du jeu (toutes les cartes)
+		
 		List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
     	recupCarteJeu.addAll(maPartie.getCarteDuJeu()); 
 		
 		while(iteratorRecupJoueurs.hasNext())  {
 			
 		  //Paramètres pour récupérer une carte au hasard
-		  Joueur joueurAssocie = iteratorRecupJoueurs.next();
+			
 		  int longueurListeCarte = (recupCarteJeu.size())-(maPartie.getQueueJoueurs().size())-1;
   		  int randomIndex = new Random().nextInt(longueurListeCarte);
+  		  Joueur joueurAssocie = iteratorRecupJoueurs.next();
   		  
-  		  
-      	//if (nbreDeJoueurs == 2) {
-    		//Pioche pioche = new Pioche (16, maPartie); 
-    		//this.piocheDeLaPartie = pioche;}
- 
-        	//On récupère les cartes du jeu (toutes les cartes)
-        	
-        	
-        	
         	//On fait en sorte que la carte ne soit pas dans la pioche
-    		  while(maPartie.getPioche().getPioche().contains(recupCarteJeu.get(randomIndex))) {
+    		  /*while(maPartie.getPioche().getPioche().contains(recupCarteJeu.get(randomIndex))) {
     			  
     			  longueurListeCarte = 0;
         		  randomIndex = 0;
         		  longueurListeCarte = (recupCarteJeu.size())-(maPartie.getQueueJoueurs().size())-1;
           		  randomIndex = new Random().nextInt(longueurListeCarte);
           		  
-    		  }
+    		 }*/
     		  
     		  CouleurType recupCouleur = recupCarteJeu.get(randomIndex).getCouleur();
     		  FormeCarte recupForme = recupCarteJeu.get(randomIndex).getForme();
     		  boolean recupRemplissage = recupCarteJeu.get(randomIndex).estRemplie;
     		  
+    		  //On récupère la carte aléatoirement
     		  Carte carteRecup = new CarteDeVictoire(recupCouleur, recupForme, recupRemplissage);
+    		  // On enlève la carte du jeu pour garantir l'unicité
+    		  recupCarteJeu.remove(randomIndex); 
+    		  //On définit la carte récupérée comme une carte de victoire
     		  CarteDeVictoire carteVictJoueur = (CarteDeVictoire) carteRecup;
     		  
     		  //Récupérer les différents joueurs pour leur attribuer une carte 
     		   
     		  
-    		  
+    		 
     		  definirCarteVictoire( carteVictJoueur, joueurAssocie);
     		 
     		  CarteVictAssociationJoueur.put(carteVictJoueur,joueurAssocie);
     		  
-    		  recupCarteJeu.remove(recupCarteJeu.get(randomIndex));
-    		  
-    		 //non// maPartie.getCarteVictAssociationJoueur().put(carteVictJoueur, iteratorRecupJoueurs.next());
+ 
     		  
     		  //Réinitialisation des paramètres pour récuperer une carte au hasard
     		  
     		  longueurListeCarte = 0;
     		  randomIndex = 0;
-    		  i++;
+    		  
       	}
 
 		maPartie.setCarteVictAssociationJoueur(CarteVictAssociationJoueur);
-    	    		
+    	return recupCarteJeu;    		
     	  		}
 
 
@@ -111,8 +109,7 @@ public class StrategieVictoireEnnemie implements StrategieMode {
 		
 		
 		
-		List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
-    	recupCarteJeu.addAll(maPartie.getCarteDuJeu()); 
+		List<Carte> recupCarteJeu = this.distribuerCartes(maPartie);
     	Collections.shuffle(recupCarteJeu);
 		
 
@@ -133,6 +130,7 @@ public class StrategieVictoireEnnemie implements StrategieMode {
 	    	}
 	    	
 	    	pioche.add(recupCarteJeu.get(randomIndex)); 
+	    	recupCarteJeu.remove((randomIndex));
 	    	arrayLength = 0; 
 	    	randomIndex = 0; 
 	    	
