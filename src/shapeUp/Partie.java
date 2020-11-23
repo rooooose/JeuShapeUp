@@ -124,7 +124,7 @@ public class Partie implements Visitable {
 //		valeursMapJoueurs = this.getListeJoueurs().values();
 //		queueJoueurs.addAll(valeursMapJoueurs);
 		
-		System.out.print(queueJoueurs);
+		//System.out.print(queueJoueurs);
 		
 //		Carte carteTest = new CarteJouable(CouleurType.BLEU, FormeCarte.CERCLE, false);
 //		CarteJouable c = (CarteJouable) carteTest;
