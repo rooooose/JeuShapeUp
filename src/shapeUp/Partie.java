@@ -255,7 +255,7 @@ public class Partie implements Visitable {
     public void utiliserMode(StrategieMode mode) {
     	 
     	
-    	mode.distribuerCartes(this);
+    	//mode.distribuerCartes(this);
     	this.pioche = mode.creerLaPiocheDeLaPartie(this);
     }
     

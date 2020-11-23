@@ -24,7 +24,7 @@ public class StrategieAvance implements StrategieMode {
 		//On récupère les cartes du jeu (toutes les cartes)
 		List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
     	recupCarteJeu.addAll(maPartie.getCarteDuJeu()); 
-		
+    	System.out.println("Cartes pour distribution : " + recupCarteJeu);
     	
     	
 		while(iteratorRecupJoueurs.hasNext())  {
@@ -34,7 +34,7 @@ public class StrategieAvance implements StrategieMode {
 			
 			while (joueurAssocie.getMainDuJoueur().size()<3) {
 		  //Paramètres pour récupérer une carte au hasard
-			
+		
 			  int longueurListeCarte = (recupCarteJeu.size())-(3*(maPartie.getQueueJoueurs().size()))-1;
 	  		  int randomIndex = new Random().nextInt(longueurListeCarte);
     		  //Carte carteRecup = recupCarteJeu.get(randomIndex);
@@ -74,7 +74,7 @@ public class StrategieAvance implements StrategieMode {
 		
 		List<Carte> recupCarteJeu = this.distribuerCartes(maPartie);
     	Collections.shuffle(recupCarteJeu);
-		
+    	System.out.println("Cartes pour pioche : " + recupCarteJeu);
 
 	    
 	    for (int nbreDeCartes = 0; nbreDeCartes < ((maPartie.getNbCartesJouables()) - (nbreDeJoueurs*2)); nbreDeCartes++) {
