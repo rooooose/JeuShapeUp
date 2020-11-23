@@ -31,8 +31,7 @@ public class Partie implements Visitable {
 	private VisiteurScore scoreForme = new ScoreForme();
 	private VisiteurScore scoreCouleur = new ScoreCouleur();
 	private VisiteurScore scoreRemplissage = new ScoreRemplissage();
-	//public List<VisiteurScore> visiteurs = new ArrayList<VisiteurScore> ();
-	//visiteurs.add()
+	public List<VisiteurScore> visiteurs = new ArrayList<VisiteurScore> ();
 
 
 	//private Queue<Joueur> listeJoueurs  = new LinkedList<Joueur> ();
