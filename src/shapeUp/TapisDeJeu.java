@@ -154,6 +154,8 @@ public class TapisDeJeu {
 		
 		this.carteEnHaut = lig == 0;
 		this.carteEnBas = lig == this.getContainer().size()-1;
+		boolean premiereLigneVide = true;
+	    boolean derniereLigneVide = true;
 		// A FAIRE / POSSIBILITE DE CONSIDERER UNE CARTE EN BAS OU HAUT SI AU DESSUS OU EN DESSOUS DE 0
 		//il doit y avoir au moins 1 ligne en haut ou en bas des cartes présentes et des 1 en dessous ou dessus d'elles.
 		//boolean nbLignesVidesOk = this.getNbLignesVides()>0;
@@ -170,21 +172,24 @@ public class TapisDeJeu {
 			
 			for(int j=0; j<this.modele[i].length; j++) {
 				
+				premiereLigneVide = !caseRemplie(0,j);
+				derniereLigneVide = !caseRemplie(this.modele.length-1,j);
+				
 				if(this.modele[i][j]==0) {
 					
-					if(i>0) {
+					if(i>0 && carteVideSur0) {
 						carteVideSur0 = !caseRemplie(i-1,j);
 					}
 					
-					if(i<this.getContainer().size()-1) {
+					if(i<this.getContainer().size()-1 && carteVideSous0) {
 						carteVideSous0 = !caseRemplie(i+1,j);
 					}
 					
-					if(j>0) {
+					if(j>0 && carteVideGauche0) {
 						carteVideGauche0 = !caseRemplie(i,j-1);
 					}
 					
-					if(j<this.getContainer().get(i).size()-1) {
+					if(j<this.getContainer().get(i).size()-1 && carteVideDroite0) {
 						carteVideDroite0 = !caseRemplie(i,j+1);
 					}
 					
@@ -194,20 +199,11 @@ public class TapisDeJeu {
 
 		}
 		
-		return (carteEnHaut || carteEnBas) && this.caseRemplie(lig, col);
+		return ((carteEnHaut && (derniereLigneVide && carteVideSur0)) || (carteEnBas && (premiereLigneVide && carteVideSous0))) && this.caseRemplie(lig, col);
 	}
 	
 	public void decalerCartes(int lig, int col) {
 		
-		//si en haut ou en bas, on décale la ligne des cartes
-//		if(caseRemplie(lig,col)){
-//			
-//			//parcours de toutes les lignes
-//			for(int i=0; i<this.getContainer().size(); i++) {
-//				this.getContainer().get(i).get(col).remove();
-//			}
-//			
-//		}
 		int derniereLigne = this.getContainer().size();
 		System.out.print("CARTE EN BAS " + carteEnBas);
 		System.out.print("CARTE EN HAUT " + carteEnHaut);
