@@ -1,15 +1,17 @@
 package shapeUp;
 
 import java.util.ArrayList;
-import java.util.Collections;
+//import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
+//import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
+//import java.util.ListIterator;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Random;
-import java.util.Set;
+//import java.util.Set;
 
 public class StrategieDeBase implements StrategieMode {
 
@@ -81,7 +83,7 @@ public class StrategieDeBase implements StrategieMode {
 		
 	public Pioche creerLaPiocheDeLaPartie (Partie maPartie) {
 		
-		Set<Carte> pioche = new HashSet<Carte> ();
+		Queue<Carte> pioche = new LinkedList<Carte> ();
 		int nombreDeCartes = 0;
 		
 		//int nbreDeJoueurs = maPartie.getQueueJoueurs().size();
@@ -181,5 +183,23 @@ public class StrategieDeBase implements StrategieMode {
     	sb.append("Stratégie de base");
 		return sb.toString();
     }
+
+
+	@Override
+	public void finirLaPartie(Partie maPartie) {
+		// TODO Auto-generated method stub
+		System.out.println("\n" +"La partie est finie, place aux résultats ! :) "+ "\n");
+		
+		Iterator<Joueur> it = maPartie.getQueueJoueurs().iterator();
+		
+		while(it.hasNext()) {
+    		
+    		Joueur joueur = it.next();
+    		System.out.println("La carte de victoire de " +joueur.getNom()+ " est " +joueur.getCarteDeVictoire());
+    		int score = maPartie.calculerScoreTotal(joueur);
+    		System.out.println("Score total de " + joueur.getNom() + " : " + score);
+    	}
+		
+	}
 
 }

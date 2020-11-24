@@ -205,39 +205,9 @@ public class ShapeUp {
 			while(!jeuShapeUp.maPartie.isEstFinie()) {
 				jeuShapeUp.maPartie.tourDeJeu();
 			}
-			System.out.println("Partie finie !"+"\n");
-			
-			Iterator<Joueur> it = jeuShapeUp.maPartie.getQueueJoueurs().iterator();
-			
-			if (jeuShapeUp.maPartie.getModeDeJeu() instanceof StrategieAvance) {
-				
-				while(it.hasNext()) {
-		    		
-		    		Joueur joueur = it.next();
-		    		Carte recupValeur = joueur.getMainDuJoueur().get(0);
-		    		
-		    		CarteDeVictoire carteVictJoueur = new CarteDeVictoire (recupValeur.getCouleur(),recupValeur.getForme(),recupValeur.EstRemplie());
-		    		
-		    		jeuShapeUp.maPartie.getModeDeJeu().definirCarteVictoire(carteVictJoueur, joueur);
-		    		System.out.println("La carte de victoire de " +joueur.getNom()+ " est " +joueur.getCarteDeVictoire());
-		    		int score = jeuShapeUp.maPartie.calculerScoreTotal(joueur);
-		    		System.out.println("Score total de " + joueur.getNom() + " : " + score);
+			//System.out.println("Partie finie !"+"\n");
+			jeuShapeUp.maPartie.getModeDeJeu().finirLaPartie(jeuShapeUp.maPartie);
 
-		    		
-		    	}
-
-			}
-
-			
-	    	while(it.hasNext()) {
-	    		
-	    		Joueur joueur = it.next();
-	    		System.out.println("La carte de victoire de " +joueur.getNom()+ " est " +joueur.getCarteDeVictoire());
-	    		int score = jeuShapeUp.maPartie.calculerScoreTotal(joueur);
-	    		System.out.println("Score total de " + joueur.getNom() + " : " + score);
-	    	}
-		
-			
 	    }
 
 }

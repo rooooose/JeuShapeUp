@@ -12,20 +12,20 @@ public class StrategieJoueurReel implements StrategieJoueur {
 		return null;
 		}else {
 		
-		//On récupère les cartes de la pioche
+		/*//On récupère les cartes de la pioche
 		List<Carte> recupCartePioche = new ArrayList<Carte>(); 
-    	recupCartePioche.addAll(pioche.getPioche()); 
+    	recupCartePioche.addAll(pioche.getPioche()); */
     	
     	//On pioche une carte
-    	Carte cartePiochee = recupCartePioche.get(0);
+		Carte cartePiochee = pioche.getPioche().poll();
 		
     	
-    	//On enlève la carte de la pioche
+    	/*On enlève la carte de la pioche
     	
     	Set<Carte> transition = new HashSet();
     	transition = pioche.getPioche();
     	transition.remove(cartePiochee);
-    	pioche.setPioche(transition);
+    	pioche.setPioche(transition);*/
     	
     	
     	

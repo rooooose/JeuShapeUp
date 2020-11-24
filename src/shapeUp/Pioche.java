@@ -1,10 +1,12 @@
 package shapeUp;
 
-import java.util.Set;
+import java.util.Queue;
+//import java.util.Set;
 
 public class Pioche {
    private int nbreDeCartes;
-   private Set<Carte> pioche;
+   //private Set<Carte> pioche;
+   private Queue<Carte> pioche;
    
     public int getNbreDeCartes() {
 		return nbreDeCartes;
@@ -17,16 +19,16 @@ public class Pioche {
     
   
 	
-	public Set<Carte> getPioche() {
+	public Queue<Carte> getPioche() {
 		return pioche;
 	}
 
-	public void setPioche(Set<Carte> pioche) {
+	public void setPioche(Queue<Carte> pioche) {
 		this.pioche = pioche;
 	}
 	
 	
-	Pioche (Set<Carte> pioche) {
+	Pioche (Queue<Carte> pioche) {
 		this.pioche = pioche;
 		
 	}
