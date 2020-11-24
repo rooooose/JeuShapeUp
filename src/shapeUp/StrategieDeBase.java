@@ -76,7 +76,7 @@ public class StrategieDeBase implements StrategieMode {
 
 		maPartie.setCarteVictAssociationJoueur(CarteVictAssociationJoueur);
     	return recupCarteJeu;    		
-    	  		}
+    }
 
 		
 	public Pioche creerLaPiocheDeLaPartie (Partie maPartie) {

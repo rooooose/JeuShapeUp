@@ -49,90 +49,37 @@ public class StrategieJoueurReel implements StrategieJoueur {
 	 
 	 */
     
-	public void deplacerCarte(TapisDeJeu tapis) {
-    	
-    	int ligneCase;
-    	int colonneCase;
-    	System.out.println(tapis);
-    	System.out.println("Veuillez choisir une carte à déplacer :");
-    	
-    	do {
-    		ligneCase = choisirLigneCarte(tapis);
-        	colonneCase = choisirColonneCarte(tapis);
-        	
-        	if(!tapis.caseRemplie(ligneCase,colonneCase)) {
-        		System.out.println("Désolée, cette case est vide");
-        	}
-    	}while(!tapis.caseRemplie(ligneCase,colonneCase));
-    	
-    	Carte carteADeplacer = tapis.getContainer().get(ligneCase).get(colonneCase);
-    	tapis.setNbCartes(tapis.getNbCartes()-1);
-    	tapis.getContainer().get(ligneCase).set(colonneCase, null);
-    	
-    	System.out.println(tapis);
-    	System.out.println("Vous avez choisi de déplacer la carte " + carteADeplacer);
-//    	carteADeplacer.setEstPlacee(false);
-    	
-    	this.placerCarte(carteADeplacer, tapis);
-   	 
-//    	carteADeplacer.setEstPlacee(true);
-	}
+//	public void deplacerCarte(TapisDeJeu tapis) {
+//    	
+//    	int ligneCase;
+//    	int colonneCase;
+//    	System.out.println(tapis);
+//    	System.out.println("Veuillez choisir une carte à déplacer :");
+//    	
+//    	do {
+//    		ligneCase = choisirLigneCarte(tapis);
+//        	colonneCase = choisirColonneCarte(tapis);
+//        	
+//        	if(!tapis.caseRemplie(ligneCase,colonneCase)) {
+//        		System.out.println("Désolée, cette case est vide");
+//        	}
+//    	}while(!tapis.caseRemplie(ligneCase,colonneCase));
+//    	
+//    	Carte carteADeplacer = tapis.getContainer().get(ligneCase).get(colonneCase);
+//    	tapis.setNbCartes(tapis.getNbCartes()-1);
+//    	tapis.getContainer().get(ligneCase).set(colonneCase, null);
+//    	
+//    	System.out.println(tapis);
+//    	System.out.println("Vous avez choisi de déplacer la carte " + carteADeplacer);
+////    	carteADeplacer.setEstPlacee(false);
+//    	
+//    	this.placerCarte(carteADeplacer, tapis);
+//   	 
+////    	carteADeplacer.setEstPlacee(true);
+//	}
 
     
-    public void placerCarte(Carte carte, TapisDeJeu tapis) {
-		
-    	int ligneCase;
-    	int colonneCase;
-    	System.out.println(tapis);
-    	
-    	if(tapis.getNbCartes()>0) {
-    		System.out.println("Les cartes doivent être adjacentes.");
-    	}
-    	
-    	do {
-    		ligneCase = choisirLigneCarte(tapis);
-        	colonneCase = choisirColonneCarte(tapis);
-        	
-        	if(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase)) {
-        		System.out.print("Désolée, cette case n'est pas disponible" + "\n");
-        	}
-        	
-    	}while(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase));
-    	
-    	if(!tapis.caseRemplie(ligneCase,colonneCase)) {
-    			
-    			tapis.getContainer().get(ligneCase).set(colonneCase, carte);
-    			
-    			//on diminue le nombre de lignes vides
-//    			if(tapis.getContainer().get(ligneCase).isEmpty()) {
-//    				tapis.setNbLignesVides(tapis.getNbLignesVides()-1);
-//    			}
-    			
-    	} else if(tapis.caseRemplie(ligneCase,colonneCase)){
-    		
-    			System.out.println("DECALAGE POSSIBLE ");
-    		    tapis.decalerCartes(ligneCase, colonneCase);
-    		    
-    		    //pas obligé ?
-    		    //ligne.remove(colonneCase);
-
-    		    tapis.getContainer().get(ligneCase).set(colonneCase, carte);
-    			
-    			//on diminue le nombre de lignes vides
-//    			if(tapis.getContainer().get(ligneCase).isEmpty()) {
-//    				tapis.setNbLignesVides(tapis.getNbLignesVides()-1);
-//    			}
-    		    
-    	}
-
-    	System.out.println(tapis);
-    	tapis.setNbCartes(tapis.getNbCartes()+1);
-    	System.out.println("NB CARTES : " + tapis.getNbCartes());
-    	//carte.setEstPlacee(true); 
-    	
-    	//nbLignesVides FAUX
-    	//System.out.println(tapis.getNbLignesVides());
-    }
+    
     
 
     public Carte definirCarteAJouer(Joueur joueur, StrategieMode modeDeJeu) {
@@ -190,7 +137,7 @@ public class StrategieJoueurReel implements StrategieJoueur {
 	}
 
 	@Override
-	public boolean proposerDeplacement(TapisDeJeu tapis) {
+	public boolean proposerDeplacement(TapisDeJeu tapis, Joueur joueur) {
 		
 		Scanner scan = new Scanner (System.in);
     	char choix='p';
@@ -207,7 +154,7 @@ public class StrategieJoueurReel implements StrategieJoueur {
     	}while (choix!= 'o' && choix!= 'n');
         	
         if(choix == 'o') {
-        	this.deplacerCarte(tapis);
+        	joueur.deplacerCarte(tapis);
         	return true;
         } else return false;
     		
