@@ -79,7 +79,7 @@ public class StrategieVictoireEnnemie implements StrategieMode {
     		   
     		  
     		 
-    		  definirCarteVictoire( carteVictJoueur, joueurAssocie);
+    		  joueurAssocie.setCarteDeVictoire(carteVictJoueur);
     		 
     		  CarteVictAssociationJoueur.put(carteVictJoueur,joueurAssocie);
     		  
@@ -96,12 +96,6 @@ public class StrategieVictoireEnnemie implements StrategieMode {
     	return recupCarteJeu;    		
     	  		}
 
-
-	@Override
-	public void definirCarteVictoire(CarteDeVictoire carteVictoire, Joueur joueur) {
-		// TODO Auto-generated method stub
-		joueur.setCarteDeVictoire(carteVictoire);
-	}
 
 
 	@Override

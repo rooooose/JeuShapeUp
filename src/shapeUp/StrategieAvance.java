@@ -2,11 +2,13 @@ package shapeUp;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
@@ -118,13 +120,7 @@ public class StrategieAvance implements StrategieMode {
 	}
 	
 	
-	@Override
-	public void definirCarteVictoire(CarteDeVictoire carteVictoire, Joueur joueur) {
-		// TODO Auto-generated method stub
-
-		joueur.setCarteDeVictoire(carteVictoire);
-
-	}
+	
 
     public String toString() {
     	StringBuffer sb = new StringBuffer();
@@ -138,7 +134,9 @@ public class StrategieAvance implements StrategieMode {
 		
 		
 		System.out.println("\n" +"La partie est finie, place aux résultats ! :) "+ "\n");
+		
 		Iterator<Joueur> it = maPartie.getQueueJoueurs().iterator();
+		
 	
 			
 			while(it.hasNext()) {
@@ -148,15 +146,21 @@ public class StrategieAvance implements StrategieMode {
 	    		
 	    		CarteDeVictoire carteVictJoueur = new CarteDeVictoire (recupValeur.getCouleur(),recupValeur.getForme(),recupValeur.EstRemplie());
 	    		
-	    		this.definirCarteVictoire(carteVictJoueur, joueur);
+	    		joueur.setCarteDeVictoire(carteVictJoueur);
 	    		System.out.println("La carte de victoire de " +joueur.getNom()+ " est " +joueur.getCarteDeVictoire());
 	    		int score = maPartie.calculerScoreTotal(joueur);
 	    		System.out.println("Score total de " + joueur.getNom() + " : " + score);
-
+	    		
+	 
 	    		
 	    	}
+
+				
+			}
+			
+			
 
 	}
 
 
-}
+

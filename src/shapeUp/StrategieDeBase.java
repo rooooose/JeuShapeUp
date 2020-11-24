@@ -61,7 +61,7 @@ public class StrategieDeBase implements StrategieMode {
     		   
     		  
     		 
-    		  definirCarteVictoire( carteVictJoueur, joueurAssocie);
+    		  joueurAssocie.setCarteDeVictoire(carteVictJoueur);
     		 
     		  CarteVictAssociationJoueur.put(carteVictJoueur,joueurAssocie);
     		  
@@ -162,15 +162,6 @@ public class StrategieDeBase implements StrategieMode {
 	}
     	
 	
-	
-	@Override
-	public void definirCarteVictoire(CarteDeVictoire carteVictoire, Joueur joueur) {
-		// TODO Auto-generated method stub
-	    	joueur.setCarteDeVictoire(carteVictoire);
-	    	
-	}
-
-
 
     public void voirCarteVictoire(Partie maPartie, Joueur joueur) {
     	
