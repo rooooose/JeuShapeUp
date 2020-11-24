@@ -12,7 +12,5 @@ public interface StrategieMode {
     void voirCarteVictoire(Partie maPartie, Joueur joueur);
     
     Pioche creerLaPiocheDeLaPartie (Partie maPartie);
-    
-    int definirNbCartesJouables(Partie partie);
 
 }

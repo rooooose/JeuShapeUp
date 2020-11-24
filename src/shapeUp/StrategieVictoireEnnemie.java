@@ -114,7 +114,7 @@ public class StrategieVictoireEnnemie implements StrategieMode {
 		
 
 	    
-	    for (int nbreDeCartes = 0; nbreDeCartes < this.definirNbCartesJouables(maPartie); nbreDeCartes++) {
+	    for (int nbreDeCartes = 0; nbreDeCartes < maPartie.getNbCartesJouables(); nbreDeCartes++) {
 	    		
 	    	
 //	    	int arrayLength = recupCarteJeu.size(); 
@@ -153,10 +153,4 @@ public class StrategieVictoireEnnemie implements StrategieMode {
 		return sb.toString();
     }
 
-
-	@Override
-	public int definirNbCartesJouables(Partie partie) {
-		
-		return partie.getCarteDuJeu().size() - (partie.getQueueJoueurs().size()+1);
-	}
 }

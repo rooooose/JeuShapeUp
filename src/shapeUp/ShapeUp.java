@@ -205,7 +205,8 @@ public class ShapeUp {
 			while(!jeuShapeUp.maPartie.isEstFinie()) {
 				jeuShapeUp.maPartie.tourDeJeu();
 			}
-
+			System.out.println("Partie finie !"+"\n");
+			
 			Iterator<Joueur> it = jeuShapeUp.maPartie.getQueueJoueurs().iterator();
 			
 			if (jeuShapeUp.maPartie.getModeDeJeu() instanceof StrategieAvance) {
@@ -224,14 +225,7 @@ public class ShapeUp {
 
 		    		
 		    	}
-		    	
-		    	System.out.println("Partie finie !"+"\n");
-		    
-				
-				
-			}else {
-			System.out.println("Partie finie !"+"\n");
-			
+
 			}
 
 			
@@ -242,8 +236,6 @@ public class ShapeUp {
 	    		int score = jeuShapeUp.maPartie.calculerScoreTotal(joueur);
 	    		System.out.println("Score total de " + joueur.getNom() + " : " + score);
 	    	}
-			
-			
 		
 			
 	    }

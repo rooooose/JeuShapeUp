@@ -52,7 +52,7 @@ public class Joueur {
 			System.out.println(pioche);
 		}
 		
-    	if(tapis.getNbCartes()>1 && tapis.getNbCartes()<modeDeJeu.definirNbCartesJouables(partie)) {
+    	if(tapis.getNbCartes()>1 && tapis.getNbCartes()<partie.getNbCartesJouables()) {
     		
     		boolean deplacementFait = this.strategie.proposerDeplacement(tapis, this);
     		

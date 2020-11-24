@@ -85,7 +85,7 @@ public class StrategieAvance implements StrategieMode {
 //    	}
 //	    System.out.println(pioche);
 	    
-	    for (int nbreDeCartes = 0; nbreDeCartes <this.definirNbCartesJouables(maPartie)-(maPartie.getQueueJoueurs().size()*2); nbreDeCartes++) {
+	    for (int nbreDeCartes = 0; nbreDeCartes <maPartie.getNbCartesJouables()-(maPartie.getQueueJoueurs().size()*2); nbreDeCartes++) {
 	    		
 	    	
 	    	//int arrayLength = recupCarteJeu.size(); 
@@ -142,10 +142,5 @@ public class StrategieAvance implements StrategieMode {
 		return sb.toString();
     }
 
-
-	public int definirNbCartesJouables(Partie partie) {
-		
-		return partie.getCarteDuJeu().size() - (partie.getQueueJoueurs().size()+1);
-	}
 
 }

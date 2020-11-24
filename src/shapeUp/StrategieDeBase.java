@@ -97,7 +97,7 @@ public class StrategieDeBase implements StrategieMode {
 //    		pioche.add(it.next());
 //    	}
 //	    System.out.println(pioche);
-	    for (int nbreDeCartes = 0; nbreDeCartes < this.definirNbCartesJouables(maPartie); nbreDeCartes++) {
+	    for (int nbreDeCartes = 0; nbreDeCartes < maPartie.getNbCartesJouables(); nbreDeCartes++) {
 	    		
 	    	//int arrayLength = recupCarteJeu.size(); 
 	    	//int randomIndex = new Random().nextInt(arrayLength);
@@ -181,25 +181,5 @@ public class StrategieDeBase implements StrategieMode {
     	sb.append("Stratégie de base");
 		return sb.toString();
     }
-
-
-	@Override
-	public int definirNbCartesJouables(Partie partie) {
-
-		return partie.getCarteDuJeu().size() - (partie.getQueueJoueurs().size()+1);
-	}
-
-
-
-
-
-
-
-
-	
-
-
-
-
 
 }
