@@ -49,6 +49,7 @@ public class Joueur {
 			cartePiochee = this.strategie.piocherCarte(pioche);
 			this.getMainDuJoueur().add(cartePiochee);
 			System.out.println(cartePiochee);
+			System.out.println(pioche);
 		}
 		
     	if(tapis.getNbCartes()>1 && tapis.getNbCartes()<modeDeJeu.definirNbCartesJouables(partie)) {
@@ -175,7 +176,7 @@ public class Joueur {
     	tapis.setNbCartes(tapis.getNbCartes()-1);
     	tapis.getContainer().get(ligneCase).set(colonneCase, null);
     	
-    	System.out.println(tapis);
+    	//System.out.println(tapis);
     	System.out.println("Vous avez choisi de déplacer la carte " + carteADeplacer);
 //    	carteADeplacer.setEstPlacee(false);
     	
