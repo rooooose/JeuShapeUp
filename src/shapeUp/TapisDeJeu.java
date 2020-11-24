@@ -11,9 +11,15 @@ import java.util.Map;
 public class TapisDeJeu {
 	
     private int nbCartes;
-    private int nbLignesVides;
-    private boolean carteEnHaut;
+	private boolean decalVersBasPossible = false;
+	private boolean decalVersHautPossible = false;
+	private boolean decalVersDroitePossible = false;
+	private boolean decalVersGauchePossible = false;
+	
+	private boolean carteEnHaut;
 	private boolean carteEnBas;
+	private boolean carteGauche;
+	private boolean carteDroite;
 
 	public int getNbCartes() {
 		return nbCartes;
@@ -152,10 +158,16 @@ public class TapisDeJeu {
 	
 	public boolean decalagePossible(int lig, int col) {
 		
-		this.carteEnHaut = lig == 0;
-		this.carteEnBas = lig == this.getContainer().size()-1;
+		carteEnHaut = lig == 0;
+		carteEnBas = lig == this.getContainer().size()-1;
+		carteGauche = col == 0;
+		carteDroite = col == this.getContainer().get(lig).size()-1;
+		System.out.println("carteEnHaut " + carteEnHaut);
+
 		boolean premiereLigneVide = true;
 	    boolean derniereLigneVide = true;
+	    boolean premiereColVide = true;
+	    boolean derniereColVide = true;
 		// A FAIRE / POSSIBILITE DE CONSIDERER UNE CARTE EN BAS OU HAUT SI AU DESSUS OU EN DESSOUS DE 0
 		//il doit y avoir au moins 1 ligne en haut ou en bas des cartes présentes et des 1 en dessous ou dessus d'elles.
 		//boolean nbLignesVidesOk = this.getNbLignesVides()>0;
@@ -170,10 +182,21 @@ public class TapisDeJeu {
 		
 		for(int i=0; i<this.modele.length; i++) {
 			
+			if(premiereColVide) {
+				premiereColVide = !caseRemplie(i,0);
+			}
+			if(derniereColVide) {
+				derniereColVide = !caseRemplie(i,this.modele[i].length-1);
+			}
+			
 			for(int j=0; j<this.modele[i].length; j++) {
 				
-				premiereLigneVide = !caseRemplie(0,j);
-				derniereLigneVide = !caseRemplie(this.modele.length-1,j);
+				if(premiereLigneVide) {
+					premiereLigneVide = !caseRemplie(0,j);
+				}
+				if(derniereLigneVide) {
+					derniereLigneVide = !caseRemplie(this.modele.length-1,j);
+				}
 				
 				if(this.modele[i][j]==0) {
 					
@@ -199,15 +222,42 @@ public class TapisDeJeu {
 
 		}
 		
-		return ((carteEnHaut && (derniereLigneVide && carteVideSur0)) || (carteEnBas && (premiereLigneVide && carteVideSous0))) && this.caseRemplie(lig, col);
+//		if(carteEnHaut && derniereLigneVide && carteVideSur0 && this.caseRemplie(lig, col)) {
+//			System.out.println("decalVersBasPossible" + decalVersBasPossible);
+//			decalVersBasPossible = true;
+//			
+//		}
+//		
+//		if(carteEnBas && premiereLigneVide && carteVideSous0 && this.caseRemplie(lig, col)) {
+//			System.out.println("decalVersHautPossible" + decalVersHautPossible);
+//			decalVersHautPossible = true;
+//		}
+//		
+//		if(carteGauche && derniereColVide && carteVideGauche0 && this.caseRemplie(lig, col)){
+//			System.out.println("decalVersDroitePossible" + decalVersDroitePossible);
+//			decalVersDroitePossible = true;
+//		}
+//		
+//		if(carteDroite && premiereColVide && carteVideDroite0 && this.caseRemplie(lig, col)) {
+//			System.out.println("decalVersGauchePossible" + decalVersGauchePossible);
+//			decalVersGauchePossible = true;
+//		}
+		
+		return (carteEnHaut && derniereLigneVide && carteVideSur0 && this.caseRemplie(lig, col)) || 
+				(carteEnBas && premiereLigneVide && carteVideSous0 && this.caseRemplie(lig, col)) || 
+				(carteGauche && derniereColVide && carteVideGauche0 && this.caseRemplie(lig, col)) || 
+				(carteDroite && premiereColVide && carteVideDroite0 && this.caseRemplie(lig, col));
+				
+				
 	}
 	
 	public void decalerCartes(int lig, int col) {
 		
 		int derniereLigne = this.getContainer().size();
-		System.out.print("CARTE EN BAS " + carteEnBas);
-		System.out.print("CARTE EN HAUT " + carteEnHaut);
-		if(this.carteEnBas) {
+//		System.out.print("CARTE EN BAS " + carteEnBas);
+//		System.out.print("CARTE EN HAUT " + carteEnHaut);
+
+		if(this.carteEnHaut) {
 			//add à l'envers
 			// convertir container en array
 //			ArrayList<CarteJouable>[] arrayContainer = new ArrayList[this.getContainer().size()];
@@ -228,15 +278,12 @@ public class TapisDeJeu {
 			    this.getContainer().get(lig).add(null);
 			}
 	        
-			//System.out.print("CONTAINER TABLEAU : " + Arrays.toString(arrayContainer));
-			System.out.print("CONTAINER RECONVERTI : " + this.getContainer() + "\n");
-	        
-		} else if(this.carteEnHaut){
+		} else if(this.carteEnBas){
 			
 			//ajout d'une nouvelle ligne là où on veut ajouter une carte
 			ligne = new ArrayList<Carte>();
 			this.getContainer().add(lig,ligne);
-			System.out.print("AJOUT DE LIGNE FAIT \n");
+			//System.out.print("AJOUT DE LIGNE FAIT \n");
 			
 			//remplissage de la ligne avec null
 			for(int j=0; j<this.modele[lig].length; j++) {
@@ -244,7 +291,25 @@ public class TapisDeJeu {
 			}
 			//suppression de la ligne excédente
 			this.getContainer().remove(derniereLigne);
-			System.out.println("DERNIERE LIGNE SUPPRIMEE : " + derniereLigne);
+			//System.out.println("DERNIERE LIGNE SUPPRIMEE : " + derniereLigne);
+			
+		} else if(this.carteGauche){
+			
+			for(int i=0; i<this.modele.length; i++) {
+				
+				int derniereColonne = this.getContainer().get(i).size();
+				this.getContainer().get(i).add(col, null);
+				this.getContainer().get(i).remove(derniereColonne);
+			}
+			
+		} else if(this.carteDroite){
+			
+			for(int i=0; i<this.modele.length; i++) {
+				
+				this.getContainer().get(i).add(null);
+				this.getContainer().get(i).remove(0);
+			}
+			
 		}
 		
 	}
