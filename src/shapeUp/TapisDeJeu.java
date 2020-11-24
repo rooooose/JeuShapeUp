@@ -16,6 +16,16 @@ public class TapisDeJeu {
 	private boolean decalVersDroitePossible = false;
 	private boolean decalVersGauchePossible = false;
 	
+	private boolean premiereLigneVide = true;
+	private boolean derniereLigneVide = true;
+	private boolean premiereColVide = true;
+	private boolean derniereColVide = true;
+	
+	private boolean carteVideSur0 = true;
+	private boolean carteVideSous0 = true;
+	private boolean carteVideGauche0 = true;
+	private boolean carteVideDroite0 = true;
+	
 	private boolean carteEnHaut;
 	private boolean carteEnBas;
 	private boolean carteGauche;
@@ -162,12 +172,9 @@ public class TapisDeJeu {
 		carteEnBas = lig == this.getContainer().size()-1;
 		carteGauche = col == 0;
 		carteDroite = col == this.getContainer().get(lig).size()-1;
-		System.out.println("carteEnHaut " + carteEnHaut);
+		//System.out.println("carteEnHaut " + carteEnHaut);
 
-		boolean premiereLigneVide = true;
-	    boolean derniereLigneVide = true;
-	    boolean premiereColVide = true;
-	    boolean derniereColVide = true;
+		
 		// A FAIRE / POSSIBILITE DE CONSIDERER UNE CARTE EN BAS OU HAUT SI AU DESSUS OU EN DESSOUS DE 0
 		//il doit y avoir au moins 1 ligne en haut ou en bas des cartes présentes et des 1 en dessous ou dessus d'elles.
 		//boolean nbLignesVidesOk = this.getNbLignesVides()>0;
@@ -175,10 +182,7 @@ public class TapisDeJeu {
 		// si case l+1 == 0 et case == null
 		//==> parcourir matrice pour trouver toutes les cases dont l+1 == 0
 		//==> verifier que ces cases (lig col) ne sont pas remplies
-		boolean carteVideSur0 = true;
-		boolean carteVideSous0 = true;
-		boolean carteVideGauche0 = true;
-		boolean carteVideDroite0 = true;
+		
 		
 		for(int i=0; i<this.modele.length; i++) {
 			
@@ -257,15 +261,7 @@ public class TapisDeJeu {
 //		System.out.print("CARTE EN BAS " + carteEnBas);
 //		System.out.print("CARTE EN HAUT " + carteEnHaut);
 
-		if(this.carteEnHaut) {
-			//add à l'envers
-			// convertir container en array
-//			ArrayList<CarteJouable>[] arrayContainer = new ArrayList[this.getContainer().size()];
-//			arrayContainer = this.getContainer().toArray(arrayContainer);
-//	        System.arraycopy(arrayContainer, lig, arrayContainer, lig-1, 1);
-//	        ArrayList<ArrayList<CarteJouable>> newContainer = new ArrayList<ArrayList<CarteJouable>>();
-//	        Collections.addAll(newContainer,arrayContainer);
-//	        this.setContainer(newContainer);
+		if(carteEnHaut) {
 	        
 	        ligne = new ArrayList<Carte>();
 			this.getContainer().add(ligne);
@@ -278,7 +274,7 @@ public class TapisDeJeu {
 			    this.getContainer().get(lig).add(null);
 			}
 	        
-		} else if(this.carteEnBas){
+		} else if(carteEnBas){
 			
 			//ajout d'une nouvelle ligne là où on veut ajouter une carte
 			ligne = new ArrayList<Carte>();
@@ -293,7 +289,7 @@ public class TapisDeJeu {
 			this.getContainer().remove(derniereLigne);
 			//System.out.println("DERNIERE LIGNE SUPPRIMEE : " + derniereLigne);
 			
-		} else if(this.carteGauche){
+		} else if(carteGauche){
 			
 			for(int i=0; i<this.modele.length; i++) {
 				
@@ -302,7 +298,7 @@ public class TapisDeJeu {
 				this.getContainer().get(i).remove(derniereColonne);
 			}
 			
-		} else if(this.carteDroite){
+		} else if(carteDroite){
 			
 			for(int i=0; i<this.modele.length; i++) {
 				

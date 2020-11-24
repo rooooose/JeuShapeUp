@@ -116,7 +116,7 @@ public class Joueur {
         	}
         	//if(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase))
         	
-    	}while(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase));
+    	}while(!tapis.placementNormalPossible(ligneCase,colonneCase));
     	//while(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase));
     	// || (ligneCase == lig && colonneCase == col)
     	
@@ -180,13 +180,13 @@ public class Joueur {
         		System.out.print("Désolée, cette case n'est pas disponible" + "\n");
         	}
         	//if(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase);
-    	}while(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase));
+    	}while(!tapis.placementNormalPossible(ligneCase,colonneCase));
     	//while(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase));
     	
 //    	System.out.println("PLACEMENT NORMAL POSSIBLE : " + tapis.placementNormalPossible(ligneCase,colonneCase));
 //		System.out.println("DECALAGE POSSIBLE : " + tapis.decalagePossible(ligneCase, colonneCase));
 		
-    	if(!tapis.caseRemplie(ligneCase,colonneCase) && tapis.placementNormalPossible(ligneCase,colonneCase)) {
+    	if(!tapis.caseRemplie(ligneCase,colonneCase)) {
     			
     			tapis.getContainer().get(ligneCase).set(colonneCase, carteAJouer);
     			
@@ -195,7 +195,7 @@ public class Joueur {
 //    				tapis.setNbLignesVides(tapis.getNbLignesVides()-1);
 //    			}
     			
-    	} else if(tapis.caseRemplie(ligneCase,colonneCase) && tapis.decalagePossible(ligneCase, colonneCase)){
+    	} else if(tapis.caseRemplie(ligneCase,colonneCase)){
     		
     			System.out.println("DECALAGE POSSIBLE");
     		    tapis.decalerCartes(ligneCase, colonneCase);
