@@ -123,39 +123,40 @@ public class StrategieDeBase implements StrategieMode {
 	    	
 	    }
 				
-		//}else if (nbreDeJoueurs == 3) {
-			
-//			
-//	    	for (int nbreDeCartes = 0; nbreDeCartes < 14; nbreDeCartes++) {
-//	    		
-//		    	
-//	    	int arrayLength = recupCarteJeu.size(); 
-//	    	int randomIndex = new Random().nextInt(arrayLength);
-//	    	
-//	    	while (pioche.contains(recupCarteJeu.get(randomIndex)))
-//	    		
-//	    	{
-//	        	arrayLength = 0; 
-//	        	randomIndex = 0; 
-//	        	arrayLength = recupCarteJeu.size(); 
-//	        	randomIndex = new Random().nextInt(arrayLength);
-//	    	}
-//	    	
-//	    	
-//	    	pioche.add(recupCarteJeu.get(randomIndex)); 
-//	    	
-//	    	arrayLength = 0; 
-//	    	randomIndex = 0; 
-//	    	
-//	    	
-//	    	nombreDeCartes = nbreDeCartes;
-//	    	}
-//			
-//		}
+
 	    System.out.println(pioche);
 		Pioche piocheDeLaPartie = new Pioche (pioche);	
 		piocheDeLaPartie.compterNbCartes(nombreDeCartes);
 		return piocheDeLaPartie;
+		//}else if (nbreDeJoueurs == 3) {
+		
+//		
+//    	for (int nbreDeCartes = 0; nbreDeCartes < 14; nbreDeCartes++) {
+//    		
+//	    	
+//    	int arrayLength = recupCarteJeu.size(); 
+//    	int randomIndex = new Random().nextInt(arrayLength);
+//    	
+//    	while (pioche.contains(recupCarteJeu.get(randomIndex)))
+//    		
+//    	{
+//        	arrayLength = 0; 
+//        	randomIndex = 0; 
+//        	arrayLength = recupCarteJeu.size(); 
+//        	randomIndex = new Random().nextInt(arrayLength);
+//    	}
+//    	
+//    	
+//    	pioche.add(recupCarteJeu.get(randomIndex)); 
+//    	
+//    	arrayLength = 0; 
+//    	randomIndex = 0; 
+//    	
+//    	
+//    	nombreDeCartes = nbreDeCartes;
+//    	}
+//		
+//	}
 	}
     	
 	

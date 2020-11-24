@@ -37,7 +37,7 @@ public class StrategieAvance implements StrategieMode {
 		  //Paramètres pour récupérer une carte au hasard
 		
 			  int longueurListeCarte = (recupCarteJeu.size())-(3*(maPartie.getQueueJoueurs().size()));
-			  System.out.println("LongueurListeCarte : " + longueurListeCarte);
+			  //System.out.println("LongueurListeCarte : " + longueurListeCarte);
 	  		  int randomIndex = new Random().nextInt(longueurListeCarte);
     		  //Carte carteRecup = recupCarteJeu.get(randomIndex);
     		  //System.out.println(carteRecup);
@@ -85,11 +85,11 @@ public class StrategieAvance implements StrategieMode {
 //    	}
 //	    System.out.println(pioche);
 	    
-	    for (int nbreDeCartes = 0; nbreDeCartes < (15 - (nbreDeJoueurs*2)); nbreDeCartes++) {
+	    for (int nbreDeCartes = 0; nbreDeCartes <this.definirNbCartesJouables(maPartie)-(maPartie.getQueueJoueurs().size()*2); nbreDeCartes++) {
 	    		
 	    	
-	    	int arrayLength = recupCarteJeu.size(); 
-	    	int randomIndex = new Random().nextInt(arrayLength);
+	    	//int arrayLength = recupCarteJeu.size(); 
+	    	//int randomIndex = new Random().nextInt(arrayLength);
 	    	
 	    	/*while (pioche.contains(recupCarteJeu.get(randomIndex)))
 	    		
@@ -100,10 +100,10 @@ public class StrategieAvance implements StrategieMode {
 	        	randomIndex = new Random().nextInt(arrayLength);
 	    	}*/
 	    	
-	    	pioche.add(recupCarteJeu.remove(randomIndex));
+	    	pioche.add(recupCarteJeu.get(nbreDeCartes));
 	    	//recupCarteJeu.remove((randomIndex));
-	    	arrayLength = 0; 
-	    	randomIndex = 0; 
+	    	//arrayLength = 0; 
+	    	//randomIndex = 0; 
 	    	
 	    	
 	    	nombreDeCartes = nbreDeCartes;
@@ -145,7 +145,7 @@ public class StrategieAvance implements StrategieMode {
 
 	public int definirNbCartesJouables(Partie partie) {
 		
-		return partie.getCarteDuJeu().size() - (partie.getQueueJoueurs().size()*2);
+		return partie.getCarteDuJeu().size() - (partie.getQueueJoueurs().size()+1);
 	}
 
 }
