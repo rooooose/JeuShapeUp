@@ -49,7 +49,7 @@ public class Joueur {
 			cartePiochee = this.strategie.piocherCarte(pioche);
 			this.getMainDuJoueur().add(cartePiochee);
 			System.out.println(cartePiochee);
-			System.out.println(pioche);
+			//System.out.println(pioche);
 		}
 		
     	if(tapis.getNbCartes()>1 && tapis.getNbCartes()<partie.getNbCartesJouables()) {

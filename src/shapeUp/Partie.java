@@ -116,7 +116,7 @@ public class Partie implements Visitable {
 		this.créerLesCartes();
 		this.setEstFinie(false);
 		this.setNbCartesJouables(this.getCarteDuJeu().size() - (this.getQueueJoueurs().size()+1));
-		System.out.println(this.nbCartesJouables);
+		//System.out.println(this.nbCartesJouables);
 		
 		//conversion map joueurs en Queue
 //		Collection<Joueur> valeursMapJoueurs = new LinkedList<Joueur>();

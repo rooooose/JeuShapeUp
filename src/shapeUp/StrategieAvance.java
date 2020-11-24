@@ -76,7 +76,7 @@ public class StrategieAvance implements StrategieMode {
 		
 		List<Carte> recupCarteJeu = this.distribuerCartes(maPartie);
     	//Collections.shuffle(recupCarteJeu);
-    	System.out.println("Cartes pour pioche : " + recupCarteJeu);
+    	//System.out.println("Cartes pour pioche : " + recupCarteJeu);
     	
 //    	ListIterator<Carte> it = recupCarteJeu.listIterator();
 //    	while(it.hasNext()) {

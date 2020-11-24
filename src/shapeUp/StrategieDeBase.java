@@ -124,7 +124,7 @@ public class StrategieDeBase implements StrategieMode {
 	    }
 				
 
-	    System.out.println(pioche);
+	    //System.out.println(pioche);
 		Pioche piocheDeLaPartie = new Pioche (pioche);	
 		piocheDeLaPartie.compterNbCartes(nombreDeCartes);
 		return piocheDeLaPartie;
