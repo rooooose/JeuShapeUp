@@ -195,9 +195,9 @@ public class Joueur {
 //    				tapis.setNbLignesVides(tapis.getNbLignesVides()-1);
 //    			}
     			
-    	} else if(tapis.caseRemplie(ligneCase,colonneCase)){
+    	} else if(tapis.caseRemplie(ligneCase,colonneCase) && tapis.decalagePossible(ligneCase, colonneCase)){
     		
-    			System.out.println("DECALAGE POSSIBLE");
+    			System.out.println("Décalage du tapis...");
     			
     		    tapis.decalerCartes(ligneCase, colonneCase);
     		    
