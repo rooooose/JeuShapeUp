@@ -114,36 +114,18 @@ public class Joueur {
         	if(ligneCase == lig && colonneCase == col) {
         		System.out.print("La carte était déjà placée ici" + "\n");
         	}
-        	//if(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase))
         	
     	}while((!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase)) || (ligneCase == lig && colonneCase == col));
-    	//while(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase));
-    	// || (ligneCase == lig && colonneCase == col)
     	
     	if(!tapis.caseRemplie(ligneCase,colonneCase)) {
     			
     			tapis.getContainer().get(ligneCase).set(colonneCase, carteAJouer);
     			
-    			//on diminue le nombre de lignes vides
-//    			if(tapis.getContainer().get(ligneCase).isEmpty()) {
-//    				tapis.setNbLignesVides(tapis.getNbLignesVides()-1);
-//    			}
-    			
     	} else if(tapis.caseRemplie(ligneCase,colonneCase) && tapis.decalagePossible(ligneCase, colonneCase)){
     		
-    			System.out.println("DECALAGE POSSIBLE ");
+    			System.out.println("Décalage du tapis...");
     		    tapis.decalerCartes(ligneCase, colonneCase);
-    		    
-    		    //pas obligé ?
-    		    //ligne.remove(colonneCase);
-
     		    tapis.getContainer().get(ligneCase).set(colonneCase, carteAJouer);
-    			
-    			//on diminue le nombre de lignes vides
-//    			if(tapis.getContainer().get(ligneCase).isEmpty()) {
-//    				tapis.setNbLignesVides(tapis.getNbLignesVides()-1);
-//    			}
-    		    
     	}
 
     	System.out.println(tapis);
@@ -179,43 +161,24 @@ public class Joueur {
         	if(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase)) {
         		System.out.print("Désolée, cette case n'est pas disponible" + "\n");
         	}
-        	//if(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase);
+        	
     	}while(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase));
-    	//while(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase));
-    	
-//    	System.out.println("PLACEMENT NORMAL POSSIBLE : " + tapis.placementNormalPossible(ligneCase,colonneCase));
-//		System.out.println("DECALAGE POSSIBLE : " + tapis.decalagePossible(ligneCase, colonneCase));
-		
+
     	if(!tapis.caseRemplie(ligneCase,colonneCase)) {
     			
-    			tapis.getContainer().get(ligneCase).set(colonneCase, carteAJouer);
-    			
-    			//on diminue le nombre de lignes vides
-//    			if(tapis.getContainer().get(ligneCase).isEmpty()) {
-//    				tapis.setNbLignesVides(tapis.getNbLignesVides()-1);
-//    			}
+    		tapis.getContainer().get(ligneCase).set(colonneCase, carteAJouer);
     			
     	} else if(tapis.caseRemplie(ligneCase,colonneCase) && tapis.decalagePossible(ligneCase, colonneCase)){
     		
     			System.out.println("Décalage du tapis...");
-    			
     		    tapis.decalerCartes(ligneCase, colonneCase);
-    		    
-    		    //pas obligé ?
-    		    //ligne.remove(colonneCase);
-
     		    tapis.getContainer().get(ligneCase).set(colonneCase, carteAJouer);
-
-    		    
     	}
 
     	System.out.println(tapis);
     	tapis.setNbCartes(tapis.getNbCartes()+1);
     	System.out.println("NB CARTES : " + tapis.getNbCartes());
-    	//carte.setEstPlacee(true); 
-    	
-    	//nbLignesVides FAUX
-    	//System.out.println(tapis.getNbLignesVides());
+
     }
 	
 	
@@ -238,14 +201,10 @@ public class Joueur {
     	Carte carteADeplacer = tapis.getContainer().get(ligneCase).get(colonneCase);
     	tapis.setNbCartes(tapis.getNbCartes()-1);
     	tapis.getContainer().get(ligneCase).set(colonneCase, null);
-    	
-    	//System.out.println(tapis);
+
     	System.out.println("Vous avez choisi de déplacer la carte " + carteADeplacer);
-//    	carteADeplacer.setEstPlacee(false);
     	
     	this.placerCarte(ligneCase, colonneCase, carteADeplacer, tapis);
-   	 
-//    	carteADeplacer.setEstPlacee(true);
-	}
-//	
+
+	}	
 }

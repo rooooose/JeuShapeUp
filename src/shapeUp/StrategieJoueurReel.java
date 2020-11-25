@@ -119,8 +119,12 @@ public class StrategieJoueurReel implements StrategieJoueur {
 		
 		Scanner scan = new Scanner (System.in);
 		int nb;
-        System.out.println("Veuillez choisir une ligne parmi celles disponibles :");
-	    nb = scan.nextInt();
+		do {
+			System.out.println("Veuillez choisir une ligne parmi celles disponibles :");
+		    nb = scan.nextInt();
+		    
+		}while(nb >= tapis.getContainer().size());
+        
 
         return nb;
 	}
@@ -130,8 +134,12 @@ public class StrategieJoueurReel implements StrategieJoueur {
 		
 		Scanner scan = new Scanner (System.in);
 		int nb;
-        System.out.println("Veuillez choisir une colonne parmi celles disponibles :");
-	    nb = scan.nextInt();
+		
+		do {
+			System.out.println("Veuillez choisir une colonne parmi celles disponibles :");
+		    nb = scan.nextInt();
+		    
+		}while(nb >= tapis.getContainer().get(0).size());
 
         return nb;
 	}
