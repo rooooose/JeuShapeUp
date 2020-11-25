@@ -123,24 +123,6 @@ public class Partie implements Visitable {
 //		valeursMapJoueurs = this.getListeJoueurs().values();
 //		queueJoueurs.addAll(valeursMapJoueurs);
 		
-		//System.out.print(queueJoueurs);
-		
-//		Carte carteTest = new CarteJouable(CouleurType.BLEU, FormeCarte.CERCLE, false);
-//		CarteJouable c = (CarteJouable) carteTest;
-//		Carte carteTest1 = new CarteJouable(CouleurType.ROUGE, FormeCarte.CERCLE, false);
-//		CarteJouable c1 = (CarteJouable) carteTest1;
-//		listeJoueurs.get("1").strategie.placerCarte(4, 2, c1, tapisDeJeu);
-//		listeJoueurs.get("1").strategie.placerCarte(4, 2, c, tapisDeJeu);
-//		listeJoueurs.get("1").strategie.placerCarte(4, 2, c, tapisDeJeu);
-//		listeJoueurs.get("1").strategie.placerCarte(4, 2, c, tapisDeJeu);
-//		listeJoueurs.get("1").strategie.placerCarte(4, 2, c, tapisDeJeu);
-		
-//		listeJoueurs.get("1").strategie.placerCarte(0, 2, c1, tapisDeJeu);
-//		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
-//		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
-//		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
-//		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
-//		listeJoueurs.get("1").strategie.placerCarte(0, 2, c, tapisDeJeu);
 		this.utiliserMode(this.modeDeJeu);
 
 	}
@@ -149,53 +131,63 @@ public class Partie implements Visitable {
 	
 	public void créerLesCartes() {
 		
-		//Création des cartes cercles vides
-		Carte carte1 = new Carte(CouleurType.BLEU, FormeCarte.CERCLE, false);
-		carteDuJeu.add(carte1);
-		Carte carte2 = new Carte(CouleurType.VERT, FormeCarte.CERCLE, false);
-		carteDuJeu.add(carte2);
-		Carte carte3 = new Carte(CouleurType.ROUGE, FormeCarte.CERCLE, false);
-		carteDuJeu.add(carte3);
+		for(CouleurType couleur : CouleurType.values()) {
+			
+			for(FormeCarte forme : FormeCarte.values()) {
+				Carte carteVide = new Carte(couleur, forme, false);
+				carteDuJeu.add(carteVide);
+				Carte carteRemplie = new Carte(couleur, forme, true);
+				carteDuJeu.add(carteRemplie);
+			}
+		}
 		
-		//Création des cartes carrées vides
-		Carte carte4 = new Carte(CouleurType.BLEU, FormeCarte.CARRE, false);
-		carteDuJeu.add(carte4);
-		Carte carte5 = new Carte(CouleurType.VERT, FormeCarte.CARRE, false);
-		carteDuJeu.add(carte5);
-		Carte carte6 = new Carte(CouleurType.ROUGE, FormeCarte.CARRE, false);
-		carteDuJeu.add(carte6);
-		
-		//Création des cartes triangulaires vides
-		Carte carte7 = new Carte(CouleurType.BLEU, FormeCarte.TRIANGLE, false);
-		carteDuJeu.add(carte7);
-		Carte carte8 = new Carte(CouleurType.VERT, FormeCarte.TRIANGLE, false);
-		carteDuJeu.add(carte8);
-		Carte carte9 = new Carte(CouleurType.ROUGE, FormeCarte.TRIANGLE, false);
-		carteDuJeu.add(carte9);
-		
-		//Création des cartes cercles remplies
-		Carte carte10 = new Carte(CouleurType.BLEU, FormeCarte.CERCLE, true);
-		carteDuJeu.add(carte10);
-		Carte carte11 = new Carte(CouleurType.VERT, FormeCarte.CERCLE, true);
-		carteDuJeu.add(carte11);
-		Carte carte12 = new Carte(CouleurType.ROUGE, FormeCarte.CERCLE, true);
-		carteDuJeu.add(carte12);
-		
-		//Création des cartes carrées remplies
-		Carte carte13 = new Carte(CouleurType.BLEU, FormeCarte.CARRE, true);
-		carteDuJeu.add(carte13);
-		Carte carte14 = new Carte(CouleurType.VERT, FormeCarte.CARRE, true);
-		carteDuJeu.add(carte14);
-		Carte carte15 = new Carte(CouleurType.ROUGE, FormeCarte.CARRE, true);
-		carteDuJeu.add(carte15);
-		
-		//Création des cartes triangulaires remplies
-		Carte carte16 = new Carte(CouleurType.BLEU, FormeCarte.TRIANGLE, true);
-		carteDuJeu.add(carte16);
-		Carte carte17 = new Carte(CouleurType.VERT, FormeCarte.TRIANGLE, true);
-		carteDuJeu.add(carte17);
-		Carte carte18 = new Carte(CouleurType.ROUGE, FormeCarte.TRIANGLE, true);
-		carteDuJeu.add(carte18);
+//		//Création des cartes cercles vides
+//		Carte carte1 = new Carte(CouleurType.BLEU, FormeCarte.CERCLE, false);
+//		carteDuJeu.add(carte1);
+//		Carte carte2 = new Carte(CouleurType.VERT, FormeCarte.CERCLE, false);
+//		carteDuJeu.add(carte2);
+//		Carte carte3 = new Carte(CouleurType.ROUGE, FormeCarte.CERCLE, false);
+//		carteDuJeu.add(carte3);
+//		
+//		//Création des cartes carrées vides
+//		Carte carte4 = new Carte(CouleurType.BLEU, FormeCarte.CARRE, false);
+//		carteDuJeu.add(carte4);
+//		Carte carte5 = new Carte(CouleurType.VERT, FormeCarte.CARRE, false);
+//		carteDuJeu.add(carte5);
+//		Carte carte6 = new Carte(CouleurType.ROUGE, FormeCarte.CARRE, false);
+//		carteDuJeu.add(carte6);
+//		
+//		//Création des cartes triangulaires vides
+//		Carte carte7 = new Carte(CouleurType.BLEU, FormeCarte.TRIANGLE, false);
+//		carteDuJeu.add(carte7);
+//		Carte carte8 = new Carte(CouleurType.VERT, FormeCarte.TRIANGLE, false);
+//		carteDuJeu.add(carte8);
+//		Carte carte9 = new Carte(CouleurType.ROUGE, FormeCarte.TRIANGLE, false);
+//		carteDuJeu.add(carte9);
+//		
+//		//Création des cartes cercles remplies
+//		Carte carte10 = new Carte(CouleurType.BLEU, FormeCarte.CERCLE, true);
+//		carteDuJeu.add(carte10);
+//		Carte carte11 = new Carte(CouleurType.VERT, FormeCarte.CERCLE, true);
+//		carteDuJeu.add(carte11);
+//		Carte carte12 = new Carte(CouleurType.ROUGE, FormeCarte.CERCLE, true);
+//		carteDuJeu.add(carte12);
+//		
+//		//Création des cartes carrées remplies
+//		Carte carte13 = new Carte(CouleurType.BLEU, FormeCarte.CARRE, true);
+//		carteDuJeu.add(carte13);
+//		Carte carte14 = new Carte(CouleurType.VERT, FormeCarte.CARRE, true);
+//		carteDuJeu.add(carte14);
+//		Carte carte15 = new Carte(CouleurType.ROUGE, FormeCarte.CARRE, true);
+//		carteDuJeu.add(carte15);
+//		
+//		//Création des cartes triangulaires remplies
+//		Carte carte16 = new Carte(CouleurType.BLEU, FormeCarte.TRIANGLE, true);
+//		carteDuJeu.add(carte16);
+//		Carte carte17 = new Carte(CouleurType.VERT, FormeCarte.TRIANGLE, true);
+//		carteDuJeu.add(carte17);
+//		Carte carte18 = new Carte(CouleurType.ROUGE, FormeCarte.TRIANGLE, true);
+//		carteDuJeu.add(carte18);
 		
 		/*Iterator<Carte> testIterator = carteDuJeu.iterator(); // Boucle de test pour vérifier la bonne création des cartes
 		
