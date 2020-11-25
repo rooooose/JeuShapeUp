@@ -29,7 +29,7 @@
 			//On récupère les cartes du jeu (toutes les cartes)
 			List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
 	    	recupCarteJeu.addAll(maPartie.getCarteDuJeu()); 
-	    	System.out.println("Cartes pour distribution : " + recupCarteJeu);
+	    	//System.out.println("Cartes pour distribution : " + recupCarteJeu);
 	    	
 	    	
 			while(iteratorRecupJoueurs.hasNext())  {
