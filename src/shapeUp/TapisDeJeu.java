@@ -168,10 +168,10 @@ public class TapisDeJeu {
 	
 	public boolean decalagePossible(int lig, int col) {
 		
-		carteEnHaut = (lig == 0);
-		carteEnBas = lig == this.getContainer().size()-1;
-		carteGauche = col == 0;
-		carteDroite = col == this.getContainer().get(lig).size()-1;
+		carteEnHaut = (lig == 0) || (this.modele[lig-1][col]==0);
+		carteEnBas = (lig == this.getContainer().size()-1) || (this.modele[lig+1][col]==0);
+		carteGauche = (col == 0) || (this.modele[lig][col-1]==0);
+		carteDroite = (col == this.getContainer().get(lig).size()-1) || (this.modele[lig][col+1]==0);
 		
 		carteVideSur0 = true;
 		carteVideSous0 = true;
