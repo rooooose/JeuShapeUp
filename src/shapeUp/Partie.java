@@ -228,7 +228,7 @@ public class Partie implements Visitable {
 		Joueur joueurActif = queueJoueurs.peek();
 		//CarteJouable carteJoueur = (CarteJouable) joueurActif.getMainDuJoueur();
 		
-		System.out.println("C'est au tour de " + joueurActif.getNom());
+		System.out.println("\n"+"***** C'est au tour de " + joueurActif.getNom()+" *****");
 
 		
 		queueJoueurs.peek().jouer(this, this.getTapisDeJeu(), this.getPioche(), this.getModeDeJeu());
