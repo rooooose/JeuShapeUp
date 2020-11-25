@@ -116,7 +116,7 @@ public class Joueur {
         	}
         	//if(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase))
         	
-    	}while(!tapis.placementNormalPossible(ligneCase,colonneCase));
+    	}while((!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase)) || (ligneCase == lig && colonneCase == col));
     	//while(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase));
     	// || (ligneCase == lig && colonneCase == col)
     	
@@ -180,7 +180,7 @@ public class Joueur {
         		System.out.print("Désolée, cette case n'est pas disponible" + "\n");
         	}
         	//if(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase);
-    	}while(!tapis.placementNormalPossible(ligneCase,colonneCase));
+    	}while(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase));
     	//while(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase));
     	
 //    	System.out.println("PLACEMENT NORMAL POSSIBLE : " + tapis.placementNormalPossible(ligneCase,colonneCase));
@@ -198,6 +198,7 @@ public class Joueur {
     	} else if(tapis.caseRemplie(ligneCase,colonneCase)){
     		
     			System.out.println("DECALAGE POSSIBLE");
+    			
     		    tapis.decalerCartes(ligneCase, colonneCase);
     		    
     		    //pas obligé ?
