@@ -247,6 +247,5 @@ public class Joueur {
    	 
 //    	carteADeplacer.setEstPlacee(true);
 	}
-	
 //	
 }

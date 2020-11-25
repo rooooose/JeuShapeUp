@@ -27,14 +27,12 @@ public class Partie implements Visitable {
 		this.pioche = pioche;
 	}
 
-	//LISTE
 	private VisiteurScore scoreForme = new ScoreForme();
 	private VisiteurScore scoreCouleur = new ScoreCouleur();
 	private VisiteurScore scoreRemplissage = new ScoreRemplissage();
 
 
-	//private Queue<Joueur> listeJoueurs  = new LinkedList<Joueur> ();
-	private Map<String,Joueur> listeJoueurs  = new HashMap<String,Joueur> ();
+//	private Map<String,Joueur> listeJoueurs  = new HashMap<String,Joueur> ();
 	private Queue<Joueur> queueJoueurs = new LinkedList<Joueur>();
 	private Map<CarteDeVictoire,Joueur> CarteVictAssociationJoueur;
 	private TapisDeJeu tapisDeJeu;
@@ -249,15 +247,6 @@ public class Partie implements Visitable {
     	//mode.distribuerCartes(this);
     	this.pioche = mode.creerLaPiocheDeLaPartie(this);
     }
-    
-    
-
-//    public Pioche ;
-//
-//    public void utiliserMode(StrategieMode mode) {
-//    mode.creerLaPiocheDeLaPartie(maPartie) = this.pioche;
-//    
-//    }
 
     public int calculerScoreTotal(Joueur joueur) {
 
@@ -265,8 +254,33 @@ public class Partie implements Visitable {
     	return scoreTotal;
     }
 
-//    public Joueur definirGagnant() {
-//    }
+    public void definirGagnant() {
+    	
+    	Joueur gagnant = null;
+    	boolean egalite = true;
+    	Iterator<Joueur> it = queueJoueurs.iterator();
+    	
+    	while(it.hasNext()) {
+    		Joueur joueur = it.next();
+    		
+    		if(gagnant == null) {
+    			gagnant = joueur;
+    			
+    		}else if(this.calculerScoreTotal(gagnant) < this.calculerScoreTotal(joueur)) {
+    			gagnant = joueur;
+    			egalite = false;
+    		} else if(this.calculerScoreTotal(gagnant) > this.calculerScoreTotal(joueur)) {
+    			egalite = false;
+    		}
+    	}
+    	if(!egalite) {
+    		System.out.println("Le gagnant est : "+ gagnant.getNom() + " !");
+    	} else {
+    		System.out.println("Egalité !");
+    	}
+		
+    	
+    }
 //
 //    public void controlerPlacementCarte(CarteJouable carte) {
 //    }

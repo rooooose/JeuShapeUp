@@ -191,6 +191,7 @@ public class StrategieDeBase implements StrategieMode {
     		System.out.println("Score total de " + joueur.getNom() + " : " + score);
     	}
 		
+		maPartie.definirGagnant();
 	}
 
 }
