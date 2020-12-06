@@ -1,7 +1,16 @@
 package shapeUp;
 
 
-
+/**
+ * 
+ * La classe Carte représente une carte du jeu ShapeUp. 
+ * A chaque carte sont associés une couleur, une forme et un remplissage (ou absence de remplissage).
+ * Une carte peut etre traitée de différentes manières selon son statut : Carte de Victoire, Carte Jouable ou Carte Cachée
+ * @see StrategieMode
+ *
+ *@author Mathéa Z, Shir F
+ *@version 1.1
+ */
 public class Carte {
 	
 	//private static int nbCartes;

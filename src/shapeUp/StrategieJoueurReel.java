@@ -123,7 +123,13 @@ public class StrategieJoueurReel implements StrategieJoueur {
 			System.out.println("Veuillez choisir une ligne parmi celles disponibles :");
 		    nb = scan.nextInt();
 		    
-		}while(nb >= tapis.getContainer().size());
+		}while(nb < -1 && nb > tapis.getContainer().size());
+		
+		if(nb == -1) {
+			nb=0;
+		} else if(nb == tapis.getContainer().size()) {
+			nb = tapis.getContainer().size()-1;
+		}
         
 
         return nb;
@@ -139,7 +145,13 @@ public class StrategieJoueurReel implements StrategieJoueur {
 			System.out.println("Veuillez choisir une colonne parmi celles disponibles :");
 		    nb = scan.nextInt();
 		    
-		}while(nb >= tapis.getContainer().get(0).size());
+		}while(nb < -1 && nb > tapis.getContainer().get(0).size());
+		
+		if(nb == -1) {
+			nb = 0;
+		} else if(nb == tapis.getContainer().get(0).size()) {
+			nb = tapis.getContainer().get(0).size()-1;
+		}
 
         return nb;
 	}
