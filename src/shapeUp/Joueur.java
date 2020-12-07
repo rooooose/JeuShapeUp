@@ -26,12 +26,12 @@ public class Joueur {
     //public List<Carte>  = new ArrayList<Carte> ();
 	
 	
-	private CarteDeVictoire carteDeVictoire;
-    public CarteDeVictoire getCarteDeVictoire() {
+	private Carte carteDeVictoire;
+    public Carte getCarteDeVictoire() {
 		return carteDeVictoire;
 	}
 
-	public void setCarteDeVictoire(CarteDeVictoire carteDeVictoire) {
+	public void setCarteDeVictoire(Carte carteDeVictoire) {
 		this.carteDeVictoire = carteDeVictoire;
 	}
 	

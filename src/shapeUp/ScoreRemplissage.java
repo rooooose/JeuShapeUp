@@ -11,7 +11,7 @@ public class ScoreRemplissage implements VisiteurScore {
 	 * 
 	 */
 	
-    public int visiter(Partie partie, CarteDeVictoire carteVictoire) {
+    public int visiter(Partie partie, Carte carteVictoire) {
     	
     	partie.getTapisDeJeu().getContainer();
     	int scoreRemplissage = 0;

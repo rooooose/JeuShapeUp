@@ -20,7 +20,7 @@ public class StrategieDeBase implements StrategieMode {
 		
 		
 		Iterator<Joueur> iteratorRecupJoueurs = maPartie.getQueueJoueurs().iterator();
-		Map<CarteDeVictoire,Joueur> CarteVictAssociationJoueur = new HashMap <CarteDeVictoire, Joueur>();
+		
 		
 		
 		//On récupère les cartes du jeu (toutes les cartes)
@@ -51,11 +51,11 @@ public class StrategieDeBase implements StrategieMode {
     		  boolean recupRemplissage = recupCarteJeu.get(randomIndex).estRemplie;
     		  
     		  //On récupère la carte aléatoirement
-    		  Carte carteRecup = new CarteDeVictoire(recupCouleur, recupForme, recupRemplissage);
+    		  Carte carteRecup = new Carte(recupCouleur, recupForme, recupRemplissage);
     		  // On enlève la carte du jeu pour garantir l'unicité
     		  recupCarteJeu.remove((randomIndex)); 
     		  //On définit la carte récupérée comme une carte de victoire
-    		  CarteDeVictoire carteVictJoueur = (CarteDeVictoire) carteRecup;
+    		  Carte carteVictJoueur = carteRecup;
     		  
     		  //Récupérer les différents joueurs pour leur attribuer une carte 
     		   
@@ -63,7 +63,7 @@ public class StrategieDeBase implements StrategieMode {
     		 
     		  joueurAssocie.setCarteDeVictoire(carteVictJoueur);
     		 
-    		  CarteVictAssociationJoueur.put(carteVictJoueur,joueurAssocie);
+    		  
     		  
     		 
     		  
@@ -76,7 +76,7 @@ public class StrategieDeBase implements StrategieMode {
     		  
       	}
 
-		maPartie.setCarteVictAssociationJoueur(CarteVictAssociationJoueur);
+		
     	return recupCarteJeu;    		
     }
 

@@ -142,7 +142,7 @@
 		    	Joueur joueur = it.next();
 		    	Carte recupValeur = joueur.getMainDuJoueur().get(0);
 		    		
-		    	CarteDeVictoire carteVictJoueur = new CarteDeVictoire (recupValeur.getCouleur(),recupValeur.getForme(),recupValeur.EstRemplie());
+		    	Carte carteVictJoueur = new Carte (recupValeur.getCouleur(),recupValeur.getForme(),recupValeur.EstRemplie());
 		    		
 		    	joueur.setCarteDeVictoire(carteVictJoueur);
 		    	System.out.println("La carte de victoire de " +joueur.getNom()+ " est " +joueur.getCarteDeVictoire());

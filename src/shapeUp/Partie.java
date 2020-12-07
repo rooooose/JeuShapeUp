@@ -34,18 +34,18 @@ public class Partie implements Visitable {
 
 //	private Map<String,Joueur> listeJoueurs  = new HashMap<String,Joueur> ();
 	private Queue<Joueur> queueJoueurs = new LinkedList<Joueur>();
-	private Map<CarteDeVictoire,Joueur> CarteVictAssociationJoueur;
+	//private Map<CarteDeVictoire,Joueur> CarteVictAssociationJoueur;
 	private TapisDeJeu tapisDeJeu;
 	private boolean estFinie;
 	private int nbCartesJouables;
 	
-	public Map<CarteDeVictoire, Joueur> getCarteVictAssociationJoueur() {
+	/*public Map<CarteDeVictoire, Joueur> getCarteVictAssociationJoueur() {
 		return CarteVictAssociationJoueur;
 	}
 
 	public void setCarteVictAssociationJoueur(Map<CarteDeVictoire, Joueur> carteVictAssociationJoueur) {
 		this.CarteVictAssociationJoueur = carteVictAssociationJoueur;
-	}
+	}*/
 
 	public Queue<Joueur> getQueueJoueurs() {
 		return queueJoueurs;

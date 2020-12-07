@@ -11,7 +11,7 @@ public class ScoreForme implements VisiteurScore {
 	 * 
 	 */
 	
-    public int visiter(Partie partie, CarteDeVictoire carteVictoire) {
+    public int visiter(Partie partie, Carte carteVictoire) {
     	
     	
     	partie.getTapisDeJeu().getContainer();

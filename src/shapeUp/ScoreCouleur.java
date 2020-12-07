@@ -10,7 +10,7 @@ public class ScoreCouleur implements VisiteurScore {
 	 */
 	
 	
-    public int visiter(Partie partie, CarteDeVictoire carteVictoire) {
+    public int visiter(Partie partie, Carte carteVictoire) {
     	
     	partie.getTapisDeJeu().getContainer();
     	int scoreCouleur = 0;
