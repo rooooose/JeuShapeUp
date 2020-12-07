@@ -15,11 +15,21 @@ public class Joueur {
 	
 	Joueur(String nom) {
 		this.setNom(nom);
+		
+	    if(this instanceof JoueurReel ) {
+	    	this.strategie = (StrategieJoueur) this;
+	    	
+	    } else if (this instanceof JoueurVirtuel) {
+	    	this.strategie = (StrategieJoueur) this;
+	    }
+	    
 	}
 
 	private String score;
 
     protected StrategieJoueur strategie;
+
+
 
 	//public Pioche pioche;
 
