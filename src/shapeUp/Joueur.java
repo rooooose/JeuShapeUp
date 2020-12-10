@@ -2,7 +2,7 @@ package shapeUp;
 
 import java.util.*;
 
-public class Joueur {
+public class Joueur extends Observable{
     private String nom;
 
     public String getNom() {
@@ -58,6 +58,7 @@ public class Joueur {
 			
 			cartePiochee = this.strategie.piocherCarte(pioche);
 			this.getMainDuJoueur().add(cartePiochee);
+//////////////////////////this.notifyObservers(cartePiochee);
 			System.out.println(cartePiochee);
 			//System.out.println(pioche);
 		}
@@ -87,6 +88,7 @@ public class Joueur {
     		
 			cartePiochee = this.strategie.piocherCarte(pioche);
 			this.getMainDuJoueur().add(cartePiochee);
+//////////////////////////this.notifyObservers(cartePiochee);
 			System.out.println(cartePiochee);
 		}
     }
@@ -108,9 +110,11 @@ public class Joueur {
 		
     	int ligneCase;
     	int colonneCase;
+//////////////////////////this.notifyObservers(tapis);    	
     	System.out.println(tapis);
     	
     	if(tapis.getNbCartes()>0) {
+//////////////////////////this.notifyObservers("Les cartes doivent être adjacentes.");    		
     		System.out.println("Les cartes doivent être adjacentes.");
     	}
     	
@@ -119,9 +123,11 @@ public class Joueur {
         	colonneCase = this.strategie.choisirColonneCarte(tapis);
         	
         	if(!tapis.placementNormalPossible(ligneCase,colonneCase)) {
+//////////////////////////this.notifyObservers("Désolée, cette case n'est pas disponible" + "\n");        		
         		System.out.print("Désolée, cette case n'est pas disponible" + "\n");
         	}
         	if(ligneCase == lig && colonneCase == col) {
+//////////////////////////this.notifyObservers("La carte était déjà placée ici" + "\n");        		
         		System.out.print("La carte était déjà placée ici" + "\n");
         	}
         	
@@ -133,13 +139,15 @@ public class Joueur {
     			
     	} else if(tapis.caseRemplie(ligneCase,colonneCase) && tapis.decalagePossible(ligneCase, colonneCase)){
     		
+//////////////////////////this.notifyObservers("Décalage du tapis...");    		
     			System.out.println("Décalage du tapis...");
     		    tapis.decalerCartes(ligneCase, colonneCase);
     		    tapis.getContainer().get(ligneCase).set(colonneCase, carteAJouer);
     	}
-
+//////////////////////////this.notifyObservers(tapis);
     	System.out.println(tapis);
     	tapis.setNbCartes(tapis.getNbCartes()+1);
+//////////////////////////this.notifyObservers("Nombre de cartes : " + tapis.getNbCartes());    	
     	System.out.println("NB CARTES : " + tapis.getNbCartes());
     	//carte.setEstPlacee(true); 
     	
@@ -153,13 +161,14 @@ public class Joueur {
     	int ligneCase;
     	int colonneCase;
     	Carte carteAJouer;
-    	
+//////////////////////////this.notifyObservers(tapis);    	
     	System.out.println(tapis);
     	
     	if(tapis.getNbCartes()>0) {
+//////////////////////////this.notifyObservers("Les cartes doivent être adjacentes.";    		
     		System.out.println("Les cartes doivent être adjacentes.");
     	}
-    	
+//////////////////////////this.notifyObservers("Carte(s) en main : " + this.getMainDuJoueur());    	
     	System.out.println("Carte(s) en main : " + this.getMainDuJoueur());
 		carteAJouer = this.strategie.definirCarteAJouer(this, partie.getModeDeJeu());
 		partie.getModeDeJeu().voirCarteVictoire(partie, this);
@@ -169,6 +178,7 @@ public class Joueur {
         	colonneCase = this.strategie.choisirColonneCarte(tapis);
         	
         	if(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase)) {
+//////////////////////////this.notifyObservers("Désolée, cette n'est pas disponible" + "\n");          		
         		System.out.print("Désolée, cette case n'est pas disponible" + "\n");
         	}
         	
@@ -179,14 +189,16 @@ public class Joueur {
     		tapis.getContainer().get(ligneCase).set(colonneCase, carteAJouer);
     			
     	} else if(tapis.caseRemplie(ligneCase,colonneCase) && tapis.decalagePossible(ligneCase, colonneCase)){
-    		
+
+//////////////////////////this.notifyObservers("Décalage du tapis...");      		
     			System.out.println("Décalage du tapis...");
     		    tapis.decalerCartes(ligneCase, colonneCase);
     		    tapis.getContainer().get(ligneCase).set(colonneCase, carteAJouer);
     	}
-
+//////////////////////////this.notifyObservers(tapis);   
     	System.out.println(tapis);
     	tapis.setNbCartes(tapis.getNbCartes()+1);
+//////////////////////////this.notifyObservers("Nombre de cartes : " + tapis.getNbCartes());       	
     	System.out.println("NB CARTES : " + tapis.getNbCartes());
 
     }
@@ -196,7 +208,9 @@ public class Joueur {
     	
     	int ligneCase;
     	int colonneCase;
+//////////////////////////this.notifyObservers(tapis);       	
     	System.out.println(tapis);
+//////////////////////////this.notifyObservers("Veuillez choisir une carte à déplacer :");       	
     	System.out.println("Veuillez choisir une carte à déplacer :");
     	
     	do {
@@ -204,6 +218,7 @@ public class Joueur {
         	colonneCase = this.strategie.choisirColonneCarte(tapis);
         	
         	if(!tapis.caseRemplie(ligneCase,colonneCase)) {
+//////////////////////////this.notifyObservers("Désolée, cette case est vide");           		
         		System.out.println("Désolée, cette case est vide");
         	}
     	}while(!tapis.caseRemplie(ligneCase,colonneCase));
@@ -211,7 +226,8 @@ public class Joueur {
     	Carte carteADeplacer = tapis.getContainer().get(ligneCase).get(colonneCase);
     	tapis.setNbCartes(tapis.getNbCartes()-1);
     	tapis.getContainer().get(ligneCase).set(colonneCase, null);
-
+    	
+//////////////////////////this.notifyObservers("Vous avez choisi de déplacer la carte " + carteADeplacer);   
     	System.out.println("Vous avez choisi de déplacer la carte " + carteADeplacer);
     	
     	this.placerCarte(ligneCase, colonneCase, carteADeplacer, tapis);
