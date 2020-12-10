@@ -10,11 +10,11 @@ public class ShapeUp extends Observable {
 	    Set<String> nomsJoueurs;
 
 	    
-	    ShapeUp(Console consoleDuJeu) {
+	    ShapeUp() {
+	    	//super(new Console());
 	    	
-	    	consoleDuJeu = new Console();
-	    	this.consoleDuJeu = consoleDuJeu;
-	    	
+	    	this.consoleDuJeu = new Console();
+	    	this.addObserver(this.consoleDuJeu);
 	    	
 	    	int nbJoueurs = this.choisirNbJoueurs();
 	    	
@@ -205,7 +205,7 @@ public class ShapeUp extends Observable {
 	    public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-			ShapeUp jeuShapeUp = new ShapeUp(consoleDeJeu);
+			ShapeUp jeuShapeUp = new ShapeUp();
 			//jeuShapeUp.notifyObservers(jeuShapeUp);
 			System.out.println(jeuShapeUp);
 			

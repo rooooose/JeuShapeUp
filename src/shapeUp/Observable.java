@@ -30,9 +30,9 @@ public class Observable {
 		
 	}
 	
-	Observable (Console consoleDeJeu){
-		
-		this.addObserver(consoleDeJeu);
-	}
+//	Observable (Console consoleDeJeu){
+//		
+//		this.addObserver(consoleDeJeu);
+//	}
 
 }
