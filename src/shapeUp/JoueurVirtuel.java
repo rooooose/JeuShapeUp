@@ -18,7 +18,7 @@ public Carte piocherCarte(Pioche pioche) {
     	
 		if (pioche.getNbreDeCartes() < 0) {
 
-//this.notifyObservers("Aucune carte disponible dans la pioche");			
+			//this.notifyObservers("Aucune carte disponible dans la pioche");			
 			System.out.println("Aucune carte disponible dans la pioche");
 			return null;
 			}
@@ -43,8 +43,8 @@ public Carte piocherCarte(Pioche pioche) {
 	    	
 	    	pioche.compterNbCartes(pioche.getNbreDeCartes() - 1);
 	    	
-	    	this.notifyObservers("Le joueur virtuel a pioché sa carte");	    	
-	    	//System.out.println("Le joueur virtuel a pioché sa carte");
+	    	//this.notifyObservers("Le joueur virtuel a pioché sa carte");	    	
+	    	System.out.println("Le joueur virtuel a pioché sa carte");
 	    	return cartePiochee;
     	
 		}
@@ -97,7 +97,7 @@ public Carte piocherCarte(Pioche pioche) {
     		}while(joueur.getMainDuJoueur().get(randomIndex) == null);
 
     		carteAJouer = joueur.getMainDuJoueur().remove(randomIndex);
-//////////////////////////this.notifyObservers(joueur.getNom()+" a choisi la carte à jouer : " + carteAJouer);    		
+    		//this.notifyObservers(joueur.getNom()+" a choisi la carte à jouer : " + carteAJouer);    		
     		System.out.println(joueur.getNom()+" a choisi la carte à jouer : " + carteAJouer);
     		return carteAJouer;
     	
@@ -192,7 +192,7 @@ public Carte piocherCarte(Pioche pioche) {
         	
        if(choix == 1) {
 
-//////////////////////////this.notifyObservers("Le joueur souhaite déplacer une carte."); 
+    	 // this.notifyObservers("Le joueur souhaite déplacer une carte."); 
           System.out.println("Le joueur souhaite déplacer une carte");
           joueur.deplacerCarte(tapis);
           return true;

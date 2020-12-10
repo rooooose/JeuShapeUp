@@ -19,7 +19,7 @@ public Carte piocherCarte(Pioche pioche) {
 		
 		
 		if (pioche.getNbreDeCartes() <0) {
-//////////////////////////this.notifyObservers("Aucune carte disponible dans la pioche");					
+		//this.notifyObservers("Aucune carte disponible dans la pioche");					
 		System.out.println("Aucune carte disponible dans la pioche");
 		return null;
 		}else {
@@ -43,7 +43,7 @@ public Carte piocherCarte(Pioche pioche) {
     	
     	pioche.compterNbCartes(pioche.getNbreDeCartes() - 1);
     	
-//////////////////////////this.notifyObservers("Vous avez pioché une carte : ");    	
+    	//this.notifyObservers("Vous avez pioché une carte : ");    	
     	System.out.println("Vous avez pioché une carte : ");
     	return cartePiochee;
     
@@ -109,13 +109,13 @@ public Carte piocherCarte(Pioche pioche) {
     		int index = 0;
     		
     		do {
-//////////////////////////this.notifyObservers("Il faut choisir la carte à jouer dans votre main entre la carte 0, 1 ou 2.");    			
+    			//this.notifyObservers("Il faut choisir la carte à jouer dans votre main entre la carte 0, 1 ou 2.");    			
     			System.out.println("Il faut choisir la carte à jouer dans votre main entre la carte 0, 1 ou 2. ");
     		
     		index = scan.nextInt();
     		 
     		if (index != 0 && index != 1 && index != 2 ) {
-//////////////////////////this.notifyObservers("Vous n'avez qu'un nombre limité de cartes, veuillez recommencer votre choix");    			
+    			//this.notifyObservers("Vous n'avez qu'un nombre limité de cartes, veuillez recommencer votre choix");    			
     			System.out.println("Vous n'avez qu'un nombre limité de cartes, veuillez recommencer votre choix");
     		}
     	}while (index != 0 && index != 1 && index != 2 );
@@ -134,7 +134,7 @@ public Carte piocherCarte(Pioche pioche) {
 		Scanner scan = new Scanner (System.in);
 		int nb;
 		do {
-//////////////////////////this.notifyObservers("Veuillez choisir une ligne parmi celles disponibles");			
+			//this.notifyObservers("Veuillez choisir une ligne parmi celles disponibles");			
 			System.out.println("Veuillez choisir une ligne parmi celles disponibles :");
 		    nb = scan.nextInt();
 		    
@@ -157,7 +157,7 @@ public Carte piocherCarte(Pioche pioche) {
 		int nb;
 		
 		do {
-//////////////////////////this.notifyObservers("Veuillez choisir une colonne parmi celles disponibles");			
+			//this.notifyObservers("Veuillez choisir une colonne parmi celles disponibles");			
 			System.out.println("Veuillez choisir une colonne parmi celles disponibles :");
 		    nb = scan.nextInt();
 		    
@@ -179,13 +179,13 @@ public Carte piocherCarte(Pioche pioche) {
     	char choix='p';
     		
     	do {
-//////////////////////////this.notifyObservers("Souhaitez-vous déplacer une carte ? \n \t-Oui (o)\n \t-Non (n)");    		
+    		//this.notifyObservers("Souhaitez-vous déplacer une carte ? \n \t-Oui (o)\n \t-Non (n)");    		
         	System.out.println("Souhaitez-vous déplacer une carte ? \n \t-Oui (o)\n \t-Non (n)");
         	choix = scan.next().charAt(0);
     		scan.nextLine();
     			
         	if (choix!= 'o' && choix!= 'n') {
-//////////////////////////this.notifyObservers("Je n'ai pas compris votre choix...");          		
+        		//this.notifyObservers("Je n'ai pas compris votre choix...");          		
     		    System.out.println("Je n'ai pas compris votre choix...");
     		}
         		

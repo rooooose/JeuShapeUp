@@ -43,8 +43,8 @@ public class ShapeUp extends Observable {
 	    	this.maPartie = new Partie(queueJoueurs, mode, forme);
 	    	
 	    	this.maPartie.addObserver(this.consoleDuJeu);
-	    	this.maPartie.setConsoleDuJeu(consoleDuJeu);
-	    	this.maPartie.getTapisDeJeu().addObserver(consoleDuJeu);
+	    	this.maPartie.setConsoleDuJeu(this.consoleDuJeu);
+	    	this.maPartie.getTapisDeJeu().addObserver(this.consoleDuJeu);
 	    }
 
 	    public int choisirNbJoueurs() {
@@ -52,12 +52,14 @@ public class ShapeUp extends Observable {
 	    		char nbChar='r';
 	        	
 	        		do {
+	        			//this.notifyObservers("Veuillez choisir le nombre de joueurs pour votre partie (2 ou 3) : ");
 			        	System.out.println("Veuillez choisir le nombre de joueurs pour votre partie (2 ou 3) : ");
 				        //nb = scan.nextInt();
 				        nbChar = scan.next().charAt(0);
 		    			scan.nextLine();
 
 				        if (nbChar != '2' && nbChar!= '3') {
+				        	//this.notifyObservers("Je suis désolée, vous ne pouvez choisir que 2 ou 3 joueurs.");
 				        	System.out.println("Je suis désolée, vous ne pouvez choisir que 2 ou 3 joueurs.");
 				        } 
 
@@ -72,12 +74,14 @@ public class ShapeUp extends Observable {
 	    	char type='r';
 	    	
 	    	do {
+	    		//this.notifyObservers("Veuillez choisir le type du joueur " + nb + ": virtuel (v) ou réel (r) ?");
     			System.out.println("Veuillez choisir le type du joueur " + nb + ": virtuel (v) ou réel (r) ?");
 
     			type = scan.next().charAt(0);
     			scan.nextLine();
 
 			    if (type != 'v' && type!= 'r') {
+			    	//this.notifyObservers("Je suis désolée, vous ne pouvez choisir qu'entre virtuel (v) ou réel (r).");
 			        System.out.println("Je suis désolée, vous ne pouvez choisir qu'entre virtuel (v) ou réel (r).");
 			    } 
 			    
@@ -118,6 +122,7 @@ public class ShapeUp extends Observable {
 	        				nomsJoueurs.add(nom);
 	        				break;
 	        			default :
+	        				//this.notifyObservers("Aucun joueur créé");
 	        				System.out.println("Aucun joueur créé");
 	        				break;
 	        				
@@ -132,9 +137,11 @@ public class ShapeUp extends Observable {
 	    	
 	    	String nom;
 	    	do {
+	    		//this.notifyObservers("Veuillez choisir le nom du joueur " + nb + ": \n");
         		System.out.println("Veuillez choisir le nom du joueur " + nb + ": \n");
         		nom = scan.nextLine();
         		if (nomsJoueurs.contains(nom)) {
+        			//this.notifyObservers("Je suis désolée, chaque joueur doit avoir un nom unique");
 			        System.out.println("Je suis désolée, chaque joueur doit avoir un nom unique");
 			    } 
 			}while (nomsJoueurs.contains(nom));
@@ -148,10 +155,12 @@ public class ShapeUp extends Observable {
 	    	StrategieMode mode;
 	    	char lettreMode='b';
 	    	do {
+	    		//this.notifyObservers("Veuillez choisir le mode de partie : \n \t-Mode de Base (b)\n \t-Mode Avancé (a)\n\t-Mode Victoire Ennemie (v)");
         		System.out.println("Veuillez choisir le mode de partie : \n \t-Mode de Base (b)\n \t-Mode Avancé (a)\n\t-Mode Victoire Ennemie (v)");
         		lettreMode = scan.next().charAt(0);
     			scan.nextLine();
         		if (lettreMode!= 'b' && lettreMode!= 'a' && lettreMode!= 'v') {
+        			//this.notifyObservers("Je suis désolée, vous ne pouvez choisir qu'entre les 3 modes proposés.");
 			        System.out.println("Je suis désolée, vous ne pouvez choisir qu'entre les 3 modes proposés.");
 			    }  
 			}while (lettreMode!= 'b' && lettreMode!= 'a' && lettreMode!= 'v');
@@ -164,6 +173,7 @@ public class ShapeUp extends Observable {
 				case 'v' :
 					return mode = new StrategieVictoireEnnemie();
 				default :
+					//this.notifyObservers("Aucun mode associé");
 					System.out.println("Aucun mode associé");
 					return null;
 	    	}
@@ -175,10 +185,12 @@ public class ShapeUp extends Observable {
 	    	TapisDeJeu forme;
 	    	char lettreForme='b';
 	    	do {
+	    		//this.notifyObservers("Veuillez choisir la forme du tapis : \n \t-Rectangle 5x3 (r)\n \t-Triangle rectangle (t)\n \t-Disque (d)");
         		System.out.println("Veuillez choisir la forme du tapis : \n \t-Rectangle 5x3 (r)\n \t-Triangle rectangle (t)\n \t-Disque (d)");
         		lettreForme = scan.next().charAt(0);
     			scan.nextLine();
         		if (lettreForme!= 'r' && lettreForme!= 't' && lettreForme!= 'd') {
+        			//this.notifyObservers("Je suis désolée, vous ne pouvez choisir qu'entre les formes proposées.");
 			        System.out.println("Je suis désolée, vous ne pouvez choisir qu'entre les formes proposées.");
 			    }  
 			}while (lettreForme!= 'r' && lettreForme!= 't' && lettreForme!= 'd');
@@ -200,6 +212,7 @@ public class ShapeUp extends Observable {
 					//return triangle;
 					return forme;
 				default :
+					//this.notifyObservers("Aucune forme associée");
 					System.out.println("Aucune forme associée");
 					return null;
 	    	}

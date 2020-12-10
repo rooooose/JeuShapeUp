@@ -23,6 +23,7 @@ public class Observable {
 		
 		Iterator<Observer> itObservers = this.observers.iterator();
 		while(itObservers.hasNext()) {
+			
 			Observer nextObserver = itObservers.next();
 			nextObserver.update(this, arg);
 			

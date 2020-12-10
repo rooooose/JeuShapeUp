@@ -287,6 +287,7 @@ public class TapisDeJeu extends Observable{
 //		System.out.print("CARTE EN HAUT " + carteEnHaut);
 
 		if(carteEnBas && premiereLigneVide && carteVideSous0) {
+			//this.notifyObservers("carte en bas");
 			System.out.println("carte en bas");
 	        
 	        ligne = new ArrayList<Carte>();
@@ -301,6 +302,7 @@ public class TapisDeJeu extends Observable{
 			}
 	        
 		} else if(carteEnHaut && derniereLigneVide && carteVideSur0){
+			//this.notifyObservers("carte en haut");
 			System.out.println("carte en haut");
 			//ajout d'une nouvelle ligne là où on veut ajouter une carte
 			ligne = new ArrayList<Carte>();
@@ -316,7 +318,7 @@ public class TapisDeJeu extends Observable{
 			//System.out.println("DERNIERE LIGNE SUPPRIMEE : " + derniereLigne);
 			
 		} else if(carteGauche && derniereColVide && carteVideGauche0){
-			
+			//this.notifyObservers("carte gauche");
 			System.out.println("carte gauche");
 			
 			for(int i=0; i<this.modele.length; i++) {
@@ -327,6 +329,7 @@ public class TapisDeJeu extends Observable{
 			}
 			
 		} else if(carteDroite && premiereColVide && carteVideDroite0){
+			//this.notifyObservers("carte droite");
 			System.out.println("carte droite");
 			for(int i=0; i<this.modele.length; i++) {
 				

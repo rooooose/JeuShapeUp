@@ -112,6 +112,8 @@ public class Partie extends Observable implements Visitable {
 	Partie(Queue<Joueur> joueurs, StrategieMode mode, TapisDeJeu formeTapisDeJeu){
 		//this.setNbreDeJoueurs(nbJoueurs);
 		//System.out.print("Nombre de joueurs : " + nbJoueurs);
+		
+		this.notifyObservers("Partie créée\n");
 		System.out.print("Partie créée\n");
 		
 		//A SUPPR LISTE 
@@ -237,6 +239,7 @@ public class Partie extends Observable implements Visitable {
 		Joueur joueurActif = queueJoueurs.peek();
 		//CarteJouable carteJoueur = (CarteJouable) joueurActif.getMainDuJoueur();
 		
+		//this.notifyObservers("\n"+"***** C'est au tour de " + joueurActif.getNom()+" *****");
 		System.out.println("\n"+"***** C'est au tour de " + joueurActif.getNom()+" *****");
 
 		
@@ -283,8 +286,10 @@ public class Partie extends Observable implements Visitable {
     		}
     	}
     	if(!egalite) {
+    		//this.notifyObservers("Le gagnant est : "+ gagnant.getNom() + " ! Bravo!" );
     		System.out.println("Le gagnant est : "+ gagnant.getNom() + " !");
     	} else {
+    		//this.notifyObservers("Egalité ! ;)");
     		System.out.println("Egalité !");
     	}
 		

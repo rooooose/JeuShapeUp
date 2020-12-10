@@ -16,6 +16,7 @@
 	public class StrategieAvance extends Observable implements StrategieMode {
 	
 	    public void voirCarteVictoire(Partie maPartie, Joueur joueur) {
+	    	//this.notifyObservers("La dernière carte dans votre main sera votre carte de victoire.");
 	    	System.out.println("La dernière carte dans votre main sera votre carte de victoire.");
 	    }
 	
@@ -73,7 +74,7 @@
 		public Pioche creerLaPiocheDeLaPartie(Partie maPartie) {
 			// TODO Auto-generated method stub
 			
-			this.addObserver(maPartie.getConsoleDuJeu());
+			//this.addObserver(maPartie.getConsoleDuJeu());
 			Queue<Carte> pioche = new LinkedList<Carte> ();
 			int nombreDeCartes = 0;
 			
@@ -135,6 +136,7 @@
 			// TODO Auto-generated method stub
 			
 			
+			//this.notifyObservers("\n" +"La partie est finie, place aux résultats ! :) "+ "\n");
 			System.out.println("\n" +"La partie est finie, place aux résultats ! :) "+ "\n");
 			
 			Iterator<Joueur> it = maPartie.getQueueJoueurs().iterator();
@@ -147,8 +149,10 @@
 		    	Carte carteVictJoueur = new Carte (recupValeur.getCouleur(),recupValeur.getForme(),recupValeur.EstRemplie());
 		    		
 		    	joueur.setCarteDeVictoire(carteVictJoueur);
+		    	//this.notifyObservers("La carte de victoire de " +joueur.getNom()+ " est " +joueur.getCarteDeVictoire());
 		    	System.out.println("La carte de victoire de " +joueur.getNom()+ " est " +joueur.getCarteDeVictoire());
 		    	int score = maPartie.calculerScoreTotal(joueur);
+		    	//this.notifyObservers("Score total de " + joueur.getNom() + " : " + score);
 		    	System.out.println("Score total de " + joueur.getNom() + " : " + score);
 
 		    }

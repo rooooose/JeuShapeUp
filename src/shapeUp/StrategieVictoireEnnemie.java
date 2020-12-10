@@ -24,8 +24,10 @@ public class StrategieVictoireEnnemie extends Observable implements StrategieMod
 		while (i < maPartie.getQueueJoueurs().size()) {
 			Joueur joueurNext = voirCartesEnnemies.next();
 		if (joueur != joueurNext ) {
+			//this.notifyObservers("Vous ne pouvez voir que la carte de victoire de vos ennemis "+joueurNext.getNom()+ " : " +joueurNext.getCarteDeVictoire());
 		System.out.println("Tu ne peux voir que la carte de victoire des tes ennemis "+joueurNext.getNom()+ " : " +joueurNext.getCarteDeVictoire());
 	   }else {
+		   //this.notifyObservers("Vous ne pouvez pas voir votre carte de victoire");
 		System.out.println("Tu ne peux pas voir ta carte de victoire");
 		}
 		i++;
@@ -101,7 +103,7 @@ public class StrategieVictoireEnnemie extends Observable implements StrategieMod
 	@Override
 	public Pioche creerLaPiocheDeLaPartie(Partie maPartie) {
 		
-		this.addObserver(maPartie.getConsoleDuJeu());
+		//this.addObserver(maPartie.getConsoleDuJeu());
 		
 		Queue<Carte> pioche = new LinkedList<Carte> ();
 		int nombreDeCartes = 0;
@@ -156,6 +158,7 @@ public class StrategieVictoireEnnemie extends Observable implements StrategieMod
 	@Override
 	public void finirLaPartie(Partie maPartie) {
 		// TODO Auto-generated method stub
+		//this.notifyObservers("\n" +"La partie est finie, place aux résultats ! :) "+ "\n");
 		System.out.println("\n" +"La partie est finie, place aux résultats ! :) "+ "\n");
 		
 		Iterator<Joueur> it = maPartie.getQueueJoueurs().iterator();
@@ -163,8 +166,10 @@ public class StrategieVictoireEnnemie extends Observable implements StrategieMod
 		while(it.hasNext()) {
     		
     		Joueur joueur = it.next();
+    		//this.notifyObservers("La carte de victoire de " +joueur.getNom()+ " est " +joueur.getCarteDeVictoire());
     		System.out.println("La carte de victoire de " +joueur.getNom()+ " est " +joueur.getCarteDeVictoire());
     		int score = maPartie.calculerScoreTotal(joueur);
+    		//this.notifyObservers("Score total de " + joueur.getNom() + " : " + score);
     		System.out.println("Score total de " + joueur.getNom() + " : " + score);
     	}
 		
