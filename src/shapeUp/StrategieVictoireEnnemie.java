@@ -100,6 +100,9 @@ public class StrategieVictoireEnnemie extends Observable implements StrategieMod
 
 	@Override
 	public Pioche creerLaPiocheDeLaPartie(Partie maPartie) {
+		
+		this.addObserver(maPartie.getConsoleDuJeu());
+		
 		Queue<Carte> pioche = new LinkedList<Carte> ();
 		int nombreDeCartes = 0;
 		

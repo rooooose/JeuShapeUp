@@ -83,6 +83,7 @@ public class StrategieDeBase extends Observable implements StrategieMode {
 		
 	public Pioche creerLaPiocheDeLaPartie (Partie maPartie) {
 		
+		this.addObserver(maPartie.getConsoleDuJeu());
 		Queue<Carte> pioche = new LinkedList<Carte> ();
 		int nombreDeCartes = 0;
 		

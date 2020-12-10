@@ -15,6 +15,15 @@ public class Partie extends Observable implements Visitable {
 	}*/
 	
 	//Unicité des cartes du jeu
+	private Console consoleDuJeu;
+	public Console getConsoleDuJeu() {
+		return consoleDuJeu;
+	}
+
+	public void setConsoleDuJeu(Console consoleDuJeu) {
+		this.consoleDuJeu = consoleDuJeu;
+	}
+
 	private Set<Carte> carteDuJeu = new HashSet<Carte> (); 
 	private Pioche pioche;
 	//private List<Carte> carteDuJeu = new ArrayList<Carte> ();

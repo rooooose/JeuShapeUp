@@ -41,8 +41,10 @@ public class ShapeUp extends Observable {
 	    public void lancerLaPartie(Queue<Joueur> queueJoueurs, StrategieMode mode, TapisDeJeu forme) {
 	    	
 	    	this.maPartie = new Partie(queueJoueurs, mode, forme);
-	    	this.maPartie.addObserver(this.consoleDuJeu);
 	    	
+	    	this.maPartie.addObserver(this.consoleDuJeu);
+	    	this.maPartie.setConsoleDuJeu(consoleDuJeu);
+	    	this.maPartie.getTapisDeJeu().addObserver(consoleDuJeu);
 	    }
 
 	    public int choisirNbJoueurs() {
@@ -104,12 +106,14 @@ public class ShapeUp extends Observable {
 	        			case 'v' :
 	        				JoueurVirtuel nouveauJoueurV = new JoueurVirtuel(nom);
 	        				//System.out.println("Nom du joueur " + i + ": " + nouveauJoueurV.getNom());
+	        				nouveauJoueurV.addObserver(consoleDuJeu);
 	        				queueJoueurs.add(nouveauJoueurV);
 	        				nomsJoueurs.add(nom);
 	        				break;
 	        			case 'r' :
 	        				JoueurReel nouveauJoueurR = new JoueurReel(nom);
 	        				//System.out.println("Nom du joueur " + i + ": " + nouveauJoueurR.getNom());
+	        				nouveauJoueurR.addObserver(consoleDuJeu);
 	        				queueJoueurs.add(nouveauJoueurR);
 	        				nomsJoueurs.add(nom);
 	        				break;
@@ -214,6 +218,7 @@ public class ShapeUp extends Observable {
 			}
 			//System.out.println("Partie finie !"+"\n");
 			jeuShapeUp.maPartie.getModeDeJeu().finirLaPartie(jeuShapeUp.maPartie);
+			
 
 	    }
 
