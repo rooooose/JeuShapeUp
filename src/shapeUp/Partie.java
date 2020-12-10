@@ -2,7 +2,7 @@ package shapeUp;
 
 import java.util.*;
 
-public class Partie implements Visitable {
+public class Partie extends Observable implements Visitable {
 	
     /*private int nbreDeJoueurs;
 

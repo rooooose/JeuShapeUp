@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.ListIterator;
 import java.util.Map;
 
-public class TapisDeJeu {
+public class TapisDeJeu extends Observable{
 	
     private int nbCartes;
 	private boolean decalVersBasPossible = false;

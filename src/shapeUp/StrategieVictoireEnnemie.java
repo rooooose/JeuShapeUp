@@ -12,7 +12,7 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
 
-public class StrategieVictoireEnnemie implements StrategieMode {
+public class StrategieVictoireEnnemie extends Observable implements StrategieMode {
 
 	
     public void voirCarteVictoire(Partie maPartie, Joueur joueur) {

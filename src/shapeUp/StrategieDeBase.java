@@ -13,7 +13,7 @@ import java.util.Queue;
 import java.util.Random;
 //import java.util.Set;
 
-public class StrategieDeBase implements StrategieMode {
+public class StrategieDeBase extends Observable implements StrategieMode {
 
 	public List<Carte> distribuerCartes(Partie maPartie) {
 		

@@ -13,7 +13,7 @@
 	import java.util.Random;
 	import java.util.Set;
 	
-	public class StrategieAvance implements StrategieMode {
+	public class StrategieAvance extends Observable implements StrategieMode {
 	
 	    public void voirCarteVictoire(Partie maPartie, Joueur joueur) {
 	    	System.out.println("La dernière carte dans votre main sera votre carte de victoire.");

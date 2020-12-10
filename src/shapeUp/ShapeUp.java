@@ -2,19 +2,24 @@ package shapeUp;
 
 import java.util.*;
 
-public class ShapeUp {
+public class ShapeUp extends Observable {
 
-
+		private Console consoleDuJeu;
 	    private Partie maPartie;
 	    private final Scanner scan = new Scanner (System.in);
 	    Set<String> nomsJoueurs;
 
 	    
-	    ShapeUp() {
+	    ShapeUp(Console consoleDuJeu) {
+	    	
+	    	consoleDuJeu = new Console();
+	    	this.consoleDuJeu = consoleDuJeu;
+	    	
 	    	
 	    	int nbJoueurs = this.choisirNbJoueurs();
 	    	
 	    	this.lancerLaPartie(this.creerJoueurs(nbJoueurs), this.choisirMode(), this.choisirFormeTapis());
+	    	//this.notifyObservers("Jeu ShapeUp créé\n");
 	    	System.out.print("Jeu ShapeUp créé\n");
 	    }
 	    
@@ -36,6 +41,7 @@ public class ShapeUp {
 	    public void lancerLaPartie(Queue<Joueur> queueJoueurs, StrategieMode mode, TapisDeJeu forme) {
 	    	
 	    	this.maPartie = new Partie(queueJoueurs, mode, forme);
+	    	this.maPartie.addObserver(this.consoleDuJeu);
 	    	
 	    }
 
@@ -199,7 +205,8 @@ public class ShapeUp {
 	    public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-			ShapeUp jeuShapeUp = new ShapeUp();
+			ShapeUp jeuShapeUp = new ShapeUp(consoleDeJeu);
+			//jeuShapeUp.notifyObservers(jeuShapeUp);
 			System.out.println(jeuShapeUp);
 			
 			while(!jeuShapeUp.maPartie.isEstFinie()) {

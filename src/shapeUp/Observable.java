@@ -8,12 +8,15 @@ public class Observable {
 	
 	private List<Observer> observers = new ArrayList<Observer>();
 	
+	
+
+	
 	public void addObserver (Observer o) {
-		
+		this.observers.add(o);
 	}
 	
 	public void deleteObserver(Observer o) {
-		
+		this.observers.remove(o);
 	}
 	
 	public void notifyObservers (Object arg) {
@@ -22,8 +25,14 @@ public class Observable {
 		while(itObservers.hasNext()) {
 			Observer nextObserver = itObservers.next();
 			nextObserver.update(this, arg);
+			
 		}
 		
+	}
+	
+	Observable (Console consoleDeJeu){
+		
+		this.addObserver(consoleDeJeu);
 	}
 
 }
