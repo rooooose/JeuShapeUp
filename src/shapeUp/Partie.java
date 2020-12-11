@@ -14,15 +14,15 @@ public class Partie extends Observable implements Visitable {
 		this.nbreDeJoueurs = nbreDeJoueurs;
 	}*/
 	
-	//Unicité des cartes du jeu
-	private Console consoleDuJeu;
-	public Console getConsoleDuJeu() {
-		return consoleDuJeu;
-	}
 
-	public void setConsoleDuJeu(Console consoleDuJeu) {
-		this.consoleDuJeu = consoleDuJeu;
-	}
+//	private Console consoleDuJeu;
+//	public Console getConsoleDuJeu() {
+//		return consoleDuJeu;
+//	}
+//
+//	public void setConsoleDuJeu(Console consoleDuJeu) {
+//		this.consoleDuJeu = consoleDuJeu;
+//	}
 
 	private Set<Carte> carteDuJeu = new HashSet<Carte> (); 
 	private Pioche pioche;
@@ -109,12 +109,12 @@ public class Partie extends Observable implements Visitable {
 		this.nbCartesJouables = nbCartesJouables;
 	}
 	
-	Partie(Queue<Joueur> joueurs, StrategieMode mode, TapisDeJeu formeTapisDeJeu){
+	Partie(Queue<Joueur> joueurs, StrategieMode mode, TapisDeJeu formeTapisDeJeu, Console console){
 		//this.setNbreDeJoueurs(nbJoueurs);
 		//System.out.print("Nombre de joueurs : " + nbJoueurs);
-		
-		this.notifyObservers("Partie créée\n");
-		System.out.print("Partie créée\n");
+		this.addObserver(console);
+		//this.notifyObservers("Partie créée\n");
+		//System.out.print("Partie créée\n");
 		
 		//A SUPPR LISTE 
 		//this.setListeJoueurs(joueurs);
@@ -149,60 +149,6 @@ public class Partie extends Observable implements Visitable {
 				carteDuJeu.add(carteRemplie);
 			}
 		}
-		
-//		//Création des cartes cercles vides
-//		Carte carte1 = new Carte(CouleurType.BLEU, FormeCarte.CERCLE, false);
-//		carteDuJeu.add(carte1);
-//		Carte carte2 = new Carte(CouleurType.VERT, FormeCarte.CERCLE, false);
-//		carteDuJeu.add(carte2);
-//		Carte carte3 = new Carte(CouleurType.ROUGE, FormeCarte.CERCLE, false);
-//		carteDuJeu.add(carte3);
-//		
-//		//Création des cartes carrées vides
-//		Carte carte4 = new Carte(CouleurType.BLEU, FormeCarte.CARRE, false);
-//		carteDuJeu.add(carte4);
-//		Carte carte5 = new Carte(CouleurType.VERT, FormeCarte.CARRE, false);
-//		carteDuJeu.add(carte5);
-//		Carte carte6 = new Carte(CouleurType.ROUGE, FormeCarte.CARRE, false);
-//		carteDuJeu.add(carte6);
-//		
-//		//Création des cartes triangulaires vides
-//		Carte carte7 = new Carte(CouleurType.BLEU, FormeCarte.TRIANGLE, false);
-//		carteDuJeu.add(carte7);
-//		Carte carte8 = new Carte(CouleurType.VERT, FormeCarte.TRIANGLE, false);
-//		carteDuJeu.add(carte8);
-//		Carte carte9 = new Carte(CouleurType.ROUGE, FormeCarte.TRIANGLE, false);
-//		carteDuJeu.add(carte9);
-//		
-//		//Création des cartes cercles remplies
-//		Carte carte10 = new Carte(CouleurType.BLEU, FormeCarte.CERCLE, true);
-//		carteDuJeu.add(carte10);
-//		Carte carte11 = new Carte(CouleurType.VERT, FormeCarte.CERCLE, true);
-//		carteDuJeu.add(carte11);
-//		Carte carte12 = new Carte(CouleurType.ROUGE, FormeCarte.CERCLE, true);
-//		carteDuJeu.add(carte12);
-//		
-//		//Création des cartes carrées remplies
-//		Carte carte13 = new Carte(CouleurType.BLEU, FormeCarte.CARRE, true);
-//		carteDuJeu.add(carte13);
-//		Carte carte14 = new Carte(CouleurType.VERT, FormeCarte.CARRE, true);
-//		carteDuJeu.add(carte14);
-//		Carte carte15 = new Carte(CouleurType.ROUGE, FormeCarte.CARRE, true);
-//		carteDuJeu.add(carte15);
-//		
-//		//Création des cartes triangulaires remplies
-//		Carte carte16 = new Carte(CouleurType.BLEU, FormeCarte.TRIANGLE, true);
-//		carteDuJeu.add(carte16);
-//		Carte carte17 = new Carte(CouleurType.VERT, FormeCarte.TRIANGLE, true);
-//		carteDuJeu.add(carte17);
-//		Carte carte18 = new Carte(CouleurType.ROUGE, FormeCarte.TRIANGLE, true);
-//		carteDuJeu.add(carte18);
-		
-		/*Iterator<Carte> testIterator = carteDuJeu.iterator(); // Boucle de test pour vérifier la bonne création des cartes
-		
-		while (testIterator.hasNext()) {
-			System.out.println(testIterator.next());
-		} */
 
 	}
 	
@@ -214,7 +160,7 @@ public class Partie extends Observable implements Visitable {
     	Iterator<Joueur> it = this.queueJoueurs.iterator();
     	while(it.hasNext()) {
     		Joueur joueur = it.next();
-    		sb.append("- " + joueur.getNom() + " -> "+ joueur.strategie + "\n");
+    		sb.append(joueur);
     	}
     	
     	sb.append("Mode de jeu : ");
@@ -239,8 +185,8 @@ public class Partie extends Observable implements Visitable {
 		Joueur joueurActif = queueJoueurs.peek();
 		//CarteJouable carteJoueur = (CarteJouable) joueurActif.getMainDuJoueur();
 		
-		//this.notifyObservers("\n"+"***** C'est au tour de " + joueurActif.getNom()+" *****");
-		System.out.println("\n"+"***** C'est au tour de " + joueurActif.getNom()+" *****");
+		this.notifyObservers("\n"+"***** C'est au tour de " + joueurActif.getNom()+" *****");
+		//System.out.println("\n"+"***** C'est au tour de " + joueurActif.getNom()+" *****");
 
 		
 		queueJoueurs.peek().jouer(this, this.getTapisDeJeu(), this.getPioche(), this.getModeDeJeu());
@@ -286,11 +232,11 @@ public class Partie extends Observable implements Visitable {
     		}
     	}
     	if(!egalite) {
-    		//this.notifyObservers("Le gagnant est : "+ gagnant.getNom() + " ! Bravo!" );
-    		System.out.println("Le gagnant est : "+ gagnant.getNom() + " !");
+    		this.notifyObservers("Le gagnant est : "+ gagnant.getNom() + " ! Bravo!" );
+    		//System.out.println("Le gagnant est : "+ gagnant.getNom() + " !");
     	} else {
-    		//this.notifyObservers("Egalité ! ;)");
-    		System.out.println("Egalité !");
+    		this.notifyObservers("Egalité ! ;)");
+    		//System.out.println("Egalité !");
     	}
 		
     	

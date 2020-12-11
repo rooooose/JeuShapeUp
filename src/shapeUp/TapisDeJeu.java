@@ -137,23 +137,6 @@ public class TapisDeJeu extends Observable{
 			caseDroiteRemplie = caseRemplie(lig,col+1);
 		}
 		
-//		if(this.getContainer().containsKey(lig-1)) {
-//			caseDessusRemplie = this.getContainer().get(lig-1).containsKey(col);
-//			System.out.println("caseDessusRemplie : "+ caseDessusRemplie);
-//		}
-//		if(this.getContainer().containsKey(lig+1)) {
-//			caseDessousRemplie = this.getContainer().get(lig+1).containsKey(col);
-//			System.out.println("caseDessousRemplie : "+ caseDessousRemplie);
-//		}
-//		if(this.getContainer().containsKey(lig)) {
-//			caseGaucheRemplie = this.getContainer().get(lig).containsKey(col-1);
-//			System.out.println("caseGaucheRemplie : "+ caseGaucheRemplie);
-//		}
-//		if(this.getContainer().containsKey(lig)) {
-//			caseDroiteRemplie = this.getContainer().get(lig).containsKey(col+1);
-//			System.out.println("caseDroiteRemplie : "+ caseDroiteRemplie);
-//		}
-		
 		if( caseDessusRemplie || caseDessousRemplie || caseGaucheRemplie || caseDroiteRemplie) {
 			return true;
 		}else {
@@ -283,12 +266,8 @@ public class TapisDeJeu extends Observable{
 	public void decalerCartes(int lig, int col) {
 		
 		int derniereLigne = this.getContainer().size();
-//		System.out.print("CARTE EN BAS " + carteEnBas);
-//		System.out.print("CARTE EN HAUT " + carteEnHaut);
 
 		if(carteEnBas && premiereLigneVide && carteVideSous0) {
-			//this.notifyObservers("carte en bas");
-			System.out.println("carte en bas");
 	        
 	        ligne = new ArrayList<Carte>();
 			this.getContainer().add(ligne);
@@ -302,12 +281,10 @@ public class TapisDeJeu extends Observable{
 			}
 	        
 		} else if(carteEnHaut && derniereLigneVide && carteVideSur0){
-			//this.notifyObservers("carte en haut");
-			System.out.println("carte en haut");
+
 			//ajout d'une nouvelle ligne là où on veut ajouter une carte
 			ligne = new ArrayList<Carte>();
 			this.getContainer().add(lig,ligne);
-			//System.out.print("AJOUT DE LIGNE FAIT \n");
 			
 			//remplissage de la ligne avec null
 			for(int j=0; j<this.modele[lig].length; j++) {
@@ -315,11 +292,8 @@ public class TapisDeJeu extends Observable{
 			}
 			//suppression de la ligne excédente
 			this.getContainer().remove(derniereLigne);
-			//System.out.println("DERNIERE LIGNE SUPPRIMEE : " + derniereLigne);
 			
 		} else if(carteGauche && derniereColVide && carteVideGauche0){
-			//this.notifyObservers("carte gauche");
-			System.out.println("carte gauche");
 			
 			for(int i=0; i<this.modele.length; i++) {
 				
@@ -329,8 +303,7 @@ public class TapisDeJeu extends Observable{
 			}
 			
 		} else if(carteDroite && premiereColVide && carteVideDroite0){
-			//this.notifyObservers("carte droite");
-			System.out.println("carte droite");
+			
 			for(int i=0; i<this.modele.length; i++) {
 				
 				this.getContainer().get(i).add(null);
