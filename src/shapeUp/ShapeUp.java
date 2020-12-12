@@ -167,11 +167,11 @@ public class ShapeUp extends Observable {
 	    	
 	    	switch(lettreMode) {
 				case 'b' :
-					return mode = new StrategieDeBase();
+					return mode = new StrategieDeBase(this.consoleDuJeu);
 				case 'a' :
-					return mode = new StrategieAvance();
+					return mode = new StrategieAvance(this.consoleDuJeu);
 				case 'v' :
-					return mode = new StrategieVictoireEnnemie();
+					return mode = new StrategieVictoireEnnemie(this.consoleDuJeu);
 				default :
 //					//this.notifyObservers("Aucun mode associé");
 //					System.out.println("Aucun mode associé");

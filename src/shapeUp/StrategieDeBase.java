@@ -15,6 +15,10 @@ import java.util.Random;
 
 public class StrategieDeBase extends Observable implements StrategieMode {
 
+	public StrategieDeBase(Console console) {
+		this.addObserver(console);
+	}
+	
 	public List<Carte> distribuerCartes(Partie maPartie) {
 		
 		
@@ -166,8 +170,8 @@ public class StrategieDeBase extends Observable implements StrategieMode {
 
     public void voirCarteVictoire(Partie maPartie, Joueur joueur) {
     	
-    	//this.notifyObservers("Votre carte de victoire est "+ joueur.getCarteDeVictoire());
-    	System.out.println("Ta carte de victoire est "+ joueur.getCarteDeVictoire());
+    	this.notifyObservers("Votre carte de victoire est "+ joueur.getCarteDeVictoire());
+    	//System.out.println("Ta carte de victoire est "+ joueur.getCarteDeVictoire());
     	
     }
     
@@ -181,19 +185,19 @@ public class StrategieDeBase extends Observable implements StrategieMode {
 	@Override
 	public void finirLaPartie(Partie maPartie) {
 		// TODO Auto-generated method stub
-		//this.notifyObservers("\n" +"La partie est finie, place aux résultats ! :) "+ "\n");
-		System.out.println("\n" +"La partie est finie, place aux résultats ! :) "+ "\n");
+		this.notifyObservers("\n" +"La partie est finie, place aux résultats ! :) "+ "\n");
+		//System.out.println("\n" +"La partie est finie, place aux résultats ! :) "+ "\n");
 		
 		Iterator<Joueur> it = maPartie.getQueueJoueurs().iterator();
 		
 		while(it.hasNext()) {
     		
     		Joueur joueur = it.next();
-    		//this.notifyObservers("La carte de victoire de " +joueur.getNom()+ " est " +joueur.getCarteDeVictoire());
-    		System.out.println("La carte de victoire de " +joueur.getNom()+ " est " +joueur.getCarteDeVictoire());
+    		this.notifyObservers("La carte de victoire de " +joueur.getNom()+ " est " +joueur.getCarteDeVictoire());
+    		//System.out.println("La carte de victoire de " +joueur.getNom()+ " est " +joueur.getCarteDeVictoire());
     		int score = maPartie.calculerScoreTotal(joueur);
-    		//this.notifyObservers("Score total de " + joueur.getNom() + " : " + score);
-    		System.out.println("Score total de " + joueur.getNom() + " : " + score);
+    		this.notifyObservers("Score total de " + joueur.getNom() + " : " + score);
+    		//System.out.println("Score total de " + joueur.getNom() + " : " + score);
     	}
 		
 		maPartie.definirGagnant();

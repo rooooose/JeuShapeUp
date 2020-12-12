@@ -199,50 +199,50 @@ public Carte piocherCarte(Pioche pioche) {
 	}
 	
 	
-	public void jouer(Partie partie, TapisDeJeu tapis, Pioche pioche, StrategieMode modeDeJeu) {
-		
-		//this.addObserver(partie.getConsoleDuJeu());
-		Carte cartePiochee;
-		Carte carteAJouer;
-		
-		if(modeDeJeu instanceof StrategieDeBase || modeDeJeu instanceof StrategieVictoireEnnemie) {
-			
-			cartePiochee = this.piocherCarte(pioche);
-			this.getMainDuJoueur().add(cartePiochee);
-			//this.notifyObservers(cartePiochee);
-			System.out.println(cartePiochee);
-			//System.out.println(pioche);
-		}
-		
-    	if(tapis.getNbCartes()>1 && tapis.getNbCartes()<partie.getNbCartesJouables()) {
-    		
-    		boolean deplacementFait = this.proposerDeplacement(tapis);
-    		
-//    		System.out.println("Carte(s) en main : " + this.getMainDuJoueur());
-//    		carteAJouer = this.strategie.definirCarteAJouer(this,partie.getModeDeJeu());
-//    		modeDeJeu.voirCarteVictoire(partie, this);
-    		this.placerCarte(partie, tapis);
-    		
-    		if(!deplacementFait) {
-    			this.proposerDeplacement(tapis);
-    		}
-    		
-    	} else {
-//        	System.out.println("Carte(s) en main : " + this.getMainDuJoueur());
-//    		carteAJouer = this.strategie.definirCarteAJouer(this,partie.getModeDeJeu());
-//    		modeDeJeu.voirCarteVictoire(partie, this);
-    		//this.strategie.placerCarte(carteAJouer, tapis);
-    		this.placerCarte(partie, tapis);
-    	}
-    	
-    	if(modeDeJeu instanceof StrategieAvance) {
-    		
-			cartePiochee = this.piocherCarte(pioche);
-			this.getMainDuJoueur().add(cartePiochee);
-			//this.notifyObservers(cartePiochee);
-			System.out.println(cartePiochee);
-		}
-    }
+//	public void jouer(Partie partie, TapisDeJeu tapis, Pioche pioche, StrategieMode modeDeJeu) {
+//		
+//		//this.addObserver(partie.getConsoleDuJeu());
+//		Carte cartePiochee;
+//		Carte carteAJouer;
+//		
+//		if(modeDeJeu instanceof StrategieDeBase || modeDeJeu instanceof StrategieVictoireEnnemie) {
+//			
+//			cartePiochee = this.piocherCarte(pioche);
+//			this.getMainDuJoueur().add(cartePiochee);
+//			//this.notifyObservers(cartePiochee);
+//			System.out.println(cartePiochee);
+//			//System.out.println(pioche);
+//		}
+//		
+//    	if(tapis.getNbCartes()>1 && tapis.getNbCartes()<partie.getNbCartesJouables()) {
+//    		
+//    		boolean deplacementFait = this.proposerDeplacement(tapis);
+//    		
+////    		System.out.println("Carte(s) en main : " + this.getMainDuJoueur());
+////    		carteAJouer = this.strategie.definirCarteAJouer(this,partie.getModeDeJeu());
+////    		modeDeJeu.voirCarteVictoire(partie, this);
+//    		this.placerCarte(partie, tapis);
+//    		
+//    		if(!deplacementFait) {
+//    			this.proposerDeplacement(tapis);
+//    		}
+//    		
+//    	} else {
+////        	System.out.println("Carte(s) en main : " + this.getMainDuJoueur());
+////    		carteAJouer = this.strategie.definirCarteAJouer(this,partie.getModeDeJeu());
+////    		modeDeJeu.voirCarteVictoire(partie, this);
+//    		//this.strategie.placerCarte(carteAJouer, tapis);
+//    		this.placerCarte(partie, tapis);
+//    	}
+//    	
+//    	if(modeDeJeu instanceof StrategieAvance) {
+//    		
+//			cartePiochee = this.piocherCarte(pioche);
+//			this.getMainDuJoueur().add(cartePiochee);
+//			//this.notifyObservers(cartePiochee);
+//			System.out.println(cartePiochee);
+//		}
+//    }
 
 	
 	public void placerCarte(int lig, int col, Carte carteAJouer, TapisDeJeu tapis) {
