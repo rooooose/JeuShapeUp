@@ -109,14 +109,14 @@ public Carte piocherCarte(Pioche pioche) {
     		int index = 0;
     		
     		do {
-    			//this.notifyObservers("Il faut choisir la carte à jouer dans votre main entre la carte 0, 1 ou 2.");    			
-    			System.out.println("Il faut choisir la carte à jouer dans votre main entre la carte 0, 1 ou 2. ");
+    			this.notifyObservers("Il faut choisir la carte à jouer dans votre main entre la carte 0, 1 ou 2.");    			
+    			//System.out.println("Il faut choisir la carte à jouer dans votre main entre la carte 0, 1 ou 2. ");
     		
     		index = scan.nextInt();
     		 
     		if (index != 0 && index != 1 && index != 2 ) {
-    			//this.notifyObservers("Vous n'avez qu'un nombre limité de cartes, veuillez recommencer votre choix");    			
-    			System.out.println("Vous n'avez qu'un nombre limité de cartes, veuillez recommencer votre choix");
+    			this.notifyObservers("Vous n'avez qu'un nombre limité de cartes, veuillez recommencer votre choix");    			
+    			//System.out.println("Vous n'avez qu'un nombre limité de cartes, veuillez recommencer votre choix");
     		}
     	}while (index != 0 && index != 1 && index != 2 );
     		
@@ -134,8 +134,8 @@ public Carte piocherCarte(Pioche pioche) {
 		Scanner scan = new Scanner (System.in);
 		int nb;
 		do {
-			//this.notifyObservers("Veuillez choisir une ligne parmi celles disponibles");			
-			System.out.println("Veuillez choisir une ligne parmi celles disponibles :");
+			this.notifyObservers("Veuillez choisir une ligne parmi celles disponibles");			
+			//System.out.println("Veuillez choisir une ligne parmi celles disponibles :");
 		    nb = scan.nextInt();
 		    
 		}while(nb < -1 && nb > tapis.getContainer().size());
@@ -157,8 +157,8 @@ public Carte piocherCarte(Pioche pioche) {
 		int nb;
 		
 		do {
-			//this.notifyObservers("Veuillez choisir une colonne parmi celles disponibles");			
-			System.out.println("Veuillez choisir une colonne parmi celles disponibles :");
+			this.notifyObservers("Veuillez choisir une colonne parmi celles disponibles");			
+			//System.out.println("Veuillez choisir une colonne parmi celles disponibles :");
 		    nb = scan.nextInt();
 		    
 		}while(nb < -1 && nb > tapis.getContainer().get(0).size());
@@ -179,14 +179,14 @@ public Carte piocherCarte(Pioche pioche) {
     	char choix='p';
     		
     	do {
-    		//this.notifyObservers("Souhaitez-vous déplacer une carte ? \n \t-Oui (o)\n \t-Non (n)");    		
-        	System.out.println("Souhaitez-vous déplacer une carte ? \n \t-Oui (o)\n \t-Non (n)");
+    		this.notifyObservers("Souhaitez-vous déplacer une carte ? \n \t-Oui (o)\n \t-Non (n)");    		
+        	//System.out.println("Souhaitez-vous déplacer une carte ? \n \t-Oui (o)\n \t-Non (n)");
         	choix = scan.next().charAt(0);
     		scan.nextLine();
     			
         	if (choix!= 'o' && choix!= 'n') {
-        		//this.notifyObservers("Je n'ai pas compris votre choix...");          		
-    		    System.out.println("Je n'ai pas compris votre choix...");
+        		this.notifyObservers("Je n'ai pas compris votre choix...");          		
+    		    //System.out.println("Je n'ai pas compris votre choix...");
     		}
         		
     	}while (choix!= 'o' && choix!= 'n');
@@ -249,12 +249,12 @@ public Carte piocherCarte(Pioche pioche) {
 		
     	int ligneCase;
     	int colonneCase;
-    	//this.notifyObservers(tapis);    	
-    	System.out.println(tapis);
+    	this.notifyObservers(tapis);    	
+    	//System.out.println(tapis);
     	
     	if(tapis.getNbCartes()>0) {
-    		//this.notifyObservers("Les cartes doivent être adjacentes.");    		
-    		System.out.println("Les cartes doivent être adjacentes.");
+    		this.notifyObservers("Les cartes doivent être adjacentes.");    		
+    		//System.out.println("Les cartes doivent être adjacentes.");
     	}
     	
     	do {
@@ -262,12 +262,12 @@ public Carte piocherCarte(Pioche pioche) {
         	colonneCase = this.choisirColonneCarte(tapis);
         	
         	if(!tapis.placementNormalPossible(ligneCase,colonneCase)) {
-        		//this.notifyObservers("Désolée, cette case n'est pas disponible" + "\n");        		
-        		System.out.print("Désolée, cette case n'est pas disponible" + "\n");
+        		this.notifyObservers("Désolée, cette case n'est pas disponible" + "\n");        		
+        		//System.out.print("Désolée, cette case n'est pas disponible" + "\n");
         	}
         	if(ligneCase == lig && colonneCase == col) {
-        		//this.notifyObservers("La carte était déjà placée ici" + "\n");        		
-        		System.out.print("La carte était déjà placée ici" + "\n");
+        		this.notifyObservers("La carte était déjà placée ici" + "\n");        		
+        		//System.out.print("La carte était déjà placée ici" + "\n");
         	}
         	
     	}while((!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase)) || (ligneCase == lig && colonneCase == col));
@@ -278,12 +278,12 @@ public Carte piocherCarte(Pioche pioche) {
     			
     	} else if(tapis.caseRemplie(ligneCase,colonneCase) && tapis.decalagePossible(ligneCase, colonneCase)){
     		
-    			//this.notifyObservers("Décalage du tapis...");    		
-    			System.out.println("Décalage du tapis...");
+    			this.notifyObservers("Décalage du tapis...");    		
+    			//System.out.println("Décalage du tapis...");
     		    tapis.decalerCartes(ligneCase, colonneCase);
     		    tapis.getContainer().get(ligneCase).set(colonneCase, carteAJouer);
     	}
-    	//this.notifyObservers(tapis);
+    	this.notifyObservers(tapis);
     	System.out.println(tapis);
     	tapis.setNbCartes(tapis.getNbCartes()+1);
 
@@ -295,15 +295,15 @@ public Carte piocherCarte(Pioche pioche) {
     	int ligneCase;
     	int colonneCase;
     	Carte carteAJouer;
-    	//this.notifyObservers(tapis);    	
-    	System.out.println(tapis);
+    	this.notifyObservers(tapis);    	
+    	//System.out.println(tapis);
     	
     	if(tapis.getNbCartes()>0) {
-    		//this.notifyObservers("Les cartes doivent être adjacentes.");    		
-    		System.out.println("Les cartes doivent être adjacentes.");
+    		this.notifyObservers("Les cartes doivent être adjacentes.");    		
+    		//System.out.println("Les cartes doivent être adjacentes.");
     	}
-    	//this.notifyObservers("Carte(s) en main : " + this.getMainDuJoueur());    	
-    	System.out.println("Carte(s) en main : " + this.getMainDuJoueur());
+    	this.notifyObservers("Carte(s) en main : " + this.getMainDuJoueur());    	
+    	//System.out.println("Carte(s) en main : " + this.getMainDuJoueur());
 		carteAJouer = this.definirCarteAJouer(this, partie.getModeDeJeu());
 		partie.getModeDeJeu().voirCarteVictoire(partie, this);
     	
@@ -312,8 +312,8 @@ public Carte piocherCarte(Pioche pioche) {
         	colonneCase = this.choisirColonneCarte(tapis);
         	
         	if(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase)) {
-        		//this.notifyObservers("Désolée, cette n'est pas disponible" + "\n");          		
-        		System.out.print("Désolée, cette case n'est pas disponible" + "\n");
+        		this.notifyObservers("Désolée, cette n'est pas disponible" + "\n");          		
+        		//System.out.print("Désolée, cette case n'est pas disponible" + "\n");
         	}
         	
     	}while(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase));
@@ -324,16 +324,14 @@ public Carte piocherCarte(Pioche pioche) {
     			
     	} else if(tapis.caseRemplie(ligneCase,colonneCase) && tapis.decalagePossible(ligneCase, colonneCase)){
 
-    			//this.notifyObservers("Décalage du tapis...");      		
-    			System.out.println("Décalage du tapis...");
+    			this.notifyObservers("Décalage du tapis...");      		
+    			//System.out.println("Décalage du tapis...");
     		    tapis.decalerCartes(ligneCase, colonneCase);
     		    tapis.getContainer().get(ligneCase).set(colonneCase, carteAJouer);
     	}
-    	//this.notifyObservers(tapis);   
-    	System.out.println(tapis);
+    	this.notifyObservers(tapis);   
+    	//System.out.println(tapis);
     	tapis.setNbCartes(tapis.getNbCartes()+1);
-    	//this.notifyObservers("Nombre de cartes : " + tapis.getNbCartes());       	
-    	System.out.println("NB CARTES : " + tapis.getNbCartes());
 
     }
 	
@@ -342,18 +340,18 @@ public Carte piocherCarte(Pioche pioche) {
     	
     	int ligneCase;
     	int colonneCase;
-    	//this.notifyObservers(tapis);       	
-    	System.out.println(tapis);
-    	//this.notifyObservers("Veuillez choisir une carte à déplacer :");       	
-    	System.out.println("Veuillez choisir une carte à déplacer :");
+    	this.notifyObservers(tapis);       	
+    	//System.out.println(tapis);
+    	this.notifyObservers("Veuillez choisir une carte à déplacer :");       	
+    	//System.out.println("Veuillez choisir une carte à déplacer :");
     	
     	do {
     		ligneCase = this.choisirLigneCarte(tapis);
         	colonneCase = this.choisirColonneCarte(tapis);
         	
         	if(!tapis.caseRemplie(ligneCase,colonneCase)) {
-        		//this.notifyObservers("Désolée, cette case est vide");           		
-        		System.out.println("Désolée, cette case est vide");
+        		this.notifyObservers("Désolée, cette case est vide");           		
+        		//System.out.println("Désolée, cette case est vide");
         	}
     	}while(!tapis.caseRemplie(ligneCase,colonneCase));
     	
@@ -361,8 +359,8 @@ public Carte piocherCarte(Pioche pioche) {
     	tapis.setNbCartes(tapis.getNbCartes()-1);
     	tapis.getContainer().get(ligneCase).set(colonneCase, null);
     	
-    	//this.notifyObservers("Vous avez choisi de déplacer la carte " + carteADeplacer);   
-    	System.out.println("Vous avez choisi de déplacer la carte " + carteADeplacer);
+    	this.notifyObservers("Vous avez choisi de déplacer la carte " + carteADeplacer);   
+    	//System.out.println("Vous avez choisi de déplacer la carte " + carteADeplacer);
     	
     	this.placerCarte(ligneCase, colonneCase, carteADeplacer, tapis);
 

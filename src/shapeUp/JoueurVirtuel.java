@@ -7,7 +7,6 @@ public class JoueurVirtuel extends Joueur implements StrategieJoueur{
 	JoueurVirtuel(String nom, Console console) {
 		super(nom, console);
 		
-		// TODO Auto-generated constructor stub
 	}
 	
 	/*JoueurVirtuel(String nom) {
