@@ -13,6 +13,8 @@ import java.util.Queue;
 import java.util.Random;
 //import java.util.Set;
 
+import vue.Console;
+
 public class StrategieDeBase extends Observable implements StrategieMode {
 
 	public StrategieDeBase(Console console) {

@@ -1,4 +1,7 @@
-package shapeUp;
+package vue;
+
+import shapeUp.Observable;
+import shapeUp.Observer;
 
 public class Console implements Observer {
 

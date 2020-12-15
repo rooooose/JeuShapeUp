@@ -12,6 +12,8 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
 
+import vue.Console;
+
 public class StrategieVictoireEnnemie extends Observable implements StrategieMode {
 	
 	public StrategieVictoireEnnemie(Console console) {

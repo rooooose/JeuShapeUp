@@ -2,6 +2,8 @@ package shapeUp;
 
 import java.util.*;
 
+import vue.Console;
+
 public class Partie extends Observable implements Visitable {
 	
     /*private int nbreDeJoueurs;

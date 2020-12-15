@@ -2,6 +2,9 @@ package shapeUp;
 
 import java.util.*;
 
+import vue.Console;
+import vue.VueShapeUp;
+
 public class ShapeUp extends Observable {
 
 		private Console consoleDuJeu;
@@ -222,6 +225,7 @@ public class ShapeUp extends Observable {
 	    public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
+	    	VueShapeUp test = new VueShapeUp();
 			ShapeUp jeuShapeUp = new ShapeUp();
 			jeuShapeUp.notifyObservers(jeuShapeUp);
 			//System.out.println(jeuShapeUp);

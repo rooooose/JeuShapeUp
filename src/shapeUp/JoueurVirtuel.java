@@ -2,6 +2,8 @@ package shapeUp;
 
 import java.util.Random;
 
+import vue.Console;
+
 public class JoueurVirtuel extends Joueur implements StrategieJoueur{
 
 	JoueurVirtuel(String nom, Console console) {

@@ -2,6 +2,8 @@ package shapeUp;
 
 import java.util.*;
 
+import vue.Console;
+
 public abstract class Joueur extends Observable{
     private String nom;
 

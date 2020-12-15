@@ -2,6 +2,8 @@ package shapeUp;
 
 import java.util.Scanner;
 
+import vue.Console;
+
 public class JoueurReel extends Joueur implements StrategieJoueur{
 	
 	JoueurReel(String nom, Console console) {

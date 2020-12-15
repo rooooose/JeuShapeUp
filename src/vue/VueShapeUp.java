@@ -272,11 +272,11 @@ public class VueShapeUp implements Observer {
 		// TODO Auto-generated method stub
 		
 	}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		VueShapeUp test = new VueShapeUp();
-		
-	}
+//	public static void main(String[] args) {
+//		// TODO Auto-generated method stub
+//		VueShapeUp test = new VueShapeUp();
+//		
+//	}
 
 
 
