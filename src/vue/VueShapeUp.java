@@ -185,6 +185,9 @@ public class VueShapeUp implements Observer {
 					
 						if (virtuel.isSelected() || reel.isSelected()) {
 							containerNom.setVisible(true);
+							
+							
+							
 									okNom.addActionListener(new ActionListener() {
 									
 		
