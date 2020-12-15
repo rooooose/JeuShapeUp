@@ -6,8 +6,14 @@ public class TapisRectangle extends TapisDeJeu {
 						   			   	   {1,1,1,1,1},
 						   			   	   {1,1,1,1,1}};
 	
-	TapisRectangle(){
+	public TapisRectangle(){
 		super(MODELE);
 	}
-
+	/*public String toString() {
+    	
+		 StringBuffer sbTapis = new StringBuffer();
+		 sbTapis.append("Tapis rectangulaire");
+		 
+		 return sbTapis.toString();
+	}  */
 }

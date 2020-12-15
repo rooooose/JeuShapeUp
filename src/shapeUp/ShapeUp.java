@@ -8,10 +8,19 @@ import vue.VueShapeUp;
 public class ShapeUp extends Observable {
 
 		private Console consoleDuJeu;
-	    private Partie maPartie;
+	    public Console getConsoleDuJeu() {
+			return consoleDuJeu;
+		}
+
+		public void setConsoleDuJeu(Console consoleDuJeu) {
+			this.consoleDuJeu = consoleDuJeu;
+		}
+
+
+		private Partie maPartie;
 	    private final Scanner scan = new Scanner (System.in);
 	    Set<String> nomsJoueurs;
-
+	    
 	    
 	    ShapeUp() {
 	    	//super(new Console());
@@ -225,8 +234,9 @@ public class ShapeUp extends Observable {
 	    public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-	    	VueShapeUp test = new VueShapeUp();
+	    	
 			ShapeUp jeuShapeUp = new ShapeUp();
+			
 			jeuShapeUp.notifyObservers(jeuShapeUp);
 			//System.out.println(jeuShapeUp);
 			
@@ -236,7 +246,7 @@ public class ShapeUp extends Observable {
 			//System.out.println("Partie finie !"+"\n");
 			jeuShapeUp.maPartie.getModeDeJeu().finirLaPartie(jeuShapeUp.maPartie);
 			
-
+			VueShapeUp test = new VueShapeUp(jeuShapeUp);
 	    }
 
 }

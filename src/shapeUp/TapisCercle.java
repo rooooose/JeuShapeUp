@@ -18,9 +18,19 @@ public class TapisCercle extends TapisDeJeu{
 			   							   {1,1,1,1},
 			   							   {0,1,1,0}};
 
-	TapisCercle() {
+	public TapisCercle() {
 		super(MODELE);
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	/* public String toString() {
+	    	
+		 StringBuffer sbTapis = new StringBuffer();
+		 sbTapis.append("Tapis circulaire");
+		 
+		 return sbTapis.toString();
+	}  */
 }
+
+
+

@@ -12,7 +12,7 @@ public class TapisTriangleRectangle extends TapisDeJeu{
 	
 	//private static final int NBLIGNES = 5;
 
-	TapisTriangleRectangle(){
+	public TapisTriangleRectangle(){
 
 		super(MODELE);
 //		ArrayList<Carte> ligne0 = new ArrayList<Carte>();
@@ -30,5 +30,11 @@ public class TapisTriangleRectangle extends TapisDeJeu{
 	
 		
 	}
-
+	/*public String toString() {
+    	
+		 StringBuffer sbTapis = new StringBuffer();
+		 sbTapis.append("Tapis triangle rectangle");
+		 
+		 return sbTapis.toString();
+	}  */
 }
