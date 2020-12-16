@@ -176,7 +176,7 @@ public class VueShapeUp implements Observer {
 		containerNom.add(nomJoueur, FlowLayout.CENTER);
 		containerNom.add(okNom);
 		containerNom.setVisible(false);
-		//faire pour le nom des joueurs (sûrment lundi)
+		
 		
 		okType.addActionListener(new ActionListener() {
 			String nom=" ";
