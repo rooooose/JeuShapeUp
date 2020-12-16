@@ -76,7 +76,6 @@ public class VueShapeUp implements Observer {
 	
 	public VueShapeUp (ShapeUp sU) {
 		
-		
 		jeuShapeUp = sU;
 		jeuShapeUp.addObserver(this);
 		
@@ -377,10 +376,13 @@ public class VueShapeUp implements Observer {
 	
     public static void main(String[] args) {
 	// TODO Auto-generated method stub
-	
     	
-    	ShapeUp jeuShapeUp = new ShapeUp();
+    	Console console = new Console();
+    	ShapeUp jeuShapeUp = new ShapeUp(console);
+//    	jeuShapeUp.addObserver(console);
+//    	console.setJeuShapeUp(jeuShapeUp);
 		VueShapeUp test = new VueShapeUp(jeuShapeUp);
+		
     }
 
 

@@ -31,9 +31,10 @@ public class ShapeUp extends Observable {
 	    Set<String> nomsJoueurs;
 	    
 	    
-	    public ShapeUp() {
+	    public ShapeUp(Console console) {
 	    	//super(new Console());
 	    	
+	    	this.addObserver(console);
 //	    	this.consoleDuJeu = new Console();
 //	    	this.addObserver(this.consoleDuJeu);
 	    	

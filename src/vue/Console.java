@@ -7,10 +7,21 @@ import shapeUp.ShapeUp;
 public class Console implements Observer, Runnable {
 	
 	private ShapeUp jeuShapeUp;
+	public ShapeUp getJeuShapeUp() {
+		return jeuShapeUp;
+	}
+
+	public void setJeuShapeUp(ShapeUp jeuShapeUp) {
+		this.jeuShapeUp = jeuShapeUp;
+	}
+
+	private Thread t;
 	
-	public Console(ShapeUp shapeUp) {
-		this.jeuShapeUp = shapeUp;
-		this.jeuShapeUp.addObserver(this);
+	public Console() {
+//		this.jeuShapeUp = shapeUp;
+//		jeuShapeUp.addObserver(this);
+//		t = new Thread(this);
+//		t.start();
 	}
 
 	@Override
