@@ -15,9 +15,9 @@ public abstract class Joueur extends Observable{
 		this.nom = nom;
 	}
 	
-	Joueur(String nom, Console console) {
+	Joueur(String nom) {
 		this.setNom(nom);
-		this.addObserver(console);
+		//this.addObserver(console);
 		
 //	    if(this instanceof JoueurReel ) {
 //	    	this.strategie = (StrategieJoueur) this;

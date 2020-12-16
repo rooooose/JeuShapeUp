@@ -17,9 +17,9 @@ import vue.Console;
 	
 	public class StrategieAvance extends Observable implements StrategieMode {
 		
-		public StrategieAvance(Console console) {
-			this.addObserver(console);
-		}
+//		public StrategieAvance(Console console) {
+//			this.addObserver(console);
+//		}
 	
 	    public void voirCarteVictoire(Partie maPartie, Joueur joueur) {
 	    	this.notifyObservers("La dernière carte dans votre main sera votre carte de victoire.");

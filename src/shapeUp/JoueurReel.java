@@ -6,8 +6,8 @@ import vue.Console;
 
 public class JoueurReel extends Joueur implements StrategieJoueur{
 	
-	public JoueurReel(String nom, Console console) {
-		super(nom, console);
+	public JoueurReel(String nom) {
+		super(nom);
 		
 		// TODO Auto-generated constructor stub
 	}

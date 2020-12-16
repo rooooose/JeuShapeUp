@@ -16,9 +16,9 @@ import vue.Console;
 
 public class StrategieVictoireEnnemie extends Observable implements StrategieMode {
 	
-	public StrategieVictoireEnnemie(Console console) {
-		this.addObserver(console);
-	}
+//	public StrategieVictoireEnnemie(Console console) {
+//		this.addObserver(console);
+//	}
 
 	
     public void voirCarteVictoire(Partie maPartie, Joueur joueur) {

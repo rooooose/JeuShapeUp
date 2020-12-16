@@ -7,31 +7,41 @@ import vue.VueShapeUp;
 
 public class ShapeUp extends Observable {
 
-		private Console consoleDuJeu;
-	    public Console getConsoleDuJeu() {
-			return consoleDuJeu;
-		}
-
-		public void setConsoleDuJeu(Console consoleDuJeu) {
-			this.consoleDuJeu = consoleDuJeu;
-		}
+//		private Console consoleDuJeu;
+//	    public Console getConsoleDuJeu() {
+//			return consoleDuJeu;
+//		}
+//
+//		public void setConsoleDuJeu(Console consoleDuJeu) {
+//			this.consoleDuJeu = consoleDuJeu;
+//		}
 
 
 		private Partie maPartie;
-	    private final Scanner scan = new Scanner (System.in);
+	    public Partie getMaPartie() {
+			return maPartie;
+		}
+
+		public void setMaPartie(Partie maPartie) {
+			this.maPartie = maPartie;
+		}
+
+
+		private final Scanner scan = new Scanner (System.in);
 	    Set<String> nomsJoueurs;
 	    
 	    
-	    ShapeUp() {
+	    public ShapeUp() {
 	    	//super(new Console());
 	    	
-	    	this.consoleDuJeu = new Console();
-	    	this.addObserver(this.consoleDuJeu);
+//	    	this.consoleDuJeu = new Console();
+//	    	this.addObserver(this.consoleDuJeu);
 	    	
 	    	int nbJoueurs = this.choisirNbJoueurs();
 	    	
-	    	this.lancerLaPartie(this.creerJoueurs(nbJoueurs), this.choisirMode(), this.choisirFormeTapis(), this.consoleDuJeu);
-	    	this.notifyObservers("Jeu ShapeUp créé\n");
+	    	//this.lancerLaPartie(this.creerJoueurs(nbJoueurs), this.choisirMode(), this.choisirFormeTapis(), this.consoleDuJeu);
+	    	this.lancerLaPartie(this.creerJoueurs(nbJoueurs), this.choisirMode(), this.choisirFormeTapis());
+//	    	this.notifyObservers("Jeu ShapeUp créé\n");
 	    	//System.out.print("Jeu ShapeUp créé\n");
 	    }
 	    
@@ -44,15 +54,10 @@ public class ShapeUp extends Observable {
 	    }
 	    
 
-	   /* public void lancerLaPartie(Queue<Joueur> listeJoueurs, StrategieMode mode) {
-	    	
-	    	this.maPartie = new Partie(listeJoueurs, mode);
-	    	
-	    }*/
 	    
-	    public void lancerLaPartie(Queue<Joueur> queueJoueurs, StrategieMode mode, TapisDeJeu forme, Console console) {
+	    public void lancerLaPartie(Queue<Joueur> queueJoueurs, StrategieMode mode, TapisDeJeu forme) {
 	    	
-	    	this.maPartie = new Partie(queueJoueurs, mode, forme, console);
+	    	this.maPartie = new Partie(queueJoueurs, mode, forme);
 	    	
 	    	//this.maPartie.addObserver(this.consoleDuJeu);
 //	    	this.maPartie.setConsoleDuJeu(this.consoleDuJeu);
@@ -120,14 +125,16 @@ public class ShapeUp extends Observable {
         			
         			switch(type) {
 	        			case 'v' :
-	        				JoueurVirtuel nouveauJoueurV = new JoueurVirtuel(nom, this.consoleDuJeu);
+	        				//JoueurVirtuel nouveauJoueurV = new JoueurVirtuel(nom, this.consoleDuJeu);
+	        				JoueurVirtuel nouveauJoueurV = new JoueurVirtuel(nom);
 	        				//System.out.println("Nom du joueur " + i + ": " + nouveauJoueurV.getNom());
-//	        				nouveauJoueurV.addObserver(consoleDuJeu);
+
 	        				queueJoueurs.add(nouveauJoueurV);
 	        				nomsJoueurs.add(nom);
 	        				break;
 	        			case 'r' :
-	        				JoueurReel nouveauJoueurR = new JoueurReel(nom, this.consoleDuJeu);
+	        				//JoueurReel nouveauJoueurR = new JoueurReel(nom, this.consoleDuJeu);
+	        				JoueurReel nouveauJoueurR = new JoueurReel(nom);
 	        				//System.out.println("Nom du joueur " + i + ": " + nouveauJoueurR.getNom());
 //	        				nouveauJoueurR.addObserver(consoleDuJeu);
 	        				queueJoueurs.add(nouveauJoueurR);
@@ -179,11 +186,14 @@ public class ShapeUp extends Observable {
 	    	
 	    	switch(lettreMode) {
 				case 'b' :
-					return mode = new StrategieDeBase(this.consoleDuJeu);
+					//return mode = new StrategieDeBase(this.consoleDuJeu);
+					return mode = new StrategieDeBase();
 				case 'a' :
-					return mode = new StrategieAvance(this.consoleDuJeu);
+					return mode = new StrategieAvance();
+					//return mode = new StrategieAvance(this.consoleDuJeu);
 				case 'v' :
-					return mode = new StrategieVictoireEnnemie(this.consoleDuJeu);
+					//return mode = new StrategieVictoireEnnemie(this.consoleDuJeu);
+					return mode = new StrategieVictoireEnnemie();
 				default :
 //					//this.notifyObservers("Aucun mode associé");
 //					System.out.println("Aucun mode associé");
@@ -231,22 +241,22 @@ public class ShapeUp extends Observable {
 	    }
 	    
 
-	    public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-	    	
-			ShapeUp jeuShapeUp = new ShapeUp();
-			
-			jeuShapeUp.notifyObservers(jeuShapeUp);
-			//System.out.println(jeuShapeUp);
-			
-			while(!jeuShapeUp.maPartie.isEstFinie()) {
-				jeuShapeUp.maPartie.tourDeJeu();
-			}
-			//System.out.println("Partie finie !"+"\n");
-			jeuShapeUp.maPartie.getModeDeJeu().finirLaPartie(jeuShapeUp.maPartie);
-			
-			VueShapeUp test = new VueShapeUp(jeuShapeUp);
-	    }
+//	    public static void main(String[] args) {
+//		// TODO Auto-generated method stub
+//		
+//	    	
+//	    	ShapeUp jeuShapeUp = new ShapeUp();
+//			
+////			jeuShapeUp.notifyObservers(jeuShapeUp);
+////			//System.out.println(jeuShapeUp);
+////			
+////			while(!jeuShapeUp.getMaPartie().isEstFinie()) {
+////				jeuShapeUp.getMaPartie().tourDeJeu();
+////			}
+////			//System.out.println("Partie finie !"+"\n");
+////			jeuShapeUp.getMaPartie().getModeDeJeu().finirLaPartie(jeuShapeUp.getMaPartie());
+////			
+//			VueShapeUp test = new VueShapeUp(jeuShapeUp);
+//	    }
 
 }

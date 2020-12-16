@@ -6,8 +6,8 @@ import vue.Console;
 
 public class JoueurVirtuel extends Joueur implements StrategieJoueur{
 
-	public JoueurVirtuel(String nom, Console console) {
-		super(nom, console);
+	public JoueurVirtuel(String nom) {
+		super(nom);
 		
 	}
 	

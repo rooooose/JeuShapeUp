@@ -203,12 +203,14 @@ public class VueShapeUp implements Observer {
 						
 									if (virtuel.isSelected()) {
 										
-										JoueurVirtuel nouveauJoueurV = new JoueurVirtuel(nom, jeuShapeUp.getConsoleDuJeu());
+										//JoueurVirtuel nouveauJoueurV = new JoueurVirtuel(nom, jeuShapeUp.getConsoleDuJeu());
+										JoueurVirtuel nouveauJoueurV = new JoueurVirtuel(nom);
 										nomDesJoueurs.setText("Veuillez saisir le nom du joueur suivant : ");
 									}
 									
 									else if (reel.isSelected()) {
-										JoueurReel nouveauJoueurR = new JoueurReel(nom, jeuShapeUp.getConsoleDuJeu());
+										//JoueurReel nouveauJoueurR = new JoueurReel(nom, jeuShapeUp.getConsoleDuJeu());
+										JoueurReel nouveauJoueurR = new JoueurReel(nom);
 										nomDesJoueurs.setText("Veuillez saisir le nom du joueur suivant : ");
 									}
 						
@@ -264,16 +266,16 @@ public class VueShapeUp implements Observer {
 			if (deBase.isSelected() || victoireEnnemie.isSelected() || avance.isSelected()) {
 				
 			if (deBase.isSelected()) {
-mode = new StrategieDeBase(jeuShapeUp.getConsoleDuJeu());
-				
+				//mode = new StrategieDeBase(jeuShapeUp.getConsoleDuJeu());
+				mode = new StrategieDeBase();
 			}
 			else if (victoireEnnemie.isSelected()) {
-mode = new StrategieVictoireEnnemie(jeuShapeUp.getConsoleDuJeu());
-				
+				//mode = new StrategieVictoireEnnemie(jeuShapeUp.getConsoleDuJeu());
+				mode = new StrategieVictoireEnnemie();
 			}
 			else if (avance.isSelected()) {
-mode = new StrategieAvance(jeuShapeUp.getConsoleDuJeu());
-				
+				//mode = new StrategieAvance(jeuShapeUp.getConsoleDuJeu());
+				mode = new StrategieAvance();
 			}
 			
 			modeDeJeu.setText("Vous avez choisi les règles : "+mode );
@@ -372,12 +374,14 @@ mode = new StrategieAvance(jeuShapeUp.getConsoleDuJeu());
 		// TODO Auto-generated method stub
 		
 	}
-//	public static void main(String[] args) {
-//		// TODO Auto-generated method stub
-//		VueShapeUp test = new VueShapeUp();
-//		
-//	}
-
+	
+    public static void main(String[] args) {
+	// TODO Auto-generated method stub
+	
+    	
+    	ShapeUp jeuShapeUp = new ShapeUp();
+		VueShapeUp test = new VueShapeUp(jeuShapeUp);
+    }
 
 
 }

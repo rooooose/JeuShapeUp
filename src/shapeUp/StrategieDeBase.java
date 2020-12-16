@@ -17,9 +17,9 @@ import vue.Console;
 
 public class StrategieDeBase extends Observable implements StrategieMode {
 
-	public StrategieDeBase(Console console) {
-		this.addObserver(console);
-	}
+//	public StrategieDeBase(Console console) {
+//		this.addObserver(console);
+//	}
 	
 	public List<Carte> distribuerCartes(Partie maPartie) {
 		

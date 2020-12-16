@@ -111,15 +111,15 @@ public class Partie extends Observable implements Visitable {
 		this.nbCartesJouables = nbCartesJouables;
 	}
 	
-	Partie(Queue<Joueur> joueurs, StrategieMode mode, TapisDeJeu formeTapisDeJeu, Console console){
+	Partie(Queue<Joueur> joueurs, StrategieMode mode, TapisDeJeu formeTapisDeJeu){
 		//this.setNbreDeJoueurs(nbJoueurs);
 		//System.out.print("Nombre de joueurs : " + nbJoueurs);
-		this.addObserver(console);
+		
+//		this.addObserver(console);
+		
 		//this.notifyObservers("Partie créée\n");
 		//System.out.print("Partie créée\n");
-		
-		//A SUPPR LISTE 
-		//this.setListeJoueurs(joueurs);
+;
 		
 		this.setQueueJoueurs(joueurs);
 		this.setModeDeJeu(mode);
