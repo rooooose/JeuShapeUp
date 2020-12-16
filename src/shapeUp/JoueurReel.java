@@ -286,7 +286,7 @@ public Carte piocherCarte(Pioche pioche) {
     		    tapis.getContainer().get(ligneCase).set(colonneCase, carteAJouer);
     	}
     	this.notifyObservers(tapis);
-    	System.out.println(tapis);
+    	//System.out.println(tapis);
     	tapis.setNbCartes(tapis.getNbCartes()+1);
 
     }

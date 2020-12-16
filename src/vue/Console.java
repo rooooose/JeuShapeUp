@@ -7,21 +7,15 @@ import shapeUp.ShapeUp;
 public class Console implements Observer, Runnable {
 	
 	private ShapeUp jeuShapeUp;
-	public ShapeUp getJeuShapeUp() {
-		return jeuShapeUp;
-	}
 
-	public void setJeuShapeUp(ShapeUp jeuShapeUp) {
-		this.jeuShapeUp = jeuShapeUp;
-	}
 
 	private Thread t;
 	
-	public Console() {
-//		this.jeuShapeUp = shapeUp;
-//		jeuShapeUp.addObserver(this);
-//		t = new Thread(this);
-//		t.start();
+	public Console(ShapeUp shapeUp) {
+		this.jeuShapeUp = shapeUp;
+		jeuShapeUp.addObserver(this);
+		t = new Thread(this);
+		t.start();
 	}
 
 	@Override
@@ -34,6 +28,8 @@ public class Console implements Observer, Runnable {
 	public void run() {
 
 		//ShapeUp jeuShapeUp = new ShapeUp();
+		int nbJoueurs = this.jeuShapeUp.choisirNbJoueurs();
+    	this.jeuShapeUp.lancerLaPartie(this.jeuShapeUp.creerJoueurs(nbJoueurs), this.jeuShapeUp.choisirMode(), this.jeuShapeUp.choisirFormeTapis());
 		
 		System.out.println(this.jeuShapeUp);
 		//System.out.println(jeuShapeUp);

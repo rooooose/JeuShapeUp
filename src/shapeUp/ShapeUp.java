@@ -31,17 +31,16 @@ public class ShapeUp extends Observable {
 	    Set<String> nomsJoueurs;
 	    
 	    
-	    public ShapeUp(Console console) {
-	    	//super(new Console());
+	    public ShapeUp() {
 	    	
-	    	this.addObserver(console);
+	    	//this.addObserver(console);
 //	    	this.consoleDuJeu = new Console();
 //	    	this.addObserver(this.consoleDuJeu);
 	    	
-	    	int nbJoueurs = this.choisirNbJoueurs();
+	    	//int nbJoueurs = this.choisirNbJoueurs();
 	    	
 	    	//this.lancerLaPartie(this.creerJoueurs(nbJoueurs), this.choisirMode(), this.choisirFormeTapis(), this.consoleDuJeu);
-	    	this.lancerLaPartie(this.creerJoueurs(nbJoueurs), this.choisirMode(), this.choisirFormeTapis());
+	    	//this.lancerLaPartie(this.creerJoueurs(nbJoueurs), this.choisirMode(), this.choisirFormeTapis());
 //	    	this.notifyObservers("Jeu ShapeUp créé\n");
 	    	//System.out.print("Jeu ShapeUp créé\n");
 	    }

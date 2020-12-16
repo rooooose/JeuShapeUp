@@ -376,9 +376,8 @@ public class VueShapeUp implements Observer {
 	
     public static void main(String[] args) {
 	// TODO Auto-generated method stub
-    	
-    	Console console = new Console();
-    	ShapeUp jeuShapeUp = new ShapeUp(console);
+    	ShapeUp jeuShapeUp = new ShapeUp();
+    	Console console = new Console(jeuShapeUp);
 //    	jeuShapeUp.addObserver(console);
 //    	console.setJeuShapeUp(jeuShapeUp);
 		VueShapeUp test = new VueShapeUp(jeuShapeUp);

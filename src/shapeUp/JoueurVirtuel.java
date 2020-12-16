@@ -197,8 +197,8 @@ public Carte piocherCarte(Pioche pioche) {
 		
     	int ligneCase;
     	int colonneCase;
-    	//this.notifyObservers(tapis);    	
-    	System.out.println(tapis);
+    	this.notifyObservers(tapis);    	
+    	//System.out.println(tapis);
     	
     	if(tapis.getNbCartes()>0) {
     		this.notifyObservers("Les cartes doivent être adjacentes.");    		
@@ -231,8 +231,8 @@ public Carte piocherCarte(Pioche pioche) {
     		    tapis.decalerCartes(ligneCase, colonneCase);
     		    tapis.getContainer().get(ligneCase).set(colonneCase, carteAJouer);
     	}
-    	//this.notifyObservers(tapis);
-    	System.out.println(tapis);
+    	this.notifyObservers(tapis);
+    	//System.out.println(tapis);
     	tapis.setNbCartes(tapis.getNbCartes()+1);
 
     }
@@ -243,8 +243,8 @@ public Carte piocherCarte(Pioche pioche) {
     	int ligneCase;
     	int colonneCase;
     	Carte carteAJouer;
-    	//this.notifyObservers(tapis);    	
-    	System.out.println(tapis);
+    	this.notifyObservers(tapis);    	
+    	//System.out.println(tapis);
     	
     	if(tapis.getNbCartes()>0) {
     		this.notifyObservers("Les cartes doivent être adjacentes.");    		
