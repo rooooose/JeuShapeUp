@@ -77,7 +77,7 @@ public class VueShapeUp implements Observer {
 	public VueShapeUp (ShapeUp sU) {
 		
 		jeuShapeUp = sU;
-		jeuShapeUp.addObserver(this);
+		//jeuShapeUp.addObserver(this);
 		
 		fenetreChoix = new JFrame("Paramètres de jeu");
 		JPanel container =(JPanel) fenetreChoix.getContentPane();

@@ -5,7 +5,7 @@ import java.util.*;
 import vue.Console;
 import vue.VueShapeUp;
 
-public class ShapeUp extends Observable {
+public class ShapeUp {
 
 //		private Console consoleDuJeu;
 //	    public Console getConsoleDuJeu() {
@@ -15,7 +15,16 @@ public class ShapeUp extends Observable {
 //		public void setConsoleDuJeu(Console consoleDuJeu) {
 //			this.consoleDuJeu = consoleDuJeu;
 //		}
+		
+		Queue<Joueur> queueJoueurs = new LinkedList<Joueur>();
 
+		public Queue<Joueur> getQueueJoueurs() {
+			return queueJoueurs;
+		}
+
+		public void setQueueJoueurs(Queue<Joueur> queueJoueurs) {
+			this.queueJoueurs = queueJoueurs;
+		}
 
 		private Partie maPartie;
 	    public Partie getMaPartie() {
@@ -26,10 +35,14 @@ public class ShapeUp extends Observable {
 			this.maPartie = maPartie;
 		}
 
+	    private Set<String> nomsJoueurs = new HashSet<String>();
+	    public Set<String> getNomsJoueurs() {
+			return nomsJoueurs;
+		}
 
-		private final Scanner scan = new Scanner (System.in);
-	    Set<String> nomsJoueurs;
-	    
+		public void setNomsJoueurs(Set<String> nomsJoueurs) {
+			this.nomsJoueurs = nomsJoueurs;
+		}
 	    
 	    public ShapeUp() {
 	    	
@@ -47,8 +60,6 @@ public class ShapeUp extends Observable {
 	    
 	    public String toString() {
 	    	StringBuffer sb = new StringBuffer();
-//	    	sb.append("Liste des joueurs : ");
-//	    	sb.append(this.nomsJoueurs.keySet() + "\n");
 	    	sb.append(this.maPartie);
 			return sb.toString();
 	    }
@@ -58,187 +69,81 @@ public class ShapeUp extends Observable {
 	    public void lancerLaPartie(Queue<Joueur> queueJoueurs, StrategieMode mode, TapisDeJeu forme) {
 	    	
 	    	this.maPartie = new Partie(queueJoueurs, mode, forme);
-	    	
-	    	//this.maPartie.addObserver(this.consoleDuJeu);
-//	    	this.maPartie.setConsoleDuJeu(this.consoleDuJeu);
-	    	//this.maPartie.getTapisDeJeu().addObserver(this.consoleDuJeu);
 	    }
-
-	    public int choisirNbJoueurs() {
-
-	    		char nbChar='r';
-	        	
-	        		do {
-	        			this.notifyObservers("Veuillez choisir le nombre de joueurs pour votre partie (2 ou 3) : ");
-			        	//System.out.println("Veuillez choisir le nombre de joueurs pour votre partie (2 ou 3) : ");
-				        //nb = scan.nextInt();
-				        nbChar = scan.next().charAt(0);
-		    			scan.nextLine();
-
-				        if (nbChar != '2' && nbChar!= '3') {
-				        	this.notifyObservers("Je suis désolée, vous ne pouvez choisir que 2 ou 3 joueurs.");
-				        	//System.out.println("Je suis désolée, vous ne pouvez choisir que 2 ou 3 joueurs.");
-				        } 
-
-			        }while (nbChar != '2' && nbChar !='3' );
-			        int nb= Integer.parseInt(String.valueOf(nbChar));
-			        return nb;
-	        	}
 	    
-
-		public char definirTypeJoueur(int nb) {
+	    public void creerJoueur(char ty, String nm) {
 	    	
-	    	char type='r';
-	    	
-	    	do {
-	    		this.notifyObservers("Veuillez choisir le type du joueur " + nb + ": virtuel (v) ou réel (r) ?");
-    			//System.out.println("Veuillez choisir le type du joueur " + nb + ": virtuel (v) ou réel (r) ?");
+	    	char type= ty;
+	    	String nom = nm;
 
-    			type = scan.next().charAt(0);
-    			scan.nextLine();
+//        	type = ty;
+//        	nom = nm;
+        			
+        	switch(type) {
+	        	case 'v' :
+	        		JoueurVirtuel nouveauJoueurV = new JoueurVirtuel(nom);
+	        		this.getNomsJoueurs().add(nom);
+	        		this.queueJoueurs.add(nouveauJoueurV);
+	        		break;
+	        		//return nouveauJoueurV;
+	        	case 'r' :
+	        		JoueurReel nouveauJoueurR = new JoueurReel(nom);
+	        		this.getNomsJoueurs().add(nom);
+	        		this.queueJoueurs.add(nouveauJoueurR);
+	        		break;
+	        		//return nouveauJoueurR;
+//	        	default :
+//	        		return null;
+        	}
 
-			    if (type != 'v' && type!= 'r') {
-			    	this.notifyObservers("Je suis désolée, vous ne pouvez choisir qu'entre virtuel (v) ou réel (r).");
-			        //System.out.println("Je suis désolée, vous ne pouvez choisir qu'entre virtuel (v) ou réel (r).");
-			    } 
-			    
-			}while (type != 'v' && type!= 'r');
-	    	
-	    	return type;
+			
 	    	
 	    }
 
-	    public Queue<Joueur> creerJoueurs(int nbJoueurs) {
-	    	
-	    	char type='r';
-	    	String nom;
-	    	nomsJoueurs = new HashSet<String>();
-	    	Queue<Joueur> queueJoueurs = new LinkedList<Joueur>();
-        		
-        		for(int i=1; i<=nbJoueurs; i++) {
-        			
-        			//définition des types des joueurs
-        			type = definirTypeJoueur(i);
-        			
-        			//définition des noms  des joueurs
-        			nom = definirNomJoueur(i);
-        			
-        			switch(type) {
-	        			case 'v' :
-	        				//JoueurVirtuel nouveauJoueurV = new JoueurVirtuel(nom, this.consoleDuJeu);
-	        				JoueurVirtuel nouveauJoueurV = new JoueurVirtuel(nom);
-	        				//System.out.println("Nom du joueur " + i + ": " + nouveauJoueurV.getNom());
 
-	        				queueJoueurs.add(nouveauJoueurV);
-	        				nomsJoueurs.add(nom);
-	        				break;
-	        			case 'r' :
-	        				//JoueurReel nouveauJoueurR = new JoueurReel(nom, this.consoleDuJeu);
-	        				JoueurReel nouveauJoueurR = new JoueurReel(nom);
-	        				//System.out.println("Nom du joueur " + i + ": " + nouveauJoueurR.getNom());
-//	        				nouveauJoueurR.addObserver(consoleDuJeu);
-	        				queueJoueurs.add(nouveauJoueurR);
-	        				nomsJoueurs.add(nom);
-	        				break;
-//	        			default :
-//	        				//this.notifyObservers("Aucun joueur créé");
-//	        				System.out.println("Aucun joueur créé");
+//	    public Queue<Joueur> creerJoueurs(int nbJoueurs) {
+//	    	
+//	    	char type='r';
+//	    	String nom;
+//	    	nomsJoueurs = new HashSet<String>();
+//	    	Queue<Joueur> queueJoueurs = new LinkedList<Joueur>();
+//        		
+//        		for(int i=1; i<=nbJoueurs; i++) {
+//        			
+//        			//définition des types des joueurs
+//        			type = definirTypeJoueur(i);
+//        			
+//        			//définition des noms  des joueurs
+//        			nom = definirNomJoueur(i);
+//        			
+//        			switch(type) {
+//	        			case 'v' :
+//	        				//JoueurVirtuel nouveauJoueurV = new JoueurVirtuel(nom, this.consoleDuJeu);
+//	        				JoueurVirtuel nouveauJoueurV = new JoueurVirtuel(nom);
+//	        				//System.out.println("Nom du joueur " + i + ": " + nouveauJoueurV.getNom());
+//
+//	        				queueJoueurs.add(nouveauJoueurV);
+//	        				nomsJoueurs.add(nom);
 //	        				break;
-	        				
-        			}
-        		
-    			}
-			return queueJoueurs;
-	    	
-	    }
-	    
-	    public String definirNomJoueur(int nb) {
-	    	
-	    	String nom;
-	    	do {
-	    		this.notifyObservers("Veuillez choisir le nom du joueur " + nb + ": \n");
-        		//System.out.println("Veuillez choisir le nom du joueur " + nb + ": \n");
-        		nom = scan.nextLine();
-        		if (nomsJoueurs.contains(nom)) {
-        			this.notifyObservers("Je suis désolée, chaque joueur doit avoir un nom unique");
-			        //System.out.println("Je suis désolée, chaque joueur doit avoir un nom unique");
-			    } 
-			}while (nomsJoueurs.contains(nom));
-	    	
-	    	return nom;
-	    }
-	    
-
-	    public StrategieMode choisirMode() {
-	    	
-	    	StrategieMode mode;
-	    	char lettreMode='b';
-	    	do {
-	    		this.notifyObservers("Veuillez choisir le mode de partie : \n \t-Mode de Base (b)\n \t-Mode Avancé (a)\n\t-Mode Victoire Ennemie (v)");
-        		//System.out.println("Veuillez choisir le mode de partie : \n \t-Mode de Base (b)\n \t-Mode Avancé (a)\n\t-Mode Victoire Ennemie (v)");
-        		lettreMode = scan.next().charAt(0);
-    			scan.nextLine();
-        		if (lettreMode!= 'b' && lettreMode!= 'a' && lettreMode!= 'v') {
-        			this.notifyObservers("Je suis désolée, vous ne pouvez choisir qu'entre les 3 modes proposés.");
-			        //System.out.println("Je suis désolée, vous ne pouvez choisir qu'entre les 3 modes proposés.");
-			    }  
-			}while (lettreMode!= 'b' && lettreMode!= 'a' && lettreMode!= 'v');
-	    	
-	    	switch(lettreMode) {
-				case 'b' :
-					//return mode = new StrategieDeBase(this.consoleDuJeu);
-					return mode = new StrategieDeBase();
-				case 'a' :
-					return mode = new StrategieAvance();
-					//return mode = new StrategieAvance(this.consoleDuJeu);
-				case 'v' :
-					//return mode = new StrategieVictoireEnnemie(this.consoleDuJeu);
-					return mode = new StrategieVictoireEnnemie();
-				default :
-//					//this.notifyObservers("Aucun mode associé");
-//					System.out.println("Aucun mode associé");
-					return null;
-	    	}
-	    }
-	    
-	    
-	    public TapisDeJeu choisirFormeTapis() {
-	    	
-	    	TapisDeJeu forme;
-	    	char lettreForme='b';
-	    	do {
-	    		this.notifyObservers("Veuillez choisir la forme du tapis : \n \t-Rectangle 5x3 (r)\n \t-Triangle rectangle (t)\n \t-Disque (d)");
-        		//System.out.println("Veuillez choisir la forme du tapis : \n \t-Rectangle 5x3 (r)\n \t-Triangle rectangle (t)\n \t-Disque (d)");
-        		lettreForme = scan.next().charAt(0);
-    			scan.nextLine();
-        		if (lettreForme!= 'r' && lettreForme!= 't' && lettreForme!= 'd') {
-        			this.notifyObservers("Je suis désolée, vous ne pouvez choisir qu'entre les formes proposées.");
-			        //System.out.println("Je suis désolée, vous ne pouvez choisir qu'entre les formes proposées.");
-			    }  
-			}while (lettreForme!= 'r' && lettreForme!= 't' && lettreForme!= 'd');
-	    	
-	    	switch(lettreForme) {
-				case 'r' :
-					//TapisRectangle rectangle = new TapisRectangle();
-					forme = new TapisRectangle();
-					//return rectangle;
-					return forme;
-				case 't' :
-					//TapisTriangleRectangle triangle = new TapisTriangleRectangle();
-					forme = new TapisTriangleRectangle();
-					//return triangle;
-					return forme;
-				case 'd' :
-					//TapisTriangleRectangle triangle = new TapisTriangleRectangle();
-					forme = new TapisCercle();
-					//return triangle;
-					return forme;
-				default :
-//					this.notifyObservers("Aucune forme associée");
-//					System.out.println("Aucune forme associée");
-					return null;
-	    	}
-	    }
+//	        			case 'r' :
+//	        				//JoueurReel nouveauJoueurR = new JoueurReel(nom, this.consoleDuJeu);
+//	        				JoueurReel nouveauJoueurR = new JoueurReel(nom);
+//	        				//System.out.println("Nom du joueur " + i + ": " + nouveauJoueurR.getNom());
+////	        				nouveauJoueurR.addObserver(consoleDuJeu);
+//	        				queueJoueurs.add(nouveauJoueurR);
+//	        				nomsJoueurs.add(nom);
+//	        				break;
+////	        			default :
+////	        				//this.notifyObservers("Aucun joueur créé");
+////	        				System.out.println("Aucun joueur créé");
+////	        				break;
+//	        				
+//        			}
+//        		
+//    			}
+//			return queueJoueurs;
+//	    	
+//	    }
 	    
 
 //	    public static void main(String[] args) {
