@@ -7,9 +7,19 @@ import java.util.List;
 public class Observable {
 	
 	private List<Observer> observers = new ArrayList<Observer>();
+	private boolean changed;
 	
+	public void setChanged() {
+		this.changed = true;
+	}
 	
-
+	public boolean hasChanged() {
+		return this.changed;
+	}
+	
+	public void clearChanged() {
+		this.changed = false;
+	}
 	
 	public void addObserver (Observer o) {
 		this.observers.add(o);
