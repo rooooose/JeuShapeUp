@@ -5,7 +5,7 @@ import java.util.*;
 import vue.Console;
 import vue.VueShapeUp;
 
-public class ShapeUp {
+public class ShapeUp extends Observable {
 
 //		private Console consoleDuJeu;
 //	    public Console getConsoleDuJeu() {
@@ -17,6 +17,8 @@ public class ShapeUp {
 //		}
 		
 		Queue<Joueur> queueJoueurs = new LinkedList<Joueur>();
+
+
 
 		public Queue<Joueur> getQueueJoueurs() {
 			return queueJoueurs;
@@ -44,7 +46,40 @@ public class ShapeUp {
 			this.nomsJoueurs = nomsJoueurs;
 		}
 	    
-	    public ShapeUp() {
+		private int nbDeJoueurs;
+		
+		public int getNbDeJoueurs() {
+			return nbDeJoueurs;
+		}
+
+		public void setNbDeJoueurs(int nbDeJoueurs) {
+			this.nbDeJoueurs = nbDeJoueurs;
+			this.notifyObservers(nbDeJoueurs);
+		}
+		
+		private TapisDeJeu formeTapis;
+		
+		private StrategieMode mode;
+		
+	    public TapisDeJeu getFormeTapis() {
+			return formeTapis;
+		}
+
+		public void setFormeTapis(TapisDeJeu formeTapis) {
+			this.formeTapis = formeTapis;
+			
+		}
+
+		public StrategieMode getMode() {
+			return mode;
+		}
+
+		public void setMode(StrategieMode mode) {
+			this.mode = mode;
+			
+		}
+
+		public ShapeUp() {
 	    	
 	    	//this.addObserver(console);
 //	    	this.consoleDuJeu = new Console();
@@ -84,12 +119,14 @@ public class ShapeUp {
 	        		JoueurVirtuel nouveauJoueurV = new JoueurVirtuel(nom);
 	        		this.getNomsJoueurs().add(nom);
 	        		this.queueJoueurs.add(nouveauJoueurV);
+	        		this.notifyObservers(nouveauJoueurV);
 	        		break;
 	        		//return nouveauJoueurV;
 	        	case 'r' :
 	        		JoueurReel nouveauJoueurR = new JoueurReel(nom);
 	        		this.getNomsJoueurs().add(nom);
 	        		this.queueJoueurs.add(nouveauJoueurR);
+	        		this.notifyObservers(nouveauJoueurR);
 	        		break;
 	        		//return nouveauJoueurR;
 //	        	default :

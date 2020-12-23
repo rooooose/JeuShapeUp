@@ -58,6 +58,8 @@ public class Console implements Observer, Runnable {
 
 	        }while (nbChar != '2' && nbChar !='3' );
 	        int nb= Integer.parseInt(String.valueOf(nbChar));
+	        this.jeuShapeUp.setNbDeJoueurs(nb);
+	        
 	        return nb;
     }
 	
@@ -116,14 +118,30 @@ public class Console implements Observer, Runnable {
 	    	
 	    	switch(lettreMode) {
 				case 'b' :
-					return mode = new StrategieDeBase();
+					
+					mode = new StrategieDeBase();
+					this.jeuShapeUp.setMode(mode);
+					this.jeuShapeUp.notifyObservers(mode);
+					return mode;
 				case 'a' :
-					return mode = new StrategieAvance();
+					
+					
+					mode = new StrategieAvance();
+					this.jeuShapeUp.setMode(mode);
+					this.jeuShapeUp.notifyObservers(mode);
+					return mode;
+					
 				case 'v' :
-					return mode = new StrategieVictoireEnnemie();
+					mode = new StrategieVictoireEnnemie();
+					this.jeuShapeUp.setMode(mode);
+					this.jeuShapeUp.notifyObservers(mode);
+					return mode;
+
 				default :
 					return null;
 	    	}
+	    	
+	    	
 	    }
 	    
 	    
@@ -145,13 +163,19 @@ public class Console implements Observer, Runnable {
 	    	switch(lettreForme) {
 				case 'r' :
 					forme = new TapisRectangle();
+					this.jeuShapeUp.setFormeTapis(forme);
+					this.jeuShapeUp.notifyObservers(forme);
 					return forme;
 				case 't' :
 					forme = new TapisTriangleRectangle();
+					this.jeuShapeUp.setFormeTapis(forme);
+					this.jeuShapeUp.notifyObservers(forme);
 					return forme;
-				case 'd' :
+			case 'd' :
 					forme = new TapisCercle();
-					return forme;
+					this.jeuShapeUp.setFormeTapis(forme);
+					this.jeuShapeUp.notifyObservers(forme);
+					return forme;		
 				default :
 					return null;
 	    	}
@@ -165,6 +189,7 @@ public class Console implements Observer, Runnable {
 		
 		for(int i=1; i<=nbJoueurs; i++) {
 			this.jeuShapeUp.creerJoueur(this.definirTypeJoueur(i), this.definirNomJoueur(i));
+			
 		}
 		
 		
@@ -182,9 +207,11 @@ public class Console implements Observer, Runnable {
 		if(this.partie.getModeDeJeu() instanceof StrategieDeBase) {
 			StrategieDeBase mode = (StrategieDeBase) this.partie.getModeDeJeu();
 			mode.addObserver(this);
+
 		} else if(this.partie.getModeDeJeu() instanceof StrategieVictoireEnnemie) {
 			StrategieVictoireEnnemie mode = (StrategieVictoireEnnemie) this.partie.getModeDeJeu();
 			mode.addObserver(this);
+
 		} else if(this.partie.getModeDeJeu() instanceof StrategieAvance) {
 			StrategieAvance mode = (StrategieAvance) this.partie.getModeDeJeu();
 			mode.addObserver(this);

@@ -76,6 +76,7 @@ public class ControleurShapeUp {
 				mode = new StrategieAvance();
 			}
 			
+			sU.setMode(mode);
 			vueShUp.getModeDeJeu().setText("Vous avez choisi les règles : "+mode );
 			vueShUp.getModeDeJeu().setForeground(Color.PINK);
 			vueShUp.getOkMode().setEnabled(false);
@@ -92,28 +93,31 @@ public class ControleurShapeUp {
 	});
 		
 		vueShUp.getOkForme().addActionListener(new ActionListener() {
-			
+			TapisDeJeu forme = null;
 			
 			public void actionPerformed(ActionEvent e) {
-				TapisDeJeu forme = null;				
+								
 			if (vueShUp.getRectangle().isSelected() || vueShUp.getTriangle().isSelected() || vueShUp.getCercle().isSelected()) {	
 				
 				if (vueShUp.getRectangle().isSelected()) {
 					forme = new TapisRectangle();
+					//sU.setFormeTapis(forme);;
 					vueShUp.getFormeTapis().setText("Vous avez choisi un tapis rectangulaire");
 					
 				}
 				else if (vueShUp.getTriangle().isSelected()) {
 					forme = new TapisTriangleRectangle();
+					//sU.setFormeTapis(new TapisTriangleRectangle());
 					vueShUp.getFormeTapis().setText("Vous avez choisi un tapis triangle rectangle");
 				}
 				else if (vueShUp.getCercle().isSelected()) {
 					forme = new TapisCercle();
+					//sU.setFormeTapis(new TapisCercle());
 					vueShUp.getFormeTapis().setText("Vous avez choisi un tapis circulaire");
 					
 				}
 				
-				
+				sU.setFormeTapis(forme);
 				vueShUp.getFormeTapis().setForeground(Color.PINK);
 				vueShUp.getOkForme().setEnabled(false);
 				vueShUp.getRectangle().setEnabled(false);
@@ -158,6 +162,7 @@ public class ControleurShapeUp {
 				}
 				
 				ControleurShapeUp.this.setNbre(nbre);
+				sU.setNbDeJoueurs(nbre);
 				
 				}
 				else 
@@ -226,6 +231,9 @@ public class ControleurShapeUp {
 										vueShUp.getNomJoueur1().setVisible(false);
 										vueShUp.getOkNom1().setVisible(false);
 										vueShUp.getFenetreChoix().pack();
+										if (sU.getQueueJoueurs().size() == 0 ) {
+											sU.creerJoueur(ControleurShapeUp.this.getTypes()[0], nom);
+										}
 										
 										
 									}
@@ -287,6 +295,9 @@ public class ControleurShapeUp {
 								vueShUp.getNomJoueur2().setVisible(false);
 								vueShUp.getOkNom2().setVisible(false);
 								vueShUp.getFenetreChoix().pack();
+								if (sU.getQueueJoueurs().size() == 1 ) {
+									sU.creerJoueur(ControleurShapeUp.this.getTypes()[1], nom);
+								}
 								
 								
 							}
@@ -348,8 +359,9 @@ public class ControleurShapeUp {
 								vueShUp.getNomJoueur3().setVisible(false);
 								vueShUp.getOkNom3().setVisible(false);
 								vueShUp.getFenetreChoix().pack();
-								
-								
+								if (sU.getQueueJoueurs().size() == 2 ) {
+								sU.creerJoueur(ControleurShapeUp.this.getTypes()[2], nom);
+								}
 							}
 							
 							

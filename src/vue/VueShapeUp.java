@@ -692,10 +692,14 @@ public class VueShapeUp implements Observer {
 	
 	public VueShapeUp (ShapeUp sU) {
 		
-		jeuShapeUp = sU;
-		//jeuShapeUp.addObserver(this);
 		
 		initialize();
+		
+		this.jeuShapeUp = sU;
+		jeuShapeUp.addObserver(this);
+		//jeuShapeUp.addObserver(this);
+		
+		
 		
 		new ControleurShapeUp (jeuShapeUp, this);
 		
@@ -958,6 +962,98 @@ public class VueShapeUp implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
+		
+		if (this.jeuShapeUp.getNbDeJoueurs() == 2) {
+			deuxJoueurs.setSelected(true);
+			okNbre.doClick();
+			
+		}
+		
+		if (this.jeuShapeUp.getNbDeJoueurs() == 3) {
+			troisJoueurs.setSelected(true);
+			okNbre.doClick();
+		}
+			if ( this.jeuShapeUp.getQueueJoueurs().size() ==1) {
+				
+				if (this.jeuShapeUp.getQueueJoueurs().toArray()[0] instanceof JoueurVirtuel) {
+					virtuel1.setSelected(true);
+					
+					
+					
+				} else if (this.jeuShapeUp.getQueueJoueurs().toArray()[0] instanceof JoueurReel) {
+					reel1.setSelected(true);
+					
+				}
+				
+				
+				nomJoueur1.setText((String) this.jeuShapeUp.getNomsJoueurs().toArray()[0]);
+				okNom1.doClick();
+				okType1.doClick();
+
+				
+			} if ( this.jeuShapeUp.getQueueJoueurs().size() == 2) {
+				if (this.jeuShapeUp.getQueueJoueurs().toArray()[1] instanceof JoueurVirtuel) {
+					virtuel2.setSelected(true);
+
+					
+				} else if (this.jeuShapeUp.getQueueJoueurs().toArray()[1] instanceof JoueurReel) {
+					reel2.setSelected(true);
+
+					
+				}
+				
+				nomJoueur2.setText((String) this.jeuShapeUp.getNomsJoueurs().toArray()[1]);
+				okNom2.doClick();
+				okType2.doClick();
+				
+				
+				
+				
+			}if ( this.jeuShapeUp.getQueueJoueurs().size() == 3) {
+				if (this.jeuShapeUp.getQueueJoueurs().toArray()[2] instanceof JoueurVirtuel) {
+					virtuel3.setSelected(true);
+
+				} else if (this.jeuShapeUp.getQueueJoueurs().toArray()[2] instanceof JoueurReel) {
+					reel3.setSelected(true);
+
+					
+				}
+				
+				nomJoueur3.setText((String) this.jeuShapeUp.getNomsJoueurs().toArray()[2]);
+				okNom3.doClick();
+				okType3.doClick();
+				
+				
+			
+			
+			
+		}
+		
+		if(this.jeuShapeUp.getMode() instanceof StrategieDeBase) {
+			deBase.setSelected(true);
+			okMode.doClick();
+			
+		} else if (this.jeuShapeUp.getMode() instanceof StrategieAvance) {
+			avance.setSelected(true);
+			okMode.doClick();
+		} else if (this.jeuShapeUp.getMode() instanceof StrategieVictoireEnnemie) {
+			victoireEnnemie.setSelected(true);
+			okMode.doClick();
+		}
+		
+		if (this.jeuShapeUp.getFormeTapis() instanceof TapisRectangle) {
+			rectangle.setSelected(true);
+			okForme.doClick();
+			
+		} else if (this.jeuShapeUp.getFormeTapis() instanceof TapisTriangleRectangle) {
+			triangle.setSelected(true);
+			okForme.doClick();
+			
+		} else if (this.jeuShapeUp.getFormeTapis() instanceof TapisCercle) {
+			cercle.setSelected(true);
+			okForme.doClick();
+			
+		} 
 		
 	}
 	
