@@ -181,7 +181,7 @@ public class Partie extends Observable implements Visitable {
 		return score;
 	}
 	
-	public void tourDeJeu()  {
+	public void tourDeJeu(Console console)  {
 		
 		
 		Joueur joueurActif = queueJoueurs.peek();
@@ -191,7 +191,7 @@ public class Partie extends Observable implements Visitable {
 		//System.out.println("\n"+"***** C'est au tour de " + joueurActif.getNom()+" *****");
 
 		
-		queueJoueurs.peek().jouer(this, this.getTapisDeJeu(), this.getPioche(), this.getModeDeJeu());
+		queueJoueurs.peek().jouer(this, this.getTapisDeJeu(), this.getPioche(), this.getModeDeJeu(), console);
 		//System.out.println(joueurActif.getMainDuJoueur());
 		queueJoueurs.add(queueJoueurs.poll());
 		

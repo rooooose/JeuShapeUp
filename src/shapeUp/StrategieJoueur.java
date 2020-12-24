@@ -7,7 +7,7 @@ public interface StrategieJoueur {
 
     public Carte definirCarteAJouer(Joueur joueur, StrategieMode modeDeJeu);
     
-    public int choisirLigneCarte(TapisDeJeu tapis);
+    //public int choisirLigneCarte(TapisDeJeu tapis);
 	
 	public int choisirColonneCarte(TapisDeJeu tapis);
 	

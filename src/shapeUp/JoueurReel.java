@@ -17,7 +17,7 @@ public class JoueurReel extends Joueur implements StrategieJoueur{
 		this.strategie = new StrategieJoueurReel();
 	}*/
 	
-public Carte piocherCarte(Pioche pioche) {
+	public Carte piocherCarte(Pioche pioche) {
 		
 		
 		if (pioche.getNbreDeCartes() <0) {
@@ -131,28 +131,6 @@ public Carte piocherCarte(Pioche pioche) {
     }
 
 
-	public int choisirLigneCarte(TapisDeJeu tapis) {
-		
-		Scanner scan = new Scanner (System.in);
-		int nb;
-		do {
-			this.notifyObservers("Veuillez choisir une ligne parmi celles disponibles");			
-			//System.out.println("Veuillez choisir une ligne parmi celles disponibles :");
-		    nb = scan.nextInt();
-		    
-		}while(nb < -1 && nb > tapis.getContainer().size());
-		
-		if(nb == -1) {
-			nb=0;
-		} else if(nb == tapis.getContainer().size()) {
-			nb = tapis.getContainer().size()-1;
-		}
-        
-
-        return nb;
-	}
-
-
 	public int choisirColonneCarte(TapisDeJeu tapis) {
 		
 		Scanner scan = new Scanner (System.in);
@@ -175,7 +153,7 @@ public Carte piocherCarte(Pioche pioche) {
 	}
 
 
-	public boolean proposerDeplacement(TapisDeJeu tapis) {
+	public boolean proposerDeplacement(TapisDeJeu tapis, Console console) {
 		
 		Scanner scan = new Scanner (System.in);
     	char choix='p';
@@ -194,7 +172,7 @@ public Carte piocherCarte(Pioche pioche) {
     	}while (choix!= 'o' && choix!= 'n');
         	
         if(choix == 'o') {
-        	this.deplacerCarte(tapis);
+        	this.deplacerCarte(tapis, console);
         	return true;
         } else return false;
     		
@@ -247,7 +225,7 @@ public Carte piocherCarte(Pioche pioche) {
 //    }
 
 	
-	public void placerCarte(int lig, int col, Carte carteAJouer, TapisDeJeu tapis) {
+	public void placerCarte(int lig, int col, Carte carteAJouer, TapisDeJeu tapis, Console console) {
 		
     	int ligneCase;
     	int colonneCase;
@@ -260,7 +238,7 @@ public Carte piocherCarte(Pioche pioche) {
     	}
     	
     	do {
-    		ligneCase = this.choisirLigneCarte(tapis);
+    		ligneCase = console.choisirLigneCarte(tapis);
         	colonneCase = this.choisirColonneCarte(tapis);
         	
         	if(!tapis.placementNormalPossible(ligneCase,colonneCase)) {
@@ -292,7 +270,7 @@ public Carte piocherCarte(Pioche pioche) {
     }
 	
 	
-	public void placerCarte(Partie partie, TapisDeJeu tapis) {
+	public void placerCarte(Partie partie, TapisDeJeu tapis, Console console) {
 		
     	int ligneCase;
     	int colonneCase;
@@ -310,7 +288,7 @@ public Carte piocherCarte(Pioche pioche) {
 		partie.getModeDeJeu().voirCarteVictoire(partie, this);
     	
     	do {
-    		ligneCase = this.choisirLigneCarte(tapis);
+    		ligneCase = console.choisirLigneCarte(tapis);
         	colonneCase = this.choisirColonneCarte(tapis);
         	
         	if(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase)) {
@@ -338,7 +316,7 @@ public Carte piocherCarte(Pioche pioche) {
     }
 	
 	
-	public void deplacerCarte(TapisDeJeu tapis) {
+	public void deplacerCarte(TapisDeJeu tapis, Console console) {
     	
     	int ligneCase;
     	int colonneCase;
@@ -348,7 +326,7 @@ public Carte piocherCarte(Pioche pioche) {
     	//System.out.println("Veuillez choisir une carte à déplacer :");
     	
     	do {
-    		ligneCase = this.choisirLigneCarte(tapis);
+    		ligneCase = console.choisirLigneCarte(tapis);
         	colonneCase = this.choisirColonneCarte(tapis);
         	
         	if(!tapis.caseRemplie(ligneCase,colonneCase)) {
@@ -364,7 +342,7 @@ public Carte piocherCarte(Pioche pioche) {
     	this.notifyObservers("Vous avez choisi de déplacer la carte " + carteADeplacer);   
     	//System.out.println("Vous avez choisi de déplacer la carte " + carteADeplacer);
     	
-    	this.placerCarte(ligneCase, colonneCase, carteADeplacer, tapis);
+    	this.placerCarte(ligneCase, colonneCase, carteADeplacer, tapis, console);
 
 	}	
 	

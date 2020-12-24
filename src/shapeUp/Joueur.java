@@ -52,7 +52,7 @@ public abstract class Joueur extends Observable{
 	private ArrayList<Carte> mainDuJoueur = new ArrayList<Carte>();
 
 
-	public void jouer(Partie partie, TapisDeJeu tapis, Pioche pioche, StrategieMode modeDeJeu) {
+	public void jouer(Partie partie, TapisDeJeu tapis, Pioche pioche, StrategieMode modeDeJeu, Console console) {
 		
 		//this.addObserver(partie.getConsoleDuJeu());
 		Carte cartePiochee;
@@ -69,15 +69,15 @@ public abstract class Joueur extends Observable{
 		
     	if(tapis.getNbCartes()>1 && tapis.getNbCartes()<partie.getNbCartesJouables()) {
     		
-    		boolean deplacementFait = this.proposerDeplacement(tapis);
+    		boolean deplacementFait = this.proposerDeplacement(tapis, console);
     		
 //    		System.out.println("Carte(s) en main : " + this.getMainDuJoueur());
 //    		carteAJouer = this.strategie.definirCarteAJouer(this,partie.getModeDeJeu());
 //    		modeDeJeu.voirCarteVictoire(partie, this);
-    		this.placerCarte(partie, tapis);
+    		this.placerCarte(partie, tapis, console);
     		
     		if(!deplacementFait) {
-    			this.proposerDeplacement(tapis);
+    			this.proposerDeplacement(tapis, console);
     		}
     		
     	} else {
@@ -85,7 +85,7 @@ public abstract class Joueur extends Observable{
 //    		carteAJouer = this.strategie.definirCarteAJouer(this,partie.getModeDeJeu());
 //    		modeDeJeu.voirCarteVictoire(partie, this);
     		//this.strategie.placerCarte(carteAJouer, tapis);
-    		this.placerCarte(partie, tapis);
+    		this.placerCarte(partie, tapis, console);
     	}
     	
     	if(modeDeJeu instanceof StrategieAvance) {
@@ -98,7 +98,6 @@ public abstract class Joueur extends Observable{
     }
 	
 
-		
     public ArrayList<Carte> getMainDuJoueur() {
 		return mainDuJoueur;
 	}
@@ -106,16 +105,16 @@ public abstract class Joueur extends Observable{
 	public void setMain(ArrayList<Carte> main) {
 		this.mainDuJoueur = main;
 	}
-//	
+	
 	public abstract Carte piocherCarte(Pioche pioche);
 	
-	public abstract boolean proposerDeplacement(TapisDeJeu tapis);
+	public abstract boolean proposerDeplacement(TapisDeJeu tapis, Console console);
   
-	public abstract void deplacerCarte(TapisDeJeu tapis);
+	public abstract void deplacerCarte(TapisDeJeu tapis, Console console);
   
-	public abstract void placerCarte(Partie partie, TapisDeJeu tapis);
+	public abstract void placerCarte(Partie partie, TapisDeJeu tapis, Console console);
   
-	public abstract void placerCarte(int lig, int col, Carte carteAJouer, TapisDeJeu tapis);
+	public abstract void placerCarte(int lig, int col, Carte carteAJouer, TapisDeJeu tapis, Console console);
   
 //	
 //	public void placerCarte(int lig, int col, Carte carteAJouer, TapisDeJeu tapis) {
