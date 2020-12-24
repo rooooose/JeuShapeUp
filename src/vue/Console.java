@@ -26,6 +26,7 @@ public class Console implements Observer, Runnable {
 	private Queue<Joueur> joueurs = new LinkedList<Joueur>();
 	private final Scanner scan = new Scanner (System.in);
 	private Thread t;
+	private boolean nbJoueursDde = false;
 	
 	public Console(ShapeUp s) {
 		this.jeuShapeUp = s;
@@ -39,6 +40,16 @@ public class Console implements Observer, Runnable {
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		System.out.println(arg);
+		
+		if (this.jeuShapeUp.getNbDeJoueurs() > 0) {
+			scan.nextLine();
+			scan.close();
+//			nbJoueursDde = true;
+			for(int i=1; i<=this.jeuShapeUp.getNbDeJoueurs(); i++) {
+				this.jeuShapeUp.creerJoueur(this.definirTypeJoueur(i), this.definirNomJoueur(i));
+				
+			}
+		}
 	}
 	
 	public int choisirNbJoueurs() {
@@ -185,8 +196,11 @@ public class Console implements Observer, Runnable {
 	public void run() {
 
 		//ShapeUp jeuShapeUp = new ShapeUp();
-		int nbJoueurs = this.choisirNbJoueurs();
-		
+		int nbJoueurs = 0;
+		//while(!nbJoueursDde) {
+			nbJoueurs = this.choisirNbJoueurs();
+		//}
+				
 		for(int i=1; i<=nbJoueurs; i++) {
 			this.jeuShapeUp.creerJoueur(this.definirTypeJoueur(i), this.definirNomJoueur(i));
 			
