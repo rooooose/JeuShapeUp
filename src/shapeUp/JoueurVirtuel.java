@@ -130,7 +130,7 @@ public Carte piocherCarte(Pioche pioche) {
 
 
 
-	public boolean proposerDeplacement(TapisDeJeu tapis, Console console) {
+	public boolean proposerDeplacement(TapisDeJeu tapis) {
 
        Random rand = new Random();
        int choix;
@@ -140,7 +140,7 @@ public Carte piocherCarte(Pioche pioche) {
 
     	  this.notifyObservers("Le joueur souhaite déplacer une carte."); 
           //System.out.println("Le joueur souhaite déplacer une carte");
-          this.deplacerCarte(tapis, console);
+          this.deplacerCarte(tapis);
           return true;
           
         } else return false;
@@ -193,7 +193,7 @@ public Carte piocherCarte(Pioche pioche) {
 //    }
 	
 	
-	public void placerCarte(int lig, int col, Carte carteAJouer, TapisDeJeu tapis, Console console) {
+	public void placerCarte(int lig, int col, Carte carteAJouer, TapisDeJeu tapis) {
 		
     	int ligneCase;
     	int colonneCase;
@@ -238,7 +238,7 @@ public Carte piocherCarte(Pioche pioche) {
     }
 	
 	
-	public void placerCarte(Partie partie, TapisDeJeu tapis, Console console) {
+	public void placerCarte(Partie partie, TapisDeJeu tapis) {
 		
     	int ligneCase;
     	int colonneCase;
@@ -284,7 +284,7 @@ public Carte piocherCarte(Pioche pioche) {
     }
 	
 	
-	public void deplacerCarte(TapisDeJeu tapis, Console console) {
+	public void deplacerCarte(TapisDeJeu tapis) {
     	
     	int ligneCase;
     	int colonneCase;
@@ -310,7 +310,7 @@ public Carte piocherCarte(Pioche pioche) {
     	this.notifyObservers("Vous avez choisi de déplacer la carte " + carteADeplacer);   
     	//System.out.println("Vous avez choisi de déplacer la carte " + carteADeplacer);
     	
-    	this.placerCarte(ligneCase, colonneCase, carteADeplacer, tapis, console);
+    	this.placerCarte(ligneCase, colonneCase, carteADeplacer, tapis);
 
 	}	
 	

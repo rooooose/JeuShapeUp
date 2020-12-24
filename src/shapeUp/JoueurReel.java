@@ -17,7 +17,7 @@ public class JoueurReel extends Joueur implements StrategieJoueur{
 		this.strategie = new StrategieJoueurReel();
 	}*/
 	
-	public Carte piocherCarte(Pioche pioche) {
+public Carte piocherCarte(Pioche pioche) {
 		
 		
 		if (pioche.getNbreDeCartes() <0) {
@@ -131,6 +131,28 @@ public class JoueurReel extends Joueur implements StrategieJoueur{
     }
 
 
+	public int choisirLigneCarte(TapisDeJeu tapis) {
+		
+		Scanner scan = new Scanner (System.in);
+		int nb;
+		do {
+			this.notifyObservers("Veuillez choisir une ligne parmi celles disponibles");			
+			//System.out.println("Veuillez choisir une ligne parmi celles disponibles :");
+		    nb = scan.nextInt();
+		    
+		}while(nb < -1 && nb > tapis.getContainer().size());
+		
+		if(nb == -1) {
+			nb=0;
+		} else if(nb == tapis.getContainer().size()) {
+			nb = tapis.getContainer().size()-1;
+		}
+        
+
+        return nb;
+	}
+
+
 	public int choisirColonneCarte(TapisDeJeu tapis) {
 		
 		Scanner scan = new Scanner (System.in);
@@ -153,7 +175,7 @@ public class JoueurReel extends Joueur implements StrategieJoueur{
 	}
 
 
-	public boolean proposerDeplacement(TapisDeJeu tapis, Console console) {
+	public boolean proposerDeplacement(TapisDeJeu tapis) {
 		
 		Scanner scan = new Scanner (System.in);
     	char choix='p';
@@ -172,7 +194,7 @@ public class JoueurReel extends Joueur implements StrategieJoueur{
     	}while (choix!= 'o' && choix!= 'n');
         	
         if(choix == 'o') {
-        	this.deplacerCarte(tapis, console);
+        	this.deplacerCarte(tapis);
         	return true;
         } else return false;
     		
@@ -225,7 +247,7 @@ public class JoueurReel extends Joueur implements StrategieJoueur{
 //    }
 
 	
-	public void placerCarte(int lig, int col, Carte carteAJouer, TapisDeJeu tapis, Console console) {
+	public void placerCarte(int lig, int col, Carte carteAJouer, TapisDeJeu tapis) {
 		
     	int ligneCase;
     	int colonneCase;
@@ -238,7 +260,7 @@ public class JoueurReel extends Joueur implements StrategieJoueur{
     	}
     	
     	do {
-    		ligneCase = console.choisirLigneCarte(tapis);
+    		ligneCase = this.choisirLigneCarte(tapis);
         	colonneCase = this.choisirColonneCarte(tapis);
         	
         	if(!tapis.placementNormalPossible(ligneCase,colonneCase)) {
@@ -270,7 +292,7 @@ public class JoueurReel extends Joueur implements StrategieJoueur{
     }
 	
 	
-	public void placerCarte(Partie partie, TapisDeJeu tapis, Console console) {
+	public void placerCarte(Partie partie, TapisDeJeu tapis) {
 		
     	int ligneCase;
     	int colonneCase;
@@ -288,7 +310,7 @@ public class JoueurReel extends Joueur implements StrategieJoueur{
 		partie.getModeDeJeu().voirCarteVictoire(partie, this);
     	
     	do {
-    		ligneCase = console.choisirLigneCarte(tapis);
+    		ligneCase = this.choisirLigneCarte(tapis);
         	colonneCase = this.choisirColonneCarte(tapis);
         	
         	if(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase)) {
@@ -316,7 +338,7 @@ public class JoueurReel extends Joueur implements StrategieJoueur{
     }
 	
 	
-	public void deplacerCarte(TapisDeJeu tapis, Console console) {
+	public void deplacerCarte(TapisDeJeu tapis) {
     	
     	int ligneCase;
     	int colonneCase;
@@ -326,7 +348,7 @@ public class JoueurReel extends Joueur implements StrategieJoueur{
     	//System.out.println("Veuillez choisir une carte à déplacer :");
     	
     	do {
-    		ligneCase = console.choisirLigneCarte(tapis);
+    		ligneCase = this.choisirLigneCarte(tapis);
         	colonneCase = this.choisirColonneCarte(tapis);
         	
         	if(!tapis.caseRemplie(ligneCase,colonneCase)) {
@@ -342,7 +364,7 @@ public class JoueurReel extends Joueur implements StrategieJoueur{
     	this.notifyObservers("Vous avez choisi de déplacer la carte " + carteADeplacer);   
     	//System.out.println("Vous avez choisi de déplacer la carte " + carteADeplacer);
     	
-    	this.placerCarte(ligneCase, colonneCase, carteADeplacer, tapis, console);
+    	this.placerCarte(ligneCase, colonneCase, carteADeplacer, tapis);
 
 	}	
 	

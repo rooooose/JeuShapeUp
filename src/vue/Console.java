@@ -180,28 +180,6 @@ public class Console implements Observer, Runnable {
 					return null;
 	    	}
 	    }
-	    
-	    
-	    public int choisirLigneCarte(TapisDeJeu tapis) {
-			
-			//Scanner scan = new Scanner (System.in);
-			int nb;
-			do {
-				//this.notifyObservers("Veuillez choisir une ligne parmi celles disponibles");			
-				System.out.println("Veuillez choisir une ligne parmi celles disponibles :");
-			    nb = scan.nextInt();
-			    
-			}while(nb < -1 && nb > tapis.getContainer().size());
-			
-			if(nb == -1) {
-				nb=0;
-			} else if(nb == tapis.getContainer().size()) {
-				nb = tapis.getContainer().size()-1;
-			}
-	        
-
-	        return nb;
-		}
 
 	@Override
 	public void run() {
@@ -243,7 +221,7 @@ public class Console implements Observer, Runnable {
 		System.out.println(this.jeuShapeUp);
 		
 		while(!this.jeuShapeUp.getMaPartie().isEstFinie()) {
-			this.jeuShapeUp.getMaPartie().tourDeJeu(this);
+			this.jeuShapeUp.getMaPartie().tourDeJeu();
 		}
 		//System.out.println("Partie finie !"+"\n");
 		this.jeuShapeUp.getMaPartie().getModeDeJeu().finirLaPartie(jeuShapeUp.getMaPartie());
