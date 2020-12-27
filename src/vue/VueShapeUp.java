@@ -37,16 +37,42 @@ import shapeUp.TapisTriangleRectangle;
 
 public class VueShapeUp implements Observer {
 	
+	private VuePartie maPartie;
+	
+	public VuePartie getMaPartie() {
+		return maPartie;
+	}
+
+
+	public void setMaPartie(VuePartie maPartie) {
+		this.maPartie = maPartie;
+	}
+
+
 	private ShapeUp jeuShapeUp;
 	
 	private JFrame fenetreChoix;
 	private JLabel choix;
 	
+	private JButton okAll;
+	
+	
+	public JButton getOkAll() {
+		return okAll;
+	}
+
+
+	public void setOkAll(JButton okAll) {
+		this.okAll = okAll;
+	}
+
+
 	private JPanel containerNbre;
 	private ButtonGroup choixNbre;
 	private JButton okNbre;
 	private JRadioButton deuxJoueurs;
 
+	
 
 	public JFrame getFenetreChoix() {
 		return fenetreChoix;
@@ -943,6 +969,7 @@ public class VueShapeUp implements Observer {
 		container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
 
 		//container.add(choix, BorderLayout.CENTER);
+		okAll = new JButton("J'ai fini de choisir mes paramètres, je veux lancer la partie.");
 		
 		container.add(containerNbre);
 		container.add(joueurs);
@@ -950,7 +977,8 @@ public class VueShapeUp implements Observer {
 		//container.add(containerNom);
 		container.add(containerMode);
 		container.add(containerForme);
-		
+		container.add(okAll);
+		okAll.setVisible(false);
 		joueurs.setVisible(false);
 		fenetreChoix.setVisible(true);
 		//fenetreChoix.getContentPane()
@@ -1065,6 +1093,8 @@ public class VueShapeUp implements Observer {
 			public void run() {
 				try {
 					VueShapeUp test = new VueShapeUp(jeuShapeUp);
+					
+						
 					
 					
 				} catch (Exception e) {

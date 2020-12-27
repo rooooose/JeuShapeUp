@@ -17,6 +17,7 @@ import shapeUp.TapisCercle;
 import shapeUp.TapisDeJeu;
 import shapeUp.TapisRectangle;
 import shapeUp.TapisTriangleRectangle;
+import vue.VuePartie;
 import vue.VueShapeUp;
 
 
@@ -53,6 +54,17 @@ public class ControleurShapeUp {
 	}
 
 	public ControleurShapeUp(ShapeUp sU, VueShapeUp vueShUp) {
+		
+		
+		
+		vueShUp.getOkAll().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				vueShUp.getOkAll().setEnabled(false);
+				vueShUp.setMaPartie(new VuePartie());
+			}
+		});
+		
 		
 		vueShUp.getOkMode().addActionListener(new ActionListener() {
 			
@@ -123,6 +135,7 @@ public class ControleurShapeUp {
 				vueShUp.getRectangle().setEnabled(false);
 				vueShUp.getTriangle().setEnabled(false);
 				vueShUp.getCercle().setEnabled(false);
+				vueShUp.getOkAll().setVisible(true);
 				
 			}  else {
 				vueShUp.getFormeTapis().setText("Attention, veuillez choisir une forme de tapis avant de confirmer.");
