@@ -1,5 +1,11 @@
 package vue;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -30,7 +36,7 @@ public class Console implements Observer, Runnable {
 	
 	public Console(ShapeUp s) {
 		this.jeuShapeUp = s;
-		//this.jeuShapeUp.addObserver(this);
+		this.jeuShapeUp.addObserver(this);
 		
 		t = new Thread(this);
 		t.start();
@@ -39,39 +45,86 @@ public class Console implements Observer, Runnable {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		System.out.println(arg);
 		
 		if (this.jeuShapeUp.getNbDeJoueurs() > 0) {
-			scan.nextLine();
-			scan.close();
-//			nbJoueursDde = true;
-			for(int i=1; i<=this.jeuShapeUp.getNbDeJoueurs(); i++) {
-				this.jeuShapeUp.creerJoueur(this.definirTypeJoueur(i), this.definirNomJoueur(i));
-				
+			//nbJoueursDde = true;
+			//System.out.println(this.jeuShapeUp.getNbDeJoueurs());
+			Robot robot = null;
+			try {
+				robot = new Robot();
+			} catch (AWTException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+			//robot.keyPress(this.jeuShapeUp.getNbDeJoueurs());
+			//robot.keyPress(KeyEvent.VK_SHIFT);
+			//robot.keyPress(KeyEvent.VK_2);
+			//robot.keyPress(KeyEvent.VK_ENTER);
+//			System.exit(0);
+//			scan.close();
+//			
+			
+//			for(int i=1; i<=this.jeuShapeUp.getNbDeJoueurs(); i++) {
+//				this.jeuShapeUp.creerJoueur(this.definirTypeJoueur(i), this.definirNomJoueur(i));
+//				
+//			}
 		}
+		
+		System.out.println(arg);
+		
+		
+		
 	}
 	
 	public int choisirNbJoueurs() {
-
-		char nbChar='r';
-    	
-    		do {
-    			//this.notifyObservers("Veuillez choisir le nombre de joueurs pour votre partie (2 ou 3) : ");
-	        	System.out.println("Veuillez choisir le nombre de joueurs pour votre partie (2 ou 3) : ");
-		        nbChar = scan.next().charAt(0);
-    			scan.nextLine();
-
-		        if (nbChar != '2' && nbChar!= '3') {
+		
+		BufferedReader br = new BufferedReader (new InputStreamReader(System.in));
+		int resultat = 0;
+		try {
+			do {
+			  System.out.println("Veuillez choisir le nombre de joueurs pour votre partie (2 ou 3) : ");
+		      //resultat = br.readLine();
+		      resultat = Integer.parseInt(br.readLine());
+		      this.jeuShapeUp.setNbDeJoueurs(resultat);
+		      
+		      if (resultat != 2 && resultat != 3) {
 		        	//this.notifyObservers("Je suis désolée, vous ne pouvez choisir que 2 ou 3 joueurs.");
 		        	System.out.println("Je suis désolée, vous ne pouvez choisir que 2 ou 3 joueurs.");
-		        } 
+		      } 
+			}while (resultat != 2 && resultat !=3);
+		} catch (IOException e) {
+		      System.err.println(e.getMessage());
+		}
 
-	        }while (nbChar != '2' && nbChar !='3' );
-	        int nb= Integer.parseInt(String.valueOf(nbChar));
-	        this.jeuShapeUp.setNbDeJoueurs(nb);
-	        
-	        return nb;
+//		char nbChar='r';
+//    	
+//    		do {
+//    			//this.notifyObservers("Veuillez choisir le nombre de joueurs pour votre partie (2 ou 3) : ");
+////    			while(nbJoueursDde == false) {
+////    				
+////    			}
+//	        	System.out.println("Veuillez choisir le nombre de joueurs pour votre partie (2 ou 3) : ");
+//	        	//while(scan.hasNext()) {
+//	        	if(nbJoueursDde == false) {
+//	        		nbChar = scan.next().charAt(0);
+//	    			scan.nextLine();
+//	        	} else {
+//	        		System.out.println("nb joueurs choisi");
+//	        	}
+//	        		
+//	        	//}
+//
+//		        if (nbChar != '2' && nbChar!= '3') {
+//		        	//this.notifyObservers("Je suis désolée, vous ne pouvez choisir que 2 ou 3 joueurs.");
+//		        	System.out.println("Je suis désolée, vous ne pouvez choisir que 2 ou 3 joueurs.");
+//		        } 
+//
+//	        }while (nbChar != '2' && nbChar !='3' && nbJoueursDde == false);
+//	        int nb= Integer.parseInt(String.valueOf(nbChar));
+//	        this.jeuShapeUp.setNbDeJoueurs(nb);
+//	        
+//	        return nb;
+			return resultat;
     }
 	
 	public char definirTypeJoueur(int nb) {

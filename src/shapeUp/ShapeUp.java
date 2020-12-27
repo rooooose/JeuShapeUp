@@ -54,7 +54,9 @@ public class ShapeUp extends Observable {
 
 		public void setNbDeJoueurs(int nbDeJoueurs) {
 			this.nbDeJoueurs = nbDeJoueurs;
+			this.setChanged();
 			this.notifyObservers(nbDeJoueurs);
+			//this.clearChanged();
 		}
 		
 		private TapisDeJeu formeTapis;
