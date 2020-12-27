@@ -1094,9 +1094,6 @@ public class VueShapeUp implements Observer {
 				try {
 					VueShapeUp test = new VueShapeUp(jeuShapeUp);
 					
-						
-					
-					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
