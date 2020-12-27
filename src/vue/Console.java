@@ -31,6 +31,7 @@ public class Console implements Observer, Runnable {
 	private Partie partie;
 	private Queue<Joueur> joueurs = new LinkedList<Joueur>();
 	private final Scanner scan = new Scanner (System.in);
+	private BufferedReader br = new BufferedReader (new InputStreamReader(System.in));
 	private Thread t;
 	private boolean nbJoueursDde = false;
 	
@@ -46,56 +47,42 @@ public class Console implements Observer, Runnable {
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		
-		if (this.jeuShapeUp.getNbDeJoueurs() > 0) {
-			//nbJoueursDde = true;
-			//System.out.println(this.jeuShapeUp.getNbDeJoueurs());
-			Robot robot = null;
-			try {
-				robot = new Robot();
-			} catch (AWTException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			//robot.keyPress(this.jeuShapeUp.getNbDeJoueurs());
-			//robot.keyPress(KeyEvent.VK_SHIFT);
-			//robot.keyPress(KeyEvent.VK_2);
-			//robot.keyPress(KeyEvent.VK_ENTER);
-//			System.exit(0);
-//			scan.close();
-//			
-			
-//			for(int i=1; i<=this.jeuShapeUp.getNbDeJoueurs(); i++) {
-//				this.jeuShapeUp.creerJoueur(this.definirTypeJoueur(i), this.definirNomJoueur(i));
-//				
-//			}
-		}
-		
 		System.out.println(arg);
-		
-		
+		if(this.jeuShapeUp.getNbDeJoueurs() != 0) {
+			System.out.println("Appuyez sur Entrée pour continuer");
+		}	
 		
 	}
 	
 	public int choisirNbJoueurs() {
 		
-		BufferedReader br = new BufferedReader (new InputStreamReader(System.in));
-		int resultat = 0;
+		
+		String resultat = "";
+		int nb = 0;
 		try {
 			do {
 			  System.out.println("Veuillez choisir le nombre de joueurs pour votre partie (2 ou 3) : ");
-		      //resultat = br.readLine();
-		      resultat = Integer.parseInt(br.readLine());
-		      this.jeuShapeUp.setNbDeJoueurs(resultat);
-		      
-		      if (resultat != 2 && resultat != 3) {
+		      resultat = br.readLine();
+		      if(this.jeuShapeUp.getNbDeJoueurs()!=0) {
+		    	  resultat = ((Integer)this.jeuShapeUp.getNbDeJoueurs()).toString();
+		    	  nb= Integer.parseInt(resultat);
+		    	  //System.out.print("Appuyez sur Entrée pour continuer");
+		      }
+		     // if (resultat != '2' && resultat != '3') {
+		      if (!resultat.equals("2") && !resultat.equals("3")) {
 		        	//this.notifyObservers("Je suis désolée, vous ne pouvez choisir que 2 ou 3 joueurs.");
 		        	System.out.println("Je suis désolée, vous ne pouvez choisir que 2 ou 3 joueurs.");
 		      } 
-			}while (resultat != 2 && resultat !=3);
+			}while (!resultat.equals("2") && !resultat.equals("3"));
 		} catch (IOException e) {
 		      System.err.println(e.getMessage());
 		}
-
+		if(this.jeuShapeUp.getNbDeJoueurs()==0) {
+			nb= Integer.parseInt(resultat);
+		    this.jeuShapeUp.setNbDeJoueurs(nb);
+		}
+		//resultat=null;
+		
 //		char nbChar='r';
 //    	
 //    		do {
@@ -123,20 +110,25 @@ public class Console implements Observer, Runnable {
 //	        int nb= Integer.parseInt(String.valueOf(nbChar));
 //	        this.jeuShapeUp.setNbDeJoueurs(nb);
 //	        
-//	        return nb;
-			return resultat;
+	        return nb;
+			//return resultat;
     }
 	
 	public char definirTypeJoueur(int nb) {
     	
     	char type='r';
-    	
+    	String resultat = "";
     	do {
     		//this.notifyObservers("Veuillez choisir le type du joueur " + nb + ": virtuel (v) ou réel (r) ?");
 			System.out.println("Veuillez choisir le type du joueur " + nb + ": virtuel (v) ou réel (r) ?");
-
-			type = scan.next().charAt(0);
-			scan.nextLine();
+			try {
+				resultat = br.readLine();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			type = resultat.charAt(0);
+//			scan.nextLine();
 
 		    if (type != 'v' && type!= 'r') {
 		    	//this.notifyObservers("Je suis désolée, vous ne pouvez choisir qu'entre virtuel (v) ou réel (r).");
