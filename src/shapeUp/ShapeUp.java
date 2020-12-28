@@ -7,16 +7,19 @@ import vue.VueShapeUp;
 
 public class ShapeUp extends Observable {
 
-//		private Console consoleDuJeu;
-//	    public Console getConsoleDuJeu() {
-//			return consoleDuJeu;
-//		}
-//
-//		public void setConsoleDuJeu(Console consoleDuJeu) {
-//			this.consoleDuJeu = consoleDuJeu;
-//		}
+		private LinkedList<String> types = new LinkedList<String>();
+		//private char[] types = {'a', 'a', 'a'};
 		
-		Queue<Joueur> queueJoueurs = new LinkedList<Joueur>();
+		public LinkedList<String> getTypes() {
+			return types;
+		}
+		
+//		public void setTypes(char[] types) {
+//			this.types = types;
+//		}
+//		private String[] noms = {null, null, null};
+		
+		private Queue<Joueur> queueJoueurs = new LinkedList<Joueur>();
 
 
 
@@ -108,9 +111,9 @@ public class ShapeUp extends Observable {
 	    	this.maPartie = new Partie(queueJoueurs, mode, forme);
 	    }
 	    
-	    public void creerJoueur(char ty, String nm) {
+	    public void creerJoueur(String ty, String nm) {
 	    	
-	    	char type= ty;
+	    	char type= ty.charAt(0);
 	    	String nom = nm;
 
 //        	type = ty;
@@ -121,14 +124,14 @@ public class ShapeUp extends Observable {
 	        		JoueurVirtuel nouveauJoueurV = new JoueurVirtuel(nom);
 	        		this.getNomsJoueurs().add(nom);
 	        		this.queueJoueurs.add(nouveauJoueurV);
-	        		this.notifyObservers(nouveauJoueurV);
+	        		//this.notifyObservers(nouveauJoueurV);
 	        		break;
 	        		//return nouveauJoueurV;
 	        	case 'r' :
 	        		JoueurReel nouveauJoueurR = new JoueurReel(nom);
 	        		this.getNomsJoueurs().add(nom);
 	        		this.queueJoueurs.add(nouveauJoueurR);
-	        		this.notifyObservers(nouveauJoueurR);
+	        		//this.notifyObservers(nouveauJoueurR);
 	        		break;
 	        		//return nouveauJoueurR;
 //	        	default :

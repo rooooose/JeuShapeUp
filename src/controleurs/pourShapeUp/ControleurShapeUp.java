@@ -24,9 +24,8 @@ import vue.VueShapeUp;
 
 
 public class ControleurShapeUp {
+	
 	private int nbre;
-	private char[] types = {'r', 'r', 'r'};
-	private String[] noms = {"Joueur1", "Joueur2", "Joueur3"};
 	
 
 	public int getNbre() {
@@ -36,22 +35,14 @@ public class ControleurShapeUp {
 	public void setNbre(int nbre) {
 		this.nbre = nbre;
 	}
-	
-	public char[] getTypes() {
-		return types;
-	}
 
-	public void setTypes(char[] types) {
-		this.types = types;
-	}
-
-	public String[] getNoms() {
-		return noms;
-	}
-
-	public void setNoms(String[] noms) {
-		this.noms = noms;
-	}
+//	public String[] getNoms() {
+//		return noms;
+//	}
+//
+//	public void setNoms(String[] noms) {
+//		this.noms = noms;
+//	}
 
 	public ControleurShapeUp(ShapeUp sU, VueShapeUp vueShUp) {
 		
@@ -201,13 +192,20 @@ public class ControleurShapeUp {
 							
 							vueShUp.getTypeDuJoueur1().setText("Vous avez choisi le joueur 1 virtuel");
 							
-							ControleurShapeUp.this.getTypes()[0] = 'v';
+							if(sU.getTypes().size() == 0) {
+								sU.getTypes().add("v");
+								sU.notifyObservers("Joueur virtuel");
+							}
+							
 							
 						}else if (vueShUp.getReel1().isSelected()) {
 							
 							vueShUp.getTypeDuJoueur1().setText("Vous avez choisi le joueur 1 réel");
 							
-							ControleurShapeUp.this.getTypes()[0] = 'r';
+							if(sU.getTypes().size() == 0) {
+								sU.getTypes().add("r");
+								sU.notifyObservers("Joueur réel");
+							}
 							
 						}
 							
@@ -237,16 +235,20 @@ public class ControleurShapeUp {
 									public void actionPerformed(ActionEvent e) {
 										
 										String nom = vueShUp.getNomJoueur1().getText();
-										ControleurShapeUp.this.getNoms()[0] = nom;
+										if(nom.isEmpty()) {
+						     		    	nom = "Joueur 1";
+									    }
+						     			
 										vueShUp.getNomDuJoueur1().setText("Vous avez choisi le nom du joueur 1 : "+nom);
 										vueShUp.getNomDuJoueur1().setForeground(Color.PINK);
 										//vueShUp.getNomJoueur().setText("");
 										vueShUp.getNomJoueur1().setVisible(false);
 										vueShUp.getOkNom1().setVisible(false);
 										vueShUp.getFenetreChoix().pack();
-										if (sU.getQueueJoueurs().size() == 0 ) {
-											sU.creerJoueur(ControleurShapeUp.this.getTypes()[0], nom);
-										}
+//										if (sU.getQueueJoueurs().size() == 0 ) {
+//											sU.creerJoueur(sU.getTypes().get(0), nom);
+//											System.out.println("Je crée un joueur gui");
+//										}
 										
 										
 									}
@@ -265,13 +267,19 @@ public class ControleurShapeUp {
 					
 					vueShUp.getTypeDuJoueur2().setText("Vous avez choisi le joueur 2 virtuel");
 					
-					ControleurShapeUp.this.getTypes()[1] = 'v';
+					if(sU.getTypes().size() == 1) {
+						sU.getTypes().add("v");
+						sU.notifyObservers("Joueur virtuel");
+					}
 					
 				}else if (vueShUp.getReel2().isSelected()) {
 					
 					vueShUp.getTypeDuJoueur2().setText("Vous avez choisi le joueur 2 réel");
 					
-					ControleurShapeUp.this.getTypes()[1] = 'r';
+					if(sU.getTypes().size() == 1) {
+						sU.getTypes().add("r");
+						sU.notifyObservers("Joueur réel");
+					}
 					
 				}
 					
@@ -292,8 +300,8 @@ public class ControleurShapeUp {
 						vueShUp.getTypeDuJoueur2().setText("Il faut choisir un type de joueur avant de confirmer.");
 					}
 					vueShUp.getFenetreChoix().pack();
-						}
-				});
+			}
+		});
 						
 		vueShUp.getOkNom2().addActionListener(new ActionListener() {
 							
@@ -301,16 +309,19 @@ public class ControleurShapeUp {
 							public void actionPerformed(ActionEvent e) {
 								
 								String nom = vueShUp.getNomJoueur2().getText();
-								ControleurShapeUp.this.getNoms()[1] = nom;
+								if(nom.isEmpty()) {
+				     		    	nom = "Joueur 2";
+							    }
 								vueShUp.getNomDuJoueur2().setText("Vous avez choisi le nom du joueur 2 : "+nom);
 								vueShUp.getNomDuJoueur2().setForeground(Color.orange);
 								//vueShUp.getNomJoueur().setText("");
 								vueShUp.getNomJoueur2().setVisible(false);
 								vueShUp.getOkNom2().setVisible(false);
 								vueShUp.getFenetreChoix().pack();
-								if (sU.getQueueJoueurs().size() == 1 ) {
-									sU.creerJoueur(ControleurShapeUp.this.getTypes()[1], nom);
-								}
+//								if (sU.getQueueJoueurs().size() == 1 ) {
+//									sU.creerJoueur(sU.getTypes().get(1), nom);
+//									System.out.println("Je crée un joueur gui");
+//								}
 								
 								
 							}
@@ -329,13 +340,19 @@ public class ControleurShapeUp {
 					
 					vueShUp.getTypeDuJoueur3().setText("Vous avez choisi le joueur 3 virtuel");
 					
-					ControleurShapeUp.this.getTypes()[2] = 'v';
+					if(sU.getTypes().size() == 2) {
+						sU.getTypes().add("v");
+						sU.notifyObservers("Joueur virtuel");
+					}
 					
 				}else if (vueShUp.getReel3().isSelected()) {
 					
 					vueShUp.getTypeDuJoueur3().setText("Vous avez choisi le joueur 3 réel");
 					
-					ControleurShapeUp.this.getTypes()[2] = 'r';
+					if(sU.getTypes().size() == 2) {
+						sU.getTypes().add("r");
+						sU.notifyObservers("Joueur réel");
+					}
 					
 				}
 					
@@ -365,16 +382,19 @@ public class ControleurShapeUp {
 							public void actionPerformed(ActionEvent e) {
 								
 								String nom = vueShUp.getNomJoueur3().getText();
-								ControleurShapeUp.this.getNoms()[2] = nom;
+								if(nom.isEmpty()) {
+				     		    	nom = "Joueur 3";
+							    }
 								vueShUp.getNomDuJoueur3().setText("Vous avez choisi le nom du joueur 3 : "+nom);
 								vueShUp.getNomDuJoueur3().setForeground(Color.blue);
 								//vueShUp.getNomJoueur().setText("");
 								vueShUp.getNomJoueur3().setVisible(false);
 								vueShUp.getOkNom3().setVisible(false);
 								vueShUp.getFenetreChoix().pack();
-								if (sU.getQueueJoueurs().size() == 2 ) {
-								sU.creerJoueur(ControleurShapeUp.this.getTypes()[2], nom);
-								}
+//								if (sU.getQueueJoueurs().size() == 2 ) {
+//									sU.creerJoueur(sU.getTypes().get(2), nom);
+//									System.out.println("Je crée un joueur gui");
+//								}
 							}
 							
 							

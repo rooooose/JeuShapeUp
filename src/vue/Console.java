@@ -33,7 +33,8 @@ public class Console implements Observer, Runnable {
 	private final Scanner scan = new Scanner (System.in);
 	private BufferedReader br = new BufferedReader (new InputStreamReader(System.in));
 	private Thread t;
-	private boolean nbJoueursDde = false;
+	private int cptAppelsType = 0;
+	private int cptAppelsNom = 0;
 	
 	public Console(ShapeUp s) {
 		this.jeuShapeUp = s;
@@ -81,77 +82,80 @@ public class Console implements Observer, Runnable {
 			nb= Integer.parseInt(resultat);
 		    this.jeuShapeUp.setNbDeJoueurs(nb);
 		}
-		//resultat=null;
-		
-//		char nbChar='r';
-//    	
-//    		do {
-//    			//this.notifyObservers("Veuillez choisir le nombre de joueurs pour votre partie (2 ou 3) : ");
-////    			while(nbJoueursDde == false) {
-////    				
-////    			}
-//	        	System.out.println("Veuillez choisir le nombre de joueurs pour votre partie (2 ou 3) : ");
-//	        	//while(scan.hasNext()) {
-//	        	if(nbJoueursDde == false) {
-//	        		nbChar = scan.next().charAt(0);
-//	    			scan.nextLine();
-//	        	} else {
-//	        		System.out.println("nb joueurs choisi");
-//	        	}
-//	        		
-//	        	//}
-//
-//		        if (nbChar != '2' && nbChar!= '3') {
-//		        	//this.notifyObservers("Je suis désolée, vous ne pouvez choisir que 2 ou 3 joueurs.");
-//		        	System.out.println("Je suis désolée, vous ne pouvez choisir que 2 ou 3 joueurs.");
-//		        } 
-//
-//	        }while (nbChar != '2' && nbChar !='3' && nbJoueursDde == false);
-//	        int nb= Integer.parseInt(String.valueOf(nbChar));
-//	        this.jeuShapeUp.setNbDeJoueurs(nb);
-//	        
-	        return nb;
-			//return resultat;
+	    return nb;
     }
 	
-	public char definirTypeJoueur(int nb) {
+	public String definirTypeJoueur(int nb) {
     	
-    	char type='r';
-    	String resultat = "";
+    	String type="";
+    	this.cptAppelsType++;
+    	//String resultat = "";
     	do {
     		//this.notifyObservers("Veuillez choisir le type du joueur " + nb + ": virtuel (v) ou réel (r) ?");
 			System.out.println("Veuillez choisir le type du joueur " + nb + ": virtuel (v) ou réel (r) ?");
 			try {
-				resultat = br.readLine();
+				type = br.readLine();
+				
+				if(this.jeuShapeUp.getTypes().size() == this.cptAppelsType) {
+					type = this.jeuShapeUp.getTypes().get(nb-1);
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			type = resultat.charAt(0);
+			//type = resultat.charAt(0);
 //			scan.nextLine();
 
-		    if (type != 'v' && type!= 'r') {
+		    if (!type.equals("v") && !type.equals("r")) {
 		    	//this.notifyObservers("Je suis désolée, vous ne pouvez choisir qu'entre virtuel (v) ou réel (r).");
 		        System.out.println("Je suis désolée, vous ne pouvez choisir qu'entre virtuel (v) ou réel (r).");
 		    } 
 		    
-		}while (type != 'v' && type!= 'r');
+		}while (!type.equals("v") && !type.equals("r"));
+    	
+    	if(this.jeuShapeUp.getTypes().size() < this.cptAppelsType) {
+    		this.jeuShapeUp.getTypes().add(type);
+    		this.jeuShapeUp.notifyObservers(type);
+		}
+    	
     	
     	return type;
     }
 	
 	 public String definirNomJoueur(int nb) {
 	    	
-	    	String nom;
+	    	String nom = "";
+	    	this.cptAppelsNom++;
 	    	do {
 	    		//this.notifyObservers("Veuillez choisir le nom du joueur " + nb + ": \n");
      		    System.out.println("Veuillez choisir le nom du joueur " + nb + ": \n");
-     		    nom = scan.nextLine();
-     			if (this.jeuShapeUp.getNomsJoueurs().contains(nom)) {
+     		    //nom = scan.nextLine();
+     		    try {
+					nom = br.readLine();
+					
+//					if(this.jeuShapeUp.getNomsJoueurs().size() == this.cptAppelsType) {
+//						Object[] noms = this.jeuShapeUp.getNomsJoueurs().toArray()[];
+//						nom = this.jeuShapeUp.getNomsJoueurs().get(0);
+//					}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+     		    
+     		    if(nom == "") {
+     		    	System.out.println("Nom par défaut");
+     		    	nom = "Joueur " + nb;
+			    	//this.jeuShapeUp.getNomsJoueurs().add("Joueur " + nb);
+			    } else if (this.jeuShapeUp.getNomsJoueurs().contains(nom)) {
      				//this.notifyObservers("Je suis désolée, chaque joueur doit avoir un nom unique");
 			        System.out.println("Je suis désolée, chaque joueur doit avoir un nom unique");
-			    } 
-			}while (this.jeuShapeUp.getNomsJoueurs().contains(nom));
+			    }
+			}while (this.jeuShapeUp.getNomsJoueurs().contains(nom) && nom != "");
+	    	
+	    	if(this.jeuShapeUp.getNomsJoueurs().size() < this.cptAppelsNom) {
+	    		this.jeuShapeUp.getNomsJoueurs().add(nom);
+		    	this.jeuShapeUp.notifyObservers(nom);
+	    	}
 	    	
 	    	return nom;
 	    }
@@ -248,7 +252,7 @@ public class Console implements Observer, Runnable {
 				
 		for(int i=1; i<=nbJoueurs; i++) {
 			this.jeuShapeUp.creerJoueur(this.definirTypeJoueur(i), this.definirNomJoueur(i));
-			
+			System.out.println("Je crée un joueur console");
 		}
 		
 		
