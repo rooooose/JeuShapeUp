@@ -17,6 +17,7 @@ import shapeUp.TapisCercle;
 import shapeUp.TapisDeJeu;
 import shapeUp.TapisRectangle;
 import shapeUp.TapisTriangleRectangle;
+import vue.Console;
 import vue.VuePartie;
 import vue.VueShapeUp;
 
@@ -44,7 +45,7 @@ public class ControleurShapeUp {
 //		this.noms = noms;
 //	}
 
-	public ControleurShapeUp(ShapeUp sU, VueShapeUp vueShUp) {
+	public ControleurShapeUp(ShapeUp sU, VueShapeUp vueShUp, Console c) {
 		
 		
 		
@@ -265,8 +266,8 @@ public class ControleurShapeUp {
 										vueShUp.getNomJoueur1().setVisible(false);
 										vueShUp.getOkNom1().setVisible(false);
 										vueShUp.getFenetreChoix().pack();
-										
-										if (sU.getQueueJoueurs().size() == 0 ) {
+										//EMPECHER DE CREER UN JOUEUR SI ON A APPELE CHOISIRNOMJOUEUR()
+										if (sU.getQueueJoueurs().size() == 0 && c.getCptAppelsNom() == 0) {
 											sU.creerJoueur(sU.getTypes().get(0), nom1);
 											System.out.println("Je crée un joueur gui");
 										}
@@ -353,7 +354,7 @@ public class ControleurShapeUp {
 								vueShUp.getOkNom2().setVisible(false);
 								vueShUp.getFenetreChoix().pack();
 
-								if (sU.getQueueJoueurs().size() == 1 ) {
+								if (sU.getQueueJoueurs().size() == 1 && c.getCptAppelsNom() == 1) {
 									sU.creerJoueur(sU.getTypes().get(1), nom2);
 									System.out.println("Je crée un joueur gui");
 								}
@@ -440,7 +441,7 @@ public class ControleurShapeUp {
 								vueShUp.getOkNom3().setVisible(false);
 								vueShUp.getFenetreChoix().pack();
 								
-								if (sU.getQueueJoueurs().size() == 2 ) {
+								if (sU.getQueueJoueurs().size() == 2 && c.getCptAppelsNom() == 2) {
 									sU.creerJoueur(sU.getTypes().get(2), nom3);
 									System.out.println("Je crée un joueur gui");
 								}

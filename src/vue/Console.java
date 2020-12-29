@@ -33,8 +33,17 @@ public class Console implements Observer, Runnable {
 	//private final Scanner scan = new Scanner (System.in);
 	private BufferedReader br = new BufferedReader (new InputStreamReader(System.in));
 	private Thread t;
-	private int cptAppelsType = 0;
+	//private int cptAppelsType = 0;
 	private int cptAppelsNom = 0;
+	
+	public int getCptAppelsNom() {
+		return cptAppelsNom;
+	}
+
+	public void setCptAppelsNom(int cptAppelsNom) {
+		this.cptAppelsNom = cptAppelsNom;
+	}
+
 	
 	public Console(ShapeUp s) {
 		this.jeuShapeUp = s;
@@ -126,13 +135,13 @@ public class Console implements Observer, Runnable {
 			try {
 				type = br.readLine();
 				
-				if (!type.equals("v") && !type.equals("r") && this.jeuShapeUp.getTypes().size() == this.jeuShapeUp.getQueueJoueurs().size()) {
+				if (!type.equals("v") && !type.equals("r") && this.jeuShapeUp.getTypes().size() != nb) {
 			    	//this.notifyObservers("Je suis désolée, vous ne pouvez choisir qu'entre virtuel (v) ou réel (r).");
 			        System.out.println("Je suis désolée, vous ne pouvez choisir qu'entre virtuel (v) ou réel (r).");
 			    }
 				
 				//if(this.jeuShapeUp.getTypes().size() == this.cptAppelsType) {
-				else if(this.jeuShapeUp.getTypes().size() > this.jeuShapeUp.getQueueJoueurs().size()) {
+				else if(this.jeuShapeUp.getTypes().size() == nb) {
 					type = this.jeuShapeUp.getTypes().get(nb-1);
 					
 				}
@@ -145,9 +154,9 @@ public class Console implements Observer, Runnable {
 			//type = resultat.charAt(0);
 //			scan.nextLine();
 		    
-		}while (!type.equals("v") && !type.equals("r"));
+		}while (!type.equals("v") && !type.equals("r") && this.jeuShapeUp.getTypes().size() != nb);
     	
-    	if(this.jeuShapeUp.getTypes().size() == this.jeuShapeUp.getQueueJoueurs().size()) {
+    	if(this.jeuShapeUp.getNomsJoueurs().size() != nb) {
     		this.jeuShapeUp.getTypes().add(type);
     		this.jeuShapeUp.notifyObservers(type);
 		}
@@ -159,7 +168,7 @@ public class Console implements Observer, Runnable {
 	 public String definirNomJoueur(int nb) {
 	    	
 	    	String nom = "";
-//	    	this.cptAppelsNom++;
+	    	this.setCptAppelsNom(this.getCptAppelsNom() + 1);
 	    	do {
 	    		//this.notifyObservers("Veuillez choisir le nom du joueur " + nb + ": \n");
      		    System.out.println("Veuillez choisir le nom du joueur " + nb + ": \n");
@@ -167,11 +176,10 @@ public class Console implements Observer, Runnable {
      		    try {
 					nom = br.readLine();
 					//si le nom du joueur est deja défini
-					if(this.jeuShapeUp.getNomsJoueurs().size() > this.jeuShapeUp.getQueueJoueurs().size()) {
-						
+					if(this.jeuShapeUp.getNomsJoueurs().size() == nb) {
 						nom = this.jeuShapeUp.getNomsJoueurs().get(nb-1);
 					}
-					else if(nom == "") {
+					else if(nom == "" && this.jeuShapeUp.getQueueJoueurs().size() != nb) {
 	     		    	System.out.println("Nom par défaut");
 	     		    	nom = "Joueur " + nb;
 				    } else if (this.jeuShapeUp.getNomsJoueurs().contains(nom)) {
@@ -182,9 +190,9 @@ public class Console implements Observer, Runnable {
 					e.printStackTrace();
 				}
      		    
-			}while (this.jeuShapeUp.getNomsJoueurs().contains(nom) && this.jeuShapeUp.getNomsJoueurs().size() != this.cptAppelsNom);
+			}while (this.jeuShapeUp.getNomsJoueurs().contains(nom) && this.jeuShapeUp.getNomsJoueurs().size() != nb);
 	    	
-	    	if(this.jeuShapeUp.getNomsJoueurs().size() == this.jeuShapeUp.getQueueJoueurs().size()) {
+	    	if(this.jeuShapeUp.getNomsJoueurs().size() != nb) {
 	    		this.jeuShapeUp.getNomsJoueurs().add(nom);
 //		    	this.jeuShapeUp.notifyObservers(nom);
 	    	}
@@ -302,6 +310,7 @@ public class Console implements Observer, Runnable {
 	    int nbJoueurs = this.choisirNbJoueurs();
 				
 		for(int i=1; i<=nbJoueurs; i++) {
+			System.out.println(this.jeuShapeUp.getQueueJoueurs());
 			if(this.jeuShapeUp.getQueueJoueurs().size() < i) {
 				String nom = "";
 				this.jeuShapeUp.creerJoueur(this.definirTypeJoueur(i), nom = this.definirNomJoueur(i));
@@ -346,7 +355,6 @@ public class Console implements Observer, Runnable {
 		this.partie.getModeDeJeu().finirLaPartie(jeuShapeUp.getMaPartie());
 		
 	}
-
 	
 	
 }

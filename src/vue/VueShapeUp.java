@@ -51,6 +51,7 @@ public class VueShapeUp implements Observer {
 
 
 	private ShapeUp jeuShapeUp;
+	private Console console;
 	
 	private JFrame fenetreChoix;
 	private JLabel choix;
@@ -725,10 +726,9 @@ public class VueShapeUp implements Observer {
 		this.jeuShapeUp = sU;
 		jeuShapeUp.addObserver(this);
 		//jeuShapeUp.addObserver(this);
-		
-		
-		
-		new ControleurShapeUp (jeuShapeUp, this);
+		Console console = new Console(jeuShapeUp);
+		this.console = console;
+		new ControleurShapeUp (jeuShapeUp, this, console);
 		
 	}
 	
@@ -1105,7 +1105,7 @@ public class VueShapeUp implements Observer {
 			}
 		});
     	
-    	Console console = new Console(jeuShapeUp);
+    	
 //    	jeuShapeUp.addObserver(console);
 //    	console.setJeuShapeUp(jeuShapeUp);
 		
