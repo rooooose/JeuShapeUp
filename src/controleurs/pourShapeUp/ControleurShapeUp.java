@@ -66,34 +66,35 @@ public class ControleurShapeUp {
 				
 				if (vueShUp.getDeBase().isSelected() || vueShUp.getVictoireEnnemie().isSelected() || vueShUp.getAvance().isSelected()) {
 					
-				if (vueShUp.getDeBase().isSelected()) {
-					//mode = new StrategieDeBase(jeuShapeUp.getConsoleDuJeu());
-					mode = new StrategieDeBase();
-				}
-				else if (vueShUp.getVictoireEnnemie().isSelected()) {
-					//mode = new StrategieVictoireEnnemie(jeuShapeUp.getConsoleDuJeu());
-					mode = new StrategieVictoireEnnemie();
-				}
-				else if (vueShUp.getAvance().isSelected()) {
-					//mode = new StrategieAvance(jeuShapeUp.getConsoleDuJeu());
-					mode = new StrategieAvance();
-				}
-				if(sU.getMode()==null) {
-					sU.setMode(mode);
-				}
-				
-				
-				vueShUp.getModeDeJeu().setText("Vous avez choisi les règles : "+mode );
-				vueShUp.getModeDeJeu().setForeground(Color.PINK);
-				vueShUp.getOkMode().setEnabled(false);
-				vueShUp.getDeBase().setEnabled(false);
-				vueShUp.getVictoireEnnemie().setEnabled(false);
-				vueShUp.getAvance().setEnabled(false);
+					if (vueShUp.getDeBase().isSelected()) {
+						//mode = new StrategieDeBase(jeuShapeUp.getConsoleDuJeu());
+						mode = new StrategieDeBase();
+					}
+					else if (vueShUp.getVictoireEnnemie().isSelected()) {
+						//mode = new StrategieVictoireEnnemie(jeuShapeUp.getConsoleDuJeu());
+						mode = new StrategieVictoireEnnemie();
+					}
+					else if (vueShUp.getAvance().isSelected()) {
+						//mode = new StrategieAvance(jeuShapeUp.getConsoleDuJeu());
+						mode = new StrategieAvance();
+					}
+					if(sU.getMode()==null) {
+						sU.setMode(mode);
+						sU.notifyObservers("Appuyez sur Entrée pour continuer");
+					}
+					
+					
+					vueShUp.getModeDeJeu().setText("Vous avez choisi les règles : "+mode );
+					vueShUp.getModeDeJeu().setForeground(Color.PINK);
+					vueShUp.getOkMode().setEnabled(false);
+					vueShUp.getDeBase().setEnabled(false);
+					vueShUp.getVictoireEnnemie().setEnabled(false);
+					vueShUp.getAvance().setEnabled(false);
 				} 
 				else {
 					vueShUp.getModeDeJeu().setText("Il faut choisir un mode de jeu avant de confirmer.");
 				}
-				
+					
 				vueShUp.getFenetreChoix().pack();
 			}
 		});
@@ -124,6 +125,7 @@ public class ControleurShapeUp {
 				}
 				if(sU.getFormeTapis()==null) {
 					sU.setFormeTapis(forme);
+					sU.notifyObservers("Appuyez sur Entrée pour continuer");
 				}
 				vueShUp.getFormeTapis().setForeground(Color.PINK);
 				vueShUp.getOkForme().setEnabled(false);
@@ -142,7 +144,8 @@ public class ControleurShapeUp {
 		});
 				
 		vueShUp.getOkNbre().addActionListener(new ActionListener() {	
-	
+			
+			int nb;
 			public void actionPerformed(ActionEvent e) {
 				if (vueShUp.getDeuxJoueurs().isSelected() || vueShUp.getTroisJoueurs().isSelected()) {
 
@@ -157,14 +160,17 @@ public class ControleurShapeUp {
 					if (vueShUp.getDeuxJoueurs().isSelected()) {
 						vueShUp.getNbreJoueurs().setText("Vous avez choisi 2 joueurs");
 						vueShUp.getJoueur3().setVisible(false);
-						sU.setNbDeJoueurs(2);
-						
+						nb=2;	
 					}
 					else if (vueShUp.getTroisJoueurs().isSelected()) {
 						vueShUp.getNbreJoueurs().setText("Vous avez choisi 3 joueurs");
-						sU.setNbDeJoueurs(3);
+						nb=3;
+						
 					}
-				
+					if(sU.getNbDeJoueurs() == 0) {
+						sU.setNbDeJoueurs(nb);
+						sU.notifyObservers("Appuyez sur Entrée pour continuer");
+					}	
 				}
 				else 
 				{
@@ -191,6 +197,7 @@ public class ControleurShapeUp {
 							if(sU.getTypes().size() == 0) {
 								sU.getTypes().add("v");
 								sU.notifyObservers("Joueur virtuel");
+								sU.notifyObservers("Appuyez sur Entrée pour continuer");
 							}
 							
 							
@@ -201,6 +208,7 @@ public class ControleurShapeUp {
 							if(sU.getTypes().size() == 0) {
 								sU.getTypes().add("r");
 								sU.notifyObservers("Joueur réel");
+								sU.notifyObservers("Appuyez sur Entrée pour continuer");
 							}
 							
 						}
@@ -240,6 +248,7 @@ public class ControleurShapeUp {
 										    }
 											sU.getNomsJoueurs().add(nom1);
 											sU.notifyObservers(nom1);
+											sU.notifyObservers("Appuyez sur Entrée pour continuer");
 										} else if(sU.getNomsJoueurs().size() == 1) {
 											//Object[] noms = sU.getNomsJoueurs().toArray();
 											nom1 = sU.getNomsJoueurs().get(0);
@@ -280,6 +289,7 @@ public class ControleurShapeUp {
 					if(sU.getTypes().size() == 1) {
 						sU.getTypes().add("v");
 						sU.notifyObservers("Joueur virtuel");
+						sU.notifyObservers("Appuyez sur Entrée pour continuer");
 					}
 					
 				}else if (vueShUp.getReel2().isSelected()) {
@@ -289,6 +299,7 @@ public class ControleurShapeUp {
 					if(sU.getTypes().size() == 1) {
 						sU.getTypes().add("r");
 						sU.notifyObservers("Joueur réel");
+						sU.notifyObservers("Appuyez sur Entrée pour continuer");
 					}
 					
 				}
@@ -328,6 +339,8 @@ public class ControleurShapeUp {
 								    }
 									sU.getNomsJoueurs().add(nom2);
 									sU.notifyObservers(nom2);
+									sU.notifyObservers("Appuyez sur Entrée pour continuer");
+									
 								} else if(sU.getNomsJoueurs().size() == 2) {
 									nom2 = sU.getNomsJoueurs().get(1);
 								}
@@ -363,6 +376,7 @@ public class ControleurShapeUp {
 					if(sU.getTypes().size() == 2) {
 						sU.getTypes().add("v");
 						sU.notifyObservers("Joueur virtuel");
+						sU.notifyObservers("Appuyez sur Entrée pour continuer");
 					}
 					
 				}else if (vueShUp.getReel3().isSelected()) {
@@ -372,6 +386,7 @@ public class ControleurShapeUp {
 					if(sU.getTypes().size() == 2) {
 						sU.getTypes().add("r");
 						sU.notifyObservers("Joueur réel");
+						sU.notifyObservers("Appuyez sur Entrée pour continuer");
 					}
 					
 				}
@@ -411,6 +426,8 @@ public class ControleurShapeUp {
 								    }
 									sU.getNomsJoueurs().add(nom3);
 									sU.notifyObservers(nom3);
+									sU.notifyObservers("Appuyez sur Entrée pour continuer");
+									
 								} else if(sU.getNomsJoueurs().size() == 3) {
 									nom3 = sU.getNomsJoueurs().get(2);
 								}

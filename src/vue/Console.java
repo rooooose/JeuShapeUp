@@ -49,9 +49,9 @@ public class Console implements Observer, Runnable {
 		// TODO Auto-generated method stub
 		
 		System.out.println(arg);
-		if(this.jeuShapeUp.getNbDeJoueurs() != 0) {
-			System.out.println("Appuyez sur Entrée pour continuer");
-		}	
+//		if(this.jeuShapeUp.getNbDeJoueurs() != 0) {
+//			System.out.println("Appuyez sur Entrée pour continuer");
+//		}	
 		
 	}
 	
@@ -198,13 +198,16 @@ public class Console implements Observer, Runnable {
 	    		switch(lettreMode.charAt(0)) {
 					case 'b' :
 						mode = new StrategieDeBase();
+						break;
 					case 'a' :
 						mode = new StrategieAvance();
+						break;
 					case 'v' :
 						mode = new StrategieVictoireEnnemie();
+						break;
 	    		}
+	    		
 	    		this.jeuShapeUp.setMode(mode);
-				this.jeuShapeUp.notifyObservers(mode);
 	    	}
 	    	return mode;
 	    	
@@ -251,13 +254,15 @@ public class Console implements Observer, Runnable {
 	    		switch(lettreForme.charAt(0)) {
 					case 'r' :
 						forme = new TapisRectangle();
+						break;
 					case 't' :
 						forme = new TapisTriangleRectangle();
+						break;
 					case 'd' :
-						forme = new TapisCercle();		
+						forme = new TapisCercle();
+						break;
 	    		}
 	    		this.jeuShapeUp.setFormeTapis(forme);
-				this.jeuShapeUp.notifyObservers(forme);
 	    	}
 	    	return forme;
 	    }
