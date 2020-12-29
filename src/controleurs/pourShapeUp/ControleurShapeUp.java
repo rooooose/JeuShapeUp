@@ -51,8 +51,11 @@ public class ControleurShapeUp {
 		vueShUp.getOkAll().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				vueShUp.getOkAll().setEnabled(false);
-				vueShUp.setMaPartie(new VuePartie());
+				if(sU.getMaPartie() == null) {
+					sU.lancerLaPartie(sU.getQueueJoueurs(), sU.getMode(), sU.getFormeTapis());
+					sU.setChanged();
+					sU.notifyObservers(sU.getMaPartie() + "\n" + "Appuyez sur Entrée pour continuer");
+				}
 			}
 		});
 		
@@ -263,11 +266,10 @@ public class ControleurShapeUp {
 										vueShUp.getOkNom1().setVisible(false);
 										vueShUp.getFenetreChoix().pack();
 										
-										
-//										if (sU.getQueueJoueurs().size() == 0 ) {
-//											sU.creerJoueur(sU.getTypes().get(0), nom);
-//											System.out.println("Je crée un joueur gui");
-//										}
+										if (sU.getQueueJoueurs().size() == 0 ) {
+											sU.creerJoueur(sU.getTypes().get(0), nom1);
+											System.out.println("Je crée un joueur gui");
+										}
 										
 										
 									}
@@ -351,10 +353,10 @@ public class ControleurShapeUp {
 								vueShUp.getOkNom2().setVisible(false);
 								vueShUp.getFenetreChoix().pack();
 
-//								if (sU.getQueueJoueurs().size() == 1 ) {
-//									sU.creerJoueur(sU.getTypes().get(1), nom);
-//									System.out.println("Je crée un joueur gui");
-//								}
+								if (sU.getQueueJoueurs().size() == 1 ) {
+									sU.creerJoueur(sU.getTypes().get(1), nom2);
+									System.out.println("Je crée un joueur gui");
+								}
 								
 								
 							}
@@ -438,10 +440,10 @@ public class ControleurShapeUp {
 								vueShUp.getOkNom3().setVisible(false);
 								vueShUp.getFenetreChoix().pack();
 								
-//								if (sU.getQueueJoueurs().size() == 2 ) {
-//									sU.creerJoueur(sU.getTypes().get(2), nom);
-//									System.out.println("Je crée un joueur gui");
-//								}
+								if (sU.getQueueJoueurs().size() == 2 ) {
+									sU.creerJoueur(sU.getTypes().get(2), nom3);
+									System.out.println("Je crée un joueur gui");
+								}
 							}
 							
 							

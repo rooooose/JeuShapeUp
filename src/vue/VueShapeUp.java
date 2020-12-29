@@ -25,6 +25,7 @@ import shapeUp.JoueurReel;
 import shapeUp.JoueurVirtuel;
 import shapeUp.Observable;
 import shapeUp.Observer;
+import shapeUp.Partie;
 import shapeUp.ShapeUp;
 import shapeUp.StrategieAvance;
 import shapeUp.StrategieDeBase;
@@ -1079,6 +1080,13 @@ public class VueShapeUp implements Observer {
 			okForme.doClick();
 			
 		} 
+		
+		Partie partie = this.jeuShapeUp.getMaPartie();
+		if(partie != null) {
+			this.getOkAll().setEnabled(false);
+			this.setMaPartie(new VuePartie(partie));
+		}
+		
 		
 	}
 	

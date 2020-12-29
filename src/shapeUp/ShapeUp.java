@@ -102,11 +102,11 @@ public class ShapeUp extends Observable {
 	    	//System.out.print("Jeu ShapeUp créé\n");
 	    }
 	    
-	    public String toString() {
-	    	StringBuffer sb = new StringBuffer();
-	    	sb.append(this.maPartie);
-			return sb.toString();
-	    }
+//	    public String toString() {
+//	    	StringBuffer sb = new StringBuffer();
+//	    	sb.append(this.maPartie);
+//			return sb.toString();
+//	    }
 	    
 
 	    

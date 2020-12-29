@@ -4,6 +4,11 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import shapeUp.Observable;
+import shapeUp.Observer;
+import shapeUp.Partie;
+
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
@@ -13,32 +18,34 @@ import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class VuePartie {
+public class VuePartie implements Observer{
 
+	private Partie partie;
 	private JFrame frame;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VuePartie window = new VuePartie();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					VuePartie window = new VuePartie();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
 	 */
-	public VuePartie() {
+	public VuePartie(Partie p) {
 		initialize();
-		
+		this.partie = p;
+		this.partie.addObserver(this);
 	}
 
 	/**
@@ -184,6 +191,12 @@ public class VuePartie {
 		
 		frame.setVisible(true);
 		frame.pack();
+	}
+	
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
