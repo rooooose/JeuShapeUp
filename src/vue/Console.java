@@ -104,17 +104,17 @@ public class Console implements Observer, Runnable {
 				if(this.jeuShapeUp.getTypes().size() == this.cptAppelsType) {
 					type = this.jeuShapeUp.getTypes().get(nb-1);
 				}
+				
+				else if (!type.equals("v") && !type.equals("r")) {
+			    	//this.notifyObservers("Je suis désolée, vous ne pouvez choisir qu'entre virtuel (v) ou réel (r).");
+			        System.out.println("Je suis désolée, vous ne pouvez choisir qu'entre virtuel (v) ou réel (r).");
+			    } 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			//type = resultat.charAt(0);
 //			scan.nextLine();
-
-		    if (!type.equals("v") && !type.equals("r")) {
-		    	//this.notifyObservers("Je suis désolée, vous ne pouvez choisir qu'entre virtuel (v) ou réel (r).");
-		        System.out.println("Je suis désolée, vous ne pouvez choisir qu'entre virtuel (v) ou réel (r).");
-		    } 
 		    
 		}while (!type.equals("v") && !type.equals("r"));
     	
