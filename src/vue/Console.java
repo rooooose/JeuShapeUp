@@ -30,7 +30,7 @@ public class Console implements Observer, Runnable {
 	private ShapeUp jeuShapeUp;
 	private Partie partie;
 	private Queue<Joueur> joueurs = new LinkedList<Joueur>();
-	private final Scanner scan = new Scanner (System.in);
+	//private final Scanner scan = new Scanner (System.in);
 	private BufferedReader br = new BufferedReader (new InputStreamReader(System.in));
 	private Thread t;
 	private int cptAppelsType = 0;
@@ -69,6 +69,7 @@ public class Console implements Observer, Runnable {
 		      if(this.jeuShapeUp.getNbDeJoueurs()!=0) {
 		    	  resultat = ((Integer)this.jeuShapeUp.getNbDeJoueurs()).toString();
 		    	  nb= Integer.parseInt(resultat);
+		    	  
 		      }
 		      
 		      if (!resultat.equals("2") && !resultat.equals("3")) {
