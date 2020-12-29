@@ -40,14 +40,14 @@ public class ShapeUp extends Observable {
 			this.maPartie = maPartie;
 		}
 
-	    private Set<String> nomsJoueurs = new HashSet<String>();
-	    public Set<String> getNomsJoueurs() {
+	    private LinkedList<String> nomsJoueurs = new LinkedList<String>();
+	    public LinkedList<String> getNomsJoueurs() {
 			return nomsJoueurs;
 		}
 
-		public void setNomsJoueurs(Set<String> nomsJoueurs) {
-			this.nomsJoueurs = nomsJoueurs;
-		}
+//		public void setNomsJoueurs(LinkedList<String> nomsJoueurs) {
+//			this.nomsJoueurs = nomsJoueurs;
+//		}
 	    
 		private int nbDeJoueurs;
 		
@@ -59,7 +59,7 @@ public class ShapeUp extends Observable {
 			this.nbDeJoueurs = nbDeJoueurs;
 			this.setChanged();
 			this.notifyObservers(nbDeJoueurs);
-			//this.clearChanged();
+			this.clearChanged();
 		}
 		
 		private TapisDeJeu formeTapis;
@@ -72,7 +72,9 @@ public class ShapeUp extends Observable {
 
 		public void setFormeTapis(TapisDeJeu formeTapis) {
 			this.formeTapis = formeTapis;
-			
+			this.setChanged();
+			this.notifyObservers(formeTapis);
+			this.clearChanged();
 		}
 
 		public StrategieMode getMode() {
@@ -81,7 +83,9 @@ public class ShapeUp extends Observable {
 
 		public void setMode(StrategieMode mode) {
 			this.mode = mode;
-			
+			this.setChanged();
+			this.notifyObservers(mode);
+			this.clearChanged();
 		}
 
 		public ShapeUp() {
@@ -122,16 +126,16 @@ public class ShapeUp extends Observable {
         	switch(type) {
 	        	case 'v' :
 	        		JoueurVirtuel nouveauJoueurV = new JoueurVirtuel(nom);
-	        		this.getNomsJoueurs().add(nom);
+	        		//this.getNomsJoueurs().add(nom);
 	        		this.queueJoueurs.add(nouveauJoueurV);
-	        		//this.notifyObservers(nouveauJoueurV);
+	        		this.notifyObservers(nouveauJoueurV);
 	        		break;
 	        		//return nouveauJoueurV;
 	        	case 'r' :
 	        		JoueurReel nouveauJoueurR = new JoueurReel(nom);
-	        		this.getNomsJoueurs().add(nom);
+	        		//this.getNomsJoueurs().add(nom);
 	        		this.queueJoueurs.add(nouveauJoueurR);
-	        		//this.notifyObservers(nouveauJoueurR);
+	        		this.notifyObservers(nouveauJoueurR);
 	        		break;
 	        		//return nouveauJoueurR;
 //	        	default :

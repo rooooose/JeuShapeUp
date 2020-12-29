@@ -25,16 +25,16 @@ import vue.VueShapeUp;
 
 public class ControleurShapeUp {
 	
-	private int nbre;
-	
-
-	public int getNbre() {
-		return nbre;
-	}
-
-	public void setNbre(int nbre) {
-		this.nbre = nbre;
-	}
+//	private int nbre;
+//	
+//
+//	public int getNbre() {
+//		return nbre;
+//	}
+//
+//	public void setNbre(int nbre) {
+//		this.nbre = nbre;
+//	}
 
 //	public String[] getNoms() {
 //		return noms;
@@ -60,40 +60,43 @@ public class ControleurShapeUp {
 		vueShUp.getOkMode().addActionListener(new ActionListener() {
 			
 			StrategieMode mode;
-			
-		public void actionPerformed(ActionEvent e) {
-			
-			
-			if (vueShUp.getDeBase().isSelected() || vueShUp.getVictoireEnnemie().isSelected() || vueShUp.getAvance().isSelected()) {
 				
-			if (vueShUp.getDeBase().isSelected()) {
-				//mode = new StrategieDeBase(jeuShapeUp.getConsoleDuJeu());
-				mode = new StrategieDeBase();
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				if (vueShUp.getDeBase().isSelected() || vueShUp.getVictoireEnnemie().isSelected() || vueShUp.getAvance().isSelected()) {
+					
+				if (vueShUp.getDeBase().isSelected()) {
+					//mode = new StrategieDeBase(jeuShapeUp.getConsoleDuJeu());
+					mode = new StrategieDeBase();
+				}
+				else if (vueShUp.getVictoireEnnemie().isSelected()) {
+					//mode = new StrategieVictoireEnnemie(jeuShapeUp.getConsoleDuJeu());
+					mode = new StrategieVictoireEnnemie();
+				}
+				else if (vueShUp.getAvance().isSelected()) {
+					//mode = new StrategieAvance(jeuShapeUp.getConsoleDuJeu());
+					mode = new StrategieAvance();
+				}
+				if(sU.getMode()==null) {
+					sU.setMode(mode);
+				}
+				
+				
+				vueShUp.getModeDeJeu().setText("Vous avez choisi les règles : "+mode );
+				vueShUp.getModeDeJeu().setForeground(Color.PINK);
+				vueShUp.getOkMode().setEnabled(false);
+				vueShUp.getDeBase().setEnabled(false);
+				vueShUp.getVictoireEnnemie().setEnabled(false);
+				vueShUp.getAvance().setEnabled(false);
+				} 
+				else {
+					vueShUp.getModeDeJeu().setText("Il faut choisir un mode de jeu avant de confirmer.");
+				}
+				
+				vueShUp.getFenetreChoix().pack();
 			}
-			else if (vueShUp.getVictoireEnnemie().isSelected()) {
-				//mode = new StrategieVictoireEnnemie(jeuShapeUp.getConsoleDuJeu());
-				mode = new StrategieVictoireEnnemie();
-			}
-			else if (vueShUp.getAvance().isSelected()) {
-				//mode = new StrategieAvance(jeuShapeUp.getConsoleDuJeu());
-				mode = new StrategieAvance();
-			}
-			
-			sU.setMode(mode);
-			vueShUp.getModeDeJeu().setText("Vous avez choisi les règles : "+mode );
-			vueShUp.getModeDeJeu().setForeground(Color.PINK);
-			vueShUp.getOkMode().setEnabled(false);
-			vueShUp.getDeBase().setEnabled(false);
-			vueShUp.getVictoireEnnemie().setEnabled(false);
-			vueShUp.getAvance().setEnabled(false);
-			} 
-			else {
-				vueShUp.getModeDeJeu().setText("Il faut choisir un mode de jeu avant de confirmer.");
-			}
-			
-			vueShUp.getFenetreChoix().pack();
-		}
-	});
+		});
 		
 		vueShUp.getOkForme().addActionListener(new ActionListener() {
 			TapisDeJeu forme = null;
@@ -119,8 +122,9 @@ public class ControleurShapeUp {
 					vueShUp.getFormeTapis().setText("Vous avez choisi un tapis circulaire");
 					
 				}
-				
-				sU.setFormeTapis(forme);
+				if(sU.getFormeTapis()==null) {
+					sU.setFormeTapis(forme);
+				}
 				vueShUp.getFormeTapis().setForeground(Color.PINK);
 				vueShUp.getOkForme().setEnabled(false);
 				vueShUp.getRectangle().setEnabled(false);
@@ -137,43 +141,35 @@ public class ControleurShapeUp {
 			
 		});
 				
-		vueShUp.getOkNbre().addActionListener(new ActionListener() {
-			
-	int nbre;		
+		vueShUp.getOkNbre().addActionListener(new ActionListener() {	
 	
 			public void actionPerformed(ActionEvent e) {
 				if (vueShUp.getDeuxJoueurs().isSelected() || vueShUp.getTroisJoueurs().isSelected()) {
-					
 
-				vueShUp.getNbreJoueurs().setForeground(Color.PINK);
-				vueShUp.getOkNbre().setEnabled(false);
-				vueShUp.getTroisJoueurs().setEnabled(false);
-				vueShUp.getDeuxJoueurs().setEnabled(false);
-				
-				////vueShUp.getContainerType().setVisible(true);
-				vueShUp.getJoueurs().setVisible(true);
-				
-				if (vueShUp.getDeuxJoueurs().isSelected()) {
-					vueShUp.getNbreJoueurs().setText("Vous avez choisi 2 joueurs");
-					vueShUp.getJoueur3().setVisible(false);
-					nbre =2;
+					vueShUp.getNbreJoueurs().setForeground(Color.PINK);
+					vueShUp.getOkNbre().setEnabled(false);
+					vueShUp.getTroisJoueurs().setEnabled(false);
+					vueShUp.getDeuxJoueurs().setEnabled(false);
 					
+					////vueShUp.getContainerType().setVisible(true);
+					vueShUp.getJoueurs().setVisible(true);
 					
-				}
-				else if (vueShUp.getTroisJoueurs().isSelected()) {
-					vueShUp.getNbreJoueurs().setText("Vous avez choisi 3 joueurs");
-					nbre = 3;
-				}
-				
-				ControleurShapeUp.this.setNbre(nbre);
-				sU.setNbDeJoueurs(nbre);
+					if (vueShUp.getDeuxJoueurs().isSelected()) {
+						vueShUp.getNbreJoueurs().setText("Vous avez choisi 2 joueurs");
+						vueShUp.getJoueur3().setVisible(false);
+						sU.setNbDeJoueurs(2);
+						
+					}
+					else if (vueShUp.getTroisJoueurs().isSelected()) {
+						vueShUp.getNbreJoueurs().setText("Vous avez choisi 3 joueurs");
+						sU.setNbDeJoueurs(3);
+					}
 				
 				}
 				else 
 				{
 					vueShUp.getNbreJoueurs().setText("Il faut choisir un nombre de joueurs avant de confirmer.");
 				}
-				
 				vueShUp.getFenetreChoix().pack();
 				
 				
@@ -234,17 +230,31 @@ public class ControleurShapeUp {
 		
 									public void actionPerformed(ActionEvent e) {
 										
-										String nom = vueShUp.getNomJoueur1().getText();
-										if(nom.isEmpty()) {
-						     		    	nom = "Joueur 1";
-									    }
+										String nom1 = "";
+										
+										if(sU.getNomsJoueurs().size() == 0) {
+											nom1 = vueShUp.getNomJoueur1().getText();
+											//sU.notifyObservers(nom);
+											if(nom1.isEmpty()) {
+							     		    	nom1 = "Joueur 1";
+										    }
+											sU.getNomsJoueurs().add(nom1);
+											sU.notifyObservers(nom1);
+										} else if(sU.getNomsJoueurs().size() == 1) {
+											//Object[] noms = sU.getNomsJoueurs().toArray();
+											nom1 = sU.getNomsJoueurs().get(0);
+										}
+											
+										
 						     			
-										vueShUp.getNomDuJoueur1().setText("Vous avez choisi le nom du joueur 1 : "+nom);
+										vueShUp.getNomDuJoueur1().setText("Vous avez choisi le nom du joueur 1 : "+nom1);
 										vueShUp.getNomDuJoueur1().setForeground(Color.PINK);
 										//vueShUp.getNomJoueur().setText("");
 										vueShUp.getNomJoueur1().setVisible(false);
 										vueShUp.getOkNom1().setVisible(false);
 										vueShUp.getFenetreChoix().pack();
+										
+										
 //										if (sU.getQueueJoueurs().size() == 0 ) {
 //											sU.creerJoueur(sU.getTypes().get(0), nom);
 //											System.out.println("Je crée un joueur gui");
@@ -308,16 +318,26 @@ public class ControleurShapeUp {
 
 							public void actionPerformed(ActionEvent e) {
 								
-								String nom = vueShUp.getNomJoueur2().getText();
-								if(nom.isEmpty()) {
-				     		    	nom = "Joueur 2";
-							    }
-								vueShUp.getNomDuJoueur2().setText("Vous avez choisi le nom du joueur 2 : "+nom);
+								String nom2 = "";
+								
+								if(sU.getNomsJoueurs().size() == 1) {
+									nom2 = vueShUp.getNomJoueur2().getText();
+									//sU.notifyObservers(nom);
+									if(nom2.isEmpty()) {
+					     		    	nom2 = "Joueur 2";
+								    }
+									sU.getNomsJoueurs().add(nom2);
+									sU.notifyObservers(nom2);
+								} else if(sU.getNomsJoueurs().size() == 2) {
+									nom2 = sU.getNomsJoueurs().get(1);
+								}
+								vueShUp.getNomDuJoueur2().setText("Vous avez choisi le nom du joueur 2 : "+nom2);
 								vueShUp.getNomDuJoueur2().setForeground(Color.orange);
 								//vueShUp.getNomJoueur().setText("");
 								vueShUp.getNomJoueur2().setVisible(false);
 								vueShUp.getOkNom2().setVisible(false);
 								vueShUp.getFenetreChoix().pack();
+
 //								if (sU.getQueueJoueurs().size() == 1 ) {
 //									sU.creerJoueur(sU.getTypes().get(1), nom);
 //									System.out.println("Je crée un joueur gui");
@@ -381,16 +401,26 @@ public class ControleurShapeUp {
 
 							public void actionPerformed(ActionEvent e) {
 								
-								String nom = vueShUp.getNomJoueur3().getText();
-								if(nom.isEmpty()) {
-				     		    	nom = "Joueur 3";
-							    }
-								vueShUp.getNomDuJoueur3().setText("Vous avez choisi le nom du joueur 3 : "+nom);
+								String nom3 = "";
+								
+								if(sU.getNomsJoueurs().size() == 2) {
+									nom3 = vueShUp.getNomJoueur3().getText();
+									//sU.notifyObservers(nom);
+									if(nom3.isEmpty()) {
+					     		    	nom3 = "Joueur 3";
+								    }
+									sU.getNomsJoueurs().add(nom3);
+									sU.notifyObservers(nom3);
+								} else if(sU.getNomsJoueurs().size() == 3) {
+									nom3 = sU.getNomsJoueurs().get(2);
+								}
+								vueShUp.getNomDuJoueur3().setText("Vous avez choisi le nom du joueur 3 : "+nom3);
 								vueShUp.getNomDuJoueur3().setForeground(Color.blue);
 								//vueShUp.getNomJoueur().setText("");
 								vueShUp.getNomJoueur3().setVisible(false);
 								vueShUp.getOkNom3().setVisible(false);
 								vueShUp.getFenetreChoix().pack();
+								
 //								if (sU.getQueueJoueurs().size() == 2 ) {
 //									sU.creerJoueur(sU.getTypes().get(2), nom);
 //									System.out.println("Je crée un joueur gui");

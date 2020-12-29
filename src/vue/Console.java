@@ -63,25 +63,29 @@ public class Console implements Observer, Runnable {
 		try {
 			do {
 			  System.out.println("Veuillez choisir le nombre de joueurs pour votre partie (2 ou 3) : ");
+			  
 		      resultat = br.readLine();
+		      
 		      if(this.jeuShapeUp.getNbDeJoueurs()!=0) {
 		    	  resultat = ((Integer)this.jeuShapeUp.getNbDeJoueurs()).toString();
 		    	  nb= Integer.parseInt(resultat);
-		    	  //System.out.print("Appuyez sur Entrée pour continuer");
 		      }
-		     // if (resultat != '2' && resultat != '3') {
+		      
 		      if (!resultat.equals("2") && !resultat.equals("3")) {
-		        	//this.notifyObservers("Je suis désolée, vous ne pouvez choisir que 2 ou 3 joueurs.");
 		        	System.out.println("Je suis désolée, vous ne pouvez choisir que 2 ou 3 joueurs.");
 		      } 
+		      
 			}while (!resultat.equals("2") && !resultat.equals("3"));
+			
 		} catch (IOException e) {
 		      System.err.println(e.getMessage());
 		}
+		
 		if(this.jeuShapeUp.getNbDeJoueurs()==0) {
 			nb= Integer.parseInt(resultat);
 		    this.jeuShapeUp.setNbDeJoueurs(nb);
 		}
+		
 	    return nb;
     }
 	
@@ -132,25 +136,23 @@ public class Console implements Observer, Runnable {
      		    //nom = scan.nextLine();
      		    try {
 					nom = br.readLine();
-					
-//					if(this.jeuShapeUp.getNomsJoueurs().size() == this.cptAppelsType) {
-//						Object[] noms = this.jeuShapeUp.getNomsJoueurs().toArray()[];
-//						nom = this.jeuShapeUp.getNomsJoueurs().get(0);
-//					}
+					//si le nom du joueur est deja défini
+					if(this.jeuShapeUp.getNomsJoueurs().size() == this.cptAppelsNom) {
+						
+						nom = this.jeuShapeUp.getNomsJoueurs().get(nb-1);
+					}
+					else if(nom == "") {
+	     		    	System.out.println("Nom par défaut");
+	     		    	nom = "Joueur " + nb;
+				    } else if (this.jeuShapeUp.getNomsJoueurs().contains(nom)) {
+				        System.out.println("Je suis désolée, chaque joueur doit avoir un nom unique");
+				    }
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
      		    
-     		    if(nom == "") {
-     		    	System.out.println("Nom par défaut");
-     		    	nom = "Joueur " + nb;
-			    	//this.jeuShapeUp.getNomsJoueurs().add("Joueur " + nb);
-			    } else if (this.jeuShapeUp.getNomsJoueurs().contains(nom)) {
-     				//this.notifyObservers("Je suis désolée, chaque joueur doit avoir un nom unique");
-			        System.out.println("Je suis désolée, chaque joueur doit avoir un nom unique");
-			    }
-			}while (this.jeuShapeUp.getNomsJoueurs().contains(nom) && nom != "");
+			}while (this.jeuShapeUp.getNomsJoueurs().contains(nom) && this.jeuShapeUp.getNomsJoueurs().size() != this.cptAppelsNom);
 	    	
 	    	if(this.jeuShapeUp.getNomsJoueurs().size() < this.cptAppelsNom) {
 	    		this.jeuShapeUp.getNomsJoueurs().add(nom);
@@ -163,43 +165,47 @@ public class Console implements Observer, Runnable {
 
 	    public StrategieMode choisirMode() {
 	    	
-	    	StrategieMode mode;
-	    	char lettreMode='b';
+	    	StrategieMode mode = null;
+	    	String lettreMode="";
 	    	do {
-	    		//this.notifyObservers("Veuillez choisir le mode de partie : \n \t-Mode de Base (b)\n \t-Mode Avancé (a)\n\t-Mode Victoire Ennemie (v)");
 	    		System.out.println("Veuillez choisir le mode de partie : \n \t-Mode de Base (b)\n \t-Mode Avancé (a)\n\t-Mode Victoire Ennemie (v)");
-     		lettreMode = scan.next().charAt(0);
- 			scan.nextLine();
-     		if (lettreMode!= 'b' && lettreMode!= 'a' && lettreMode!= 'v') {
-     				//this.notifyObservers("Je suis désolée, vous ne pouvez choisir qu'entre les 3 modes proposés.");
+//	    		lettreMode = scan.next().charAt(0);
+//	    		scan.nextLine();
+	    		try {
+					lettreMode = br.readLine();
+					
+					if(this.jeuShapeUp.getMode()!=null) {
+						if((mode = this.jeuShapeUp.getMode()) instanceof StrategieDeBase) {
+							lettreMode="b";
+						} else if ((mode = this.jeuShapeUp.getMode()) instanceof StrategieAvance) {
+							lettreMode="a";
+						} else if ((mode = this.jeuShapeUp.getMode()) instanceof StrategieVictoireEnnemie) {
+							lettreMode="v";
+						}
+				     }
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	    		if (!lettreMode.equals("b") && !lettreMode.equals("a") && !lettreMode.equals("v")) {
 			        System.out.println("Je suis désolée, vous ne pouvez choisir qu'entre les 3 modes proposés.");
 			    }  
-			}while (lettreMode!= 'b' && lettreMode!= 'a' && lettreMode!= 'v');
+			}while (!lettreMode.equals("b") && !lettreMode.equals("a") && !lettreMode.equals("v"));
 	    	
-	    	switch(lettreMode) {
-				case 'b' :
-					
-					mode = new StrategieDeBase();
-					this.jeuShapeUp.setMode(mode);
-					this.jeuShapeUp.notifyObservers(mode);
-					return mode;
-				case 'a' :
-					
-					
-					mode = new StrategieAvance();
-					this.jeuShapeUp.setMode(mode);
-					this.jeuShapeUp.notifyObservers(mode);
-					return mode;
-					
-				case 'v' :
-					mode = new StrategieVictoireEnnemie();
-					this.jeuShapeUp.setMode(mode);
-					this.jeuShapeUp.notifyObservers(mode);
-					return mode;
-
-				default :
-					return null;
+	    	if(this.jeuShapeUp.getMode()==null) {
+	    		
+	    		switch(lettreMode.charAt(0)) {
+					case 'b' :
+						mode = new StrategieDeBase();
+					case 'a' :
+						mode = new StrategieAvance();
+					case 'v' :
+						mode = new StrategieVictoireEnnemie();
+	    		}
+	    		this.jeuShapeUp.setMode(mode);
+				this.jeuShapeUp.notifyObservers(mode);
 	    	}
+	    	return mode;
 	    	
 	    	
 	    }
@@ -207,38 +213,52 @@ public class Console implements Observer, Runnable {
 	    
 	    public TapisDeJeu choisirFormeTapis() {
 	    	
-	    	TapisDeJeu forme;
-	    	char lettreForme='b';
+	    	TapisDeJeu forme = null;
+	    	String lettreForme="";
 	    	do {
 	    		//this.notifyObservers("Veuillez choisir la forme du tapis : \n \t-Rectangle 5x3 (r)\n \t-Triangle rectangle (t)\n \t-Disque (d)");
 	    		System.out.println("Veuillez choisir la forme du tapis : \n \t-Rectangle 5x3 (r)\n \t-Triangle rectangle (t)\n \t-Disque (d)");
-     		lettreForme = scan.next().charAt(0);
- 			scan.nextLine();
-     		if (lettreForme!= 'r' && lettreForme!= 't' && lettreForme!= 'd') {
+     		//lettreForme = scan.next().charAt(0);
+     		try {
+				lettreForme = br.readLine();
+				
+				if(this.jeuShapeUp.getFormeTapis()!=null) {
+					if ((forme = this.jeuShapeUp.getFormeTapis()) instanceof TapisRectangle) {
+						lettreForme="r";
+						
+					} else if ((forme = this.jeuShapeUp.getFormeTapis()) instanceof TapisTriangleRectangle) {
+						lettreForme="t";
+						
+					} else if ((forme = this.jeuShapeUp.getFormeTapis()) instanceof TapisCercle) {
+						lettreForme="d";
+						
+					} 
+				}
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+     		
+     		if (!lettreForme.equals("r") && !lettreForme.equals("t") && !lettreForme.equals("d")) {
      				//this.notifyObservers("Je suis désolée, vous ne pouvez choisir qu'entre les formes proposées.");
 			        System.out.println("Je suis désolée, vous ne pouvez choisir qu'entre les formes proposées.");
 			    }  
-			}while (lettreForme!= 'r' && lettreForme!= 't' && lettreForme!= 'd');
+			}while (!lettreForme.equals("r") && !lettreForme.equals("t") && !lettreForme.equals("d"));
 	    	
-	    	switch(lettreForme) {
-				case 'r' :
-					forme = new TapisRectangle();
-					this.jeuShapeUp.setFormeTapis(forme);
-					this.jeuShapeUp.notifyObservers(forme);
-					return forme;
-				case 't' :
-					forme = new TapisTriangleRectangle();
-					this.jeuShapeUp.setFormeTapis(forme);
-					this.jeuShapeUp.notifyObservers(forme);
-					return forme;
-			case 'd' :
-					forme = new TapisCercle();
-					this.jeuShapeUp.setFormeTapis(forme);
-					this.jeuShapeUp.notifyObservers(forme);
-					return forme;		
-				default :
-					return null;
+	    	if(this.jeuShapeUp.getFormeTapis()==null) {
+	    		switch(lettreForme.charAt(0)) {
+					case 'r' :
+						forme = new TapisRectangle();
+					case 't' :
+						forme = new TapisTriangleRectangle();
+					case 'd' :
+						forme = new TapisCercle();		
+	    		}
+	    		this.jeuShapeUp.setFormeTapis(forme);
+				this.jeuShapeUp.notifyObservers(forme);
 	    	}
+	    	return forme;
 	    }
 
 	@Override
@@ -252,7 +272,6 @@ public class Console implements Observer, Runnable {
 				
 		for(int i=1; i<=nbJoueurs; i++) {
 			this.jeuShapeUp.creerJoueur(this.definirTypeJoueur(i), this.definirNomJoueur(i));
-			System.out.println("Je crée un joueur console");
 		}
 		
 		

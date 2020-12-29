@@ -1003,7 +1003,6 @@ public class VueShapeUp implements Observer {
 		}
 		
 		//choix des options joueurs
-		Object[] noms = this.jeuShapeUp.getNomsJoueurs().toArray();
 		
 		if(this.jeuShapeUp.getTypes().size()==1) {
 			String ty1 = this.jeuShapeUp.getTypes().get(0);
@@ -1013,14 +1012,12 @@ public class VueShapeUp implements Observer {
 			} else if (ty1.equals("r")) {
 				reel1.setSelected(true);		
 			}
-			this.getContainerNom1().setVisible(true);
-			
-			
+			okType1.doClick();
 		}
 		if(this.jeuShapeUp.getNomsJoueurs().size() == 1) {
-			nomJoueur1.setText((String) noms[0]);
 			okNom1.doClick();
-			okType1.doClick();
+			//nomJoueur1.setText((String) noms[0]);
+			
 		}
 		
 		if(this.jeuShapeUp.getTypes().size()==2) {
@@ -1032,12 +1029,12 @@ public class VueShapeUp implements Observer {
 			} else if (ty2.equals("r")) {
 				reel2.setSelected(true);		
 			}
-			this.getContainerNom2().setVisible(true);
+			okType2.doClick();
 		}
 		if(this.jeuShapeUp.getNomsJoueurs().size() == 2) {
-			nomJoueur2.setText((String) noms[1]);
 			okNom2.doClick();
-			okType2.doClick();
+			//nomJoueur2.setText((String) noms[1]);
+			
 		}
 		
 		if(this.jeuShapeUp.getTypes().size()==3) {
@@ -1048,13 +1045,11 @@ public class VueShapeUp implements Observer {
 			} else if (ty3.equals("r")) {
 				reel3.setSelected(true);		
 			}
-			this.getContainerNom3().setVisible(true);
-			
+			okType3.doClick();
 		}
 		if(this.jeuShapeUp.getNomsJoueurs().size() == 3) {
-			nomJoueur3.setText((String) noms[2]);
 			okNom3.doClick();
-			okType3.doClick();
+			//nomJoueur3.setText((String) noms[2]);
 		}
 		
 		
