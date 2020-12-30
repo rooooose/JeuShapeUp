@@ -16,7 +16,7 @@ public class VueTriangle {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -27,7 +27,7 @@ public class VueTriangle {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the application.
@@ -169,6 +169,7 @@ public class VueTriangle {
 		gbc_case4x4.gridy = 4;
 		frame.getContentPane().add(case4x4, gbc_case4x4);
 		
+		frame.setVisible(true);
 		frame.pack();
 	}
 

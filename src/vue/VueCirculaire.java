@@ -16,7 +16,7 @@ public class VueCirculaire {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -27,7 +27,7 @@ public class VueCirculaire {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the application.
@@ -178,7 +178,8 @@ public class VueCirculaire {
 		gbc_case4x2.gridy = 4;
 		frame.getContentPane().add(case4x2, gbc_case4x2);
 		
-		//frame.pack();
+		frame.setVisible(true);
+		frame.pack();
 	}
 
 }

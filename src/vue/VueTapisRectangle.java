@@ -16,7 +16,7 @@ public class VueTapisRectangle {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -27,7 +27,7 @@ public class VueTapisRectangle {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the application.
@@ -169,6 +169,7 @@ public class VueTapisRectangle {
 		gbc_case2x4.gridy = 2;
 		frame.getContentPane().add(case2x4, gbc_case2x4);
 		
+		frame.setVisible(true);
 		frame.pack();
 	}
 
