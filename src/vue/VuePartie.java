@@ -9,6 +9,8 @@ import controleurs.pourShapeUp.ControleurPartie;
 import shapeUp.Observable;
 import shapeUp.Observer;
 import shapeUp.Partie;
+import shapeUp.StrategieDeBase;
+import shapeUp.StrategieVictoireEnnemie;
 import shapeUp.TapisCercle;
 import shapeUp.TapisRectangle;
 import shapeUp.TapisTriangleRectangle;
@@ -198,6 +200,10 @@ public class VuePartie implements Observer{
 			VueCirculaire vueTapisDeJeu = new VueCirculaire();
 		}
 		
+		if (this.partie.getModeDeJeu() instanceof StrategieDeBase || this.partie.getModeDeJeu() instanceof StrategieVictoireEnnemie ) {
+			carte1.setVisible(false);
+			carte2.setVisible(false);
+		}
 		frame.setVisible(true);
 		//frame.pack();
 	}
