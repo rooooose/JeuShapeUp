@@ -156,7 +156,7 @@ public class Console implements Observer, Runnable {
 		    
 		}while (!type.equals("v") && !type.equals("r") && this.jeuShapeUp.getTypes().size() != nb);
     	
-    	if(this.jeuShapeUp.getNomsJoueurs().size() != nb) {
+    	if(this.jeuShapeUp.getTypes().size() != nb) {
     		this.jeuShapeUp.getTypes().add(type);
     		this.jeuShapeUp.notifyObservers(type);
 		}
@@ -310,8 +310,9 @@ public class Console implements Observer, Runnable {
 	    int nbJoueurs = this.choisirNbJoueurs();
 				
 		for(int i=1; i<=nbJoueurs; i++) {
-			System.out.println(this.jeuShapeUp.getQueueJoueurs());
+			//System.out.println(this.jeuShapeUp.getQueueJoueurs());
 			if(this.jeuShapeUp.getQueueJoueurs().size() < i) {
+				System.out.println("Coucou");
 				String nom = "";
 				this.jeuShapeUp.creerJoueur(this.definirTypeJoueur(i), nom = this.definirNomJoueur(i));
 				this.jeuShapeUp.notifyObservers(nom);
