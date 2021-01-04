@@ -58,6 +58,7 @@ public class Console implements Observer, Runnable {
 		// TODO Auto-generated method stub
 		
 		System.out.println(arg);
+		
 //		if(this.jeuShapeUp.getNbDeJoueurs() != 0) {
 //			System.out.println("Appuyez sur Entrée pour continuer");
 //		}	
@@ -98,13 +99,28 @@ public class Console implements Observer, Runnable {
 			do {
 			  System.out.println("Veuillez choisir le nombre de joueurs pour votre partie (2 ou 3) : ");
 			  
+			  while (br.ready() == false) {
+				  try {
+					t.wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			  }
+			  
+			  if (br.ready() == true) {
 		      resultat = br.readLine();
+			  }
+			 
 		      
 		      if(this.jeuShapeUp.getNbDeJoueurs()!=0) {
 		    	  resultat = ((Integer)this.jeuShapeUp.getNbDeJoueurs()).toString();
 		    	  nb= Integer.parseInt(resultat);
 		    	  
+		    	  
 		      }
+		      
+		      
 		      
 		      if (!resultat.equals("2") && !resultat.equals("3")) {
 		        	System.out.println("Je suis désolée, vous ne pouvez choisir que 2 ou 3 joueurs.");
