@@ -173,7 +173,7 @@ public class ControleurShapeUp {
 					}
 					if(sU.getNbDeJoueurs() == 0) {
 						sU.setNbDeJoueurs(nb);
-						sU.notifyObservers("Appuyez sur Entrée pour continuer");
+						sU.notifyObservers("Appuyez sur Entrée pour continuer les choix dans la console");
 					}	
 				}
 				else 
@@ -201,7 +201,7 @@ public class ControleurShapeUp {
 							if(sU.getTypes().size() == 0) {
 								sU.getTypes().add("v");
 								sU.notifyObservers("Joueur virtuel");
-								sU.notifyObservers("Appuyez sur Entrée pour continuer");
+								sU.notifyObservers("Appuyez sur Entrée pour continuer les choix dans la console");
 							}
 							
 							
@@ -212,7 +212,7 @@ public class ControleurShapeUp {
 							if(sU.getTypes().size() == 0) {
 								sU.getTypes().add("r");
 								sU.notifyObservers("Joueur réel");
-								sU.notifyObservers("Appuyez sur Entrée pour continuer");
+								sU.notifyObservers("Appuyez sur Entrée pour continuer les choix dans la console");
 							}
 							
 						}
@@ -252,7 +252,7 @@ public class ControleurShapeUp {
 										    }
 											sU.getNomsJoueurs().add(nom1);
 											sU.notifyObservers(nom1);
-											sU.notifyObservers("Appuyez sur Entrée pour continuer");
+											sU.notifyObservers("Appuyez sur Entrée pour continuer les choix dans la console");
 										} else if(sU.getNomsJoueurs().size() == 1) {
 											//Object[] noms = sU.getNomsJoueurs().toArray();
 											nom1 = sU.getNomsJoueurs().get(0);
@@ -292,7 +292,7 @@ public class ControleurShapeUp {
 					if(sU.getTypes().size() == 1) {
 						sU.getTypes().add("v");
 						sU.notifyObservers("Joueur virtuel");
-						sU.notifyObservers("Appuyez sur Entrée pour continuer");
+						sU.notifyObservers("Appuyez sur Entrée pour continuer les choix dans la console");
 					}
 					
 				}else if (vueShUp.getReel2().isSelected()) {
@@ -302,7 +302,7 @@ public class ControleurShapeUp {
 					if(sU.getTypes().size() == 1) {
 						sU.getTypes().add("r");
 						sU.notifyObservers("Joueur réel");
-						sU.notifyObservers("Appuyez sur Entrée pour continuer");
+						sU.notifyObservers("Appuyez sur Entrée pour continuer les choix dans la console");
 					}
 					
 				}
@@ -342,7 +342,12 @@ public class ControleurShapeUp {
 								    }
 									sU.getNomsJoueurs().add(nom2);
 									sU.notifyObservers(nom2);
-									sU.notifyObservers("Appuyez sur Entrée pour continuer");
+									if(sU.getNbDeJoueurs() ==2) {
+										sU.notifyObservers("Appuyez sur Entrée pour continuer les choix dans la console");
+									} else {
+										sU.notifyObservers("Appuyez sur Entrée pour continuer");
+									}
+									
 									
 								} else if(sU.getNomsJoueurs().size() == 2) {
 									nom2 = sU.getNomsJoueurs().get(1);
@@ -379,7 +384,7 @@ public class ControleurShapeUp {
 					if(sU.getTypes().size() == 2) {
 						sU.getTypes().add("v");
 						sU.notifyObservers("Joueur virtuel");
-						sU.notifyObservers("Appuyez sur Entrée pour continuer");
+						sU.notifyObservers("Appuyez sur Entrée pour continuer les choix dans la console");
 					}
 					
 				}else if (vueShUp.getReel3().isSelected()) {
@@ -389,7 +394,7 @@ public class ControleurShapeUp {
 					if(sU.getTypes().size() == 2) {
 						sU.getTypes().add("r");
 						sU.notifyObservers("Joueur réel");
-						sU.notifyObservers("Appuyez sur Entrée pour continuer");
+						sU.notifyObservers("Appuyez sur Entrée pour continuer les choix dans la console");
 					}
 					
 				}

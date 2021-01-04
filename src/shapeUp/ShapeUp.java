@@ -123,7 +123,9 @@ public class ShapeUp extends Observable {
 //        	type = ty;
 //        	nom = nm;
         			
-        	switch(type) {
+	    	//if(this.getNomsJoueurs().contains(nm)) {
+	    		
+	    		switch(type) {
 	        	case 'v' :
 	        		JoueurVirtuel nouveauJoueurV = new JoueurVirtuel(nom);
 	        		//this.getNomsJoueurs().add(nom);
@@ -137,10 +139,9 @@ public class ShapeUp extends Observable {
 	        		this.queueJoueurs.add(nouveauJoueurR);
 	        		this.notifyObservers(nouveauJoueurR);
 	        		break;
-	        		//return nouveauJoueurR;
-//	        	default :
-//	        		return null;
-        	}
+	    		}
+	    	//}
+        	
 
 			
 	    	

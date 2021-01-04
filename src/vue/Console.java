@@ -331,7 +331,7 @@ public class Console implements Observer, Runnable {
 	    int nbJoueurs = this.choisirNbJoueurs();
 				
 		for(int i=1; i<=nbJoueurs; i++) {
-			//System.out.println(this.jeuShapeUp.getQueueJoueurs());
+			System.out.println(this.jeuShapeUp.getQueueJoueurs());
 			if(this.jeuShapeUp.getQueueJoueurs().size() < i) {
 				String nom = "";
 				this.jeuShapeUp.creerJoueur(this.definirTypeJoueur(i), nom = this.definirNomJoueur(i));
