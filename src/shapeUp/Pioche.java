@@ -66,7 +66,7 @@ public class Pioche {
     	//}
  
 
-    	
+    	// A SUPPR ?
     	    public String toString() {
     	    	 StringBuffer sbPioche = new StringBuffer();
     	    	// sbCarte.append("Forme de la carte : " +this.forme);

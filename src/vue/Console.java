@@ -135,13 +135,13 @@ public class Console implements Observer, Runnable {
 			try {
 				type = br.readLine();
 				
-				if (!type.equals("v") && !type.equals("r") && this.jeuShapeUp.getTypes().size() != nb) {
+				if (!type.equals("v") && !type.equals("r") && this.jeuShapeUp.getTypes().size() < nb) {
 			    	//this.notifyObservers("Je suis désolée, vous ne pouvez choisir qu'entre virtuel (v) ou réel (r).");
 			        System.out.println("Je suis désolée, vous ne pouvez choisir qu'entre virtuel (v) ou réel (r).");
 			    }
 				
 				//if(this.jeuShapeUp.getTypes().size() == this.cptAppelsType) {
-				else if(this.jeuShapeUp.getTypes().size() == nb) {
+				else if(this.jeuShapeUp.getTypes().size() >= nb) {
 					type = this.jeuShapeUp.getTypes().get(nb-1);
 					
 				}
@@ -154,9 +154,9 @@ public class Console implements Observer, Runnable {
 			//type = resultat.charAt(0);
 //			scan.nextLine();
 		    
-		}while (!type.equals("v") && !type.equals("r") && this.jeuShapeUp.getTypes().size() != nb);
+		}while (!type.equals("v") && !type.equals("r") && this.jeuShapeUp.getTypes().size() < nb);
     	
-    	if(this.jeuShapeUp.getTypes().size() != nb) {
+    	if(this.jeuShapeUp.getTypes().size() < nb) {
     		this.jeuShapeUp.getTypes().add(type);
     		this.jeuShapeUp.notifyObservers(type);
 		}
@@ -176,10 +176,10 @@ public class Console implements Observer, Runnable {
      		    try {
 					nom = br.readLine();
 					//si le nom du joueur est deja défini
-					if(this.jeuShapeUp.getNomsJoueurs().size() == nb) {
+					if(this.jeuShapeUp.getNomsJoueurs().size() >= nb) {
 						nom = this.jeuShapeUp.getNomsJoueurs().get(nb-1);
 					}
-					else if(nom == "" && this.jeuShapeUp.getQueueJoueurs().size() != nb) {
+					else if(nom == "" && this.jeuShapeUp.getNomsJoueurs().size() < nb) {
 	     		    	System.out.println("Nom par défaut");
 	     		    	nom = "Joueur " + nb;
 				    } else if (this.jeuShapeUp.getNomsJoueurs().contains(nom)) {
@@ -190,9 +190,9 @@ public class Console implements Observer, Runnable {
 					e.printStackTrace();
 				}
      		    
-			}while (this.jeuShapeUp.getNomsJoueurs().contains(nom) && this.jeuShapeUp.getNomsJoueurs().size() != nb);
+			}while (this.jeuShapeUp.getNomsJoueurs().contains(nom) && this.jeuShapeUp.getNomsJoueurs().size() < nb);
 	    	
-	    	if(this.jeuShapeUp.getNomsJoueurs().size() != nb) {
+	    	if(this.jeuShapeUp.getNomsJoueurs().size() < nb) {
 	    		this.jeuShapeUp.getNomsJoueurs().add(nom);
 //		    	this.jeuShapeUp.notifyObservers(nom);
 	    	}

@@ -149,7 +149,7 @@ public class VuePartie implements Observer{
 		
 		frame = new JFrame("C'est parti pour jouer ! :) ");
 		
-		frame.setBounds(100, 100, 666, 398);
+		frame.setBounds(100, 100, 796, 398);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		panel = new JPanel();
@@ -180,7 +180,7 @@ public class VuePartie implements Observer{
 		
 		tourDeJeu = new JLabel("Au tour de ");
 		tourDeJeu.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		tourDeJeu.setBounds(507, 40, 96, 65);
+		tourDeJeu.setBounds(472, 29, 256, 163);
 		panel.add(tourDeJeu);
 		
 		boutonDeplacer = new JButton("D\u00E9placer une carte");
@@ -211,6 +211,7 @@ public class VuePartie implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
+		this.tourDeJeu.setText((String) arg);
 		
 	}
 }

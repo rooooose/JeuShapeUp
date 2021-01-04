@@ -106,8 +106,29 @@ public abstract class Joueur extends Observable{
 	public void setMain(ArrayList<Carte> main) {
 		this.mainDuJoueur = main;
 	}
-//	
-	public abstract Carte piocherCarte(Pioche pioche);
+
+	//public abstract Carte piocherCarte(Pioche pioche);
+	
+	public Carte piocherCarte(Pioche pioche) {
+    	
+		if (pioche.getNbreDeCartes() < 0) {
+
+			this.notifyObservers("Aucune carte disponible dans la pioche");			
+			return null;
+			}
+		else {
+
+	    	Carte cartePiochee = pioche.getPioche().poll();
+	    	
+	    	pioche.compterNbCartes(pioche.getNbreDeCartes() - 1);
+	    	
+	    	this.notifyObservers(this.getNom() + " a pioché sa carte :");	    	
+	    	//System.out.println("Le joueur virtuel a pioché sa carte");
+	    	return cartePiochee;
+    	
+		}
+	}
+	
 	
 	public abstract boolean proposerDeplacement(TapisDeJeu tapis);
   

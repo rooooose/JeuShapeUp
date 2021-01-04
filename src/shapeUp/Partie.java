@@ -187,7 +187,7 @@ public class Partie extends Observable implements Visitable {
 		Joueur joueurActif = queueJoueurs.peek();
 		//CarteJouable carteJoueur = (CarteJouable) joueurActif.getMainDuJoueur();
 		
-		this.notifyObservers("\n"+"***** C'est au tour de " + joueurActif.getNom()+" *****");
+		this.notifyObservers("\n"+"** Au tour de " + joueurActif.getNom()+" **");
 		//System.out.println("\n"+"***** C'est au tour de " + joueurActif.getNom()+" *****");
 
 		

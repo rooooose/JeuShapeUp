@@ -15,42 +15,42 @@ public class JoueurVirtuel extends Joueur implements StrategieJoueur{
 		super(nom);
 		this.strategie = new StrategieJoueurVirtuel();
 	}*/
-public Carte piocherCarte(Pioche pioche) {
-    	
-		if (pioche.getNbreDeCartes() < 0) {
-
-			this.notifyObservers("Aucune carte disponible dans la pioche");			
-			//System.out.println("Aucune carte disponible dans la pioche");
-			return null;
-			}
-		else {
-		
-			//On récupère les cartes de la pioche
-			/*List<Carte> recupCartePioche = new ArrayList<Carte>(); 
-	    	recupCartePioche.addAll(pioche.getPioche()); */
-	    	
-	    	//On pioche une carte
-	    	Carte cartePiochee = pioche.getPioche().poll();
-			
-	    	
-	    	/*On enlève la carte de la pioche
-	    	
-	    	Set<Carte> transition = new HashSet();
-	    	transition = pioche.getPioche();
-	    	transition.remove(cartePiochee);	
-	    	pioche.setPioche(transition);*/
-	    	
-	    	
-	    	
-	    	pioche.compterNbCartes(pioche.getNbreDeCartes() - 1);
-	    	
-	    	this.notifyObservers("Le joueur virtuel a pioché sa carte");	    	
-	    	//System.out.println("Le joueur virtuel a pioché sa carte");
-	    	return cartePiochee;
-    	
-		}
-	}
-	
+//	public Carte piocherCarte(Pioche pioche) {
+//    	
+//		if (pioche.getNbreDeCartes() < 0) {
+//
+//			this.notifyObservers("Aucune carte disponible dans la pioche");			
+//			//System.out.println("Aucune carte disponible dans la pioche");
+//			return null;
+//			}
+//		else {
+//		
+//			//On récupère les cartes de la pioche
+//			/*List<Carte> recupCartePioche = new ArrayList<Carte>(); 
+//	    	recupCartePioche.addAll(pioche.getPioche()); */
+//	    	
+//	    	//On pioche une carte
+//	    	Carte cartePiochee = pioche.getPioche().poll();
+//			
+//	    	
+//	    	/*On enlève la carte de la pioche
+//	    	
+//	    	Set<Carte> transition = new HashSet();
+//	    	transition = pioche.getPioche();
+//	    	transition.remove(cartePiochee);	
+//	    	pioche.setPioche(transition);*/
+//	    	
+//	    	
+//	    	
+//	    	pioche.compterNbCartes(pioche.getNbreDeCartes() - 1);
+//	    	
+//	    	this.notifyObservers(this.getNom() + " a pioché sa carte :");	    	
+//	    	//System.out.println("Le joueur virtuel a pioché sa carte");
+//	    	return cartePiochee;
+//    	
+//		}
+//	}
+//	
 
 //    public void deplacerCarte(TapisDeJeu tapis) {
 //    	

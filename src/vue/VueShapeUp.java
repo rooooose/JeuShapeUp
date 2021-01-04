@@ -1084,7 +1084,10 @@ public class VueShapeUp implements Observer {
 		Partie partie = this.jeuShapeUp.getMaPartie();
 		if(partie != null) {
 			this.getOkAll().setEnabled(false);
-			this.setMaPartie(new VuePartie(partie));
+			
+			if(this.getMaPartie()==null) {
+			  this.setMaPartie(new VuePartie(partie));
+			}
 		}
 		
 		
