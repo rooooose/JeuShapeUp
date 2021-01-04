@@ -11,6 +11,7 @@ import shapeUp.Joueur;
 import shapeUp.Observable;
 import shapeUp.Observer;
 import shapeUp.Partie;
+import shapeUp.StrategieAvance;
 import shapeUp.StrategieDeBase;
 import shapeUp.StrategieVictoireEnnemie;
 import shapeUp.TapisCercle;
@@ -51,6 +52,7 @@ public class VuePartie implements Observer{
 	
 	private JLabel tourDeJeu;
 	private JLabel carteVict;
+	private JLabel carteVict2;
 	
 	
 
@@ -188,16 +190,19 @@ public class VuePartie implements Observer{
 		panel.setLayout(null);
 		
 		carte0 = new JButton();
+		carte0.setBackground(new Color(0, 0, 0));
 		carte0.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/caseVide.png")));
 		carte0.setBounds(12, 13, 146, 179);
 		panel.add(carte0);
 		
 		carte1 = new JButton();
+		carte1.setBackground(new Color(0, 0, 0));
 		carte1.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/caseVide.png")));
 		carte1.setBounds(169, 13, 144, 179);
 		panel.add(carte1);
 		
 		carte2 = new JButton();
+		carte2.setBackground(new Color(0, 0, 0));
 		carte2.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/caseVide.png")));
 		carte2.setBounds(325, 13, 137, 179);
 		panel.add(carte2);
@@ -215,18 +220,28 @@ public class VuePartie implements Observer{
 		panel.add(boutonDeplacer);
 		
 		carteDeVict = new JButton();
+		carteDeVict.setBackground(new Color(128, 0, 128));
 		carteDeVict.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/caseVide.png")));
 		carteDeVict.setBounds(663, 13, 146, 179);
 		panel.add(carteDeVict);
 		
 		carteVict = new JLabel("");
+		carteVict.setBackground(new Color(0, 0, 0));
+		carteVict.setForeground(new Color(128, 0, 128));
 		carteVict.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		carteVict.setBounds(663, 205, 146, 16);
+		carteVict.setBounds(518, 205, 291, 16);
 		panel.add(carteVict);
 		
 		carteDeVict2 = new JButton();
-		carteDeVict2.setBounds(663, 245, 97, 25);
+		carteDeVict2.setBackground(new Color(0, 0, 128));
+		carteDeVict2.setBounds(663, 227, 146, 179);
 		panel.add(carteDeVict2);
+		
+		carteVict2 = new JLabel();
+		carteVict2.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		carteVict2.setForeground(new Color(0, 0, 128));
+		carteVict2.setBounds(518, 406, 291, 16);
+		panel.add(carteVict2);
 		carteDeVict2.setVisible(false);
 		
 		
@@ -295,11 +310,27 @@ public class VuePartie implements Observer{
 			if (this.partie.getModeDeJeu() instanceof StrategieDeBase) {
 			carteDeVict.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+((Joueur) o).getCarteDeVictoire().getForme()+((Joueur) o).getCarteDeVictoire().getCouleur()+((Joueur) o).getCarteDeVictoire().EstRemplie()+".png")));
 			carteVict.setText("Voici votre carte de victoire");
+			} else if (this.partie.getModeDeJeu() instanceof StrategieVictoireEnnemie) {
+
+					if ((Joueur) o != ((Joueur) this.partie.getQueueJoueurs().toArray()[1]) ) {
+						carteDeVict.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+((Joueur) this.partie.getQueueJoueurs().toArray()[1]).getCarteDeVictoire().getForme()+((Joueur) this.partie.getQueueJoueurs().toArray()[1]).getCarteDeVictoire().getCouleur()+((Joueur) this.partie.getQueueJoueurs().toArray()[1]).getCarteDeVictoire().EstRemplie()+".png")));
+						carteVict.setText("Voici la carte de victoire de "+((Joueur) this.partie.getQueueJoueurs().toArray()[1]).getNom());
+						
+						if (this.partie.getQueueJoueurs().size() == 3 && (Joueur) o != ((Joueur) this.partie.getQueueJoueurs().toArray()[2])) {
+						carteDeVict2.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+((Joueur) this.partie.getQueueJoueurs().toArray()[2]).getCarteDeVictoire().getForme()+((Joueur) this.partie.getQueueJoueurs().toArray()[2]).getCarteDeVictoire().getCouleur()+((Joueur) this.partie.getQueueJoueurs().toArray()[2]).getCarteDeVictoire().EstRemplie()+".png")));
+						carteVict2.setText("Voici la carte de victoire de "+((Joueur) this.partie.getQueueJoueurs().toArray()[2]).getNom());
+						carteDeVict2.setVisible(true);
+						carteVict2.setVisible(true);
+						}
+					}
+				}
+				
 			}
+			
 		}
 		
 		
 		
 		
 	}
-}
+
