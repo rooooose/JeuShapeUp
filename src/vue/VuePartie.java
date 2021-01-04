@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import controleurs.pourShapeUp.ControleurPartie;
+import shapeUp.Carte;
+import shapeUp.Joueur;
 import shapeUp.Observable;
 import shapeUp.Observer;
 import shapeUp.Partie;
@@ -22,6 +24,9 @@ import java.awt.GridBagConstraints;
 import javax.swing.ImageIcon;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Color;
@@ -41,6 +46,8 @@ public class VuePartie implements Observer{
 	private JButton carte2;
 	
 	private JLabel tourDeJeu;
+	
+	private Queue<Joueur> joueurs = new LinkedList<Joueur>();
 	
 	public Partie getPartie() {
 		return partie;
@@ -138,6 +145,11 @@ public class VuePartie implements Observer{
 		
 		this.partie = p;
 		this.partie.addObserver(this);
+		this.joueurs = this.partie.getQueueJoueurs();
+		Iterator<Joueur> it = this.joueurs.iterator();
+		while(it.hasNext()) {
+			it.next().addObserver(this);
+		}
 		initialize();
 		new ControleurPartie (this.partie, this);
 	}
@@ -211,7 +223,32 @@ public class VuePartie implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		this.tourDeJeu.setText((String) arg);
+		if(arg instanceof String) {
+			this.tourDeJeu.setText((String) arg);
+		}
+		
+//		if(arg instanceof Carte) {
+//			this.tourDeJeu.setText((String) arg);
+//		}
+		
+		if(o instanceof Joueur) {
+			if(((Joueur) o).getMainDuJoueur().size()>=1) {
+				Carte cartePiochee = ((Joueur) o).getMainDuJoueur().get(0);
+				carte0.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+cartePiochee.getForme()+cartePiochee.getCouleur()+cartePiochee.EstRemplie()+".png")));
+			}
+			if(((Joueur) o).getMainDuJoueur().size()>=2) {
+				Carte cartePiochee = ((Joueur) o).getMainDuJoueur().get(1);
+				carte1.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+cartePiochee.getForme()+cartePiochee.getCouleur()+cartePiochee.EstRemplie()+".png")));
+			}
+			if(((Joueur) o).getMainDuJoueur().size()>=3) {
+				Carte cartePiochee = ((Joueur) o).getMainDuJoueur().get(2);
+				carte2.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+cartePiochee.getForme()+cartePiochee.getCouleur()+cartePiochee.EstRemplie()+".png")));
+			}
+			
+		}
+		
+		
+		
 		
 	}
 }
