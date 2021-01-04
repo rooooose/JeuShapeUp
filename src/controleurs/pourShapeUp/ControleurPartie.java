@@ -13,16 +13,17 @@ public class ControleurPartie {
 
 	public ControleurPartie(Partie p, VuePartie vuePartie) {
 		
-		vuePartie.getBoutonPioche().addActionListener(new ActionListener() {
+		/*vuePartie.getBoutonPioche().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				vuePartie.getCarte0().setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/triangleBleuRempli.png")));
 
 			}
 		});
-	}
+	}*/
 	
 	
 	
+}
 }
 
 

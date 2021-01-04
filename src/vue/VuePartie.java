@@ -35,19 +35,28 @@ import javax.swing.JLabel;
 public class VuePartie implements Observer{
 
 	private Partie partie;
-	private JFrame frame;
-	private JPanel panel;
 	
-	private JButton boutonPioche;
+	private JFrame frame;
+	private JFrame tapisDeJeu;
+	
+	private JPanel panel;
 	private JButton boutonDeplacer;
 	
 	private JButton carte0;
 	private JButton carte1;
 	private JButton carte2;
 	
-	private JLabel tourDeJeu;
+	private JButton carteDeVict;
+	private JButton carteDeVict2;
 	
+	private JLabel tourDeJeu;
+	private JLabel carteVict;
+	
+	
+
+
 	private Queue<Joueur> joueurs = new LinkedList<Joueur>();
+	
 	
 	public Partie getPartie() {
 		return partie;
@@ -65,6 +74,23 @@ public class VuePartie implements Observer{
 		this.frame = frame;
 	}
 
+	
+	public JButton getCarteDeVict() {
+		return carteDeVict;
+	}
+
+	public void setCarteDeVict(JButton carteDeVict) {
+		this.carteDeVict = carteDeVict;
+	}
+
+	public JLabel getCarteVict() {
+		return carteVict;
+	}
+
+	public void setCarteVict(JLabel carteVict) {
+		this.carteVict = carteVict;
+	}
+	
 	public JPanel getPanel() {
 		return panel;
 	}
@@ -73,13 +99,6 @@ public class VuePartie implements Observer{
 		this.panel = panel;
 	}
 
-	public JButton getBoutonPioche() {
-		return boutonPioche;
-	}
-
-	public void setBoutonPioche(JButton boutonPioche) {
-		this.boutonPioche = boutonPioche;
-	}
 
 	public JButton getBoutonDeplacer() {
 		return boutonDeplacer;
@@ -161,19 +180,12 @@ public class VuePartie implements Observer{
 		
 		frame = new JFrame("C'est parti pour jouer ! :) ");
 		
-		frame.setBounds(100, 100, 796, 398);
+		frame.setBounds(100, 100, 850, 490);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
-		
-		boutonPioche = new JButton("Piocher une carte");
-		boutonPioche.setBackground(Color.BLACK);
-		boutonPioche.setForeground(new Color(64, 224, 208));
-		boutonPioche.setFont(new Font("Century Gothic", Font.BOLD, 13));
-		boutonPioche.setBounds(24, 243, 161, 25);
-		panel.add(boutonPioche);
 		
 		carte0 = new JButton();
 		carte0.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/caseVide.png")));
@@ -190,31 +202,50 @@ public class VuePartie implements Observer{
 		carte2.setBounds(325, 13, 137, 179);
 		panel.add(carte2);
 		
-		tourDeJeu = new JLabel("Au tour de ");
+		tourDeJeu = new JLabel("Jouons");
 		tourDeJeu.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		tourDeJeu.setBounds(472, 29, 256, 163);
+		tourDeJeu.setBounds(12, 259, 450, 163);
 		panel.add(tourDeJeu);
 		
 		boutonDeplacer = new JButton("D\u00E9placer une carte");
 		boutonDeplacer.setForeground(new Color(218, 112, 214));
 		boutonDeplacer.setFont(new Font("Century Gothic", Font.BOLD, 13));
 		boutonDeplacer.setBackground(Color.BLACK);
-		boutonDeplacer.setBounds(206, 244, 161, 25);
+		boutonDeplacer.setBounds(12, 221, 161, 25);
 		panel.add(boutonDeplacer);
+		
+		carteDeVict = new JButton();
+		carteDeVict.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/caseVide.png")));
+		carteDeVict.setBounds(663, 13, 146, 179);
+		panel.add(carteDeVict);
+		
+		carteVict = new JLabel("");
+		carteVict.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		carteVict.setBounds(663, 205, 146, 16);
+		panel.add(carteVict);
+		
+		carteDeVict2 = new JButton();
+		carteDeVict2.setBounds(663, 245, 97, 25);
+		panel.add(carteDeVict2);
+		carteDeVict2.setVisible(false);
 		
 		
 		if (this.partie.getTapisDeJeu() instanceof TapisRectangle) {
-			VueTapisRectangle vueTapisDeJeu = new VueTapisRectangle();
+			tapisDeJeu = new VueTapisRectangle();
 			
 		} else if (this.partie.getTapisDeJeu() instanceof TapisTriangleRectangle) {
-			VueTriangle vueTapisDeJeu = new VueTriangle();
+			tapisDeJeu = new VueTriangle();
 		} else if (this.partie.getTapisDeJeu() instanceof TapisCercle) {
-			VueCirculaire vueTapisDeJeu = new VueCirculaire();
+			tapisDeJeu = new VueCirculaire();
 		}
 		
+		tapisDeJeu.setVisible(true);
+		
+		carteDeVict.setVisible(false);
 		if (this.partie.getModeDeJeu() instanceof StrategieDeBase || this.partie.getModeDeJeu() instanceof StrategieVictoireEnnemie ) {
 			carte1.setVisible(false);
 			carte2.setVisible(false);
+			carteDeVict.setVisible(true);
 		}
 		frame.setVisible(true);
 		//frame.pack();
@@ -245,6 +276,10 @@ public class VuePartie implements Observer{
 				carte2.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+cartePiochee.getForme()+cartePiochee.getCouleur()+cartePiochee.EstRemplie()+".png")));
 			}
 			
+			if (this.partie.getModeDeJeu() instanceof StrategieDeBase) {
+			carteDeVict.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+((Joueur) o).getCarteDeVictoire().getForme()+((Joueur) o).getCarteDeVictoire().getCouleur()+((Joueur) o).getCarteDeVictoire().EstRemplie()+".png")));
+			carteVict.setText("Voici votre carte de victoire");
+			}
 		}
 		
 		
