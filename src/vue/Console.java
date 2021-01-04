@@ -90,7 +90,7 @@ public class Console implements Observer, Runnable {
 		
 	}
 	
-	public int choisirNbJoueurs() {
+	public synchronized int  choisirNbJoueurs() {
 		
 		
 		String resultat = "";
@@ -99,25 +99,25 @@ public class Console implements Observer, Runnable {
 			do {
 			  System.out.println("Veuillez choisir le nombre de joueurs pour votre partie (2 ou 3) : ");
 			  
-			  while (br.ready() == false) {
+			 /* while (br.ready() == false) {
 				  try {
-					t.wait();
+					this.wait();
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			  }
 			  
-			  if (br.ready() == true) {
+			  if (br.ready() == true) {*/
 		      resultat = br.readLine();
-			  }
+		      
+			  
 			 
 		      
 		      if(this.jeuShapeUp.getNbDeJoueurs()!=0) {
 		    	  resultat = ((Integer)this.jeuShapeUp.getNbDeJoueurs()).toString();
 		    	  nb= Integer.parseInt(resultat);
-		    	  
-		    	  
+		    	   
 		      }
 		      
 		      
@@ -149,7 +149,11 @@ public class Console implements Observer, Runnable {
     		//this.notifyObservers("Veuillez choisir le type du joueur " + nb + ": virtuel (v) ou réel (r) ?");
 			System.out.println("Veuillez choisir le type du joueur " + nb + ": virtuel (v) ou réel (r) ?");
 			try {
+
+				 
+				   
 				type = br.readLine();
+				  
 				
 				if (!type.equals("v") && !type.equals("r") && this.jeuShapeUp.getTypes().size() < nb) {
 			    	//this.notifyObservers("Je suis désolée, vous ne pouvez choisir qu'entre virtuel (v) ou réel (r).");
@@ -159,6 +163,7 @@ public class Console implements Observer, Runnable {
 				//if(this.jeuShapeUp.getTypes().size() == this.cptAppelsType) {
 				else if(this.jeuShapeUp.getTypes().size() >= nb) {
 					type = this.jeuShapeUp.getTypes().get(nb-1);
+					
 					
 				}
 				
