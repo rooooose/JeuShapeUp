@@ -264,16 +264,32 @@ public class VuePartie implements Observer{
 		
 		if(o instanceof Joueur) {
 			if(((Joueur) o).getMainDuJoueur().size()>=1) {
-				Carte cartePiochee = ((Joueur) o).getMainDuJoueur().get(0);
-				carte0.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+cartePiochee.getForme()+cartePiochee.getCouleur()+cartePiochee.EstRemplie()+".png")));
+				Carte c0 = ((Joueur) o).getMainDuJoueur().get(0);
+				carte0.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+c0.getForme()+c0.getCouleur()+c0.EstRemplie()+".png")));
 			}
+			
 			if(((Joueur) o).getMainDuJoueur().size()>=2) {
-				Carte cartePiochee = ((Joueur) o).getMainDuJoueur().get(1);
-				carte1.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+cartePiochee.getForme()+cartePiochee.getCouleur()+cartePiochee.EstRemplie()+".png")));
-			}
-			if(((Joueur) o).getMainDuJoueur().size()>=3) {
-				Carte cartePiochee = ((Joueur) o).getMainDuJoueur().get(2);
-				carte2.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+cartePiochee.getForme()+cartePiochee.getCouleur()+cartePiochee.EstRemplie()+".png")));
+				
+				if(((Joueur) o).getMainDuJoueur().get(1)!=null) {
+					
+					Carte c1 = ((Joueur) o).getMainDuJoueur().get(1);
+					carte1.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+c1.getForme()+c1.getCouleur()+c1.EstRemplie()+".png")));
+				}else{
+					carte1.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/caseVide.png")));
+				}
+				
+			} 
+			
+			if(((Joueur) o).getMainDuJoueur().size()==3) {
+				
+				if(((Joueur) o).getMainDuJoueur().get(2)!=null) {
+					
+					Carte c2 = ((Joueur) o).getMainDuJoueur().get(2);
+					carte2.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+c2.getForme()+c2.getCouleur()+c2.EstRemplie()+".png")));
+				}
+				else{
+					carte2.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/caseVide.png")));
+				}
 			}
 			
 			if (this.partie.getModeDeJeu() instanceof StrategieDeBase) {
