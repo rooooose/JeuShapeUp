@@ -281,8 +281,16 @@ public class VuePartie implements Observer{
 		
 		if(o instanceof Joueur) {
 			if(((Joueur) o).getMainDuJoueur().size()>=1) {
-				Carte c0 = ((Joueur) o).getMainDuJoueur().get(0);
-				carte0.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+c0.getForme()+c0.getCouleur()+c0.EstRemplie()+".png")));
+				
+				if(((Joueur) o).getMainDuJoueur().get(0)!=null) {
+					
+					Carte c0 = ((Joueur) o).getMainDuJoueur().get(0);
+					carte0.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+c0.getForme()+c0.getCouleur()+c0.EstRemplie()+".png")));
+					
+				}else {
+					carte0.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/caseVide.png")));
+				}
+				
 			}
 			
 			if(((Joueur) o).getMainDuJoueur().size()>=2) {

@@ -192,7 +192,8 @@ public abstract class Joueur extends Observable{
 	
 	public void placerCarte(Partie partie, TapisDeJeu tapis) {
 		
-		setCptPlacerCarte(getCptPlacerCarte() + 1);
+		//setCptPlacerCarte(getCptPlacerCarte() + 1);
+		this.cptPlacerCarte++;
 		
     	int ligneCase;
     	int colonneCase = 0;
@@ -212,7 +213,7 @@ public abstract class Joueur extends Observable{
     	do {
     		ligneCase = this.strategie.choisirLigneCarte(tapis);
     		
-    		if(this.cptPlacerCarte > tapis.getNbCartes()) {
+    		if(this.cptPlacerCarte*2 > tapis.getNbCartes()) {
     			colonneCase = this.strategie.choisirColonneCarte(tapis);
 
 	        	if(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase)) {
@@ -221,9 +222,9 @@ public abstract class Joueur extends Observable{
 	        	}
     		}
         	
-    	}while(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase) && this.cptPlacerCarte > tapis.getNbCartes());
+    	}while(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase) && this.cptPlacerCarte*2 > tapis.getNbCartes());
     	
-    	if(this.cptPlacerCarte > tapis.getNbCartes()) {
+    	if(this.cptPlacerCarte*2 > tapis.getNbCartes()) {
     		
     		if(!tapis.caseRemplie(ligneCase,colonneCase)) {
     			
