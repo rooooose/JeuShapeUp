@@ -269,7 +269,7 @@ public class ControleurShapeUp {
 										//EMPECHER DE CREER UN JOUEUR SI ON A APPELE CHOISIRNOMJOUEUR()
 										if (sU.getQueueJoueurs().size() == 0 && c.getCptAppelsNom() == 0) {
 											sU.creerJoueur(sU.getTypes().get(0), nom1);
-											System.out.println("Je crée un joueur gui");
+											//System.out.println("Je crée un joueur gui");
 										}
 										
 										
@@ -361,7 +361,7 @@ public class ControleurShapeUp {
 
 								if (sU.getQueueJoueurs().size() == 1 && c.getCptAppelsNom() <= 1) {
 									sU.creerJoueur(sU.getTypes().get(1), nom2);
-									System.out.println("Je crée un joueur gui");
+									//System.out.println("Je crée un joueur gui");
 								}
 								
 								
@@ -448,7 +448,7 @@ public class ControleurShapeUp {
 								
 								if (sU.getQueueJoueurs().size() == 2 && c.getCptAppelsNom() <= 2) {
 									sU.creerJoueur(sU.getTypes().get(2), nom3);
-									System.out.println("Je crée un joueur gui");
+									//System.out.println("Je crée un joueur gui");
 								}
 							}
 							

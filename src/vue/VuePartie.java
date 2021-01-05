@@ -15,6 +15,7 @@ import shapeUp.StrategieAvance;
 import shapeUp.StrategieDeBase;
 import shapeUp.StrategieVictoireEnnemie;
 import shapeUp.TapisCercle;
+import shapeUp.TapisDeJeu;
 import shapeUp.TapisRectangle;
 import shapeUp.TapisTriangleRectangle;
 
@@ -22,6 +23,8 @@ import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import java.awt.GridBagConstraints;
+
+import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
@@ -39,7 +42,7 @@ public class VuePartie implements Observer{
 	
 	private JFrame frame;
 	private JFrame tapisDeJeu;
-	
+
 	private JPanel panel;
 	private JButton boutonDeplacer;
 	
@@ -54,11 +57,12 @@ public class VuePartie implements Observer{
 	private JLabel carteVict;
 	private JLabel carteVict2;
 	
-	
-
-
 	private Queue<Joueur> joueurs = new LinkedList<Joueur>();
+	private TapisDeJeu tapis;
 	
+	public JFrame getTapisDeJeu() {
+		return tapisDeJeu;
+	}
 	
 	public Partie getPartie() {
 		return partie;
@@ -171,6 +175,8 @@ public class VuePartie implements Observer{
 		while(it.hasNext()) {
 			it.next().addObserver(this);
 		}
+		this.tapis = this.partie.getTapisDeJeu();
+		this.tapis.addObserver(this);
 		initialize();
 		new ControleurPartie (this.partie, this);
 	}
@@ -273,10 +279,6 @@ public class VuePartie implements Observer{
 			this.tourDeJeu.setText((String) arg);
 		}
 		
-//		if(arg instanceof Carte) {
-//			this.tourDeJeu.setText((String) arg);
-//		}
-		
 		if(o instanceof Joueur) {
 			if(((Joueur) o).getMainDuJoueur().size()>=1) {
 				Carte c0 = ((Joueur) o).getMainDuJoueur().get(0);
@@ -308,8 +310,9 @@ public class VuePartie implements Observer{
 			}
 			
 			if (this.partie.getModeDeJeu() instanceof StrategieDeBase) {
-			carteDeVict.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+((Joueur) o).getCarteDeVictoire().getForme()+((Joueur) o).getCarteDeVictoire().getCouleur()+((Joueur) o).getCarteDeVictoire().EstRemplie()+".png")));
-			carteVict.setText("Voici votre carte de victoire");
+				carteDeVict.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+((Joueur) o).getCarteDeVictoire().getForme()+((Joueur) o).getCarteDeVictoire().getCouleur()+((Joueur) o).getCarteDeVictoire().EstRemplie()+".png")));
+				carteVict.setText("Voici votre carte de victoire");
+			
 			} else if (this.partie.getModeDeJeu() instanceof StrategieVictoireEnnemie) {
 
 					if ((Joueur) o != ((Joueur) this.partie.getQueueJoueurs().toArray()[1]) ) {
@@ -317,20 +320,45 @@ public class VuePartie implements Observer{
 						carteVict.setText("Voici la carte de victoire de "+((Joueur) this.partie.getQueueJoueurs().toArray()[1]).getNom());
 						
 						if (this.partie.getQueueJoueurs().size() == 3 && (Joueur) o != ((Joueur) this.partie.getQueueJoueurs().toArray()[2])) {
-						carteDeVict2.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+((Joueur) this.partie.getQueueJoueurs().toArray()[2]).getCarteDeVictoire().getForme()+((Joueur) this.partie.getQueueJoueurs().toArray()[2]).getCarteDeVictoire().getCouleur()+((Joueur) this.partie.getQueueJoueurs().toArray()[2]).getCarteDeVictoire().EstRemplie()+".png")));
-						carteVict2.setText("Voici la carte de victoire de "+((Joueur) this.partie.getQueueJoueurs().toArray()[2]).getNom());
-						carteDeVict2.setVisible(true);
-						carteVict2.setVisible(true);
+							carteDeVict2.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+((Joueur) this.partie.getQueueJoueurs().toArray()[2]).getCarteDeVictoire().getForme()+((Joueur) this.partie.getQueueJoueurs().toArray()[2]).getCarteDeVictoire().getCouleur()+((Joueur) this.partie.getQueueJoueurs().toArray()[2]).getCarteDeVictoire().EstRemplie()+".png")));
+							carteVict2.setText("Voici la carte de victoire de "+((Joueur) this.partie.getQueueJoueurs().toArray()[2]).getNom());
+							carteDeVict2.setVisible(true);
+							carteVict2.setVisible(true);
 						}
 					}
-				}
-				
 			}
-			
+				
 		}
 		
 		
-		
-		
+		if(arg instanceof TapisDeJeu) {
+			
+			for(int i=0; i<tapis.getContainer().size(); i++) {
+				
+				for(int j=0; j<tapis.getContainer().get(i).size(); j++) {
+					
+					Carte c = tapis.getContainer().get(i).get(j);
+					
+					if(tapis.caseRemplie(i,j)) {
+						((AbstractButton) this.tapisDeJeu.getContentPane().getComponent(i*tapis.getContainer().get(i).size()+j)).setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+c.getForme()+c.getCouleur()+c.EstRemplie()+".png")));
+						
+					} else {
+						
+						if(this.tapisDeJeu.getContentPane().getComponent(i*tapis.getContainer().get(i).size()+j) instanceof AbstractButton) {
+							((AbstractButton) this.tapisDeJeu.getContentPane().getComponent(i*tapis.getContainer().get(i).size()+j)).setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/caseVide.png")));
+						}
+						
+					}
+					
+				}
+			}
+			
+		}
+			
 	}
+		
+		
+		
+		
+}
 

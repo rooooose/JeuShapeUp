@@ -5,8 +5,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 
+import shapeUp.Carte;
 import shapeUp.Partie;
+import shapeUp.TapisDeJeu;
 import vue.Console;
+import vue.VueCirculaire;
 import vue.VuePartie;
 
 public class ControleurPartie {
@@ -20,10 +23,24 @@ public class ControleurPartie {
 			}
 		});
 	}*/
+		if(vuePartie.getTapisDeJeu() instanceof VueCirculaire) {
+			
+			((VueCirculaire) vuePartie.getTapisDeJeu()).getCase0x1().addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent e) {
+					//System.out.println(p.getJoueurActif().getMainDuJoueur());
+					Carte c = p.getJoueurActif().getCarteAJouer();
+					p.getJoueurActif().placerCarteGUI(0,1,p.getTapisDeJeu(),c);
+					p.getJoueurActif().setLigCarteGUI(0);
+				}
+			});
+			
+		}
+		
 	
 	
 	
-}
+	}
 }
 
 

@@ -49,6 +49,7 @@ public class Partie extends Observable implements Visitable {
 	private TapisDeJeu tapisDeJeu;
 	private boolean estFinie;
 	private int nbCartesJouables;
+	private Joueur joueurActif = null;
 	
 	/*public Map<CarteDeVictoire, Joueur> getCarteVictAssociationJoueur() {
 		return CarteVictAssociationJoueur;
@@ -109,6 +110,14 @@ public class Partie extends Observable implements Visitable {
 	}
 	public void setNbCartesJouables(int nbCartesJouables) {
 		this.nbCartesJouables = nbCartesJouables;
+	}
+	
+	public Joueur getJoueurActif() {
+		return joueurActif;
+	}
+
+	public void setJoueurActif(Joueur joueurActif) {
+		this.joueurActif = joueurActif;
 	}
 	
 	Partie(Queue<Joueur> joueurs, StrategieMode mode, TapisDeJeu formeTapisDeJeu){
@@ -184,10 +193,10 @@ public class Partie extends Observable implements Visitable {
 	public void tourDeJeu()  {
 		
 		
-		Joueur joueurActif = queueJoueurs.peek();
+		this.setJoueurActif(queueJoueurs.peek());
 		//CarteJouable carteJoueur = (CarteJouable) joueurActif.getMainDuJoueur();
 		
-		this.notifyObservers("\n"+"** Au tour de " + joueurActif.getNom()+" **");
+		this.notifyObservers("\n"+"** Au tour de " + this.joueurActif.getNom()+" **");
 		//System.out.println("\n"+"***** C'est au tour de " + joueurActif.getNom()+" *****");
 
 		
@@ -243,9 +252,6 @@ public class Partie extends Observable implements Visitable {
 		
     	
     }
-//
-//    public void controlerPlacementCarte(CarteJouable carte) {
-//    }
 
 	
 
