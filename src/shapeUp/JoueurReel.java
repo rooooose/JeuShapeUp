@@ -68,9 +68,9 @@ public class JoueurReel extends Joueur implements StrategieJoueur{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		    if(tapis.getNbCartes()>=this.getCptPlacerCarte()*2) {
+		    if(this.getLigCarteGUI() != -1) {
 		    	nb = this.getLigCarteGUI();
-		    	System.out.println("NB : "+ nb);
+		    	//System.out.println("NB : "+ nb);
 		    } else {
 				nb= Integer.parseInt(resultat);
 			}

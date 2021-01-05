@@ -348,7 +348,9 @@ public class VuePartie implements Observer{
 					Carte c = tapis.getContainer().get(i).get(j);
 					
 					if(tapis.caseRemplie(i,j)) {
-						((AbstractButton) this.tapisDeJeu.getContentPane().getComponent(i*tapis.getContainer().get(i).size()+j)).setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+c.getForme()+c.getCouleur()+c.EstRemplie()+".png")));
+						//if(this.tapisDeJeu.getContentPane().getComponent(i*tapis.getContainer().get(i).size()+j) instanceof AbstractButton) {
+							((AbstractButton) this.tapisDeJeu.getContentPane().getComponent(i*tapis.getContainer().get(i).size()+j)).setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+c.getForme()+c.getCouleur()+c.EstRemplie()+".png")));
+						//}
 						
 					} else {
 						

@@ -213,18 +213,18 @@ public abstract class Joueur extends Observable{
     	do {
     		ligneCase = this.strategie.choisirLigneCarte(tapis);
     		
-    		if(this.cptPlacerCarte*2 > tapis.getNbCartes()) {
+    		if(this.ligCarteGUI == -1) {
     			colonneCase = this.strategie.choisirColonneCarte(tapis);
 
 	        	if(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase)) {
-	        		this.notifyObservers("Désolée, cette n'est pas disponible");          		
+	        		this.notifyObservers("Désolée, cette case n'est pas disponible");          		
 	        		//System.out.print("Désolée, cette case n'est pas disponible" + "\n");
 	        	}
     		}
         	
-    	}while(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase) && this.cptPlacerCarte*2 > tapis.getNbCartes());
+    	}while(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase) && this.ligCarteGUI == -1);
     	
-    	if(this.cptPlacerCarte*2 > tapis.getNbCartes()) {
+    	if(this.ligCarteGUI == -1) {
     		
     		if(!tapis.caseRemplie(ligneCase,colonneCase)) {
     			
