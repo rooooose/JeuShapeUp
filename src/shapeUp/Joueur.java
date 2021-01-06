@@ -8,10 +8,42 @@ public abstract class Joueur extends Observable{
 	
 	private StrategieJoueur strategie;
     private String nom;
-    private int cptPlacerCarte = 0;
     
     //permet de récupérer la ligne de la derniere carte placée dans l'interface graphique
+    // initialisée dans Partie - tourDeJeu()
     private int ligCarteGUI;
+    // initialisée dans Joueur - proposerDeplacement()
+    private int ligCarteADepGUI;
+    // initialisée dans JoueurReel - choisirLigneCarte()
+    private int ligCarteDepGUI;
+    
+    private boolean deplacementPossible = false;
+    private boolean deplacementEnCours;
+    
+    public int getLigCarteDepGUI() {
+		return ligCarteDepGUI;
+	}
+
+	public void setLigCarteDepGUI(int ligCarteDepGUI) {
+		this.ligCarteDepGUI = ligCarteDepGUI;
+	}
+    
+    public boolean isDeplacementEnCours() {
+		return deplacementEnCours;
+	}
+
+	public void setDeplacementEnCours(boolean deplacementEnCours) {
+		this.deplacementEnCours = deplacementEnCours;
+	}
+	
+	public int getLigCarteADepGUI() {
+		return ligCarteADepGUI;
+	}
+
+	public void setLigCarteADepGUI(int ligCarteADepGUI) {
+		this.ligCarteADepGUI = ligCarteADepGUI;
+	}
+
     
 	public int getLigCarteGUI() {
 		return ligCarteGUI;
@@ -19,6 +51,14 @@ public abstract class Joueur extends Observable{
 
 	public void setLigCarteGUI(int ligCarteGUI) {
 		this.ligCarteGUI = ligCarteGUI;
+	}
+	
+	public boolean isDeplacementPossible() {
+		return deplacementPossible;
+	}
+
+	public void setDeplacementPossible(boolean deplacementPossible) {
+		this.deplacementPossible = deplacementPossible;
 	}
     
 	private int numCarteGUI;
@@ -30,14 +70,6 @@ public abstract class Joueur extends Observable{
 	public void setNumCarteGUI(int numCarteGUI) {
 		this.numCarteGUI = numCarteGUI;
 	}
-	
-    public int getCptPlacerCarte() {
-		return cptPlacerCarte;
-	}
-
-	public void setCptPlacerCarte(int cptPlacerCarte) {
-		this.cptPlacerCarte = cptPlacerCarte;
-	}	
 
     public String getNom() {
 		return nom;
@@ -97,12 +129,12 @@ public abstract class Joueur extends Observable{
 		
     	if(tapis.getNbCartes()>1 && tapis.getNbCartes()<partie.getNbCartesJouables()) {
     		
-    		boolean deplacementFait = this.proposerDeplacement(tapis);
+    		boolean deplacementFait = this.proposerDeplacement(tapis, partie);
 
     		this.placerCarte(partie, tapis);
     		
     		if(!deplacementFait) {
-    			this.proposerDeplacement(tapis);
+    			this.proposerDeplacement(tapis, partie);
     		}
     		
     	} else {
@@ -150,7 +182,7 @@ public abstract class Joueur extends Observable{
 	}
 	
 	
-	public abstract boolean proposerDeplacement(TapisDeJeu tapis);
+	public abstract boolean proposerDeplacement(TapisDeJeu tapis, Partie partie);
   
 //	public abstract void deplacerCarte(TapisDeJeu tapis);
 //  
@@ -206,9 +238,6 @@ public abstract class Joueur extends Observable{
 	
 	public void placerCarte(Partie partie, TapisDeJeu tapis) {
 		
-		//setCptPlacerCarte(getCptPlacerCarte() + 1);
-		this.cptPlacerCarte++;
-		
     	int ligneCase;
     	int colonneCase = 0;
     	//Carte carteAJouer;
@@ -221,13 +250,16 @@ public abstract class Joueur extends Observable{
     	}
     	this.notifyObservers("Carte(s) en main : " + this.getMainDuJoueur());    	
     	//System.out.println("Carte(s) en main : " + this.getMainDuJoueur());
-		this.carteAJouer = this.strategie.definirCarteAJouer(this, partie.getModeDeJeu());
+    	if(!this.deplacementEnCours) {
+    		this.carteAJouer = this.strategie.definirCarteAJouer(this, partie.getModeDeJeu());
+    	}
+		
 		partie.getModeDeJeu().voirCarteVictoire(partie, this);
     	
     	do {
     		ligneCase = this.strategie.choisirLigneCarte(tapis);
     		
-    		if(this.ligCarteGUI == -1) {
+    		if(this.ligCarteGUI == -1 && this.ligCarteDepGUI == -1) {
     			colonneCase = this.strategie.choisirColonneCarte(tapis);
 
 	        	if(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase)) {
@@ -236,9 +268,9 @@ public abstract class Joueur extends Observable{
 	        	}
     		}
         	
-    	}while(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase) && this.ligCarteGUI == -1);
+    	}while(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase) && ((this.ligCarteGUI == -1 && this.ligCarteDepGUI == -1)));
     	
-    	if(this.ligCarteGUI == -1) {
+    	if(this.ligCarteGUI == -1 && this.ligCarteDepGUI == -1) {
     		
     		if(!tapis.caseRemplie(ligneCase,colonneCase)) {
     			
@@ -261,12 +293,10 @@ public abstract class Joueur extends Observable{
     }
 	
 	public void placerCarteGUI(int ligneCase, int colonneCase, TapisDeJeu tapis, Carte carteAJouer) {  	
-	
-//		carteAJouer = this.strategie.definirCarteAJouer(this, partie.getModeDeJeu());
-//		partie.getModeDeJeu().voirCarteVictoire(partie, this);
-    	if(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase)) {
-    		this.notifyObservers("Désolée, cette n'est pas disponible");          		
-    	}
+
+//    	if(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase)) {
+//    		this.notifyObservers("Désolée, cette n'est pas disponible");          		
+//    	}
     	
     	if(!tapis.caseRemplie(ligneCase,colonneCase) && tapis.placementNormalPossible(ligneCase,colonneCase)) {
     			
@@ -283,34 +313,72 @@ public abstract class Joueur extends Observable{
 
     }
 	
-	public void deplacerCarte(TapisDeJeu tapis) {
+	public void deplacerCarte(TapisDeJeu tapis, Partie partie) {
     	
+		this.deplacementEnCours = true;
     	int ligneCase;
-    	int colonneCase;
+    	int colonneCase = 0;
     	this.notifyObservers(tapis);       	
     	//System.out.println(tapis);
     	this.notifyObservers("Veuillez choisir une carte à déplacer :");       	
     	//System.out.println("Veuillez choisir une carte à déplacer :");
     	
     	do {
+    		
     		ligneCase = this.strategie.choisirLigneCarte(tapis);
-        	colonneCase = this.strategie.choisirColonneCarte(tapis);
+    		//on ne peut plus choisir une carte à deplacer dans l'interface
+    		this.setDeplacementPossible(false);
+    		if(this.ligCarteADepGUI == -1) {
+    			colonneCase = this.strategie.choisirColonneCarte(tapis);
+            	
+            	if(!tapis.caseRemplie(ligneCase,colonneCase)) {
+            		this.notifyObservers("Désolée, cette case est vide");           		
+            		//System.out.println("Désolée, cette case est vide");
+            	}
+    		}
         	
-        	if(!tapis.caseRemplie(ligneCase,colonneCase)) {
-        		this.notifyObservers("Désolée, cette case est vide");           		
-        		//System.out.println("Désolée, cette case est vide");
-        	}
     	}while(!tapis.caseRemplie(ligneCase,colonneCase));
     	
-    	Carte carteADeplacer = tapis.getContainer().get(ligneCase).get(colonneCase);
+    	Carte carteADeplacer;
+    	
+    	if(this.ligCarteADepGUI == -1) {
+    		
+    		//this.carteAJouer = tapis.getContainer().get(ligneCase).get(colonneCase);
+    		carteADeplacer = tapis.getContainer().get(ligneCase).get(colonneCase);
+        	tapis.setNbCartes(tapis.getNbCartes()-1);
+        	tapis.getContainer().get(ligneCase).set(colonneCase, null);
+        	this.notifyObservers("Vous avez choisi de déplacer la carte " + carteADeplacer);
+        	this.placerCarte(ligneCase, colonneCase, carteADeplacer, tapis);
+    	
+    	} else {
+    		carteADeplacer = this.carteAJouer;
+    		this.placerCarte(partie, tapis);
+    	}
+    	
+    	
+    	
+    	this.deplacementEnCours = false;
+
+	}
+	
+	
+
+	public void deplacerCarteGUI(int ligneCase, int colonneCase, TapisDeJeu tapis) {
+    	
+//        if(!tapis.caseRemplie(ligneCase,colonneCase)) {
+//        	this.notifyObservers("Désolée, cette case est vide");           		
+//
+//        }
+		this.carteAJouer = tapis.getContainer().get(ligneCase).get(colonneCase);
     	tapis.setNbCartes(tapis.getNbCartes()-1);
     	tapis.getContainer().get(ligneCase).set(colonneCase, null);
     	
-    	this.notifyObservers("Vous avez choisi de déplacer la carte " + carteADeplacer);   
-    	//System.out.println("Vous avez choisi de déplacer la carte " + carteADeplacer);
+    	this.notifyObservers("Vous avez choisi de déplacer la carte " + this.carteAJouer);   
+    	this.notifyObservers(tapis); 
     	
-    	this.placerCarte(ligneCase, colonneCase, carteADeplacer, tapis);
+    	//this.placerCarte(ligneCase, colonneCase, carteADeplacer, tapis);
 
 	}
 
+	
 }

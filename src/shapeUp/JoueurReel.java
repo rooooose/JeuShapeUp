@@ -11,8 +11,6 @@ public class JoueurReel extends Joueur implements StrategieJoueur{
 	
 	public JoueurReel(String nom) {
 		super(nom);
-		
-		// TODO Auto-generated constructor stub
 	}
 
     
@@ -68,7 +66,10 @@ public class JoueurReel extends Joueur implements StrategieJoueur{
 
 	public int choisirLigneCarte(TapisDeJeu tapis) {
 		
-		//Scanner scan = new Scanner (System.in);
+		if(this.isDeplacementEnCours()) {
+			this.setLigCarteDepGUI(-1);
+		}
+		
 		BufferedReader br = new BufferedReader (new InputStreamReader(System.in));
 		String resultat = "";
 		int nb = 0;
@@ -85,10 +86,18 @@ public class JoueurReel extends Joueur implements StrategieJoueur{
 		    if(this.getLigCarteGUI() != -1) {
 		    	nb = this.getLigCarteGUI();
 		    	//System.out.println("NB : "+ nb);
-		    } else {
-				nb= Integer.parseInt(resultat);
-			}
-		    
+		    } else if(this.getLigCarteADepGUI() != -1) {
+		    	nb = this.getLigCarteADepGUI();
+		    	
+		    } else if(this.getLigCarteDepGUI() != -1) {
+		    	nb = this.getLigCarteDepGUI();
+		    	
+		    }
+		    if(!resultat.equals("")) {
+		    	nb= Integer.parseInt(resultat);
+				//System.out.println("je parse");
+		    }
+			
 		}while(nb < -1 && nb > tapis.getContainer().size());
 		
 		if(nb == -1) {
@@ -124,8 +133,9 @@ public class JoueurReel extends Joueur implements StrategieJoueur{
 	}
 
 
-	public boolean proposerDeplacement(TapisDeJeu tapis) {
+	public boolean proposerDeplacement(TapisDeJeu tapis, Partie partie) {
 		
+		this.setLigCarteADepGUI(-1);
 		Scanner scan = new Scanner (System.in);
     	char choix='p';
     		
@@ -143,7 +153,8 @@ public class JoueurReel extends Joueur implements StrategieJoueur{
     	}while (choix!= 'o' && choix!= 'n');
         	
         if(choix == 'o') {
-        	this.deplacerCarte(tapis);
+        	this.setDeplacementPossible(true);
+        	this.deplacerCarte(tapis, partie);
         	return true;
         } else return false;
     		

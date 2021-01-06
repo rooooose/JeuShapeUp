@@ -42,7 +42,6 @@ public class JoueurVirtuel extends Joueur implements StrategieJoueur{
 
 
 	public int choisirLigneCarte(TapisDeJeu tapis) {
-
 		Random rand = new Random();
 		int nb;
 	    nb = rand.nextInt(tapis.getContainer().size());
@@ -52,7 +51,7 @@ public class JoueurVirtuel extends Joueur implements StrategieJoueur{
 
 
 	public int choisirColonneCarte(TapisDeJeu tapis) {
-		// revoir methode avec contraintes 0
+		
 		Random rand = new Random();
 		int nb;
 	    nb = rand.nextInt(tapis.getContainer().get(0).size());
@@ -61,8 +60,9 @@ public class JoueurVirtuel extends Joueur implements StrategieJoueur{
 
 
 
-	public boolean proposerDeplacement(TapisDeJeu tapis) {
+	public boolean proposerDeplacement(TapisDeJeu tapis, Partie partie) {
 
+	   this.setLigCarteADepGUI(-1);
        Random rand = new Random();
        int choix;
 	   choix = rand.nextInt(2);
@@ -71,7 +71,7 @@ public class JoueurVirtuel extends Joueur implements StrategieJoueur{
 
     	  this.notifyObservers("Le joueur souhaite déplacer une carte."); 
           //System.out.println("Le joueur souhaite déplacer une carte");
-          this.deplacerCarte(tapis);
+          this.deplacerCarte(tapis, partie);
           return true;
           
         } else return false;
