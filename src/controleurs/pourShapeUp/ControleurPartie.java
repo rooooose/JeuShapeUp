@@ -31,10 +31,13 @@ public class ControleurPartie {
 							
 							if(p.getModeDeJeu() instanceof StrategieAvance) {
 								
-								if (p.getJoueurActif() instanceof JoueurReel && p.getJoueurActif().getCarteAJouer() == null) {
+								if (p.getJoueurActif() instanceof JoueurReel ) {
 							
-							p.getJoueurActif().setCarteAJouer(p.getJoueurActif().getMainDuJoueur().get(0));
-							p.getJoueurActif().getMainDuJoueur().remove(0) ;
+							//p.getJoueurActif().setCarteAJouer(p.getJoueurActif().getMainDuJoueur().get(0));
+							//p.getJoueurActif().getMainDuJoueur().remove(0);
+							p.getJoueurActif().setNumCarteGUI(0);
+							
+							p.notifyObservers("Appuyez sur Entrée pour continuer");
 							//p.getJoueurActif().notifyObservers(p.getJoueurActif().getMainDuJoueur());
 							
 							
@@ -52,10 +55,13 @@ public class ControleurPartie {
 							
 							if(p.getModeDeJeu() instanceof StrategieAvance) {
 								
-								if (p.getJoueurActif() instanceof JoueurReel && p.getJoueurActif().getCarteAJouer() == null) {
+								if (p.getJoueurActif() instanceof JoueurReel ) {
 							
-							p.getJoueurActif().setCarteAJouer(p.getJoueurActif().getMainDuJoueur().get(1));
-							p.getJoueurActif().getMainDuJoueur().remove(1) ;
+							//p.getJoueurActif().setCarteAJouer(p.getJoueurActif().getMainDuJoueur().get(1));
+							//p.getJoueurActif().getMainDuJoueur().remove(1);
+							p.getJoueurActif().setNumCarteGUI(1);
+							
+							p.notifyObservers("Appuyez sur Entrée pour continuer");
 							//p.getJoueurActif().notifyObservers(p.getJoueurActif().getMainDuJoueur());
 							
 							
@@ -73,14 +79,15 @@ public class ControleurPartie {
 							
 							if(p.getModeDeJeu() instanceof StrategieAvance) {
 								
-								if (p.getJoueurActif() instanceof JoueurReel && p.getJoueurActif().getCarteAJouer() == null) {
+								if (p.getJoueurActif() instanceof JoueurReel ) {
 							
 							
-									p.getJoueurActif().setCarteAJouer(p.getJoueurActif().getMainDuJoueur().get(2));
-									p.getJoueurActif().getMainDuJoueur().remove(2) ;
-							
-							
-							
+									//p.getJoueurActif().setCarteAJouer(p.getJoueurActif().getMainDuJoueur().get(2));
+									//p.getJoueurActif().getMainDuJoueur().remove(2);
+									p.getJoueurActif().setNumCarteGUI(2);
+									
+									p.notifyObservers("Appuyez sur Entrée pour continuer");
+								
 						}
 					}
 					

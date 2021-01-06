@@ -200,6 +200,7 @@ public class Partie extends Observable implements Visitable {
 		//System.out.println("\n"+"***** C'est au tour de " + joueurActif.getNom()+" *****");
 		
 		this.getJoueurActif().setLigCarteGUI(-1);
+		this.getJoueurActif().setNumCarteGUI(-1);
 		
 		queueJoueurs.peek().jouer(this, this.getTapisDeJeu(), this.getPioche(), this.getModeDeJeu());
 		//System.out.println(joueurActif.getMainDuJoueur());

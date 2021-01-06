@@ -21,6 +21,16 @@ public abstract class Joueur extends Observable{
 		this.ligCarteGUI = ligCarteGUI;
 	}
     
+	private int numCarteGUI;
+	
+	public int getNumCarteGUI() {
+		return numCarteGUI;
+	}
+
+	public void setNumCarteGUI(int numCarteGUI) {
+		this.numCarteGUI = numCarteGUI;
+	}
+	
     public int getCptPlacerCarte() {
 		return cptPlacerCarte;
 	}

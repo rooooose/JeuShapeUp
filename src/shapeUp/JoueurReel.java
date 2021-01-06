@@ -28,15 +28,29 @@ public class JoueurReel extends Joueur implements StrategieJoueur{
     		
     	} else {
     		
-    		Scanner scan = new Scanner (System.in);
+    		//Scanner scan = new Scanner (System.in);
+    		BufferedReader br = new BufferedReader (new InputStreamReader(System.in));
+    		String resultat = ""; 
     		int index = 0;
     		
     		do {
     			this.notifyObservers("Il faut choisir la carte à jouer dans votre main entre la carte 0, 1 ou 2.");    			
     			//System.out.println("Il faut choisir la carte à jouer dans votre main entre la carte 0, 1 ou 2. ");
     		
-    		index = scan.nextInt();
-    		 
+    		//index = scan.nextInt();
+    			 try {
+    					resultat = br.readLine();
+    				} catch (IOException e) {
+    					// TODO Auto-generated catch block
+    					e.printStackTrace();
+    				}
+    			    if(this.getNumCarteGUI() != -1) {
+    			    	index = this.getNumCarteGUI();
+    			    	//System.out.println("NB : "+ nb);
+    			    } else {
+    					index = Integer.parseInt(resultat);
+    				}
+    			
     		if (index != 0 && index != 1 && index != 2 ) {
     			this.notifyObservers("Vous n'avez qu'un nombre limité de cartes, veuillez recommencer votre choix");    			
     			//System.out.println("Vous n'avez qu'un nombre limité de cartes, veuillez recommencer votre choix");
