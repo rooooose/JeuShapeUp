@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import controleurs.pourShapeUp.ControleurPartie;
 import shapeUp.Carte;
 import shapeUp.Joueur;
+import shapeUp.JoueurReel;
 import shapeUp.Observable;
 import shapeUp.Observer;
 import shapeUp.Partie;
@@ -315,7 +316,11 @@ public class VuePartie implements Observer{
 				else{
 					carte2.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/caseVide.png")));
 				}
-			}
+			} /*if (this.partie.getModeDeJeu() instanceof StrategieAvance) {
+
+
+				
+			}*/
 			
 			if (this.partie.getModeDeJeu() instanceof StrategieDeBase) {
 				carteDeVict.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+((Joueur) o).getCarteDeVictoire().getForme()+((Joueur) o).getCarteDeVictoire().getCouleur()+((Joueur) o).getCarteDeVictoire().EstRemplie()+".png")));

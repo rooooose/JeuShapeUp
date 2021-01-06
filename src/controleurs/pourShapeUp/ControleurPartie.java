@@ -1,12 +1,15 @@
 package controleurs.pourShapeUp;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 
 import shapeUp.Carte;
+import shapeUp.JoueurReel;
 import shapeUp.Partie;
+import shapeUp.StrategieAvance;
 import shapeUp.TapisDeJeu;
 import vue.Console;
 import vue.VueCirculaire;
@@ -17,6 +20,76 @@ import vue.VueTriangle;
 public class ControleurPartie {
 
 	public ControleurPartie(Partie p, VuePartie vuePartie) {
+		
+		
+
+				//if(p.getJoueurActif().getCarteAJouer() == null) {
+					
+					(vuePartie.getCarte0()).addActionListener(new ActionListener() {
+						
+						public void actionPerformed(ActionEvent e) {
+							
+							if(p.getModeDeJeu() instanceof StrategieAvance) {
+								
+								if (p.getJoueurActif() instanceof JoueurReel && p.getJoueurActif().getCarteAJouer() == null) {
+							
+							p.getJoueurActif().setCarteAJouer(p.getJoueurActif().getMainDuJoueur().get(0));
+							p.getJoueurActif().getMainDuJoueur().remove(0) ;
+							//p.getJoueurActif().notifyObservers(p.getJoueurActif().getMainDuJoueur());
+							
+							
+							
+						}
+					}
+					
+							
+						}
+					});
+					
+					(vuePartie.getCarte1()).addActionListener(new ActionListener() {
+						
+						public void actionPerformed(ActionEvent e) {
+							
+							if(p.getModeDeJeu() instanceof StrategieAvance) {
+								
+								if (p.getJoueurActif() instanceof JoueurReel && p.getJoueurActif().getCarteAJouer() == null) {
+							
+							p.getJoueurActif().setCarteAJouer(p.getJoueurActif().getMainDuJoueur().get(1));
+							p.getJoueurActif().getMainDuJoueur().remove(1) ;
+							//p.getJoueurActif().notifyObservers(p.getJoueurActif().getMainDuJoueur());
+							
+							
+							
+						}
+					}
+					
+							
+						}
+					});
+					
+					(vuePartie.getCarte2()).addActionListener(new ActionListener() {
+						
+						public void actionPerformed(ActionEvent e) {
+							
+							if(p.getModeDeJeu() instanceof StrategieAvance) {
+								
+								if (p.getJoueurActif() instanceof JoueurReel && p.getJoueurActif().getCarteAJouer() == null) {
+							
+							
+									p.getJoueurActif().setCarteAJouer(p.getJoueurActif().getMainDuJoueur().get(2));
+									p.getJoueurActif().getMainDuJoueur().remove(2) ;
+							
+							
+							
+						}
+					}
+					
+							
+						}
+					});
+				//}
+			
+			
 		
 		
 		if(vuePartie.getTapisDeJeu() instanceof VueCirculaire) {

@@ -57,6 +57,10 @@ public abstract class Joueur extends Observable{
 		return carteAJouer;
 	}
 
+	public void setCarteAJouer(Carte carteAJouer) {
+		this.carteAJouer = carteAJouer;
+	}
+	
 	private Carte carteDeVictoire;
     public Carte getCarteDeVictoire() {
 		return carteDeVictoire;
