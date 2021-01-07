@@ -45,7 +45,6 @@ public class VuePartie implements Observer{
 	private JFrame tapisDeJeu;
 
 	private JPanel panel;
-	private JButton boutonDeplacer;
 	
 	private JButton carte0;
 	private JButton carte1;
@@ -218,13 +217,6 @@ public class VuePartie implements Observer{
 		tourDeJeu.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tourDeJeu.setBounds(12, 259, 450, 163);
 		panel.add(tourDeJeu);
-		
-		boutonDeplacer = new JButton("D\u00E9placer une carte");
-		boutonDeplacer.setForeground(new Color(218, 112, 214));
-		boutonDeplacer.setFont(new Font("Century Gothic", Font.BOLD, 13));
-		boutonDeplacer.setBackground(Color.BLACK);
-		boutonDeplacer.setBounds(345, 205, 161, 25);
-		panel.add(boutonDeplacer);
 		
 		carteDeVict = new JButton();
 		carteDeVict.setBackground(new Color(128, 0, 128));
