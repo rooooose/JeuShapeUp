@@ -38,7 +38,7 @@ public class ControleurPartie {
 							p.getJoueurActif().setNumCarteGUI(0);
 							
 							p.notifyObservers("Appuyez sur Entrée pour continuer");
-							//p.getJoueurActif().notifyObservers(p.getJoueurActif().getMainDuJoueur());
+							p.getJoueurActif().notifyObservers(p.getJoueurActif().getMainDuJoueur());
 							
 							
 							

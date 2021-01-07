@@ -105,15 +105,6 @@ public class VuePartie implements Observer{
 		this.panel = panel;
 	}
 
-
-	public JButton getBoutonDeplacer() {
-		return boutonDeplacer;
-	}
-
-	public void setBoutonDeplacer(JButton boutonDeplacer) {
-		this.boutonDeplacer = boutonDeplacer;
-	}
-
 	public JButton getCarte0() {
 		return carte0;
 	}
@@ -281,7 +272,7 @@ public class VuePartie implements Observer{
 		
 		if(o instanceof Joueur) {
 			tourDe.setText("C'est au tour de "+((Joueur)o).getNom());
-			if(((Joueur) o).getMainDuJoueur().size()>=1) {
+			if(((Joueur) o).getMainDuJoueur().size()==1) {
 				
 				if(((Joueur) o).getMainDuJoueur().get(0)!=null) {
 					
@@ -293,8 +284,18 @@ public class VuePartie implements Observer{
 				}
 				
 			}
+
 			
-			if(((Joueur) o).getMainDuJoueur().size()>=2) {
+			if(((Joueur) o).getMainDuJoueur().size()==3) {
+				
+				if(((Joueur) o).getMainDuJoueur().get(0)!=null) {
+					
+					Carte c0 = ((Joueur) o).getMainDuJoueur().get(0);
+					carte0.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+c0.getForme()+c0.getCouleur()+c0.EstRemplie()+".png")));
+					
+				}else {
+					carte0.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/caseVide.png")));
+				}
 				
 				if(((Joueur) o).getMainDuJoueur().get(1)!=null) {
 					
@@ -304,10 +305,6 @@ public class VuePartie implements Observer{
 					carte1.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/caseVide.png")));
 				}
 				
-			} 
-			
-			if(((Joueur) o).getMainDuJoueur().size()==3) {
-				
 				if(((Joueur) o).getMainDuJoueur().get(2)!=null) {
 					
 					Carte c2 = ((Joueur) o).getMainDuJoueur().get(2);
@@ -316,11 +313,8 @@ public class VuePartie implements Observer{
 				else{
 					carte2.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/caseVide.png")));
 				}
-			} /*if (this.partie.getModeDeJeu() instanceof StrategieAvance) {
-
-
-				
-			}*/
+			} 
+			
 			
 			if (this.partie.getModeDeJeu() instanceof StrategieDeBase) {
 				carteDeVict.setIcon(new ImageIcon(VuePartie.class.getResource("/vue/imagesPourCartes/"+((Joueur) o).getCarteDeVictoire().getForme()+((Joueur) o).getCarteDeVictoire().getCouleur()+((Joueur) o).getCarteDeVictoire().EstRemplie()+".png")));
