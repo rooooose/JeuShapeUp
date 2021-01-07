@@ -57,7 +57,7 @@ public class VuePartie implements Observer{
 	private JLabel tourDeJeu;
 	private JLabel carteVict;
 	private JLabel carteVict2;
-	
+	private JLabel tourDe;
 	private Queue<Joueur> joueurs = new LinkedList<Joueur>();
 	private TapisDeJeu tapis;
 	
@@ -223,7 +223,7 @@ public class VuePartie implements Observer{
 		boutonDeplacer.setForeground(new Color(218, 112, 214));
 		boutonDeplacer.setFont(new Font("Century Gothic", Font.BOLD, 13));
 		boutonDeplacer.setBackground(Color.BLACK);
-		boutonDeplacer.setBounds(12, 221, 161, 25);
+		boutonDeplacer.setBounds(345, 205, 161, 25);
 		panel.add(boutonDeplacer);
 		
 		carteDeVict = new JButton();
@@ -249,6 +249,13 @@ public class VuePartie implements Observer{
 		carteVict2.setForeground(new Color(0, 0, 128));
 		carteVict2.setBounds(518, 406, 291, 16);
 		panel.add(carteVict2);
+		
+		tourDe = new JLabel();
+		tourDe.setFont(new Font("Agency FB", Font.BOLD, 26));
+		tourDe.setForeground(new Color(32, 178, 170));
+		tourDe.setBackground(Color.BLACK);
+		tourDe.setBounds(12, 220, 257, 41);
+		panel.add(tourDe);
 		carteDeVict2.setVisible(false);
 		
 		
@@ -281,6 +288,7 @@ public class VuePartie implements Observer{
 		}
 		
 		if(o instanceof Joueur) {
+			tourDe.setText("C'est au tour de "+((Joueur)o).getNom());
 			if(((Joueur) o).getMainDuJoueur().size()>=1) {
 				
 				if(((Joueur) o).getMainDuJoueur().get(0)!=null) {
@@ -371,9 +379,5 @@ public class VuePartie implements Observer{
 		}
 			
 	}
-		
-		
-		
-		
 }
 
