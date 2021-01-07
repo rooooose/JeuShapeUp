@@ -240,7 +240,7 @@ public class VuePartie implements Observer{
 		tourDe.setFont(new Font("Agency FB", Font.BOLD, 26));
 		tourDe.setForeground(new Color(32, 178, 170));
 		tourDe.setBackground(Color.BLACK);
-		tourDe.setBounds(12, 220, 257, 41);
+		tourDe.setBounds(12, 220, 494, 41);
 		panel.add(tourDe);
 		carteDeVict2.setVisible(false);
 		
