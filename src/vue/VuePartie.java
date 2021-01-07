@@ -106,13 +106,7 @@ public class VuePartie implements Observer{
 	}
 
 
-	public JButton getBoutonDeplacer() {
-		return boutonDeplacer;
-	}
 
-	public void setBoutonDeplacer(JButton boutonDeplacer) {
-		this.boutonDeplacer = boutonDeplacer;
-	}
 
 	public JButton getCarte0() {
 		return carte0;
