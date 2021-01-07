@@ -62,7 +62,8 @@ public class JoueurVirtuel extends Joueur implements StrategieJoueur{
 
 	public boolean proposerDeplacement(TapisDeJeu tapis, Partie partie) {
 
-	   this.setLigCarteADepGUI(-1);
+//	   this.setLigCarteADepGUI(-1);
+//	   this.setLigCarteDepGUI(-1);
        Random rand = new Random();
        int choix;
 	   choix = rand.nextInt(2);

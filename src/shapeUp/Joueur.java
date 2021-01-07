@@ -11,11 +11,11 @@ public abstract class Joueur extends Observable{
     
     //permet de récupérer la ligne de la derniere carte placée dans l'interface graphique
     // initialisée dans Partie - tourDeJeu()
-    private int ligCarteGUI;
+    private int ligCarteGUI = -1;
     // initialisée dans Joueur - proposerDeplacement()
-    private int ligCarteADepGUI;
+    private int ligCarteADepGUI = -1;
     // initialisée dans JoueurReel - choisirLigneCarte()
-    private int ligCarteDepGUI;
+    private int ligCarteDepGUI = -1;
     
     private boolean deplacementPossible = false;
     private boolean deplacementEnCours;
