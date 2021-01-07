@@ -337,7 +337,7 @@ public abstract class Joueur extends Observable{
             	}
     		}
         	
-    	}while(!tapis.caseRemplie(ligneCase,colonneCase));
+    	}while(!tapis.caseRemplie(ligneCase,colonneCase) && this.ligCarteADepGUI == -1);
     	
     	Carte carteADeplacer;
     	
