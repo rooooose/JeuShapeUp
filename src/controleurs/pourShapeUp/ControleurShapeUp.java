@@ -343,9 +343,9 @@ public class ControleurShapeUp {
 									sU.getNomsJoueurs().add(nom2);
 									sU.notifyObservers(nom2);
 									if(sU.getNbDeJoueurs() ==2) {
-										sU.notifyObservers("Appuyez sur Entrée pour continuer les choix dans la console");
-									} else {
 										sU.notifyObservers("Appuyez sur Entrée pour continuer");
+									} else {
+										sU.notifyObservers("Appuyez sur Entrée pour continuer les choix dans la console");
 									}
 									
 									
