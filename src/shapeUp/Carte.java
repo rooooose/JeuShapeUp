@@ -46,18 +46,6 @@ public class Carte {
     	this.setEstRemplie(estRemplie);
     	
     }
-
-//    private boolean estPlacee;
-	
-
-//	public void setEstPlacee(boolean estPlacee) {
-//		this.estPlacee = estPlacee;
-//	}
-//	public boolean estPlacee() { // J'ai enlevé l'argument TapisDeJeu tapis car il n'y qu'1 tapis
-//
-//    	return estPlacee;
-//    	
-//    }
     
     /**
      * Getter de la couleur de la carte
@@ -103,17 +91,6 @@ public class Carte {
 	public void setEstRemplie(boolean estRemplie) {
 		this.estRemplie = estRemplie;
 	}
-    
-    
-//    public boolean equals(Object o) {
-//    	if (o instanceof Carte) {
-//    		Carte c = (Carte) o;
-//    		return (this.couleur == c.couleur && this.forme == c.forme && this.estRemplie == c.estRemplie );
-//    	} else {
-//    	return false;
-//    	}
-//    }
-    
 
     /**
      * Redéfinition de la méthode toString(), qui présente la carte grâce à ses 3 attributs
