@@ -1,6 +1,7 @@
 package shapeUp;
 
 import java.util.ArrayList;
+
 //import java.util.Collections;
 import java.util.HashMap;
 //import java.util.HashSet;
@@ -15,16 +16,26 @@ import java.util.Random;
 
 import vue.Console;
 
+/**
+ * Cette classe correspond aux règles de base de ShapeUp.
+ * C'est une implémentation de l'interface StrategieMode.
+ * Les règles de base correspondent au fait de pouvoir voir sa carte de victoire et de jouer avec une seule carte dans sa main.
+ * @author Shir F, Mathéa Z
+ * @see StrategieMode
+ *
+ */
 public class StrategieDeBase extends Observable implements StrategieMode {
 
-//	public StrategieDeBase(Console console) {
-//		this.addObserver(console);
-//	}
-	
+/**
+ * Cette méthode permet de distribuer les cartes en début de Partie.
+ * Ici, une carte de victoire est attribuée à chaque joueur.
+ * 
+ * @see StrategieMode#distribuerCartes(Partie)
+ */
 	public List<Carte> distribuerCartes(Partie maPartie) {
 		
 		
-		//this.addObserver(maPartie.getConsoleDuJeu());
+		
 		Iterator<Joueur> iteratorRecupJoueurs = maPartie.getQueueJoueurs().iterator();
 		
 		
@@ -41,16 +52,7 @@ public class StrategieDeBase extends Observable implements StrategieMode {
 		  int longueurListeCarte = (recupCarteJeu.size())-(maPartie.getQueueJoueurs().size())-1;
   		  int randomIndex = new Random().nextInt(longueurListeCarte);
   		  Joueur joueurAssocie = iteratorRecupJoueurs.next();
-  		  
-        	//On fait en sorte que la carte ne soit pas dans la pioche
-    		  /*while(maPartie.getPioche().getPioche().contains(recupCarteJeu.get(randomIndex))) {
-    			  
-    			  longueurListeCarte = 0;
-        		  randomIndex = 0;
-        		  longueurListeCarte = (recupCarteJeu.size())-(maPartie.getQueueJoueurs().size())-1;
-          		  randomIndex = new Random().nextInt(longueurListeCarte);
-          		  
-    		 }*/
+
     		  
     		  CouleurType recupCouleur = recupCarteJeu.get(randomIndex).getCouleur();
     		  FormeCarte recupForme = recupCarteJeu.get(randomIndex).getForme();
@@ -62,19 +64,9 @@ public class StrategieDeBase extends Observable implements StrategieMode {
     		  recupCarteJeu.remove((randomIndex)); 
     		  //On définit la carte récupérée comme une carte de victoire
     		  Carte carteVictJoueur = carteRecup;
-    		  
-    		  //Récupérer les différents joueurs pour leur attribuer une carte 
-    		   
-    		  
-    		 
+
     		  joueurAssocie.setCarteDeVictoire(carteVictJoueur);
-    		 
-    		  
-    		  
-    		 
-    		  
-    		 //non// maPartie.getCarteVictAssociationJoueur().put(carteVictJoueur, iteratorRecupJoueurs.next());
-    		  
+
     		  //Réinitialisation des paramètres pour récuperer une carte au hasard
     		  
     		  longueurListeCarte = 0;
@@ -85,7 +77,12 @@ public class StrategieDeBase extends Observable implements StrategieMode {
 		
     	return recupCarteJeu;    		
     }
-
+/**
+ * On crée la pioche de la partie en fonction des cartes déjà distribuées, ici toutes les cartes qui ne sont pas assignées comme carte de victoire seront dans la pioche.
+ * 
+ * 
+ * @see StrategieMode#creerLaPiocheDeLaPartie(Partie)
+ */
 		
 	public Pioche creerLaPiocheDeLaPartie (Partie maPartie) {
 		
@@ -93,90 +90,36 @@ public class StrategieDeBase extends Observable implements StrategieMode {
 		Queue<Carte> pioche = new LinkedList<Carte> ();
 		int nombreDeCartes = 0;
 		
-		//int nbreDeJoueurs = maPartie.getQueueJoueurs().size();
-		
-		
 		List<Carte> recupCarteJeu = this.distribuerCartes(maPartie);
-    	//Collections.shuffle(recupCarteJeu);
-		
-		//if (nbreDeJoueurs == 2) {
-    	
-//    	ListIterator<Carte> it = recupCarteJeu.listIterator();
-//    	while(it.hasNext()) {
-//    		pioche.add(it.next());
-//    	}
-//	    System.out.println(pioche);
+ 
 	    for (int nbreDeCartes = 0; nbreDeCartes < maPartie.getNbCartesJouables(); nbreDeCartes++) {
-	    		
-	    	//int arrayLength = recupCarteJeu.size(); 
-	    	//int randomIndex = new Random().nextInt(arrayLength);
-	    	
-	    	/*while (pioche.contains(recupCarteJeu.get(randomIndex)))
-	    		
-	    	{
-	        	arrayLength = 0; 
-	        	randomIndex = 0; 
-	        	arrayLength = recupCarteJeu.size(); 
-	        	randomIndex = new Random().nextInt(arrayLength);
-	    	}*/
-	    	
-	    	//pioche.add(recupCarteJeu.remove(randomIndex));
+
 	    	pioche.add(recupCarteJeu.get(nbreDeCartes));
-	    	//recupCarteJeu.remove((randomIndex));
-	    	//arrayLength = 0; 
-	    	//randomIndex = 0; 
-	    	
-	    	
+
 	    	nombreDeCartes = nbreDeCartes;
-	    	//System.out.print("NB CARTES DANS LA PIOCHE :" + nombreDeCartes);
+	    	
 	    	
 	    }
-				
-
-	    //System.out.println(pioche);
+			
 		Pioche piocheDeLaPartie = new Pioche (pioche);	
 		piocheDeLaPartie.compterNbCartes(nombreDeCartes);
 		return piocheDeLaPartie;
-		//}else if (nbreDeJoueurs == 3) {
-		
-//		
-//    	for (int nbreDeCartes = 0; nbreDeCartes < 14; nbreDeCartes++) {
-//    		
-//	    	
-//    	int arrayLength = recupCarteJeu.size(); 
-//    	int randomIndex = new Random().nextInt(arrayLength);
-//    	
-//    	while (pioche.contains(recupCarteJeu.get(randomIndex)))
-//    		
-//    	{
-//        	arrayLength = 0; 
-//        	randomIndex = 0; 
-//        	arrayLength = recupCarteJeu.size(); 
-//        	randomIndex = new Random().nextInt(arrayLength);
-//    	}
-//    	
-//    	
-//    	pioche.add(recupCarteJeu.get(randomIndex)); 
-//    	
-//    	arrayLength = 0; 
-//    	randomIndex = 0; 
-//    	
-//    	
-//    	nombreDeCartes = nbreDeCartes;
-//    	}
-//		
-//	}
+
 	}
     	
-	
+	/**
+	 * Ici, la carte de victoire est visible uniquement par le joueur associé à celle-ci.
+	 * 
+	 *@see StrategieMode#voirCarteVictoire(Partie, Joueur)
+	 */
 
     public void voirCarteVictoire(Partie maPartie, Joueur joueur) {
     	
     	this.notifyObservers("Votre carte de victoire est "+ joueur.getCarteDeVictoire());
-    	//System.out.println("Ta carte de victoire est "+ joueur.getCarteDeVictoire());
+    	
     	
     }
-    
+
     public String toString() {
     	StringBuffer sb = new StringBuffer();
     	sb.append("Stratégie de base");
@@ -184,11 +127,14 @@ public class StrategieDeBase extends Observable implements StrategieMode {
     }
 
 
-	@Override
+	
+	/**
+	 * Cette méthode permet en fin de partie de rendre visible toutes les cartes de victoires. En fonction des cartes de victoire, les scores seront calculées.
+	 */
 	public void finirLaPartie(Partie maPartie) {
 		// TODO Auto-generated method stub
 		this.notifyObservers("\n" +"La partie est finie, place aux résultats ! :) "+ "\n");
-		//System.out.println("\n" +"La partie est finie, place aux résultats ! :) "+ "\n");
+		
 		
 		Iterator<Joueur> it = maPartie.getQueueJoueurs().iterator();
 		
@@ -196,10 +142,10 @@ public class StrategieDeBase extends Observable implements StrategieMode {
     		
     		Joueur joueur = it.next();
     		this.notifyObservers("La carte de victoire de " +joueur.getNom()+ " est " +joueur.getCarteDeVictoire());
-    		//System.out.println("La carte de victoire de " +joueur.getNom()+ " est " +joueur.getCarteDeVictoire());
+    	
     		int score = maPartie.calculerScoreTotal(joueur);
     		this.notifyObservers("Score total de " + joueur.getNom() + " : " + score);
-    		//System.out.println("Score total de " + joueur.getNom() + " : " + score);
+    		
     	}
 		
 		maPartie.definirGagnant();

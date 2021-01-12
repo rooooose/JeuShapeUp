@@ -14,11 +14,23 @@ import java.util.Set;
 
 import vue.Console;
 
+/**
+ * Cette classe correspond aux règles de "Victoire Ennemie", c'est une implémentation imaginée par les auteurs de cette classe.
+ * C'est une implémentation de l'interface StrategieMode.
+ * Les règles en victoire ennemie sont semblables aux règles de base, sauf que le joueur ne peut pas voir sa carte de victoire. Il ne pourra voir que les cartes de victoire des ses ennemies. Ainsi, il devra faire en sorte que ceux-ci perdent sans pour autant connaître sa carte de victoire.
+ * 
+ * @author Shir F, Mathéa Z
+ * @see StrategieMode
+ */
+
+
 public class StrategieVictoireEnnemie extends Observable implements StrategieMode {
 	
-//	public StrategieVictoireEnnemie(Console console) {
-//		this.addObserver(console);
-//	}
+/**
+ * Ici, le joueur ne peut pas voir sa carte de victoire pendant la partie. Cependant, il peut voir la carte de victoire de chaque adversaire de jeu.
+ * 
+ * @see StrategieMode#voirCarteVictoire(Partie, Joueur)
+ */
 
 	
     public void voirCarteVictoire(Partie maPartie, Joueur joueur) {
@@ -31,10 +43,10 @@ public class StrategieVictoireEnnemie extends Observable implements StrategieMod
 			Joueur joueurNext = voirCartesEnnemies.next();
 		if (joueur != joueurNext ) {
 		this.notifyObservers("Vous ne pouvez voir que la carte de victoire de vos ennemis "+joueurNext.getNom()+ " : " +joueurNext.getCarteDeVictoire());
-		//System.out.println("Tu ne peux voir que la carte de victoire des tes ennemis "+joueurNext.getNom()+ " : " +joueurNext.getCarteDeVictoire());
+		
 	   }else {
 		this.notifyObservers("Vous ne pouvez pas voir votre carte de victoire");
-		//System.out.println("Tu ne peux pas voir ta carte de victoire");
+		
 		}
 		i++;
 	}
@@ -42,7 +54,11 @@ public class StrategieVictoireEnnemie extends Observable implements StrategieMod
     }
 
 
-	@Override
+	/**
+	 * Les cartes sont distribuées de façon semblable aux règles de base.
+	 * Une carte de victoire est assignée à chaque joueur.
+	 * @see StrategieDeBase#distribuerCartes(Partie)
+	 */
 	public List<Carte> distribuerCartes(Partie maPartie) {
 		
 		Iterator<Joueur> iteratorRecupJoueurs = maPartie.getQueueJoueurs().iterator();
@@ -61,17 +77,7 @@ public class StrategieVictoireEnnemie extends Observable implements StrategieMod
 		  int longueurListeCarte = (recupCarteJeu.size())-(maPartie.getQueueJoueurs().size())-1;
   		  int randomIndex = new Random().nextInt(longueurListeCarte);
   		  Joueur joueurAssocie = iteratorRecupJoueurs.next();
-  		  
-        	//On fait en sorte que la carte ne soit pas dans la pioche
-    		  /*while(maPartie.getPioche().getPioche().contains(recupCarteJeu.get(randomIndex))) {
-    			  
-    			  longueurListeCarte = 0;
-        		  randomIndex = 0;
-        		  longueurListeCarte = (recupCarteJeu.size())-(maPartie.getQueueJoueurs().size())-1;
-          		  randomIndex = new Random().nextInt(longueurListeCarte);
-          		  
-    		 }*/
-    		  
+  		
     		  CouleurType recupCouleur = recupCarteJeu.get(randomIndex).getCouleur();
     		  FormeCarte recupForme = recupCarteJeu.get(randomIndex).getForme();
     		  boolean recupRemplissage = recupCarteJeu.get(randomIndex).estRemplie;
@@ -106,7 +112,9 @@ public class StrategieVictoireEnnemie extends Observable implements StrategieMod
 
 
 
-	@Override
+	/**
+	 * 
+	 */
 	public Pioche creerLaPiocheDeLaPartie(Partie maPartie) {
 		
 		//this.addObserver(maPartie.getConsoleDuJeu());
@@ -124,25 +132,9 @@ public class StrategieVictoireEnnemie extends Observable implements StrategieMod
 	    for (int nbreDeCartes = 0; nbreDeCartes < maPartie.getNbCartesJouables(); nbreDeCartes++) {
 	    		
 	    	
-//	    	int arrayLength = recupCarteJeu.size(); 
-//	    	int randomIndex = new Random().nextInt(arrayLength);
-	    	
-	    	/*while (pioche.contains(recupCarteJeu.get(randomIndex)))
-	    		
-	    	{
-	        	arrayLength = 0; 
-	        	randomIndex = 0; 
-	        	arrayLength = recupCarteJeu.size(); 
-	        	randomIndex = new Random().nextInt(arrayLength);
-	    	}*/
-	    	
-	    	// On remove pour garantir l'unicité
-//	    	pioche.add(recupCarteJeu.remove(randomIndex)); 
+
 	    	pioche.add(recupCarteJeu.get(nbreDeCartes));
-	    	//recupCarteJeu.remove((randomIndex));
-//	    	arrayLength = 0; 
-//	    	randomIndex = 0; 
-	    	
+
 	    	
 	    	nombreDeCartes = nbreDeCartes;
 	    	
@@ -161,11 +153,16 @@ public class StrategieVictoireEnnemie extends Observable implements StrategieMod
     }
 
 
-	@Override
+	/**
+	 * Cette méthode, permettant de finir la partie, permet de voir chaque carte de victoire associée au joueur.
+	 * On fait des appels à des méthodes de la partie pour calculer le score et définir le gagnant.
+	 * 
+	 * @see StrategieMode#finirLaPartie(Partie)
+	 */
 	public void finirLaPartie(Partie maPartie) {
 
 		this.notifyObservers("\n" +"La partie est finie, place aux résultats ! :) "+ "\n");
-		//System.out.println("\n" +"La partie est finie, place aux résultats ! :) "+ "\n");
+		
 		
 		Iterator<Joueur> it = maPartie.getQueueJoueurs().iterator();
 		
@@ -173,10 +170,10 @@ public class StrategieVictoireEnnemie extends Observable implements StrategieMod
     		
     		Joueur joueur = it.next();
     		this.notifyObservers("La carte de victoire de " +joueur.getNom()+ " est " +joueur.getCarteDeVictoire());
-    		//System.out.println("La carte de victoire de " +joueur.getNom()+ " est " +joueur.getCarteDeVictoire());
+    		
     		int score = maPartie.calculerScoreTotal(joueur);
     		this.notifyObservers("Score total de " + joueur.getNom() + " : " + score);
-    		//System.out.println("Score total de " + joueur.getNom() + " : " + score);
+    		
     	}
 		
 		maPartie.definirGagnant();

@@ -1,77 +1,76 @@
 package shapeUp;
 
 import java.util.Queue;
-//import java.util.Set;
+/**
+ * Cette classe permet d'avoir dans laquelle les joueurs vont pouvoir piocher de nouvelles cartes au fur et à mesure de la partie.
+ * La pioche est créée en début de partie en fonction du mode jeu choisi.
+ * 
+ * 
+ * @author Shir F, Mathéa Z
+ * @see StrategieMode#creerLaPiocheDeLaPartie(Partie)
+ */
 
 public class Pioche {
+	/**
+	 * Entier correspondant au nombre de cartes dans la pioche
+	 */
    private int nbreDeCartes;
-   //private Set<Carte> pioche;
+   
+   /*
+    * Collection de type Queue modélisant les cartes présentes dans la pioche
+    * 
+    */
    private Queue<Carte> pioche;
    
+   /**
+    * Cette méthode permet de connaître le nombre de cartes dans la pioche
+    * 
+    * @return le nombre de carte dans la pioche
+    */
     public int getNbreDeCartes() {
 		return nbreDeCartes;
 	}
 
+    /**
+     * Permet d'attribuer un nombre de cartes à la pioche
+     * @param nbreDeCartes
+     */
     public void compterNbCartes(int nbreDeCartes) {
     	this.nbreDeCartes = nbreDeCartes;
     	
     }
     
   
-	
+	/**
+	 * Cette méthode permet de récupérer les cartes présentes dans la pioche
+	 * @return la collection contenant les cartes de la pioche
+	 */
 	public Queue<Carte> getPioche() {
 		return pioche;
 	}
 
+	/**
+	 * Cette méthode permet de définir les cartes présentes dans la pioche
+	 * 
+	 * @param pioche - Collection de type Queue contenant des cartes 
+	 */
 	public void setPioche(Queue<Carte> pioche) {
 		this.pioche = pioche;
 	}
 	
-	
+	/**
+	 * Constructeur de la classe, permet de créer une pioche.
+	 * @param pioche
+	 */
 	Pioche (Queue<Carte> pioche) {
 		this.pioche = pioche;
 		
 	}
 
 
-    	//Iterator<Carte> piocheIt = pioche.iterator();
-    	
-    	//while (piocheIt.hasNext()) {
-    	//System.out.println(piocheIt.next());
-    	//}
-    	
-    	/*for (int i = 0; i < nbreDeCartes; i++) {
-    		int longueurListeCarte = maPartie.getCarteDuJeu().size();
-    		int randomIndex = new Random().nextInt(longueurListeCarte);
-    		
-    		pioche.add(maPartie.getCarteDuJeu().get(randomIndex));
-    		
-    		longueurListeCarte = 0;
-    		randomIndex = 0;
-    		
-    		
-    	}
-    	
-    	Iterator<Carte> piocheIt = pioche.iterator(); 
-    	while (piocheIt.hasNext()) {
-    	System.out.println(piocheIt.next());
-    	}
-    	*/
-    	
-    	
-
-
-    	
-    	
-    	//}
- 
-
-    	// A SUPPR ?
     	    public String toString() {
     	    	 StringBuffer sbPioche = new StringBuffer();
-    	    	// sbCarte.append("Forme de la carte : " +this.forme);
-    	    	// sbCarte.append(" Couleur de la carte : " +this.couleur);
-    	    	// sbCarte.append(" La carte est remplie : " +this.estRemplie+ "(true -> la carte est remplie)");
+    	    	
     	    	 sbPioche.append("\n");
     	    	 sbPioche.append(this.pioche);
     	    	 sbPioche.append("\n");
@@ -79,7 +78,7 @@ public class Pioche {
     	    	}
     	}
 
-    //}
+
     
     
 

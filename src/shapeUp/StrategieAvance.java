@@ -14,29 +14,40 @@
 	import java.util.Set;
 
 import vue.Console;
-	
+	/**
+	 * Cette classe correspond aux règles avancées de ShapeUp.
+	 * C'est une implémentation de l'interface StrategieMode.
+	 * Les règles avancées de ShapeUp permettent d'avoir trois cartes dans la main du joueur. La carte de victoire d'un joueur est la dernière carte présente dans la main du joueur.
+	 * @author Shir F, Mathéa Z
+	 * @see StrategieMode
+	 */
 	public class StrategieAvance extends Observable implements StrategieMode {
 		
-//		public StrategieAvance(Console console) {
-//			this.addObserver(console);
-//		}
+/**
+ * Ici, le joueur ne peut pas voir sa carte de victoire avant le dernier tour. En effet, la dernière carte dans la main du joueur sera sa carte de victoire.
+ */
 	
 	    public void voirCarteVictoire(Partie maPartie, Joueur joueur) {
 	    	this.notifyObservers("La dernière carte dans votre main sera votre carte de victoire.");
-	    	//System.out.println("La dernière carte dans votre main sera votre carte de victoire.");
+	    	
 	    }
 	
-		@Override
+		
+		/**
+		 * Dans cette implémentation, la distribution en début de partie est faite pour que le joueur ait toujours 3 cartes dans sa main.
+		 * 
+		 *@see StrategieMode#distribuerCartes(Partie)
+		 */
 		public List<Carte> distribuerCartes(Partie maPartie) {
 			// TODO Auto-generated method stub
 			
 			Iterator<Joueur> iteratorRecupJoueurs = maPartie.getQueueJoueurs().iterator();
-			//int i = 1;
+			
 			
 			//On récupère les cartes du jeu (toutes les cartes)
 			List<Carte> recupCarteJeu = new ArrayList<Carte>(); 
 	    	recupCarteJeu.addAll(maPartie.getCarteDuJeu()); 
-	    	//System.out.println("Cartes pour distribution : " + recupCarteJeu);
+	    	
 	    	
 	    	
 			while(iteratorRecupJoueurs.hasNext())  {
@@ -48,27 +59,19 @@ import vue.Console;
 			  //Paramètres pour récupérer une carte au hasard
 			
 				  int longueurListeCarte = (recupCarteJeu.size())-(3*(maPartie.getQueueJoueurs().size()));
-				  //System.out.println("LongueurListeCarte : " + longueurListeCarte);
+				 
 		  		  int randomIndex = new Random().nextInt(longueurListeCarte);
-	    		  //Carte carteRecup = recupCarteJeu.get(randomIndex);
-	    		  //System.out.println(carteRecup);
-	    		 
+	    		
 	    		  //Récupérer les différents joueurs ajouter les cartes récupérées dans leur main
 	    		   
 	    		  joueurAssocie.getMainDuJoueur().add(recupCarteJeu.remove(randomIndex));
-	    		  
-	    		  //System.out.println(joueurAssocie.getNom() + joueurAssocie.getMainDuJoueur());
-	    		  
-	    		  //On enlève la carte mise dans la main de la liste de récupération des cartes pour garantir l'unicité
-	    		  
-	    		 // recupCarteJeu.remove((randomIndex));
-	    		
+
 	    		  
 	    		  //Réinitialisation des paramètres pour récuperer une autre carte au hasard
 	    		  
 	    		  longueurListeCarte = 0;
 	    		  randomIndex = 0;
-	    		  //i++;
+	    		 
 	    		  
 				}
 	      	}
@@ -76,10 +79,13 @@ import vue.Console;
 	    	    		
 	    }
 		
-		@Override
+		/**
+		 * 
+		 *
+		 */
 		public Pioche creerLaPiocheDeLaPartie(Partie maPartie) {
 			
-			//this.addObserver(maPartie.getConsoleDuJeu());
+			
 			Queue<Carte> pioche = new LinkedList<Carte> ();
 			int nombreDeCartes = 0;
 			
@@ -87,37 +93,14 @@ import vue.Console;
 			
 			
 			List<Carte> recupCarteJeu = this.distribuerCartes(maPartie);
-	    	//Collections.shuffle(recupCarteJeu);
-	    	//System.out.println("Cartes pour pioche : " + recupCarteJeu);
-	    	
-	//    	ListIterator<Carte> it = recupCarteJeu.listIterator();
-	//    	while(it.hasNext()) {
-	//    		pioche.add(it.next());
-	//    		nombreDeCartes++;
-	//    	}
-	//	    System.out.println(pioche);
+
 		    
 		    for (int nbreDeCartes = 0; nbreDeCartes <maPartie.getNbCartesJouables()-(maPartie.getQueueJoueurs().size()*2); nbreDeCartes++) {
 		    		
-		    	
-		    	//int arrayLength = recupCarteJeu.size(); 
-		    	//int randomIndex = new Random().nextInt(arrayLength);
-		    	
-		    	/*while (pioche.contains(recupCarteJeu.get(randomIndex)))
-		    		
-		    	{
-		        	arrayLength = 0; 
-		        	randomIndex = 0; 
-		        	arrayLength = recupCarteJeu.size(); 
-		        	randomIndex = new Random().nextInt(arrayLength);
-		    	}*/
+
 		    	
 		    	pioche.add(recupCarteJeu.get(nbreDeCartes));
-		    	//recupCarteJeu.remove((randomIndex));
-		    	//arrayLength = 0; 
-		    	//randomIndex = 0; 
-		    	
-		    	
+		    
 		    	nombreDeCartes = nbreDeCartes;
 		    	
 		    }
@@ -136,13 +119,17 @@ import vue.Console;
 			return sb.toString();
 	    }
 	
-		@Override
+		/**
+		 * Cette méthode permet, en stratégie avancée, de récupérer la dernière carte dans la main du joueur pour la définir comme sa carte de victoire.
+		 * A partir de cette carte, on va pouvoir calculer le score et définir un gagnant.
+		 * @see StrategieMode#finirLaPartie(Partie)
+		 */
 		public void finirLaPartie(Partie maPartie) {
 			// TODO Auto-generated method stub
 			
 			
 			this.notifyObservers("\n" +"La partie est finie, place aux résultats ! :) "+ "\n");
-			//System.out.println("\n" +"La partie est finie, place aux résultats ! :) "+ "\n");
+			
 			
 			Iterator<Joueur> it = maPartie.getQueueJoueurs().iterator();
 			
@@ -155,10 +142,10 @@ import vue.Console;
 		    		
 		    	joueur.setCarteDeVictoire(carteVictJoueur);
 		    	this.notifyObservers("La carte de victoire de " +joueur.getNom()+ " est " +joueur.getCarteDeVictoire());
-		    	//System.out.println("La carte de victoire de " +joueur.getNom()+ " est " +joueur.getCarteDeVictoire());
+		    	
 		    	int score = maPartie.calculerScoreTotal(joueur);
 		    	this.notifyObservers("Score total de " + joueur.getNom() + " : " + score);
-		    	//System.out.println("Score total de " + joueur.getNom() + " : " + score);
+		    	
 
 		    }
 			maPartie.definirGagnant();
