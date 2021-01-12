@@ -18,7 +18,7 @@ public abstract class Joueur extends Observable{
 	/**
 	 * Modélise la stratégie du Joueur. Les classes qui héritent de Joueur implémentent cette interface.
 	 * Valeurs possibles : le joueur casté dans le type StrategieJoueur.
-	 * Si strategie est null, il y aura l'exception NullPointerException, car Joueur utilise des méthodes de cette interface.
+	 * Si strategie est null, il y aura l'exception NullPointerException lors de l'appel aux méthode de cette interface : definirCarteAJouer, choisirLigneCarte, choisirColonneCarte
 	 * @see StrategieJoueur
 	 */
 	private StrategieJoueur strategie;
@@ -41,6 +41,7 @@ public abstract class Joueur extends Observable{
      * Permet de récupérer la ligne de la derniere carte à déplacer de ce joueur dans l'interface graphique. 
      * Elle est réinitialisée à -1 dès qu'on propose au joueur de déplacer une carte.
      * Valeurs possibles : (-1 ; dernière ligne du tapis)
+     * @see ControleurPartie
      * 
      */
     private int ligCarteADepGUI = -1;
@@ -49,13 +50,13 @@ public abstract class Joueur extends Observable{
      * Permet de récupérer la ligne de la derniere carte déplacée par ce joueur dans l'interface graphique. 
      * Elle est réinitialisée à -1 dès que le joueur réel choisit une ligne pour sa carte.
      * Valeurs possibles : (-1 ; dernière ligne du tapis)
-     * 
+     * @see ControleurPartie
      */
     private int ligCarteDepGUI = -1;
     
     /**
      * Permet de savoir si le déplacement d'une carte est possible pour le joueur, càd si il peut sélectionner une carte à déplacer dans l'interface graphique.
-     * 
+     * @see ControleurPartie
      */
     private boolean deplacementPossible = false;
     
@@ -69,7 +70,7 @@ public abstract class Joueur extends Observable{
      * Permet de récupérer le numéro de carte choisi dans la main du joueur dans l'interface graphique, en mode Avancé. 
      * Elle est réinitialisée à -1 à chaque tour de jeu
      * Valeurs possibles : (-1 ; 2) => les cartes dans la main du joueur sont numérotées de 0 à 2.
-     * 
+     * @see ControleurPartie
      */
     private int numCarteGUI;
     
@@ -266,7 +267,20 @@ public abstract class Joueur extends Observable{
 		this.strategie = (StrategieJoueur) this;
 	}
 
-
+	/**
+	 * Permet au joueur de jouer son tour de jeu. Le joueur passe alors à l'état en jeu
+	 * @param partie - la partie en cours
+	 * @param tapis - au choix parmi les formes disponibles
+	 * @param pioche - la pioche de la partie
+	 * @param modeDeJeu au choix entre StrategieAvancee, StrategieVictoireEnnemie et StrategieDeBase
+	 * 
+	 * @exception NullPointerException - Si tout ou partie de ces paramètres sont null
+	 * 
+	 * @see Partie, TapisDeJeu, Pioche, StrategieMode, StrategieAvancee, StrategieVictoireEnnemie, StrategieDeBase
+	 * 
+	 * Cette méthode vérifie à quel mode de jeu appartient la partie, pour déterminer si le joueur doit piocher avant ou après avoir joué sa carte.
+	 * S'il y a au moins 2 cartes sur le tapis, on peut proposer un déplacement avant et/ou après le placement d'une carte, sinon on peut simplement placer une nouvelle carte.
+	 */
 	public void jouer(Partie partie, TapisDeJeu tapis, Pioche pioche, StrategieMode modeDeJeu) {
 		
 		Carte cartePiochee;
@@ -278,7 +292,7 @@ public abstract class Joueur extends Observable{
 			this.notifyObservers(cartePiochee);
 		}
 		
-    	if(tapis.getNbCartes()>1 && tapis.getNbCartes()<partie.getNbCartesJouables()) {
+    	if(tapis.getNbCartes()>1) {
     		
     		boolean deplacementFait = this.proposerDeplacement(tapis, partie);
 
@@ -300,7 +314,16 @@ public abstract class Joueur extends Observable{
 		}
     }
 	
-	
+	/**
+	 * Permet au joueur de piocher une carte.
+	 * @param pioche - la pioche de la partie
+	 * @return la carte piochée. Un objet de type Carte parmi celles créées au début de la partie
+	 * @exception NullPointerException - Si la pioche est null
+	 * @see Pioche
+	 * 
+	 * Si aucune carte n'est disponible dans la pioche, un message est généré. 
+	 * Sinon on récupère la carte en haut de la pioche et on décrémente le nombre de cartes disponibles dans la pioche.
+	 */
 	public Carte piocherCarte(Pioche pioche) {
     	
 		if (pioche.getNbreDeCartes() < 0) {
@@ -315,16 +338,38 @@ public abstract class Joueur extends Observable{
 	    	pioche.compterNbCartes(pioche.getNbreDeCartes() - 1);
 	    	
 	    	this.notifyObservers(this.getNom() + " a pioché sa carte :");	    	
-	    	//System.out.println("Le joueur virtuel a pioché sa carte");
 	    	return cartePiochee;
     	
 		}
 	}
 	
-	
+	/**
+	 * Méthode définie dans les classes filles de joueur
+	 * @param tapis
+	 * @param partie
+	 * @return true/false
+	 * @see JoueurReel
+	 * @see JoueurVirtuel
+	 */
 	public abstract boolean proposerDeplacement(TapisDeJeu tapis, Partie partie);
 	
-	
+	/**
+	 * Place la carte à déplacer dans la console.
+	 * @param lig - la ligne à laquelle appartenait précédemment la carte à déplacer (0; nombre de lignes du tapis -1)
+	 * @param col - la colonne à laquelle appartenait précédemment la carte à déplacer (0; nombre de colonnes du tapis -1)
+	 * @param carteAJouer - la carte à déplacer. Si elle est null, un objet null sera placé sur le tapis.
+	 * @param tapis - le tapis de jeu de la partie
+	 * 
+	 * @exception NullPointerException - Si le tapis est null
+	 * 
+	 * @see TapisDeJeu
+	 * @see Partie
+	 * 
+	 * Après avoir affiché l'état actuel du tapis, le programme demande au joueur de choisir une ligne et une colonne pour le déplacement de la carte, tant qu'il n'a pas entré de valeur valide.
+	 * Les coordonnées sont valides si un placement normal est possible ici (voir placementNormalPossible - TapisDeJeu), si un décalage est possible, et si elles sont différentes de l'emplacement précédent de la carte.
+	 * Si la case est vide, on place la carte à l'endroit voulu dans l'ArrayList du tapis, sinon on décale d'abord les cartes présentes
+	 * Pour finir, on affiche le résultat de l'emplacement et on incrémente le nombre de cartes du tapis.
+	 */
 	public void placerCarte(int lig, int col, Carte carteAJouer, TapisDeJeu tapis) {
 		
     	int ligneCase;
@@ -363,7 +408,22 @@ public abstract class Joueur extends Observable{
 
     }
 	
-	
+	/**
+	 * Place une nouvelle carte, ou la carte à déplacer si on joue dans le GUI.
+	 * @param partie
+	 * @param tapis - le tapis de jeu de la partie
+	 * 
+	 * @exception NullPointerException - Si tout ou partie des paramètres sont null
+	 * 
+	 * @see TapisDeJeu
+	 * @see Partie
+	 * 
+	 * Après avoir affiché l'état actuel du tapis, la carte à jouer est définie parmi celle(s) de la main du joueur, et affiche la carte de Victoire du joueur
+	 * le programme demande au joueur de choisir une ligne et une colonne pour le déplacement de la carte, tant qu'il n'a pas entré de valeur valide.
+	 * Les coordonnées sont valides si un placement normal est possible ici (voir placementNormalPossible - TapisDeJeu) ou si un décalage est possible
+	 * Si la case est vide, on place la carte à l'endroit voulu dans l'ArrayList du tapis, sinon on décale d'abord les cartes présentes
+	 * Pour finir, on affiche le résultat de l'emplacement et on incrémente le nombre de cartes du tapis.
+	 */
 	public void placerCarte(Partie partie, TapisDeJeu tapis) {
 		
     	int ligneCase;
@@ -407,12 +467,25 @@ public abstract class Joueur extends Observable{
         	}
         	this.notifyObservers(tapis);   
         	tapis.setNbCartes(tapis.getNbCartes()+1);
-    	}
-
-    	
+    	}  	
 
     }
 	
+	/**
+	 * Place une carte dans l'interface graphique
+	 * @param ligneCase la ligne de destination de la carte (0; nombre de lignes du tapis -1)
+	 * @param colonneCase la colonne de destination de la carte (0; nombre de colonnes du tapis -1)
+	 * @param tapis
+	 * @param carteAJouer - la carte à placer. Si elle est null, un objet null sera placé sur le tapis. NullPointerException sera générée dans ControleurPartie
+	 * 
+	 * @see ControleurPartie
+	 * @see TapisDeJeu
+	 * @see Partie
+	 * @exception NullPointerException - si le tapis est null
+	 * 
+	 * Si la case est vide, on place la carte à l'endroit voulu dans l'ArrayList du tapis, sinon on décale d'abord les cartes présentes
+	 * Pour finir, on affiche le résultat de l'emplacement et on incrémente le nombre de cartes du tapis.
+	 */
 	public void placerCarteGUI(int ligneCase, int colonneCase, TapisDeJeu tapis, Carte carteAJouer) {  	
     	
     	if(!tapis.caseRemplie(ligneCase,colonneCase) && tapis.placementNormalPossible(ligneCase,colonneCase)) {
@@ -430,6 +503,20 @@ public abstract class Joueur extends Observable{
 
     }
 	
+	/**
+	 * Permet de choisir une carte à déplacer dans la console
+	 * @param partie
+	 * @param tapis - le tapis de jeu de la partie
+	 * 
+	 * @exception NullPointerException - Si tout ou partie des paramètres sont null
+	 * 
+	 * @see TapisDeJeu
+	 * @see Partie
+	 * 
+	 * Une ligne et une colonne est demandée au joueur tant que la case de cet emplacement est vide (et que rien n'a été choisi dans l'interface).
+	 * On récupère alors la carte de cet emplacement, on décrémente le nombre de cartes du tapis, et on la remplace par null. Puis on appelle placerCarte().
+	 * Si la carte à déplacer a été choisie dans l'interface, alors la carteADeplacer est la carteAJouer du joueur.
+	 */
 	public void deplacerCarte(TapisDeJeu tapis, Partie partie) {
     	
 		this.deplacementEnCours = true;
@@ -471,9 +558,23 @@ public abstract class Joueur extends Observable{
     	this.deplacementEnCours = false;
 
 	}
-	
-	
 
+	
+	/**
+	 * Permet de choisir une carte à déplacer dans l'interface graphique
+	 * 
+	 * @param ligneCase - la ligne de la carte à déplacer (0; nombre de lignes du tapis -1)
+	 * @param colonneCase - la colonne de la carte à déplacer (0; nombre de colonnes du tapis -1) 
+	 * @param tapis - le tapis de jeu de la partie
+	 * 
+	 * @exception NullPointerException - Si le tapis est null
+	 * 
+	 * @see TapisDeJeu
+	 * @see ControleurPartie 
+	 * 
+	 * On récupère alors la carte du tapis à l'emplacement ligneCase-colonneCase, on décrémente le nombre de cartes du tapis, et on la remplace par null. Puis on appelle placerCarte().
+	 * On affiche le tapis et un message après en avoir retiré la carte
+	 */
 	public void deplacerCarteGUI(int ligneCase, int colonneCase, TapisDeJeu tapis) {
     	
 		this.carteAJouer = tapis.getContainer().get(ligneCase).get(colonneCase);
