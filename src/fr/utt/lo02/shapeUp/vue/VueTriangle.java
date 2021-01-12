@@ -107,7 +107,8 @@ public class VueTriangle extends JFrame {
 		this.getContentPane().setLayout(gridBagLayout);
 		
 		case0x0 = new JButton();
-		case0x0.setIcon(new ImageIcon(VueTriangle.class.getResource("/vue/imagesPourCartes/caseVide.png")));
+		String name = "/fr/utt/lo02/shapeUp/vue/imagesPourCartes/caseVide.png";
+		case0x0.setIcon(new ImageIcon(VueTriangle.class.getResource(name)));
 		GridBagConstraints gbc_case0x0 = new GridBagConstraints();
 		gbc_case0x0.insets = new Insets(0, 0, 5, 5);
 		gbc_case0x0.gridx = 0;
@@ -143,7 +144,7 @@ public class VueTriangle extends JFrame {
 		getContentPane().add(lblNewLabel_5, gbc_lblNewLabel_5);
 		
 		case1x0 = new JButton();
-		case1x0.setIcon(new ImageIcon(VueTriangle.class.getResource("/vue/imagesPourCartes/caseVide.png")));
+		case1x0.setIcon(new ImageIcon(VueTriangle.class.getResource(name)));
 		GridBagConstraints gbc_case1x0 = new GridBagConstraints();
 		gbc_case1x0.insets = new Insets(0, 0, 5, 5);
 		gbc_case1x0.gridx = 0;
@@ -151,7 +152,7 @@ public class VueTriangle extends JFrame {
 		this.getContentPane().add(case1x0, gbc_case1x0);
 		
 		case1x1 = new JButton();
-		case1x1.setIcon(new ImageIcon(VueTriangle.class.getResource("/vue/imagesPourCartes/caseVide.png")));
+		case1x1.setIcon(new ImageIcon(VueTriangle.class.getResource(name)));
 		GridBagConstraints gbc_case1x1 = new GridBagConstraints();
 		gbc_case1x1.insets = new Insets(0, 0, 5, 5);
 		gbc_case1x1.gridx = 1;
@@ -180,7 +181,7 @@ public class VueTriangle extends JFrame {
 		getContentPane().add(lblNewLabel_6, gbc_lblNewLabel_6);
 		
 		case2x0 = new JButton();
-		case2x0.setIcon(new ImageIcon(VueTriangle.class.getResource("/vue/imagesPourCartes/caseVide.png")));
+		case2x0.setIcon(new ImageIcon(VueTriangle.class.getResource(name)));
 		GridBagConstraints gbc_case2x0 = new GridBagConstraints();
 		gbc_case2x0.insets = new Insets(0, 0, 5, 5);
 		gbc_case2x0.gridx = 0;
@@ -188,7 +189,7 @@ public class VueTriangle extends JFrame {
 		this.getContentPane().add(case2x0, gbc_case2x0);
 		
 		case2x1 = new JButton();
-		case2x1.setIcon(new ImageIcon(VueTriangle.class.getResource("/vue/imagesPourCartes/caseVide.png")));
+		case2x1.setIcon(new ImageIcon(VueTriangle.class.getResource(name)));
 		GridBagConstraints gbc_case2x1 = new GridBagConstraints();
 		gbc_case2x1.insets = new Insets(0, 0, 5, 5);
 		gbc_case2x1.gridx = 1;
@@ -196,7 +197,7 @@ public class VueTriangle extends JFrame {
 		this.getContentPane().add(case2x1, gbc_case2x1);
 		
 		case2x2 = new JButton();
-		case2x2.setIcon(new ImageIcon(VueTriangle.class.getResource("/vue/imagesPourCartes/caseVide.png")));
+		case2x2.setIcon(new ImageIcon(VueTriangle.class.getResource(name)));
 		GridBagConstraints gbc_case2x2 = new GridBagConstraints();
 		gbc_case2x2.insets = new Insets(0, 0, 5, 5);
 		gbc_case2x2.gridx = 2;
@@ -218,7 +219,7 @@ public class VueTriangle extends JFrame {
 		getContentPane().add(lblNewLabel_8, gbc_lblNewLabel_8);
 		
 		case3x0 = new JButton();
-		case3x0.setIcon(new ImageIcon(VueTriangle.class.getResource("/vue/imagesPourCartes/caseVide.png")));
+		case3x0.setIcon(new ImageIcon(VueTriangle.class.getResource(name)));
 		GridBagConstraints gbc_case3x0 = new GridBagConstraints();
 		gbc_case3x0.insets = new Insets(0, 0, 5, 5);
 		gbc_case3x0.gridx = 0;
@@ -226,7 +227,7 @@ public class VueTriangle extends JFrame {
 		this.getContentPane().add(case3x0, gbc_case3x0);
 		
 		case3x1 = new JButton();
-		case3x1.setIcon(new ImageIcon(VueTriangle.class.getResource("/vue/imagesPourCartes/caseVide.png")));
+		case3x1.setIcon(new ImageIcon(VueTriangle.class.getResource(name)));
 		GridBagConstraints gbc_case3x1 = new GridBagConstraints();
 		gbc_case3x1.insets = new Insets(0, 0, 5, 5);
 		gbc_case3x1.gridx = 1;
@@ -234,7 +235,7 @@ public class VueTriangle extends JFrame {
 		this.getContentPane().add(case3x1, gbc_case3x1);
 		
 		case3x2 = new JButton();
-		case3x2.setIcon(new ImageIcon(VueTriangle.class.getResource("/vue/imagesPourCartes/caseVide.png")));
+		case3x2.setIcon(new ImageIcon(VueTriangle.class.getResource(name)));
 		GridBagConstraints gbc_case3x2 = new GridBagConstraints();
 		gbc_case3x2.insets = new Insets(0, 0, 5, 5);
 		gbc_case3x2.gridx = 2;
@@ -242,7 +243,7 @@ public class VueTriangle extends JFrame {
 		this.getContentPane().add(case3x2, gbc_case3x2);
 		
 		case3x3 = new JButton();
-		case3x3.setIcon(new ImageIcon(VueTriangle.class.getResource("/vue/imagesPourCartes/caseVide.png")));
+		case3x3.setIcon(new ImageIcon(VueTriangle.class.getResource(name)));
 		GridBagConstraints gbc_case3x3 = new GridBagConstraints();
 		gbc_case3x3.insets = new Insets(0, 0, 5, 5);
 		gbc_case3x3.gridx = 3;
@@ -257,7 +258,7 @@ public class VueTriangle extends JFrame {
 		getContentPane().add(lblNewLabel_9, gbc_lblNewLabel_9);
 		
 		case4x0 = new JButton();
-		case4x0.setIcon(new ImageIcon(VueTriangle.class.getResource("/vue/imagesPourCartes/caseVide.png")));
+		case4x0.setIcon(new ImageIcon(VueTriangle.class.getResource(name)));
 		GridBagConstraints gbc_case4x0 = new GridBagConstraints();
 		gbc_case4x0.insets = new Insets(0, 0, 0, 5);
 		gbc_case4x0.gridx = 0;
@@ -265,7 +266,7 @@ public class VueTriangle extends JFrame {
 		this.getContentPane().add(case4x0, gbc_case4x0);
 		
 		case4x1 = new JButton();
-		case4x1.setIcon(new ImageIcon(VueTriangle.class.getResource("/vue/imagesPourCartes/caseVide.png")));
+		case4x1.setIcon(new ImageIcon(VueTriangle.class.getResource(name)));
 		GridBagConstraints gbc_case4x1 = new GridBagConstraints();
 		gbc_case4x1.insets = new Insets(0, 0, 0, 5);
 		gbc_case4x1.gridx = 1;
@@ -273,7 +274,7 @@ public class VueTriangle extends JFrame {
 		this.getContentPane().add(case4x1, gbc_case4x1);
 		
 		case4x2 = new JButton();
-		case4x2.setIcon(new ImageIcon(VueTriangle.class.getResource("/vue/imagesPourCartes/caseVide.png")));
+		case4x2.setIcon(new ImageIcon(VueTriangle.class.getResource(name)));
 		GridBagConstraints gbc_case4x2 = new GridBagConstraints();
 		gbc_case4x2.insets = new Insets(0, 0, 0, 5);
 		gbc_case4x2.gridx = 2;
@@ -281,7 +282,7 @@ public class VueTriangle extends JFrame {
 		this.getContentPane().add(case4x2, gbc_case4x2);
 		
 		case4x3 = new JButton();
-		case4x3.setIcon(new ImageIcon(VueTriangle.class.getResource("/vue/imagesPourCartes/caseVide.png")));
+		case4x3.setIcon(new ImageIcon(VueTriangle.class.getResource(name)));
 		GridBagConstraints gbc_case4x3 = new GridBagConstraints();
 		gbc_case4x3.insets = new Insets(0, 0, 0, 5);
 		gbc_case4x3.gridx = 3;
@@ -289,7 +290,7 @@ public class VueTriangle extends JFrame {
 		this.getContentPane().add(case4x3, gbc_case4x3);
 		
 		case4x4 = new JButton();
-		case4x4.setIcon(new ImageIcon(VueTriangle.class.getResource("/vue/imagesPourCartes/caseVide.png")));
+		case4x4.setIcon(new ImageIcon(VueTriangle.class.getResource(name)));
 		GridBagConstraints gbc_case4x4 = new GridBagConstraints();
 		gbc_case4x4.gridx = 4;
 		gbc_case4x4.gridy = 4;
