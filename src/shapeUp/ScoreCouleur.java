@@ -1,15 +1,24 @@
 package shapeUp;
 
+/**
+ * Implémentation de l'interface VisiteurScore permettant de calculer le score en fonction de la couleur des cartes
+ * @author Shir F, Mathéa Z
+ * @see VisiteurScore
+ *
+ */
 public class ScoreCouleur implements VisiteurScore {
-	/*
-	 * Pour le score de couleur on prend en considération à partir de 3 cartes côte à côte
-	 * 3 cartes = + 4 points
-		...
-	 * 5 cartes = + 6 points
+
+	/**
+	 * Permet de calculer le score de couleur en fonction du paramètre de couleur de la carte de victoire <br>
+	 * Pour le score de couleur, on prend en considération à partir de 3 cartes côte à côte ayant la même couleur que la carte de victoire (rouge, vert ou bleu) <br>
 	 * 
+	 * 3 cartes = +4 points;
+	 * 4 cartes = +5 points;
+	 * 5 cartes = +6 points;
+	 * 
+	 * 
+	 * @see {@link VisiteurScore#visiter(Partie, Carte)}, {@link Carte}
 	 */
-	
-	
     public int visiter(Partie partie, Carte carteVictoire) {
     	
     	partie.getTapisDeJeu().getContainer();

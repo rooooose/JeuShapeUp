@@ -1,16 +1,24 @@
 package shapeUp;
 
-
+/**
+ * Implémentation de l'interface VisiteurScore permettant de calculer le score en fonction du remplissage des cartes
+ * 
+ * @author Shir F, Mathéa Z
+ * @see VisiteurScore
+ *
+ */
 public class ScoreRemplissage implements VisiteurScore {
 
-	/*
-	 * Pour le score de REMPLISSAGE on prend en considération à partir de 3 cartes côte à côte
-	 * 3 cartes = + 3 points
-		...
-	 * 5 cartes = + 5 points
+	/**
+	 * Permet de calculer le score de remplissage en fonction du paramètre de remplissage de la carte de victoire <br>
+	 * Pour le score de remplissage, on prend en considération à partir de 3 cartes côte à côte ayant le même remplissage que la carte de victoire (forme rempli ou non) <br>
 	 * 
+	 * 3 cartes = +3 points;
+	 * 4 cartes = +4 points;
+	 * 5 cartes = +5 points
+	 * 
+	 * @see {@link VisiteurScore#visiter(Partie, Carte)}, {@link Carte}
 	 */
-	
     public int visiter(Partie partie, Carte carteVictoire) {
     	
     	partie.getTapisDeJeu().getContainer();

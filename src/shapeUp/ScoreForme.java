@@ -1,16 +1,25 @@
 package shapeUp;
 
+/**
+ * Implémentation de l'interface VisiteurScore permettant de calculer le score en fonction de la forme des cartes
+ * @author Shir F, Mathéa Z
+ * @see VisiteurScore
+ *
+ */
 
 public class ScoreForme implements VisiteurScore {
 
-	/*
-	 * Pour le score de FORME on prend en considération à partir de 2 cartes côte à côte
-	 * 2 cartes = + 1 point
-		...
-	 * 5 cartes = + 4 points
+	/**
+	 * Permet de calculer le score de la forme en fonction du paramètre de forme de la carte de victoire <br>
+	 * Pour le score de forme, on prend en considération à partir de 2 cartes côte à côte ayant la même forme que la carte de victoire (triangle, carré ou cercle) <br>
 	 * 
+	 * 2 cartes = +1 points;
+	 * 3 cartes = +2 points;
+	 * 4 cartes = +3 points;
+	 * 5 cartes = +4 points;
+	 * 
+	 * @see {@link VisiteurScore#visiter(Partie, Carte)}, {@link Carte}
 	 */
-	
     public int visiter(Partie partie, Carte carteVictoire) {
     	
     	

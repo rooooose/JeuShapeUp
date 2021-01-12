@@ -4,7 +4,7 @@ import java.util.List;
 /**
  * L'interface StrategieMode permet de déclarer les méthodes qui seront utilisées pour définir les différents modes de jeu d'une partie.
  * @author Shir F, Mathéa Z
- * @see StrategieDeBase, StrategieVictoireEnnemie, StrategieAvance, Partie
+ * @see   {@link StrategieDeBase}, {@link StrategieVictoireEnnemie}, {@link StrategieAvance}, {@link Partie}
  * */
 
 
