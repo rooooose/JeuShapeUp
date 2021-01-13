@@ -8,8 +8,9 @@ import fr.utt.lo02.shapeUp.vue.Console;
  * 
  * La classe abstraite Joueur représente un joueur du jeu ShapeUp. Il sera soit Réel, soit Virtuel
  * Il peut être actif (en train de jouer) ou non.
+ * Il hérite de la classe Observable pour permettre la mise à jour des vues.
  * 
- * @see JoueurReel, JoueurVirtuel
+ * @see {@link JoueurReel}, {@link JoueurVirtuel}, {@link VuePartie}, {@link Console}
  *
  * @author Mathéa Z, Shir F
  */
