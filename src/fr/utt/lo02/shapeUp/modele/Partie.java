@@ -323,7 +323,7 @@ public class Partie extends Observable implements Visitable {
 	}
 
 	/**
-	 * Calcule le score total du joueur en paramètre en appelant la méthode accepterScore(VisiteurScore, Joueur)
+	 * Calcule le score total du joueur en paramètre en appelant la méthode accepterScore(VisiteurScore, Joueur) pour chaque visiteur
 	 * @param joueur
 	 * @return le score total du joueur - entier
 	 * 
@@ -338,7 +338,8 @@ public class Partie extends Observable implements Visitable {
     }
     
     /**
-     * 
+     * Définit et affiche le gagnant de la partie (s'il n'y a pas égalité).
+     * Pour ce faire, on parcourt la liste des joueurs et on compare le score de chacun d'eux
      */
     public void definirGagnant() {
     	
