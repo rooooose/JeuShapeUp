@@ -10,90 +10,189 @@ import java.awt.Insets;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class VueTriangle extends JFrame {
 
+/**
+ * 
+ * Classe héritant de JFrame permettant d'obtenir une fenêtre contenant les éléments pour correspondre à un tapis de jeu triangle rectangle
+ * 
+ * @author Shir F, Mathéa Z
+ *
+ */
+public class VueTriangle extends JFrame {
+	/**
+	 * JButton modélisant la case 0x0 du tapis de jeu
+	 */
 	private JButton case0x0;
+	/**
+	 * JButton modélisant la case 1x0 du tapis de jeu
+	 */
 	private JButton case1x0;
+	/**
+	 * JButton modélisant la case 1x1 du tapis de jeu
+	 */
 	private JButton case1x1;
+	/**
+	 * JButton modélisant la case 2x0 du tapis de jeu
+	 */
 	private JButton case2x0;
+	/**
+	 * JButton modélisant la case 2x1 du tapis de jeu
+	 */
 	private JButton case2x1;
+	/**
+	 * JButton modélisant la case 2x2 du tapis de jeu
+	 */
 	private JButton case2x2;
+	/**
+	 * JButton modélisant la case 3x0 du tapis de jeu
+	 */
 	private JButton case3x0;
+	/**
+	 * JButton modélisant la case 3x1 du tapis de jeu
+	 */
 	private JButton case3x1;
+	/**
+	 * JButton modélisant la case 3x2 du tapis de jeu
+	 */
 	private JButton case3x2;
+	/**
+	 * JButton modélisant la case 3x3 du tapis de jeu
+	 */
 	private JButton case3x3;
+	/**
+	 * JButton modélisant la case 4x0 du tapis de jeu
+	 */
 	private JButton case4x0;
+	/**
+	 * JButton modélisant la case 4x1 du tapis de jeu
+	 */
 	private JButton case4x1;
+	/**
+	 * JButton modélisant la case 4x2 du tapis de jeu
+	 */
 	private JButton case4x2;
+	/**
+	 * JButton modélisant la case 4x3 du tapis de jeu
+	 */
 	private JButton case4x3;
+	/**
+	 * JButton modélisant la case 4x4 du tapis de jeu
+	 */
 	private JButton case4x4;
-	
+	/**
+	 * Permet de récupérer la case 0x0 de la vue du tapis de jeu.
+	 * @return JButton correspond à la case 0x0
+	 */
 	public JButton getCase0x0() {
 		return case0x0;
 	}
-
+	/**
+	 * Permet de récupérer la case 1x0 de la vue du tapis de jeu.
+	 * @return JButton correspond à la case 1x0
+	 */
 	public JButton getCase1x0() {
 		return case1x0;
 	}
-	
+	/**
+	 * Permet de récupérer la case 1x1 de la vue du tapis de jeu.
+	 * @return JButton correspond à la case 1x1
+	 */
 	public JButton getCase1x1() {
 		return case1x1;
 	}
-
+	/**
+	 * Permet de récupérer la case 2x0 de la vue du tapis de jeu.
+	 * @return JButton correspond à la case 2x0
+	 */
 	public JButton getCase2x0() {
 		return case2x0;
 	}
-
+	/**
+	 * Permet de récupérer la case 2x1 de la vue du tapis de jeu.
+	 * @return JButton correspond à la case 2x1
+	 */
 	public JButton getCase2x1() {
 		return case2x1;
 	}
-
+	/**
+	 * Permet de récupérer la case 2x2 de la vue du tapis de jeu.
+	 * @return JButton correspond à la case 2x2
+	 */
 	public JButton getCase2x2() {
 		return case2x2;
 	}
-
+	/**
+	 * Permet de récupérer la case 3x0 de la vue du tapis de jeu.
+	 * @return JButton correspond à la case 3x0
+	 */
 	public JButton getCase3x0() {
 		return case3x0;
 	}
-
+	/**
+	 * Permet de récupérer la case 3x1 de la vue du tapis de jeu.
+	 * @return JButton correspond à la case 3x1
+	 */
 	public JButton getCase3x1() {
 		return case3x1;
 	}
-
+	/**
+	 * Permet de récupérer la case 3x2 de la vue du tapis de jeu.
+	 * @return JButton correspond à la case 3x2
+	 */
 	public JButton getCase3x2() {
 		return case3x2;
 	}
-
+	/**
+	 * Permet de récupérer la case 3x3 de la vue du tapis de jeu.
+	 * @return JButton correspond à la case 3x3
+	 */
 	public JButton getCase3x3() {
 		return case3x3;
 	}
-	
+	/**
+	 * Permet de récupérer la case 4x0 de la vue du tapis de jeu.
+	 * @return JButton correspond à la case 4x0
+	 */
 	public JButton getCase4x0() {
 		return case4x0;
 	}
-
+	/**
+	 * Permet de récupérer la case 4x1 de la vue du tapis de jeu.
+	 * @return JButton correspond à la case 4x1
+	 */
 	public JButton getCase4x1() {
 		return case4x1;
 	}
-
+	/**
+	 * Permet de récupérer la case 4x2 de la vue du tapis de jeu.
+	 * @return JButton correspond à la case 4x2
+	 */
 	public JButton getCase4x2() {
 		return case4x2;
 	}
-
+	/**
+	 * Permet de récupérer la case 4x3 de la vue du tapis de jeu.
+	 * @return JButton correspond à la case 4x3
+	 */
 	public JButton getCase4x3() {
 		return case4x3;
 	}
-
+	/**
+	 * Permet de récupérer la case 4x4 de la vue du tapis de jeu.
+	 * @return JButton correspond à la case 4x4
+	 */
 	public JButton getCase4x4() {
 		return case4x4;
 	}
-	
+	/**
+	 * Constructeur de la VueTriangle
+	 */
 	public VueTriangle() {
 		initialize();
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Permet d'initialiser le contenu de la fenêtre qu'est la VueTriangle
 	 */
 	private void initialize() {
 		

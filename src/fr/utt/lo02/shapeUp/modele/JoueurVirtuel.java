@@ -3,15 +3,37 @@ package fr.utt.lo02.shapeUp.modele;
 import java.util.Random;
 
 import fr.utt.lo02.shapeUp.vue.Console;
-
+/**
+ * 
+ * Représente un joueur virtuel du jeu ShapeUp. Le joueur virtuel est basé sur des actions aléatoires qui respectent les règles du jeu.
+ * Tout comme un joueur réel, il peut être actif (ou non).
+ * Le joueur virtuel est une implémentation de l'interface StrategieJoueur et et il hérite de la classe Joueur.
+ * 
+ * @see {@link Joueur}, {@link StrategieJoueur}
+ * 
+ * @author Shir F, Mathéa Z
+ *
+ */
 public class JoueurVirtuel extends Joueur implements StrategieJoueur{
 
+	/**
+	 * Constructeur de la classe, appelle le constructeur de la classe mère Joueur.
+	 * 
+	 * @see {@link Joueur#Joueur(String)}
+	 * 
+	 * @param nom - nom du joueur virtuel
+	 */
 	public JoueurVirtuel(String nom) {
 		super(nom);
 		
 	}
     
-
+/**
+ * Permet au joueur virtuel de définir la carte qu'il va jouer de façon aléatoire dans les règles avancées.
+ *<br>
+ * Sinon, le joueur virtuel utilisera automatiquement la seule carte dans sa main.
+ * 
+ */
     public Carte definirCarteAJouer(Joueur joueur, StrategieMode modeDeJeu) {
 
     	Carte carteAJouer;
@@ -30,7 +52,7 @@ public class JoueurVirtuel extends Joueur implements StrategieJoueur{
 
     		carteAJouer = joueur.getMainDuJoueur().remove(randomIndex);
     		this.notifyObservers(joueur.getNom()+" a choisi la carte à jouer : " + carteAJouer);    		
-    		//System.out.println(joueur.getNom()+" a choisi la carte à jouer : " + carteAJouer);
+    		
     		return carteAJouer;
     	
     	}
@@ -40,7 +62,10 @@ public class JoueurVirtuel extends Joueur implements StrategieJoueur{
     	
     }
 
-
+/**
+ * Permet au joueur virtuel de choisir de façon aléatoire (mais cohérente avec le tapis de jeu) une ligne pour placer ou déplacer une carte.
+ * 
+ */
 	public int choisirLigneCarte(TapisDeJeu tapis) {
 		Random rand = new Random();
 		int nb;
@@ -49,7 +74,10 @@ public class JoueurVirtuel extends Joueur implements StrategieJoueur{
 	}
 
 
-
+/**
+ * Permet au joueur virtuel de choisir de façon aléatoire (mais cohérente avec le tapis de jeu) une colonne pour placer ou déplacer une carte.
+ * 
+ */
 	public int choisirColonneCarte(TapisDeJeu tapis) {
 		
 		Random rand = new Random();
@@ -58,12 +86,14 @@ public class JoueurVirtuel extends Joueur implements StrategieJoueur{
         return nb;
 	}
 
-
+/**
+ * Propose au joueur virtuel de déplacer une carte. <br>
+ * Le joueur pourra choisir de façon aléatoire si il souhaite déplacer une carte ou non.
+ */
 
 	public boolean proposerDeplacement(TapisDeJeu tapis, Partie partie) {
 
-//	   this.setLigCarteADepGUI(-1);
-//	   this.setLigCarteDepGUI(-1);
+
        Random rand = new Random();
        int choix;
 	   choix = rand.nextInt(2);
@@ -71,135 +101,13 @@ public class JoueurVirtuel extends Joueur implements StrategieJoueur{
        if(choix == 1) {
 
     	  this.notifyObservers("Le joueur souhaite déplacer une carte."); 
-          //System.out.println("Le joueur souhaite déplacer une carte");
+         
           this.deplacerCarte(tapis, partie);
           return true;
           
         } else return false;
 		
 	}
-	
-	
-//	public void placerCarte(int lig, int col, Carte carteAJouer, TapisDeJeu tapis) {
-//		
-//    	int ligneCase;
-//    	int colonneCase;
-//    	this.notifyObservers(tapis);    	
-//    	//System.out.println(tapis);
-//    	
-//    	if(tapis.getNbCartes()>0) {
-//    		this.notifyObservers("Les cartes doivent être adjacentes.");    		
-//    		//System.out.println("Les cartes doivent être adjacentes.");
-//    	}
-//    	
-//    	do {
-//    		ligneCase = this.choisirLigneCarte(tapis);
-//        	colonneCase = this.choisirColonneCarte(tapis);
-//        	
-//        	if(!tapis.placementNormalPossible(ligneCase,colonneCase)) {
-//        		this.notifyObservers("Désolée, cette case n'est pas disponible");        		
-//        		//System.out.print("Désolée, cette case n'est pas disponible" + "\n");
-//        	}
-//        	if(ligneCase == lig && colonneCase == col) {
-//        		this.notifyObservers("La carte était déjà placée ici" + "\n");        		
-//        		//System.out.print("La carte était déjà placée ici" + "\n");
-//        	}
-//        	
-//    	}while((!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase)) || (ligneCase == lig && colonneCase == col));
-//    	
-//    	if(!tapis.caseRemplie(ligneCase,colonneCase)) {
-//    			
-//    			tapis.getContainer().get(ligneCase).set(colonneCase, carteAJouer);
-//    			
-//    	} else if(tapis.caseRemplie(ligneCase,colonneCase) && tapis.decalagePossible(ligneCase, colonneCase)){
-//    		
-//    			this.notifyObservers("Décalage du tapis...");    		
-//    			//System.out.println("Décalage du tapis...");
-//    		    tapis.decalerCartes(ligneCase, colonneCase);
-//    		    tapis.getContainer().get(ligneCase).set(colonneCase, carteAJouer);
-//    	}
-//    	this.notifyObservers(tapis);
-//    	//System.out.println(tapis);
-//    	tapis.setNbCartes(tapis.getNbCartes()+1);
-//
-//    }
-//	
-//	
-//	public void placerCarte(Partie partie, TapisDeJeu tapis) {
-//		
-//    	int ligneCase;
-//    	int colonneCase;
-//    	Carte carteAJouer;
-//    	this.notifyObservers(tapis);    	
-//    	//System.out.println(tapis);
-//    	
-//    	if(tapis.getNbCartes()>0) {
-//    		this.notifyObservers("Les cartes doivent être adjacentes.");    		
-//    		//System.out.println("Les cartes doivent être adjacentes.");
-//    	}
-//    	this.notifyObservers("Carte(s) en main : " + this.getMainDuJoueur());    	
-//    	//System.out.println("Carte(s) en main : " + this.getMainDuJoueur());
-//		carteAJouer = this.definirCarteAJouer(this, partie.getModeDeJeu());
-//		partie.getModeDeJeu().voirCarteVictoire(partie, this);
-//    	
-//    	do {
-//    		ligneCase = this.choisirLigneCarte(tapis);
-//        	colonneCase = this.choisirColonneCarte(tapis);
-//        	
-//        	if(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase)) {
-//        		this.notifyObservers("Désolée, cette case n'est pas disponible");          		
-//        		//System.out.print("Désolée, cette case n'est pas disponible" + "\n");
-//        	}
-//        	
-//    	}while(!tapis.placementNormalPossible(ligneCase,colonneCase) && !tapis.decalagePossible(ligneCase, colonneCase));
-//
-//    	if(!tapis.caseRemplie(ligneCase,colonneCase)) {
-//    			
-//    		tapis.getContainer().get(ligneCase).set(colonneCase, carteAJouer);
-//    			
-//    	} else if(tapis.caseRemplie(ligneCase,colonneCase) && tapis.decalagePossible(ligneCase, colonneCase)){
-//
-//    			this.notifyObservers("Décalage du tapis...");      		
-//    			//System.out.println("Décalage du tapis...");
-//    		    tapis.decalerCartes(ligneCase, colonneCase);
-//    		    tapis.getContainer().get(ligneCase).set(colonneCase, carteAJouer);
-//    	}
-//    	this.notifyObservers(tapis);   
-//    	//System.out.println(tapis);
-//    	tapis.setNbCartes(tapis.getNbCartes()+1);
-//
-//    }
-//	
-//	
-//	public void deplacerCarte(TapisDeJeu tapis) {
-//    	
-//    	int ligneCase;
-//    	int colonneCase;
-//    	this.notifyObservers(tapis);       	
-//    	//System.out.println(tapis);
-//    	this.notifyObservers("Veuillez choisir une carte à déplacer :");       	
-//    	//System.out.println("Veuillez choisir une carte à déplacer :");
-//    	
-//    	do {
-//    		ligneCase = this.choisirLigneCarte(tapis);
-//        	colonneCase = this.choisirColonneCarte(tapis);
-//        	
-//        	if(!tapis.caseRemplie(ligneCase,colonneCase)) {
-//        		this.notifyObservers("Désolée, cette case est vide");           		
-//        		//System.out.println("Désolée, cette case est vide");
-//        	}
-//    	}while(!tapis.caseRemplie(ligneCase,colonneCase));
-//    	
-//    	Carte carteADeplacer = tapis.getContainer().get(ligneCase).get(colonneCase);
-//    	tapis.setNbCartes(tapis.getNbCartes()-1);
-//    	tapis.getContainer().get(ligneCase).set(colonneCase, null);
-//    	
-//    	this.notifyObservers("Vous avez choisi de déplacer la carte " + carteADeplacer);   
-//    	//System.out.println("Vous avez choisi de déplacer la carte " + carteADeplacer);
-//    	
-//    	this.placerCarte(ligneCase, colonneCase, carteADeplacer, tapis);
-//
-//	}	
 	
 	
 	public String toString() {
