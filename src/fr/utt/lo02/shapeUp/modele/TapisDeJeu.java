@@ -11,10 +11,6 @@ import java.util.Map;
 public class TapisDeJeu extends Observable{
 	
     private int nbCartes;
-	private boolean decalVersBasPossible = false;
-	private boolean decalVersHautPossible = false;
-	private boolean decalVersDroitePossible = false;
-	private boolean decalVersGauchePossible = false;
 	
 	private boolean premiereLigneVide;
 	private boolean derniereLigneVide;
@@ -30,6 +26,10 @@ public class TapisDeJeu extends Observable{
 	private boolean carteEnBas;
 	private boolean carteGauche;
 	private boolean carteDroite;
+	
+	private ArrayList<ArrayList<Carte>> container;
+	private ArrayList<Carte> ligne;
+	private int[][] modele;
 
 	public int getNbCartes() {
 		return nbCartes;
@@ -38,36 +38,13 @@ public class TapisDeJeu extends Observable{
 		this.nbCartes = nbCartes;
 	}
 
-    //private FormeTapis forme; 
-
-	private ArrayList<ArrayList<Carte>> container;
-	ArrayList<Carte> ligne;
-    //private Map<Integer,Map<Integer,Carte>> container;
-
 	public void setContainer(ArrayList<ArrayList<Carte>> container) {
 		this.container = container;
 	}
 	public ArrayList<ArrayList<Carte>> getContainer() {
 		return container;
 	}
-	
-//	public Map<Integer, Map<Integer, Carte>> getContainer() {
-//		return container;
-//	}
-//	public void setContainer(Map<Integer, Map<Integer, Carte>> container) {
-//		this.container = container;
-//	}
 
-	private int[][] modele;
-
-    
-    /*public FormeTapis getForme() {
-		return forme;
-	}
-
-	public void setForme(FormeTapis forme) {
-		this.forme = forme;
-	}*/
 	
 	public int[][] getModele() {
 		return modele;
@@ -78,27 +55,20 @@ public class TapisDeJeu extends Observable{
 		
 		setNbCartes(0);
 		this.modele= modeleForme;
-		//boolean debutForme = false;
+
 		
 	    this.setContainer(new ArrayList<ArrayList<Carte>>());
 	    for(int i=0; i<this.modele.length; i++) {
 	    	
 	    	ligne = new ArrayList<Carte>();
-	    	//Map<Integer,Carte> ligne = new HashMap<Integer,Carte>();
+
 			this.getContainer().add(ligne);
 			
 			for(int j=0; j<this.modele[i].length; j++) {
-				//carteVide = new Carte();
-				// VOIR POUR LONGUEUR DE LA LISTE
-		    	//if(this.modele[i][j]==1 || !debutForme) {
 		    		this.getContainer().get(i).add(null);
 
-//				}
 			}
 		}
-	    //setNbLignesVides(this.getContainer().size());
-	    
-		//this.setForme(forme);
 	}
 	
 	public boolean placementNormalPossible(int lig, int col) {
@@ -113,7 +83,6 @@ public class TapisDeJeu extends Observable{
     }
 	
 	public boolean adjacenceRespectee(int lig, int col) {
-		//regle d'adjacence + déplacement possible des autres cartes + 1ere carte au milieu
 		
 		//déclaration + initialisation des variables de condition
 		boolean caseDessusRemplie = false;
@@ -150,11 +119,6 @@ public class TapisDeJeu extends Observable{
 	}
 	
 	public boolean decalagePossible(int lig, int col) {
-		
-//		carteEnHaut = (lig == 0) || (this.modele[lig-1][col]==0);
-//		carteEnBas = (lig == this.getContainer().size()-1) || (this.modele[lig+1][col]==0);
-//		carteGauche = (col == 0) || (this.modele[lig][col-1]==0);
-//		carteDroite = (col == this.getContainer().get(lig).size()-1) || (this.modele[lig][col+1]==0);
 		
 		carteEnHaut = (lig == 0);
 		carteEnBas = (lig == this.getContainer().size()-1);
@@ -212,48 +176,6 @@ public class TapisDeJeu extends Observable{
 			}
 
 		}
-//		System.out.println("carteEnHaut & derniereLigneVide & carteVideSur0 & this.caseRemplie(lig, col)) " 
-//		+ (carteEnHaut && derniereLigneVide && carteVideSur0 && this.caseRemplie(lig, col)));
-//		
-//		System.out.println("carteEnHaut " 
-//				+ carteEnHaut);
-//		
-//		System.out.println("derniereLigneVide " 
-//				+ derniereLigneVide);
-//		
-//		System.out.println("carteVideSur0 " 
-//				+ carteVideSur0);
-//		
-//		
-//		System.out.println("(carteEnBas && premiereLigneVide && carteVideSous0 && this.caseRemplie(lig, col)) " 
-//				+ (carteEnBas && premiereLigneVide && carteVideSous0 && this.caseRemplie(lig, col)));
-//		
-//		System.out.println("(carteGauche && derniereColVide && carteVideGauche0 && this.caseRemplie(lig, col)) " 
-//				+ (carteGauche && derniereColVide && carteVideGauche0 && this.caseRemplie(lig, col)));
-//		
-//		System.out.println("(carteDroite && premiereColVide && carteVideDroite0 && this.caseRemplie(lig, col)) " 
-//				+ (carteDroite && premiereColVide && carteVideDroite0 && this.caseRemplie(lig, col)));
-		
-//		if(carteEnHaut && derniereLigneVide && carteVideSur0 && this.caseRemplie(lig, col)) {
-//			System.out.println("decalVersBasPossible" + decalVersBasPossible);
-//			decalVersBasPossible2 = true;
-//			
-//		}
-//		
-//		if(carteEnBas && premiereLigneVide && carteVideSous0 && this.caseRemplie(lig, col)) {
-//			System.out.println("decalVersHautPossible" + decalVersHautPossible);
-//			decalVersHautPossible = true;
-//		}
-//		
-//		if(carteGauche && derniereColVide && carteVideGauche0 && this.caseRemplie(lig, col)){
-//			System.out.println("decalVersDroitePossible" + decalVersDroitePossible);
-//			decalVersDroitePossible = true;
-//		}
-//		
-//		if(carteDroite && premiereColVide && carteVideDroite0 && this.caseRemplie(lig, col)) {
-//			System.out.println("decalVersGauchePossible" + decalVersGauchePossible);
-//			decalVersGauchePossible = true;
-//		}
 		
 		return (carteEnHaut && derniereLigneVide && carteVideSur0 && this.caseRemplie(lig, col)) || 
 				(carteEnBas && premiereLigneVide && carteVideSous0 && this.caseRemplie(lig, col)) || 
