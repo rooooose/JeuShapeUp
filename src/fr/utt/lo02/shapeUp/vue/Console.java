@@ -74,6 +74,7 @@ public class Console implements Observer, Runnable {
 	/**
 	 * Représente le nombre de fois que la méthode definirNomJoueur(int nb) a été appelée. Elle permet de ne pas créer une 2ème fois le joueur dans l'interface graphique.
 	 * En effet le notifyObserver actionne le bouton de validation de la création du joueur, et appelle donc le controleur qui crée le joueur.
+	 * Il peut etre égal à 0, 1, 2 ou 3, selon le nombre de joueurs de la partie
 	 * @see {@link VueShapeUp}, {@link ControleurShapeUp}, {@link #definirNomJoueur(int)}
 	 */
 	private int cptAppelsNom = 0;
