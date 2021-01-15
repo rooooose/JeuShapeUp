@@ -22,7 +22,8 @@ public class ShapeUp extends Observable {
 		/**
 		 * Permet de récupérer le type des joueurs de la partie 
 		 * @return un LinkedList contenant les types des joueurs 'r' pour un joueur réel et 'v' pour un joueur virtuel
-		 * @see JoueurReel, JoueurVirtuel
+		 * @see JoueurReel 
+		 * @see JoueurVirtuel
 		 */
 		public LinkedList<String> getTypes() {
 			return types;
@@ -188,7 +189,8 @@ public class ShapeUp extends Observable {
 	     * @param ty 'r' pour un joueur réel ou 'v' pour un joueur virtuel
 	     * @param nm nom du joueur
 	     * 
-	     * @see JoueurReel, JoueurVirtuel
+	     * @see JoueurReel
+	     * @see JoueurVirtuel
 	     */
 	    public void creerJoueur(String ty, String nm) {
 	    	

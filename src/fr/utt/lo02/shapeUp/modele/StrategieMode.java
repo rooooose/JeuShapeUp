@@ -4,7 +4,10 @@ import java.util.List;
 /**
  * L'interface StrategieMode permet de déclarer les méthodes qui seront utilisées pour définir les différents modes de jeu d'une partie.
  * @author Shir F, Mathéa Z
- * @see   StrategieDeBase, StrategieVictoireEnnemie, StrategieAvance, Partie
+ * @see StrategieDeBase 
+ * @see StrategieVictoireEnnemie
+ * @see StrategieAvance
+ * @see Partie
  * */
 
 
@@ -33,7 +36,8 @@ public interface StrategieMode {
 /**
  * Cette méthode est appelée et permet de finir la partie pour pouvoir calculer le score et définir un gagnant (par appels de méthode de la partie).    
  * @param maPartie la partie de jeu actuelle
- * @see Partie#calculerScoreTotal(Joueur), Partie#definirGagnant()
+ * @see Partie#calculerScoreTotal(Joueur)
+ * @see Partie#definirGagnant()
  */
     public void finirLaPartie (Partie maPartie);
 
