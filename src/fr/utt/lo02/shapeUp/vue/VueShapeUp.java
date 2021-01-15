@@ -35,7 +35,7 @@ import fr.utt.lo02.shapeUp.modele.TapisDeJeu;
 import fr.utt.lo02.shapeUp.modele.TapisRectangle;
 import fr.utt.lo02.shapeUp.modele.TapisTriangleRectangle;
 /**
- * Cette classe permet de chosiir les paramètres de ShapeUp via une interface graphique. C'est une vue graphique de ShapeUp.
+ * Cette classe permet de choisir les paramètres de ShapeUp via une interface graphique. C'est une vue graphique de ShapeUp.
  * 
  * @see ShapeUp
  * @author Shir F, Mathéa Z
