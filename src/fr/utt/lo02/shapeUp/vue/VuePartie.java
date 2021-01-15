@@ -36,128 +36,242 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JLabel;
-
+/**
+ * Cette classe permet de jouer au jeu de ShapeUp via une interface graphique. <br>
+ * C'est une vue graphique de la partie et des différents tour de jeu.
+ * 
+ * @see Partie
+ * @author Shir F, Mathéa Z
+ *
+ */
 public class VuePartie implements Observer{
 
+	/**
+	 * Partie dont cette classe est la vue graphique
+	 */
 	private Partie partie;
 	
+	/**
+	 * Fenêtre correspondant à l'affichage des cartes du joueur et du déroulé du jeu
+	 */
 	private JFrame frame;
+	/**
+	 * Fenêtre correspondant à l'affichage du tapis de jeu
+	 */
 	private JFrame tapisDeJeu;
 
+	/**
+	 * Ensemble des éléments graphiques nécessaire pour l'affichage des cartes du joueur et du déroulé du jeu
+	 */
 	private JPanel panel;
 	
+	/**
+	 * Bouton utilisé pour la représentation de la première carte dans la main du joueur
+	 */
 	private JButton carte0;
+	/**
+	 * Bouton utilisé pour la représentation de la deuxième carte dans la main du joueur (utilisé seulement en règles avancées)
+	 * 
+	 * @see StrategieAvance
+	 */
 	private JButton carte1;
+	/**
+	 * Bouton utilisé pour la représentation de la troisième carte dans la main du joueur (utilisé seulement en règles avancées)
+	 * 
+	 * @see StrategieAvance
+	 */
 	private JButton carte2;
 	
+	/**
+	 * Bouton utilisé pour la représentation de la carte de victoire du joueur ou, en règles "victoire ennemie", la première carte de victoire ennemie
+	 * 
+	 * @see StrategieMode
+	 */
 	private JButton carteDeVict;
+	/**
+	 * Bouton utilisé en règles "victoire ennemie" pour la représentation de la seconde carte de victoire ennemie (lorsqu'il y a 3 joueurs)
+	 * 
+	 * @see StrategieVictoireEnnemie
+	 */
 	private JButton carteDeVict2;
 	
+	/**
+	 * Zone de texte pour connaître le déroulé du jeu
+	 */
 	private JLabel tourDeJeu;
+	/**
+	 * Zone de texte lié à la carte de victoire du joueur (ou la première carte de victoire ennemie)
+	 */
 	private JLabel carteVict;
+	/**
+	 * Zone de texte lié à la seconde carte de victoire ennemie (lorsqu'il y a 3 joueurs en règles "victoire ennemie")
+	 */
 	private JLabel carteVict2;
+	/**
+	 * Zone de texte pour l'affichage du nom du joueur actif
+	 */
 	private JLabel tourDe;
+	/**
+	 * Collection contenant les joueurs
+	 */
 	private Queue<Joueur> joueurs = new LinkedList<Joueur>();
+	/**
+	 * Tapis de jeu de la partie
+	 */
 	private TapisDeJeu tapis;
 	
+	/**
+	 * Permet de récupérer la vue du tapis de jeu de la partie
+	 * @return JFrame correspondant à la vue du tapis de jeu
+	 */
 	public JFrame getTapisDeJeu() {
 		return tapisDeJeu;
 	}
 	
+	/**
+	 * Permet de récupérer la partie observée par la vue
+	 * @return Partie observée par la vue
+	 */
 	public Partie getPartie() {
 		return partie;
 	}
 
+	/**
+	 * Permet de définir la partie observée par la vue
+	 * @param partie
+	 */
 	public void setPartie(Partie partie) {
 		this.partie = partie;
 	}
 
+	/**
+	 * Permet de récupérer la fenêtre pour la gestion du déroulé du jeu
+	 * @return JFrame correspondant à la gestion du déroulé du jeu
+	 */
 	public JFrame getFrame() {
 		return frame;
 	}
 
+	/**
+	 * Permet de définir la fenêtre pour la gestion du déroulé du jeu
+	 * @param frame
+	 */
 	public void setFrame(JFrame frame) {
 		this.frame = frame;
 	}
 
-	
+	/**
+	 * Permet dé récupérer le bouton utilisé pour la représentation de la carte de victoire du joueur actif ou, en règles "victoire ennemie", la première carte de victoire ennemie
+	 * @return JButton correspondant à la carte de victoire 
+	 */
 	public JButton getCarteDeVict() {
 		return carteDeVict;
 	}
 
+	/**
+	 * Permet dé définir le bouton utilisé pour la représentation de la carte de victoire du joueur actif ou, en règles "victoire ennemie", la première carte de victoire ennemie
+	 * @param carteDeVict
+	 */
 	public void setCarteDeVict(JButton carteDeVict) {
 		this.carteDeVict = carteDeVict;
 	}
-
+	
+	/**
+	 * Permet de récupérer la zone de texte correspondant aux informations sur la carte de victoire
+	 * @return Zone de texte pour l'affichage des informations sur la carte de victoire
+	 */
 	public JLabel getCarteVict() {
 		return carteVict;
 	}
 
+	/**
+	 * Permet de définir la zone de texte correspondant aux informations sur la carte de victoire
+	 * @param carteVict
+	 */
 	public void setCarteVict(JLabel carteVict) {
 		this.carteVict = carteVict;
 	}
 	
+	/**
+	 * Permet de récupérer l'ensemble des éléments graphiques liés au déroulé de la partie
+	 * @return JPanel correspondant à l'ensemble des éléments graphiques liés au déroulé de la partie
+	 */
 	public JPanel getPanel() {
 		return panel;
 	}
 
+	/**
+	 * Permet de définir l'ensemble des éléments graphiques liés au déroulé de la partie
+	 * @param panel
+	 */
 	public void setPanel(JPanel panel) {
 		this.panel = panel;
 	}
 
-
+	/**
+	 * Permet de récupérer le bouton représentant la première carte dans la main du joueur 
+	 * @return JButton utilisé pour la représentation de la première carte dans la main du joueur
+	 */
 	public JButton getCarte0() {
 		return carte0;
 	}
 
+	/**
+	 * Permet de définir le bouton représentant la première carte dans la main du joueur
+	 * @param carte0
+	 */
 	public void setCarte0(JButton carte0) {
 		this.carte0 = carte0;
 	}
 
+	/**
+	 * Permet de récupérer le bouton représentant la deuxième carte dans la main du joueur (utilisé seulement en règles avancées)
+	 * @return JButton utilisé pour la représentation de la deuxième carte dans la main du joueur
+	 */
 	public JButton getCarte1() {
 		return carte1;
 	}
-
+	/**
+	 * Permet de définir le bouton représentant la deuxième carte dans la main du joueur (utilisé seulement en règles avancées)
+	 * @param carte1
+	 */
 	public void setCarte1(JButton carte1) {
 		this.carte1 = carte1;
 	}
-
+	/**
+	 * Permet de récupérer le bouton représentant la troisème carte dans la main du joueur (utilisé seulement en règles avancées)
+	 * @return JButton utilisé pour la représentation de la troisème carte dans la main du joueur
+	 */
 	public JButton getCarte2() {
 		return carte2;
 	}
-
+	/**
+	 * Permet de définir le bouton représentant la troisième carte dans la main du joueur (utilisé seulement en règles avancées)
+	 * @param carte2
+	 */
 	public void setCarte2(JButton carte2) {
 		this.carte2 = carte2;
 	}
 
+	/**
+	 * Permet de récupérer la zone de texte pour l'affichage du déroulé du jeu
+	 * @return JLabel pour l'affichage du déroulé du jeu
+	 */
 	public JLabel getTourDeJeu() {
 		return tourDeJeu;
 	}
-
+	/**
+	 * Permet de définir la zone de texte pour l'affichage du déroulé du jeu
+	 * @param tourDeJeu
+	 */
 	public void setTourDeJeu(JLabel tourDeJeu) {
 		this.tourDeJeu = tourDeJeu;
 	}
 
-
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					VuePartie window = new VuePartie();
-//					window.frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
-	 * Create the application.
-	 */
+/**
+ * Constructeur de la vue graphique de la partie de jeu
+ * @param p - Partie dont on souhaite avoir la vue graphique
+ */
 	public VuePartie(Partie p) {
 		
 		this.partie = p;
@@ -174,7 +288,7 @@ public class VuePartie implements Observer{
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Permet d'initialiser la fenêtre lié au déroulé de la partie
 	 */
 	private void initialize() {
 		
@@ -262,10 +376,13 @@ public class VuePartie implements Observer{
 			carteDeVict.setVisible(true);
 		}
 		frame.setVisible(true);
-		//frame.pack();
+		
 	}
 	
 	@Override
+	/**
+	 * Permet à la vue graphique de se mettre à jour en fonction du déroulé de la partie
+	 */
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		if(arg instanceof String) {
@@ -351,9 +468,9 @@ public class VuePartie implements Observer{
 					Carte c = tapis.getContainer().get(i).get(j);
 					
 					if(tapis.caseRemplie(i,j)) {
-						//if(this.tapisDeJeu.getContentPane().getComponent(i*tapis.getContainer().get(i).size()+j) instanceof AbstractButton) {
+						
 							((AbstractButton) this.tapisDeJeu.getContentPane().getComponent(i*tapis.getContainer().get(i).size()+j)).setIcon(new ImageIcon(VuePartie.class.getResource(string+c.getForme()+c.getCouleur()+c.EstRemplie()+".png")));
-						//}
+						
 						
 					} else {
 						
