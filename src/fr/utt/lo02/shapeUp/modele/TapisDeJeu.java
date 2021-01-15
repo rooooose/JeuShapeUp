@@ -8,59 +8,155 @@ import java.util.HashMap;
 import java.util.ListIterator;
 import java.util.Map;
 
+import fr.utt.lo02.shapeUp.vue.Console;
+
+/**
+ * 
+ * Représente le tapis de jeu de la partie. Les cartes peuvent être placées dessus sous diverses conditions.
+ * Il peut être de différentes formes, définies dans ses classes filles : TapisRectangle, TapisTriangleRectangle, TapisCercle
+ * Il hérite de Observable pour permettre la mise à jour des vues.
+ * 
+ * @see {@link VuePartie}, {@link Console}, {@link TapisRectangle}, {@link TapisTriangleRectangle}, {@link TapisCercle}
+ * 
+ * @author Mathéa Z, Shir F
+ */
 public class TapisDeJeu extends Observable{
 	
+	/**
+	 * Représente le nombre de cartes présentes sur le tapis - de 0 à 15
+	 */
     private int nbCartes;
 	
+    /**
+     * Modélise le fait que la 1ère ligne du tapis est vide
+     * @see {@link #decalagePossible(int, int)}
+     */
 	private boolean premiereLigneVide;
+	
+	/**
+     * Modélise le fait que la dernière ligne du tapis est vide
+     * @see {@link #decalagePossible(int, int)}
+     */
 	private boolean derniereLigneVide;
+	
+	/**
+     * Modélise le fait que la 1ère colonne du tapis est vide
+     * @see {@link #decalagePossible(int, int)}
+     */
 	private boolean premiereColVide;
+	
+	/**
+     * Modélise le fait que la dernière colonne du tapis est vide
+     * @see {@link #decalagePossible(int, int)}
+     */
 	private boolean derniereColVide;
 	
+	/**
+     * Modélise le fait qu'1 case située au-dessus d'un 0 dans le tableau modèle du tapis est vide
+     * @see {@link #decalagePossible(int, int)}
+     */
 	private boolean carteVideSur0;
+	
+	/**
+     * Modélise le fait qu'1 case située en-dessous d'un 0 dans le tableau modèle du tapis est vide
+     * @see {@link #decalagePossible(int, int)}
+     */
 	private boolean carteVideSous0;
+	
+	/**
+     * Modélise le fait qu'1 case située à gauche d'un 0 dans le tableau modèle du tapis est vide
+     * @see {@link #decalagePossible(int, int)}
+     */
 	private boolean carteVideGauche0;
+	
+	/**
+     * Modélise le fait qu'1 case située à droite d'un 0 dans le tableau modèle du tapis est vide
+     * @see {@link #decalagePossible(int, int)}
+     */
 	private boolean carteVideDroite0;
 	
+	/**
+     * Modélise le fait que la carte souhaitant être placée est tout en haut du tapis (et non sous des cases 0)
+     * @see {@link #decalagePossible(int, int)}
+     */
 	private boolean carteEnHaut;
+	
+	/**
+     * Modélise le fait que la carte souhaitant être placée est tout en bas du tapis (et non au-dessus de cases 0)
+     * @see {@link #decalagePossible(int, int)}
+     */
 	private boolean carteEnBas;
+	
+	/**
+     * Modélise le fait que la carte souhaitant être placée est tout à gauche du tapis (et non à droite de cases 0)
+     * @see {@link #decalagePossible(int, int)}
+     */
 	private boolean carteGauche;
+	
+	/**
+     * Modélise le fait que la carte souhaitant être placée est tout à droite du tapis (et non à gauche de cases 0)
+     * @see {@link #decalagePossible(int, int)}
+     */
 	private boolean carteDroite;
 	
+	/**
+	 * Modélise la la liste 2D de cartes placées sur le tapis
+	 */
 	private ArrayList<ArrayList<Carte>> container;
-	private ArrayList<Carte> ligne;
+	
+	/**
+	 * Modélise le tableau d'entier définissant la forme du tapis. Ce modèle sera utilisé pour construire le container.
+	 * @see {@link TapisRectangle}, {@link TapisTriangleRectangle}, {@link TapisCercle}
+	 */
 	private int[][] modele;
 
+	/**
+	 * Getter du nombre de cartes du tapis
+	 * @return le nombre de cartes - entier
+	 */
 	public int getNbCartes() {
 		return nbCartes;
 	}
+	
+	/**
+	 * Setter du nombre de cartes du tapis
+	 * @param nbCartes
+	 */
 	public void setNbCartes(int nbCartes) {
 		this.nbCartes = nbCartes;
 	}
-
-	public void setContainer(ArrayList<ArrayList<Carte>> container) {
-		this.container = container;
-	}
+	
+	/**
+	 * Getter du container 2D de cartes du tapis de jeu
+	 * @return container
+	 */
 	public ArrayList<ArrayList<Carte>> getContainer() {
 		return container;
 	}
 
-	
+	/**
+	 * Getter du tableau modèle de la forme de tapis
+	 * @return le modèle
+	 */
 	public int[][] getModele() {
 		return modele;
 	}
 
-	
+	/**
+	 * Instancie le tapis de jeu en récupérant le modèle choisi par l'utilisateur, et en créant l'ArrayList d'ArrayLists dans laquelle on va placer les cartes, en suivant le modèle de la forme.
+	 * On ajoute un objet null à chaque case en attendant leur remplissage.
+	 * @param modeleForme
+	 */
 	TapisDeJeu(int[][] modeleForme) {
 		
 		setNbCartes(0);
 		this.modele= modeleForme;
 
 		
-	    this.setContainer(new ArrayList<ArrayList<Carte>>());
+	    this.container = new ArrayList<ArrayList<Carte>>();
 	    for(int i=0; i<this.modele.length; i++) {
 	    	
-	    	ligne = new ArrayList<Carte>();
+	    	ArrayList<Carte> ligne = new ArrayList<Carte>();
 
 			this.getContainer().add(ligne);
 			
@@ -71,6 +167,15 @@ public class TapisDeJeu extends Observable{
 		}
 	}
 	
+	/**
+	 * Définit lorsqu'un "placement normal" est possible : S'il n'y a encore aucune carte sur le tapis, il suffit qu'il y ait un 1 dans la case (lig;col) du tableau modele.
+	 * S'il y en plus que cela, la case doit être vide et l'adjacence doit être respectée
+	 * @param lig - la ligne à laquelle on tente de placer la carte
+	 * @param col - la colonne à laquelle on tente de placer la carte
+	 * @return true si le placement est possible
+	 * 
+	 * @see {@link #adjacenceRespectee(int, int)}, {@link #caseRemplie(int, int)}
+	 */
 	public boolean placementNormalPossible(int lig, int col) {
 		
 		if(getNbCartes()==0) {
@@ -82,6 +187,14 @@ public class TapisDeJeu extends Observable{
 
     }
 	
+	/**
+	 * Définit lorsque l'adjacence est respectée : 
+	 * Au moins une des cases entourant celle de coordonnées (lig;col) (haut, bas, gauche, droite) doit être remplie
+	 * @param lig - la ligne à laquelle on tente de placer la carte
+	 * @param col - la colonne à laquelle on tente de placer la carte
+	 * @return true si le placement est possible
+	 * 
+	 */
 	public boolean adjacenceRespectee(int lig, int col) {
 		
 		//déclaration + initialisation des variables de condition
@@ -114,10 +227,25 @@ public class TapisDeJeu extends Observable{
 		
     }
 	
+	/**
+	 * Définit lorsqu'une case est remplie : càd si elle n'est pas nulle
+	 * @param la ligne à laquelle on tente de placer la carte
+	 * @param col - la colonne à laquelle on tente de placer la carte
+	 * @return true si la case est remplie
+	 */
 	public boolean caseRemplie(int lig, int col) {
 		return this.getContainer().get(lig).get(col)!=null;
 	}
 	
+	/**
+	 * Définit lorsque le décalage du tapis est possible : 
+	 * la case de coordonnées (lig;col) doit être remplie et aux bornes du tapis (haut, bas, gauche, droite selon le sens de décalage).
+	 * Selon le sens de décalage également, la ligne ou la colonne opposée doit être vide. De plus, il ne faut pas qu'une carte soit poussée sur une case 0 lors du décalage.
+	 * Pour ce faire, l'ensemble du tableau modele est parcouru pour verifier si tous ces paramètres sont respectés.
+	 * @param lig - la ligne à laquelle on tente de placer la carte
+	 * @param col - la colonne à laquelle on tente de placer la carte
+	 * @return true si le décalage est possible
+	 */
 	public boolean decalagePossible(int lig, int col) {
 		
 		carteEnHaut = (lig == 0);
@@ -185,13 +313,20 @@ public class TapisDeJeu extends Observable{
 				
 	}
 	
+	/**
+	 * Décale les cartes du tapis pour en placer une à la case (lig;col).
+	 * Pour cela, selon le sens de décalage, on ajoute une nouvelle ligne ou nouvelle colonne là où l'on veut placer notre carte, on la remplie avec des objets null, et on supprime la ligne excédante
+	 * @param lig - la ligne à laquelle on tente de placer la carte
+	 * @param col - la colonne à laquelle on tente de placer la carte
+	 * @return true si le décalage est possible
+	 */
 	public void decalerCartes(int lig, int col) {
 		
 		int derniereLigne = this.getContainer().size();
 
 		if(carteEnBas && premiereLigneVide && carteVideSous0) {
 	        
-	        ligne = new ArrayList<Carte>();
+			ArrayList<Carte> ligne = new ArrayList<Carte>();
 			this.getContainer().add(ligne);
 			
 			//suppression de la ligne excédante
@@ -205,7 +340,7 @@ public class TapisDeJeu extends Observable{
 		} else if(carteEnHaut && derniereLigneVide && carteVideSur0){
 
 			//ajout d'une nouvelle ligne là où on veut ajouter une carte
-			ligne = new ArrayList<Carte>();
+			ArrayList<Carte> ligne = new ArrayList<Carte>();
 			this.getContainer().add(lig,ligne);
 			
 			//remplissage de la ligne avec null
@@ -236,6 +371,11 @@ public class TapisDeJeu extends Observable{
 		
 	}
 	
+	/**
+     * Redéfinition de la méthode toString(), qui présente le tapis visuellement avec des cases vides [ ] ou remplies [x]. 
+     * A coté la liste dynamique est représentée avec son contenu exact, une carte ou un objet null.
+     * @return le String Buffer converti en String
+     */
 	public String toString(){
 		StringBuffer sb = new StringBuffer();
 		

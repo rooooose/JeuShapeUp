@@ -88,7 +88,7 @@ public class JoueurReel extends Joueur implements StrategieJoueur{
      * @return la ligne choisie, un entier
      * @exception NullPointerException - Si le tapis est null
      * 
-     * Un buffered Reader lit le numéro de ligne entré, qui est directement converti en entier. Tant que la ligne n'est pas valide, on réitère la demande.
+     * Un buffered Reader lit le numéro de ligne entré (ou transmis par l'interface graphique), qui est directement converti en entier. Tant que la ligne n'est pas valide, on réitère la demande.
      * Une ligne est valide si elle est comprise entre -1 et le nombre de lignes du tapis.
      * Entrer l'une des 2 valeurs aux bornes de l'intervalle signifie que l'on veut décaler le tapis. 
      * Elles seront directement converties pour considérer que -1 = 0 et tapis.size() = tapis.size()-1

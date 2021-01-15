@@ -419,9 +419,11 @@ public abstract class Joueur extends Observable{
 	 * @see TapisDeJeu
 	 * @see Partie
 	 * 
-	 * Après avoir affiché l'état actuel du tapis, la carte à jouer est définie parmi celle(s) de la main du joueur, et affiche la carte de Victoire du joueur
+	 * Après avoir affiché l'état actuel du tapis, la carte à jouer est définie parmi celle(s) de la main du joueur (si un déplacement n'est pas en cours), et affiche la carte de Victoire du joueur. 
 	 * le programme demande au joueur de choisir une ligne et une colonne pour le déplacement de la carte, tant qu'il n'a pas entré de valeur valide.
+	 * Une colonne est demandée seulement si le déplacement ou placement d'une carte n'a pas été commencé dans le GUI.
 	 * Les coordonnées sont valides si un placement normal est possible ici (voir placementNormalPossible - TapisDeJeu) ou si un décalage est possible
+	 * Ce qui suit est fait uniquement si le placement ou déplacement d'une carte n'a pas deja été fait dans le GUI.
 	 * Si la case est vide, on place la carte à l'endroit voulu dans l'ArrayList du tapis, sinon on décale d'abord les cartes présentes
 	 * Pour finir, on affiche le résultat de l'emplacement et on incrémente le nombre de cartes du tapis.
 	 */
@@ -515,7 +517,7 @@ public abstract class Joueur extends Observable{
 	 * @see Partie
 	 * 
 	 * Une ligne et une colonne est demandée au joueur tant que la case de cet emplacement est vide (et que rien n'a été choisi dans l'interface).
-	 * On récupère alors la carte de cet emplacement, on décrémente le nombre de cartes du tapis, et on la remplace par null. Puis on appelle placerCarte().
+	 * Si aucune carte n'a été choisie dans l'interface, on récupère la carte de cet emplacement, on décrémente le nombre de cartes du tapis, et on la remplace par null. Puis on appelle placerCarte().
 	 * Si la carte à déplacer a été choisie dans l'interface, alors la carteADeplacer est la carteAJouer du joueur.
 	 */
 	public void deplacerCarte(TapisDeJeu tapis, Partie partie) {
