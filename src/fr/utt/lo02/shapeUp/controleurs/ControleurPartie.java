@@ -21,7 +21,8 @@ import fr.utt.lo02.shapeUp.vue.VueTriangle;
  * Ce contrôleur permet de faire le lien entre une Partie et ses différents Observer 
  * @author Shir F, Mathéa Z
  * 
- * @see Partie, VuePartie
+ * @see Partie
+ * @see VuePartie
  *
  */
 public class ControleurPartie {

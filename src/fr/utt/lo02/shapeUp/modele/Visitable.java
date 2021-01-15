@@ -6,7 +6,8 @@ package fr.utt.lo02.shapeUp.modele;
  * Dans notre cas, la partie est Visitable et sera visitée par trois visiteurs correspondants aux différents calculs de score.
  * 
  * @author Shir F, Mathéa Z
- * @see Partie, VisiteurScore
+ * @see Partie
+ * @see VisiteurScore
  */
 public interface Visitable {
 	/**

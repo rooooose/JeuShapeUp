@@ -26,7 +26,9 @@ import fr.utt.lo02.shapeUp.vue.VueShapeUp;
  * Ce contrôleur permet de faire le lien entre un objet ShapeUp et ses différents Observer (l'interface graphique et la console)
  * 
  * @author Shir F, Mathéa Z
- * @see ShapeUp, VueShapeUp, Console
+ * @see ShapeUp
+ * @see VueShapeUp
+ * @see Console
  */
 
 public class ControleurShapeUp {

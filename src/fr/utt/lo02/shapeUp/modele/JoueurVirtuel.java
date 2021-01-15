@@ -9,7 +9,8 @@ import fr.utt.lo02.shapeUp.vue.Console;
  * Tout comme un joueur réel, il peut être actif (ou non).
  * Le joueur virtuel est une implémentation de l'interface StrategieJoueur et et il hérite de la classe Joueur.
  * 
- * @see Joueur, StrategieJoueur
+ * @see Joueur
+ * @see StrategieJoueur
  * 
  * @author Shir F, Mathéa Z
  *
