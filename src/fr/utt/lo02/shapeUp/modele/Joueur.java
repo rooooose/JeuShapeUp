@@ -269,7 +269,10 @@ public abstract class Joueur extends Observable{
 	}
 
 	/**
-	 * Permet au joueur de jouer son tour de jeu. Le joueur passe alors à l'état en jeu
+	 * Permet au joueur de jouer son tour de jeu. Le joueur passe alors à l'état en jeu.
+	 * 
+	 * Cette méthode vérifie à quel mode de jeu appartient la partie, pour déterminer si le joueur doit piocher avant ou après avoir joué sa carte.
+	 * S'il y a au moins 2 cartes sur le tapis, on peut proposer un déplacement avant et/ou après le placement d'une carte, sinon on peut simplement placer une nouvelle carte.
 	 * @param partie - la partie en cours
 	 * @param tapis - au choix parmi les formes disponibles
 	 * @param pioche - la pioche de la partie
@@ -279,8 +282,7 @@ public abstract class Joueur extends Observable{
 	 * 
 	 * @see Partie, TapisDeJeu, Pioche, StrategieMode, StrategieAvancee, StrategieVictoireEnnemie, StrategieDeBase
 	 * 
-	 * Cette méthode vérifie à quel mode de jeu appartient la partie, pour déterminer si le joueur doit piocher avant ou après avoir joué sa carte.
-	 * S'il y a au moins 2 cartes sur le tapis, on peut proposer un déplacement avant et/ou après le placement d'une carte, sinon on peut simplement placer une nouvelle carte.
+	 * 
 	 */
 	public void jouer(Partie partie, TapisDeJeu tapis, Pioche pioche, StrategieMode modeDeJeu) {
 		
@@ -317,13 +319,15 @@ public abstract class Joueur extends Observable{
 	
 	/**
 	 * Permet au joueur de piocher une carte.
-	 * @param pioche - la pioche de la partie
-	 * @return la carte piochée. Un objet de type Carte parmi celles créées au début de la partie
-	 * @exception NullPointerException - Si la pioche est null
-	 * @see Pioche
 	 * 
 	 * Si aucune carte n'est disponible dans la pioche, un message est généré. 
 	 * Sinon on récupère la carte en haut de la pioche et on décrémente le nombre de cartes disponibles dans la pioche.
+	 * 
+	 * @param pioche - la pioche de la partie
+	 * @return la carte piochée. Un objet de type Carte parmi celles créées au début de la partie
+	 * @exception NullPointerException - Si la pioche est null
+	 * 
+	 * @see Pioche
 	 */
 	public Carte piocherCarte(Pioche pioche) {
     	
@@ -356,6 +360,12 @@ public abstract class Joueur extends Observable{
 	
 	/**
 	 * Place la carte à déplacer dans la console.
+	 * 
+	 * Après avoir affiché l'état actuel du tapis, le programme demande au joueur de choisir une ligne et une colonne pour le déplacement de la carte, tant qu'il n'a pas entré de valeur valide.
+	 * Les coordonnées sont valides si un placement normal est possible ici (voir placementNormalPossible - TapisDeJeu), si un décalage est possible, et si elles sont différentes de l'emplacement précédent de la carte.
+	 * Si la case est vide, on place la carte à l'endroit voulu dans l'ArrayList du tapis, sinon on décale d'abord les cartes présentes
+	 * Pour finir, on affiche le résultat de l'emplacement et on incrémente le nombre de cartes du tapis.
+	 * 
 	 * @param lig - la ligne à laquelle appartenait précédemment la carte à déplacer (0; nombre de lignes du tapis -1)
 	 * @param col - la colonne à laquelle appartenait précédemment la carte à déplacer (0; nombre de colonnes du tapis -1)
 	 * @param carteAJouer - la carte à déplacer. Si elle est null, un objet null sera placé sur le tapis.
@@ -363,13 +373,11 @@ public abstract class Joueur extends Observable{
 	 * 
 	 * @exception NullPointerException - Si le tapis est null
 	 * 
+	 * 
 	 * @see TapisDeJeu
 	 * @see Partie
 	 * 
-	 * Après avoir affiché l'état actuel du tapis, le programme demande au joueur de choisir une ligne et une colonne pour le déplacement de la carte, tant qu'il n'a pas entré de valeur valide.
-	 * Les coordonnées sont valides si un placement normal est possible ici (voir placementNormalPossible - TapisDeJeu), si un décalage est possible, et si elles sont différentes de l'emplacement précédent de la carte.
-	 * Si la case est vide, on place la carte à l'endroit voulu dans l'ArrayList du tapis, sinon on décale d'abord les cartes présentes
-	 * Pour finir, on affiche le résultat de l'emplacement et on incrémente le nombre de cartes du tapis.
+	 * 
 	 */
 	public void placerCarte(int lig, int col, Carte carteAJouer, TapisDeJeu tapis) {
 		
@@ -411,13 +419,6 @@ public abstract class Joueur extends Observable{
 	
 	/**
 	 * Place une nouvelle carte, ou la carte à déplacer si on joue dans le GUI.
-	 * @param partie
-	 * @param tapis - le tapis de jeu de la partie
-	 * 
-	 * @exception NullPointerException - Si tout ou partie des paramètres sont null
-	 * 
-	 * @see TapisDeJeu
-	 * @see Partie
 	 * 
 	 * Après avoir affiché l'état actuel du tapis, la carte à jouer est définie parmi celle(s) de la main du joueur (si un déplacement n'est pas en cours), et affiche la carte de Victoire du joueur. 
 	 * le programme demande au joueur de choisir une ligne et une colonne pour le déplacement de la carte, tant qu'il n'a pas entré de valeur valide.
@@ -426,6 +427,16 @@ public abstract class Joueur extends Observable{
 	 * Ce qui suit est fait uniquement si le placement ou déplacement d'une carte n'a pas deja été fait dans le GUI.
 	 * Si la case est vide, on place la carte à l'endroit voulu dans l'ArrayList du tapis, sinon on décale d'abord les cartes présentes
 	 * Pour finir, on affiche le résultat de l'emplacement et on incrémente le nombre de cartes du tapis.
+	 * 
+	 * @param partie
+	 * @param tapis - le tapis de jeu de la partie
+	 * 
+	 * @exception NullPointerException - Si tout ou partie des paramètres sont null
+
+	 * @see TapisDeJeu
+	 * @see Partie
+	 * 
+	 * 
 	 */
 	public void placerCarte(Partie partie, TapisDeJeu tapis) {
 		
@@ -475,7 +486,11 @@ public abstract class Joueur extends Observable{
     }
 	
 	/**
-	 * Place une carte dans l'interface graphique
+	 * Place une carte dans l'interface graphique.
+	 * 
+	 * Si la case est vide, on place la carte à l'endroit voulu dans l'ArrayList du tapis, sinon on décale d'abord les cartes présentes
+	 * Pour finir, on affiche le résultat de l'emplacement et on incrémente le nombre de cartes du tapis.
+	 * 
 	 * @param ligneCase la ligne de destination de la carte (0; nombre de lignes du tapis -1)
 	 * @param colonneCase la colonne de destination de la carte (0; nombre de colonnes du tapis -1)
 	 * @param tapis
@@ -486,8 +501,7 @@ public abstract class Joueur extends Observable{
 	 * @see Partie
 	 * @exception NullPointerException - si le tapis est null
 	 * 
-	 * Si la case est vide, on place la carte à l'endroit voulu dans l'ArrayList du tapis, sinon on décale d'abord les cartes présentes
-	 * Pour finir, on affiche le résultat de l'emplacement et on incrémente le nombre de cartes du tapis.
+	 * 
 	 */
 	public void placerCarteGUI(int ligneCase, int colonneCase, TapisDeJeu tapis, Carte carteAJouer) {  	
     	
@@ -507,7 +521,12 @@ public abstract class Joueur extends Observable{
     }
 	
 	/**
-	 * Permet de choisir une carte à déplacer dans la console
+	 * Permet de choisir une carte à déplacer dans la console.
+	 * 
+	 * Une ligne et une colonne est demandée au joueur tant que la case de cet emplacement est vide (et que rien n'a été choisi dans l'interface).
+	 * Si aucune carte n'a été choisie dans l'interface, on récupère la carte de cet emplacement, on décrémente le nombre de cartes du tapis, et on la remplace par null. Puis on appelle placerCarte().
+	 * Si la carte à déplacer a été choisie dans l'interface, alors la carteADeplacer est la carteAJouer du joueur.
+	 * 
 	 * @param partie
 	 * @param tapis - le tapis de jeu de la partie
 	 * 
@@ -516,9 +535,7 @@ public abstract class Joueur extends Observable{
 	 * @see TapisDeJeu
 	 * @see Partie
 	 * 
-	 * Une ligne et une colonne est demandée au joueur tant que la case de cet emplacement est vide (et que rien n'a été choisi dans l'interface).
-	 * Si aucune carte n'a été choisie dans l'interface, on récupère la carte de cet emplacement, on décrémente le nombre de cartes du tapis, et on la remplace par null. Puis on appelle placerCarte().
-	 * Si la carte à déplacer a été choisie dans l'interface, alors la carteADeplacer est la carteAJouer du joueur.
+	 * 
 	 */
 	public void deplacerCarte(TapisDeJeu tapis, Partie partie) {
     	
@@ -564,7 +581,9 @@ public abstract class Joueur extends Observable{
 
 	
 	/**
-	 * Permet de choisir une carte à déplacer dans l'interface graphique
+	 * Permet de choisir une carte à déplacer dans l'interface graphique.
+	 * On récupère alors la carte du tapis à l'emplacement ligneCase-colonneCase, on décrémente le nombre de cartes du tapis, et on la remplace par null. Puis on appelle placerCarte().
+	 * On affiche le tapis et un message après en avoir retiré la carte
 	 * 
 	 * @param ligneCase - la ligne de la carte à déplacer (0; nombre de lignes du tapis -1)
 	 * @param colonneCase - la colonne de la carte à déplacer (0; nombre de colonnes du tapis -1) 
@@ -575,8 +594,7 @@ public abstract class Joueur extends Observable{
 	 * @see TapisDeJeu
 	 * @see ControleurPartie 
 	 * 
-	 * On récupère alors la carte du tapis à l'emplacement ligneCase-colonneCase, on décrémente le nombre de cartes du tapis, et on la remplace par null. Puis on appelle placerCarte().
-	 * On affiche le tapis et un message après en avoir retiré la carte
+	 * 
 	 */
 	public void deplacerCarteGUI(int ligneCase, int colonneCase, TapisDeJeu tapis) {
     	
