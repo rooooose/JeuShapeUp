@@ -29,14 +29,17 @@ public class JoueurReel extends Joueur implements StrategieJoueur{
 
     /**
      * Permet au joueur de définir sa carte à placer, dans sa main.
+     * 
+     * Si le mode de jeu est le mode avancé, le joueur va choisir manuellement sa carte entre 0 1 et 2, qui sera retirée de sa main.
+     * Sinon, on prend la seule carte disponible dans la main, à l'index 0.
+     * 
      * @param joueur - lui-même
      * @param modeDeJeu - le mode de la partie en cours (Victoire Ennemie, Avancé, Base)
      * @return la carte choisie pour être placée - Parmi celles présentes dans la main du joueur
      * 
      * @exception NullPointerException - Si tout ou partie des paramètres sont null
      * 
-     * Si le mode de jeu est le mode avancé, le joueur va choisir manuellement sa carte entre 0 1 et 2, qui sera retirée de sa main.
-     * Sinon, on prend la seule carte disponible dans la main, à l'index 0.
+     * 
      */
     public Carte definirCarteAJouer(Joueur joueur, StrategieMode modeDeJeu) {
     	
@@ -84,14 +87,15 @@ public class JoueurReel extends Joueur implements StrategieJoueur{
 
     /**
      * Permet au joueur de choisir une ligne de destination pour une carte à placer ou déplacer, ou une ligne pour récupérer une carte du tapis.
-     * @param tapis
-     * @return la ligne choisie, un entier
-     * @exception NullPointerException - Si le tapis est null
-     * 
      * Un buffered Reader lit le numéro de ligne entré (ou transmis par l'interface graphique), qui est directement converti en entier. Tant que la ligne n'est pas valide, on réitère la demande.
      * Une ligne est valide si elle est comprise entre -1 et le nombre de lignes du tapis.
      * Entrer l'une des 2 valeurs aux bornes de l'intervalle signifie que l'on veut décaler le tapis. 
      * Elles seront directement converties pour considérer que -1 = 0 et tapis.size() = tapis.size()-1
+     * 
+     * @param tapis
+     * @return la ligne choisie, un entier
+     * @exception NullPointerException - Si le tapis est null
+     * 
      */
 	public int choisirLigneCarte(TapisDeJeu tapis) {
 		
@@ -136,14 +140,15 @@ public class JoueurReel extends Joueur implements StrategieJoueur{
 
 	/**
      * Permet au joueur de choisir une colonne de destination pour une carte à placer ou déplacer, ou une colonne pour récupérer une carte du tapis.
-     * @param tapis
-     * @return la colonne choisie, un entier
-     * @exception NullPointerException - Si le tapis est null
-     * 
      * Un buffered Reader lit le numéro de colonne entré, qui est directement converti en entier. Tant que la colonne n'est pas valide, on réitère la demande.
      * Une colonne est valide si elle est comprise entre -1 et le nombre de colonnes du tapis.
      * Entrer l'une des 2 valeurs aux bornes de l'intervalle signifie que l'on veut décaler le tapis. 
      * Elles seront directement converties pour considérer que -1 = 0 et tapis.getContainer().get(0).size() = tapis.getContainer().get(0).size()-1
+     * @param tapis
+     * @return la colonne choisie, un entier
+     * @exception NullPointerException - Si le tapis est null
+     * 
+     * 
      */
 	public int choisirColonneCarte(TapisDeJeu tapis) {
 		
@@ -167,14 +172,17 @@ public class JoueurReel extends Joueur implements StrategieJoueur{
 
 	/**
 	 * Propose au joueur de déplacer une carte.
+	 * 
+	 * On demande au joueur s'il souhaite déplacer une carte grâce à un scanner. Il doit entrer 'o' ou 'n'.
+	 * Si 'o', on appelle deplacerCarte() définie dans la classe mère.
+	 * 
 	 * @param tapis
 	 * @param partie
 	 * @return la réponse de l'utilisateur : true/false
 	 * 
 	 * @exception NullPointerException - Si tout ou partie des paramètres sont null
 	 * 
-	 * On demande au joueur s'il souhaite déplacer une carte grâce à un scanner. Il doit entrer 'o' ou 'n'.
-	 * Si 'o', on appelle deplacerCarte() définie dans la classe mère.
+	 * 
 	 */
 	public boolean proposerDeplacement(TapisDeJeu tapis, Partie partie) {
 		

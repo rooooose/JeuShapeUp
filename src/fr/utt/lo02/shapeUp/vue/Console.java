@@ -30,7 +30,8 @@ import fr.utt.lo02.shapeUp.modele.TapisTriangleRectangle;
  * Modélise la console avec laquelle un joueur réel peut interagir pour passer et recevoir des informations du jeu.
  * Il possède un Thread qui lui est propre pour permettre la concurrence avec l'interface graphique, elle implémente donc Runnable.
  * Elle implémente aussi Observer pour observer les classes du modèle et se mettre à jour en conséquence.
- * @see {@link Observer}, {@link Runnable}
+ * @see Observer
+ * @see Runnable
  *
  * @author Mathéa Z, Shir F
  */
@@ -39,35 +40,35 @@ public class Console implements Observer, Runnable {
 	/**
 	 * Représente le jeu ShapeUp, qui lance une partie selon divers paramètres.
 	 * Si elle est null, l'exception NullPointerException sera générée dès son utilisation
-	 * @see {@link ShapeUp}
+	 * @see ShapeUp
 	 */
 	private ShapeUp jeuShapeUp;
 	
 	/**
 	 * Représente la partie lancée
 	 * Si elle est null, l'exception NullPointerException sera générée dès son utilisation
-	 * @see {@link Partie}
+	 * @see Partie
 	 */
 	private Partie partie;
 	
 	/**
 	 * Modélise la liste des joueurs de la partie. Elle peut en contenir 2 ou 3.
 	 * Si elle est null, l'exception NullPointerException sera générée dès son utilisation
-	 * @see {@link Queue<E>}, {@link LinkedList<E>}
+	 * @see Queue<E>, LinkedList<E>
 	 */
 	private Queue<Joueur> joueurs = new LinkedList<Joueur>();
 	
 	/**
 	 * Représente un lecteur de flux d'entrée en mode caractères, permettant au joueur d'entrer des données dans la console.
 	 * S'il est null, l'exception NullPointerException sera générée dès son utilisation
-	 * @see {@link BufferedReader}
+	 * @see BufferedReader
 	 */
 	private BufferedReader br = new BufferedReader (new InputStreamReader(System.in));
 	
 	/**
 	 * Représente le thread associé à la console.
 	 * S'il est null, l'exception NullPointerException sera générée dès son utilisation
-	 * @see {@link Thread}
+	 * @see Thread
 	 */
 	private Thread t;
 	
@@ -75,7 +76,7 @@ public class Console implements Observer, Runnable {
 	 * Représente le nombre de fois que la méthode definirNomJoueur(int nb) a été appelée. Elle permet de ne pas créer une 2ème fois le joueur dans l'interface graphique.
 	 * En effet le notifyObserver actionne le bouton de validation de la création du joueur, et appelle donc le controleur qui crée le joueur.
 	 * Il peut etre égal à 0, 1, 2 ou 3, selon le nombre de joueurs de la partie
-	 * @see {@link VueShapeUp}, {@link ControleurShapeUp}, {@link #definirNomJoueur(int)}
+	 * @see VueShapeUp, ControleurShapeUp, definirNomJoueur(int)
 	 */
 	private int cptAppelsNom = 0;
 	
@@ -99,7 +100,7 @@ public class Console implements Observer, Runnable {
 	 * Instancie la console en lui associant le jeu ShapeUp et en l'ajoutant à la liste d'observers de ShapeUp.
 	 * Son thread est également crée et démarré.
 	 * @param s - le jeu ShapeUp
-	 * @see {@link ShapeUp}
+	 * @see ShapeUp
 	 */
 	public Console(ShapeUp s) {
 		this.jeuShapeUp = s;
@@ -111,11 +112,12 @@ public class Console implements Observer, Runnable {
 
 	/**
 	 * Met à jour la console par rapport aux modifications faites dans le modèle, pour correspondre au patron de conception Observer.
+	 * Tous les affichages de la console se font ici.
+	 * Dès que la partie est créée, elle est associée à la console.
 	 * @param o - l'objet observé par la console
 	 * @param arg - l'objet modifié pour lequel on souhaite mettre à jour la vue.
 	 * 
-	 * Tous les affichages de la console se font ici.
-	 * Dès que la partie est créée, elle est associée à la console.
+	 * .
 	 */
 	public void update(Observable o, Object arg) {
 		
@@ -131,11 +133,15 @@ public class Console implements Observer, Runnable {
 	
 	/**
 	 * Permet à l'utilisateur de choisir le nombre de joueurs de la partie.
-	 * @return le nombre de joueurs - 2 ou 3
-	 * 
 	 * Le programme enregistre la valeur entrée par l'utilisateur dans l'attribut nbDeJoueurs de ShapeUp, grâce à la classe BufferedReader, si elle est valide. La valeur peut également être enregistrée si elle a été choisie depuis l'interface.
 	 * En effet dans ce cas, la valeur aura déja été ajoutée à nbDeJoueurs.
-	 * @see {@link ShapeUp#nbDeJoueurs}, {@link ControleurShapeUp}
+	 * 
+	 * @see nbDeJoueurs
+	 * @see ControleurShapeUp
+	 * 
+	 * @return le nombre de joueurs - 2 ou 3
+	 * 
+	 * 
 	 */
 	public int choisirNbJoueurs() {
 		
@@ -172,12 +178,13 @@ public class Console implements Observer, Runnable {
 	
 	/**
 	 * Permet à l'utilisateur de choisir le type du joueur nb de la partie.
+	 * Le programme enregistre la valeur entrée par l'utilisateur dans le tableau types de ShapeUp, grâce à la classe BufferedReader, si elle est valide. La valeur peut également être enregistrée si elle a été choisie depuis l'interface.
+	 * En effet dans ce cas, la valeur aura déja été ajoutée au tableau types.
 	 * @param nb - le numéro du joueur - 1, 2, ou 3
 	 * @return le type du joueur - "v" pour réel ou "r" pour virtuel, qui sera utilisé pour créer les joueurs dans la classe ShapeUp
 	 * 
-	 * Le programme enregistre la valeur entrée par l'utilisateur dans le tableau types de ShapeUp, grâce à la classe BufferedReader, si elle est valide. La valeur peut également être enregistrée si elle a été choisie depuis l'interface.
-	 * En effet dans ce cas, la valeur aura déja été ajoutée au tableau types.
-	 * @see {@link ShapeUp#creerJoueur(String,String)}, {@link ControleurShapeUp}
+	 * @see creerJoueur(String,String)
+	 * @see ControleurShapeUp
 	 * 
 	 */
 	public String definirTypeJoueur(int nb) {
@@ -218,12 +225,15 @@ public class Console implements Observer, Runnable {
 	
 	/**
 	 * Permet à l'utilisateur de choisir le nom du joueur nb de la partie.
+	 * Le programme enregistre la valeur entrée par l'utilisateur dans le tableau nomsJoueurs de ShapeUp, grâce à la classe BufferedReader.
+	 * La valeur peut également être enregistrée si elle a été choisie depuis l'interface. En effet dans ce cas, la valeur aura déja été ajoutée au tableau nomsJoueurs.
 	 * @param nb - le numéro du joueur - 1, 2, ou 3
 	 * @return le nom du joueur qui sera utilisé pour créer le joueur dans la classe ShapeUp
 	 * 
-	 * Le programme enregistre la valeur entrée par l'utilisateur dans le tableau nomsJoueurs de ShapeUp, grâce à la classe BufferedReader.
-	 * La valeur peut également être enregistrée si elle a été choisie depuis l'interface. En effet dans ce cas, la valeur aura déja été ajoutée au tableau nomsJoueurs.
-	 * @see {@link ShapeUp#creerJoueur(String,String)}, {@link ShapeUp#nomsJoueurs} {@link ControleurShapeUp}
+	 * 
+	 * @see creerJoueur(String,String)
+	 * @see nomsJoueurs
+	 * @see ControleurShapeUp
 	 * 
 	 */
 	public String definirNomJoueur(int nb) {
@@ -263,11 +273,18 @@ public class Console implements Observer, Runnable {
 	    
 	/**
 	 * Permet à l'utilisateur de choisir le mode de la partie.
-	 * @return le mode de jeu - de type StrategieDeBase, StrategieAvancee ou StrategieVictoireEnnemie
 	 * 
 	 * Le programme enregistre la valeur entrée par l'utilisateur (une lettre représentant le mode) dans l'attribut mode de ShapeUp, grâce à la classe BufferedReader, en la convertissant en un objet de la bonne classe.
 	 * La valeur peut également être enregistrée si elle a été choisie depuis l'interface. En effet dans ce cas, la valeur aura déja été ajoutée à l'attribut mode de la classe ShapeUp.
-	 * @see {@link StrategieMode}, {@link StrategieDeBase},{@link StrategieAvancee}, {@link StrategieVictoireEnnemie}, {@link ShapeUp#mode} {@link ControleurShapeUp}
+	 * 
+	 * @see StrategieMode
+	 * @see StrategieDeBase
+	 * @see StrategieAvancee
+	 * @see StrategieVictoireEnnemie
+	 * @see mode
+	 * @see ControleurShapeUp
+	 * 
+	 * @return le mode de jeu - de type StrategieDeBase, StrategieAvancee ou StrategieVictoireEnnemie
 	 * 
 	 */
 	    public StrategieMode choisirMode() {
@@ -321,11 +338,16 @@ public class Console implements Observer, Runnable {
 	    
 	    /**
 		 * Permet à l'utilisateur de choisir la forme de tapis de la partie.
-		 * @return la forme de tapis - de type TapisRectangle, TapisCercle ou TapisTriangleRectangle
-		 * 
 		 * Le programme enregistre la valeur entrée par l'utilisateur (une lettre représentant la forme) dans l'attribut formeTapis de ShapeUp, grâce à la classe BufferedReader, en la convertissant en un objet de la bonne classe.
 		 * La valeur peut également être enregistrée si elle a été choisie depuis l'interface. En effet dans ce cas, la valeur aura déja été ajoutée à l'attribut formeTapis de la classe ShapeUp.
-		 * @see {@link TapisRectangle}, {@link TapisCercle},{@link TapisTriangleRectangle}, {@link ShapeUp#formeTapis} {@link ControleurShapeUp}
+		 * 
+		 * @return la forme de tapis - de type TapisRectangle, TapisCercle ou TapisTriangleRectangle
+		 * 
+		 * @see TapisRectangle
+		 * @see TapisCercle
+		 * @see TapisTriangleRectangle
+		 * @see formeTapis
+		 * @see ControleurShapeUp
 		 * 
 		 */
 	    public TapisDeJeu choisirFormeTapis() {
@@ -381,7 +403,7 @@ public class Console implements Observer, Runnable {
 	    }
 
 	/**
-	 * @see {@link Runnable#run()}
+	 * 
 	 * Ici la méthode run() exécute le programme du jeu depuis la définition des paramètres de la partie jusqu'à l'affichage du gagnant.
 	 * La console est également ajoutée à la liste d'Observers de chaque objet du jeu qui le nécessite, dès leur création.
 	 */

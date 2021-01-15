@@ -10,7 +10,10 @@ import fr.utt.lo02.shapeUp.vue.Console;
  * Il peut être actif (en train de jouer) ou non.
  * Il hérite de la classe Observable pour permettre la mise à jour des vues.
  * 
- * @see {@link JoueurReel}, {@link JoueurVirtuel}, {@link VuePartie}, {@link Console}
+ * @see JoueurReel
+ * @see JoueurVirtuel
+ * @see VuePartie
+ * @see Console
  *
  * @author Mathéa Z, Shir F
  */

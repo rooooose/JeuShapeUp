@@ -16,7 +16,11 @@ import fr.utt.lo02.shapeUp.vue.Console;
  * Il peut être de différentes formes, définies dans ses classes filles : TapisRectangle, TapisTriangleRectangle, TapisCercle
  * Il hérite de Observable pour permettre la mise à jour des vues.
  * 
- * @see {@link VuePartie}, {@link Console}, {@link TapisRectangle}, {@link TapisTriangleRectangle}, {@link TapisCercle}
+ * @see VuePartie
+ * @see Console
+ * @see TapisRectangle
+ * @see TapisTriangleRectangle
+ * @see TapisCercle
  * 
  * @author Mathéa Z, Shir F
  */
@@ -29,73 +33,73 @@ public class TapisDeJeu extends Observable{
 	
     /**
      * Modélise le fait que la 1ère ligne du tapis est vide
-     * @see {@link #decalagePossible(int, int)}
+     * @see decalagePossible(int, int)
      */
 	private boolean premiereLigneVide;
 	
 	/**
      * Modélise le fait que la dernière ligne du tapis est vide
-     * @see {@link #decalagePossible(int, int)}
+     * @see decalagePossible(int, int)
      */
 	private boolean derniereLigneVide;
 	
 	/**
      * Modélise le fait que la 1ère colonne du tapis est vide
-     * @see {@link #decalagePossible(int, int)}
+     * @see decalagePossible(int, int)
      */
 	private boolean premiereColVide;
 	
 	/**
      * Modélise le fait que la dernière colonne du tapis est vide
-     * @see {@link #decalagePossible(int, int)}
+     * @see decalagePossible(int, int)
      */
 	private boolean derniereColVide;
 	
 	/**
      * Modélise le fait qu'1 case située au-dessus d'un 0 dans le tableau modèle du tapis est vide
-     * @see {@link #decalagePossible(int, int)}
+     * @see decalagePossible(int, int)
      */
 	private boolean carteVideSur0;
 	
 	/**
      * Modélise le fait qu'1 case située en-dessous d'un 0 dans le tableau modèle du tapis est vide
-     * @see {@link #decalagePossible(int, int)}
+     * @see decalagePossible(int, int)
      */
 	private boolean carteVideSous0;
 	
 	/**
      * Modélise le fait qu'1 case située à gauche d'un 0 dans le tableau modèle du tapis est vide
-     * @see {@link #decalagePossible(int, int)}
+     * @see decalagePossible(int, int)
      */
 	private boolean carteVideGauche0;
 	
 	/**
      * Modélise le fait qu'1 case située à droite d'un 0 dans le tableau modèle du tapis est vide
-     * @see {@link #decalagePossible(int, int)}
+     * @see decalagePossible(int, int)
      */
 	private boolean carteVideDroite0;
 	
 	/**
      * Modélise le fait que la carte souhaitant être placée est tout en haut du tapis (et non sous des cases 0)
-     * @see {@link #decalagePossible(int, int)}
+     * @see decalagePossible(int, int)
      */
 	private boolean carteEnHaut;
 	
 	/**
      * Modélise le fait que la carte souhaitant être placée est tout en bas du tapis (et non au-dessus de cases 0)
-     * @see {@link #decalagePossible(int, int)}
+     * @see decalagePossible(int, int)
      */
 	private boolean carteEnBas;
 	
 	/**
      * Modélise le fait que la carte souhaitant être placée est tout à gauche du tapis (et non à droite de cases 0)
-     * @see {@link #decalagePossible(int, int)}
+     * @see decalagePossible(int, int)
      */
 	private boolean carteGauche;
 	
 	/**
      * Modélise le fait que la carte souhaitant être placée est tout à droite du tapis (et non à gauche de cases 0)
-     * @see {@link #decalagePossible(int, int)}
+     * @see decalagePossible(int, int)
      */
 	private boolean carteDroite;
 	
@@ -106,7 +110,7 @@ public class TapisDeJeu extends Observable{
 	
 	/**
 	 * Modélise le tableau d'entier définissant la forme du tapis. Ce modèle sera utilisé pour construire le container.
-	 * @see {@link TapisRectangle}, {@link TapisTriangleRectangle}, {@link TapisCercle}
+	 * @see TapisRectangle, TapisTriangleRectangle, TapisCercle
 	 */
 	private int[][] modele;
 
@@ -174,7 +178,7 @@ public class TapisDeJeu extends Observable{
 	 * @param col - la colonne à laquelle on tente de placer la carte
 	 * @return true si le placement est possible
 	 * 
-	 * @see {@link #adjacenceRespectee(int, int)}, {@link #caseRemplie(int, int)}
+	 * @see adjacenceRespectee(int, int), caseRemplie(int, int)
 	 */
 	public boolean placementNormalPossible(int lig, int col) {
 		

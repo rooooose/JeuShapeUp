@@ -10,7 +10,8 @@ import fr.utt.lo02.shapeUp.vue.Console;
  * Elle peut être en cours ou terminée.
  * Elle hérite de Observable pour permettre la mise à jour des vues.
  * 
- * @see {@link VuePartie}, {@link Console}
+ * @see VuePartie
+ * @see Console
  * 
  * @author Mathéa Z, Shir F
  */
@@ -18,49 +19,55 @@ public class Partie extends Observable implements Visitable {
 
 	/**
 	 * Modélise l'ensemble des cartes du jeu, qui sont uniques.
-	 * @see {@link Set<E>}
+	 * @see Set<E>
 	 */
 	private Set<Carte> carteDuJeu = new HashSet<Carte> (); 
 	
 	/**
 	 * Modélise la pioche de la partie
 	 * Si elle est null, l'exception NullPointerException sera générée dès son utilisation
-	 * @see {@link Pioche}
+	 * @see Pioche
 	 */
 	private Pioche pioche;
 	
 	/**
 	 * Modélise la classe de score qui calcule celui pour les formes de cartes
-	 * @see {@link VisiteurScore}, {@link ScoreForme}
+	 * 
 	 * S'il est null, l'exception NullPointerException sera générée dès son utilisation
+	 * 
+	 * @see VisiteurScore
+	 * @see ScoreForme
 	 */
 	private VisiteurScore scoreForme = new ScoreForme();
 	
 	/**
 	 * Modélise la classe de score qui calcule celui pour les couleurs de cartes
 	 * S'il est null, l'exception NullPointerException sera générée dès son utilisation
-	 * @see {@link VisiteurScore}, {@link ScoreCouleur}
+	 * @see VisiteurScore
+	 * @see ScoreCouleur
 	 */
 	private VisiteurScore scoreCouleur = new ScoreCouleur();
 	
 	/**
 	 * Modélise la classe de score qui calcule celui pour le remplissage des cartes
 	 * S'il est null, l'exception NullPointerException sera générée dès son utilisation
-	 * @see {@link VisiteurScore}, {@link ScoreRemplissage}
+	 * @see VisiteurScore
+	 * @see ScoreRemplissage
 	 */
 	private VisiteurScore scoreRemplissage = new ScoreRemplissage();
 	
 	/**
 	 * Modélise la liste des joueurs de la partie. Elle peut en contenir 2 ou 3.
 	 * Si elle est null, l'exception NullPointerException sera générée dès son utilisation
-	 * @see {@link Queue<E>}, {@link LinkedList<E>}
+	 * @see Queue<E>
+	 * @see LinkedList<E>
 	 */
 	private Queue<Joueur> queueJoueurs;
 
 	/**
 	 * Modélise le tapis de jeu de la partie. Il peut avoir une forme triangulaire, rectangulaire ou circulaire
 	 * S'il est null, l'exception NullPointerException sera générée dès son utilisation
-	 * @see {@link TapisDeJeu}
+	 * @see TapisDeJeu
 	 */
 	private TapisDeJeu tapisDeJeu;
 	
@@ -72,7 +79,7 @@ public class Partie extends Observable implements Visitable {
 	/**
 	 * Modélise le nombre de cartes pouvant être placées sur le tapis de jeu.
 	 * Si elle est à 0, alors la partie sera terminée alors qu'elle n'a pas été commencée.
-	 * @see {@link #tourDeJeu()}
+	 * @see tourDeJeu()
 	 * 
 	 * Valeurs valides : {15;14}
 	 */
@@ -87,7 +94,7 @@ public class Partie extends Observable implements Visitable {
 	/**
 	 * Modélise le mode de la partie : StrategieAvance, StrategieVictoireEnnemie, ou StrategieDeBase
 	 * S'il est null, l'exception NullPointerException sera générée dès son utilisation
-	 * @see {@link StrategieMode}, {@link StrategieAvance}, {@link StrategieVictoireEnnemie}, {@link StrategieDeBase}
+	 * @see StrategieMode, StrategieAvance, {@link StrategieVictoireEnnemie}, {@link StrategieDeBase}
 	 */
 	private StrategieMode modeDeJeu;
 	
@@ -228,7 +235,9 @@ public class Partie extends Observable implements Visitable {
 	 * 
 	 * @exception NullPointerException - Si le mode ou la liste de joueurs est null
 	 * 
-	 * @see {@link ShapeUp}, {@link StrategieMode}, {@link TapisDeJeu}
+	 * @see ShapeUp
+	 * @see StrategieMode
+	 * @see TapisDeJeu
 	 * 
 	 */
 	Partie(Queue<Joueur> joueurs, StrategieMode mode, TapisDeJeu formeTapisDeJeu){
@@ -287,7 +296,10 @@ public class Partie extends Observable implements Visitable {
 	 * @param le visiteur - ScoreForme, ScoreCouleur ou ScoreRemplissage
 	 * @return le score du joueur pour tel visiteur
 	 * @exception NullPointerException - Si le visiteur ou le joueur est null
-	 * @see {@link VisiteurScore}, {@link ScoreRemplissage}, {@link ScoreForme}, {@link ScoreCouleur}
+	 * @see VisiteurScore
+	 * @see ScoreRemplissage
+	 * @see ScoreForme
+	 * @see ScoreCouleur
 	 */
 	public int accepterScore(VisiteurScore visiteur, Joueur joueur) {
 
@@ -302,7 +314,7 @@ public class Partie extends Observable implements Visitable {
 	 * Puis on déplace le joueur au bout de la queue.
 	 * Lorsque le tapis de jeu a atteint son nombre maximal de cartes, la partie est finie
 	 * 
-	 * @see {@link Joueur#jouer(Partie,TapisDeJeu,Pioche,StrategieMode)}
+	 * @see Joueur#jouer(Partie,TapisDeJeu,Pioche,StrategieMode)
 	 */
 	public void tourDeJeu()  {
 		
@@ -329,7 +341,7 @@ public class Partie extends Observable implements Visitable {
 	 * 
 	 * @exception NullPointerException - Si le joueur est null
 	 * 
-	 * @see {@link #accepterScore(VisiteurScore, Joueur)}
+	 * @see accepterScore(VisiteurScore, Joueur)
 	 */
     public int calculerScoreTotal(Joueur joueur) {
 
