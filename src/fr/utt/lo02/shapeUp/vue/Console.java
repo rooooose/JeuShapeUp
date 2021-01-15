@@ -279,7 +279,7 @@ public class Console implements Observer, Runnable {
 	 * 
 	 * @see StrategieMode
 	 * @see StrategieDeBase
-	 * @see StrategieAvancee
+	 * @see StrategieAvance
 	 * @see StrategieVictoireEnnemie
 	 * @see mode
 	 * @see ControleurShapeUp
