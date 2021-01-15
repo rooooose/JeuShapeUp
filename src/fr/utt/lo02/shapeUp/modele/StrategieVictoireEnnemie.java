@@ -117,7 +117,7 @@ public class StrategieVictoireEnnemie extends Observable implements StrategieMod
 	 */
 	public Pioche creerLaPiocheDeLaPartie(Partie maPartie) {
 		
-		//this.addObserver(maPartie.getConsoleDuJeu());
+		
 		
 		Queue<Carte> pioche = new LinkedList<Carte> ();
 		int nombreDeCartes = 0;
@@ -125,7 +125,7 @@ public class StrategieVictoireEnnemie extends Observable implements StrategieMod
 		
 		
 		List<Carte> recupCarteJeu = this.distribuerCartes(maPartie);
-    	//Collections.shuffle(recupCarteJeu);
+    	
 		
 
 	    

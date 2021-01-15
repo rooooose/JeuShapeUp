@@ -18,7 +18,7 @@ public class ScoreForme implements VisiteurScore {
 	 * 4 cartes = +3 points;
 	 * 5 cartes = +4 points;
 	 * 
-	 * @see {@link VisiteurScore#visiter(Partie, Carte)}, {@link Carte}
+	 * @see VisiteurScore#visiter(Partie, Carte), Carte
 	 */
     public int visiter(Partie partie, Carte carteVictoire) {
     	

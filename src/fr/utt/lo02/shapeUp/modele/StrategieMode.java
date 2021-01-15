@@ -4,7 +4,7 @@ import java.util.List;
 /**
  * L'interface StrategieMode permet de déclarer les méthodes qui seront utilisées pour définir les différents modes de jeu d'une partie.
  * @author Shir F, Mathéa Z
- * @see   {@link StrategieDeBase}, {@link StrategieVictoireEnnemie}, {@link StrategieAvance}, {@link Partie}
+ * @see   StrategieDeBase, StrategieVictoireEnnemie, StrategieAvance, Partie
  * */
 
 
@@ -14,7 +14,7 @@ public interface StrategieMode {
 	 * La méthode distribuerCartes permet de distribuer les cartes en début de Partie à chaque joueur.
 	 * @param maPartie la partie de jeu actuelle
 	 * @return Les cartes non utilisées pour la distribution pour qu'elles soient utilisées dans la pioche
-	 * @see {@link #creerLaPiocheDeLaPartie(Partie)}
+	 * @see #creerLaPiocheDeLaPartie(Partie)
 	 */
     public List<Carte> distribuerCartes(Partie maPartie);
 /**
@@ -33,7 +33,7 @@ public interface StrategieMode {
 /**
  * Cette méthode est appelée et permet de finir la partie pour pouvoir calculer le score et définir un gagnant (par appels de méthode de la partie).    
  * @param maPartie la partie de jeu actuelle
- * @see {@link Partie#calculerScoreTotal(Joueur)}, {@link Partie#definirGagnant()}
+ * @see Partie#calculerScoreTotal(Joueur), Partie#definirGagnant()
  */
     public void finirLaPartie (Partie maPartie);
 

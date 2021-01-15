@@ -5,7 +5,7 @@ package fr.utt.lo02.shapeUp.modele;
  * La partie est une implémentation de l'interface Visitable qui lui permet d'être visiter.
  * 
  * @author Shir F, Mathéa Z
- * @see {@link ScoreForme}, {@link ScoreCouleur}, {@link ScoreRemplissage}, {@link Visitable}
+ * @see ScoreForme, ScoreCouleur, ScoreRemplissage, Visitable
  *
  */
 

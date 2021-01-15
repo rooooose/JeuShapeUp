@@ -17,7 +17,7 @@ public class ScoreCouleur implements VisiteurScore {
 	 * 5 cartes = +6 points;
 	 * 
 	 * 
-	 * @see {@link VisiteurScore#visiter(Partie, Carte)}, {@link Carte}
+	 * @see VisiteurScore#visiter(Partie, Carte), Carte
 	 */
     public int visiter(Partie partie, Carte carteVictoire) {
     	

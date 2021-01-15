@@ -17,7 +17,7 @@ public class ScoreRemplissage implements VisiteurScore {
 	 * 4 cartes = +4 points;
 	 * 5 cartes = +5 points
 	 * 
-	 * @see {@link VisiteurScore#visiter(Partie, Carte)}, {@link Carte}
+	 * @see VisiteurScore#visiter(Partie, Carte), Carte
 	 */
     public int visiter(Partie partie, Carte carteVictoire) {
     	
